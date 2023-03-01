@@ -10,7 +10,9 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
 	@IBOutlet weak var questionLabel: UILabel!
-
+	
+	@IBOutlet weak var conditionLabel: UILabel!
+	
 	@IBOutlet weak var objectCollectionView: UICollectionView!
 
 	@IBOutlet weak var choice1Button: UIButton!
@@ -34,7 +36,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 
 	@IBAction func newQuestion(_ sender: Any) {
-		print("New question")
+		conditionLabel.text?.removeAll()
 		gameBrain.newQuestion(countingBy: 2)
 		questionLabel.text = gameBrain.getQuestionText()
 		setColors()
@@ -46,17 +48,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		guard let answer = sender.currentTitle else { return }
 		let correct = gameBrain.checkAnswer(answer)
 		if correct {
-			print("Correct!")
+			conditionLabel.text = "Correct!"
+			// Play sound here
 		} else {
-			print("Incorrect!")
+			conditionLabel.text = "Incorrect!"
+			// Play sound here
 		}
 	}
 
 	func setChoices() {
-		choice1Button.setTitle("2", for: .normal)
-		choice2Button.setTitle("4", for: .normal)
-		choice3Button.setTitle("6", for: .normal)
-		choice4Button.setTitle("8", for: .normal)
+		let choices = gameBrain.getChoices()
+		choice1Button.setTitle("\(choices[0])", for: .normal)
+		choice2Button.setTitle("\(choices[1])", for: .normal)
+		choice3Button.setTitle("\(choices[2])", for: .normal)
+		choice4Button.setTitle("\(choices[3])", for: .normal)
 	}
 
 	func setColors() {

@@ -43,6 +43,15 @@ struct GameBrain {
 		return (background: currentObject.backgroundColor, buttons: currentObject.buttonColor)
 	}
 
+	func getChoices() -> [String] {
+		let choice1 = numberOfObjectsToShow * currentObject.quantity / 8
+		let choice2 = numberOfObjectsToShow * currentObject.quantity / 4
+		let choice3 = numberOfObjectsToShow * currentObject.quantity / 2
+		let choice4 = numberOfObjectsToShow * currentObject.quantity
+		let shuffledChoices = [String(choice1), String(choice2), String(choice3), String(choice4)].shuffled()
+		return shuffledChoices
+	}
+
 	func checkAnswer(_ answer: String) -> Bool {
 		let correctAnswer = String(numberOfObjectsToShow * currentObject.quantity)
 		print("Comparing answer \(answer) to correct \(correctAnswer)")
