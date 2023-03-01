@@ -31,9 +31,9 @@ struct Cherry: Object {
 
 	var quantity: Int = 2
 
-	var backgroundColor: UIColor = UIColor.red
+	var backgroundColor: UIColor = UIColor(red: 0.65, green: 0, blue: 0, alpha: 1)
 
-	var buttonColor: UIColor = .green
+	var buttonColor: UIColor = UIColor(red: 0, green: 0.75, blue: 0, alpha: 1)
 
 	var attributionText: String? = nil
 

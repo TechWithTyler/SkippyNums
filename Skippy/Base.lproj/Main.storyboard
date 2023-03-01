@@ -26,7 +26,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYv-2K-VFw">
-                                <rect key="frame" x="579" y="864" width="75" height="36"/>
+                                <rect key="frame" x="579" y="864" width="75" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
@@ -44,7 +44,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHk-uY-fWd">
-                                <rect key="frame" x="711" y="864" width="75" height="36"/>
+                                <rect key="frame" x="711" y="864" width="75" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
@@ -81,6 +81,16 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lbn-Gx-4Za">
+                                <rect key="frame" x="618" y="967" width="131" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="New Question"/>
+                                <connections>
+                                    <action selector="answerSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cbr-QT-gx2"/>
+                                    <action selector="newQuestion:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U0q-Si-7VE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -90,6 +100,7 @@
                         <outlet property="choice2Button" destination="LHk-uY-fWd" id="wIs-no-Zrm"/>
                         <outlet property="choice3Button" destination="MYF-fH-uo5" id="AHb-c8-P6v"/>
                         <outlet property="choice4Button" destination="JED-63-76J" id="sDl-2w-bIf"/>
+                        <outlet property="newQuestionButton" destination="Lbn-Gx-4Za" id="cgu-yE-g4A"/>
                         <outlet property="objectCollectionView" destination="1KS-f4-rKK" id="wKG-0S-SHB"/>
                         <outlet property="questionLabel" destination="ks8-dK-aEE" id="u1w-FJ-uDn"/>
                     </connections>

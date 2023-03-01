@@ -29,6 +29,7 @@ struct GameBrain {
 	// MARK: - Game Logic
 
 	mutating func newQuestion(countingBy: Int) {
+		self.countingBy = countingBy
 		currentObject = GameBrain.objects.randomElement()!
 		numberOfObjectsToShow = Int.random(in: 1*countingBy...4*countingBy)
 	}

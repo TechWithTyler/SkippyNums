@@ -21,21 +21,25 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	@IBOutlet weak var choice4Button: UIButton!
 
+	@IBOutlet weak var newQuestionButton: UIButton!
+
 	var gameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		newQuestion()
 		objectCollectionView.dataSource = self
 		objectCollectionView.delegate = self
+		newQuestion(self)
 	}
 
-	func newQuestion() {
+	@IBAction func newQuestion(_ sender: Any) {
+		print("New question")
 		gameBrain.newQuestion(countingBy: 2)
 		questionLabel.text = gameBrain.getQuestionText()
 		setColors()
 		setChoices()
+		objectCollectionView.reloadData()
 	}
 
 	@IBAction func answerSelected(_ sender: UIButton) {
@@ -62,6 +66,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		choice2Button.tintColor = gameBrain.getColors().buttons
 		choice3Button.tintColor = gameBrain.getColors().buttons
 		choice4Button.tintColor = gameBrain.getColors().buttons
+		newQuestionButton.tintColor = gameBrain.getColors().buttons
 	}
 
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
