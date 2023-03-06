@@ -27,6 +27,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	var gameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
 
+	var output: (rows: Int, columns: Int) = (0, 0)
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
@@ -42,6 +44,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		setColors()
 		setChoices()
 		objectCollectionView.reloadData()
+		output = gameBrain.getLayout()
 	}
 
 	@IBAction func answerSelected(_ sender: UIButton) {
@@ -74,14 +77,22 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		newQuestionButton.tintColor = gameBrain.getColors().buttons
 	}
 
+}
+
+extension ViewController {
+
+	// MARK: - Collection View Delegate and Data Source
+
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		let number = gameBrain.numberOfObjectsToShow / gameBrain.groupsOfObjectsToShow
+		// Objects per group
+		let number = output.columns
 		print("Number of rows: \(number)")
 		return number
 	}
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let number = gameBrain.groupsOfObjectsToShow
+		// Groups of objects
+		let number = output.rows
 		print("Number of objects in row \(section): \(number)")
 		return number
 	}
@@ -106,7 +117,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let numberOfObjectsInRow = gameBrain.groupsOfObjectsToShow
+		let numberOfObjectsInRow = output.columns
 		let availableWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
 		let cellWidth = (availableWidth - CGFloat(numberOfObjectsInRow - 1) * 15) / CGFloat(numberOfObjectsInRow)
 		let numberOfRows = ceil(CGFloat(gameBrain.numberOfObjectsToShow) / CGFloat(numberOfObjectsInRow))

@@ -18,18 +18,27 @@ struct GameBrain {
 
 	var currentObject: Object
 
-	var countingBy: Int = 2
+	var numberOfObjectsToShow: Int = 2
 
-	var numberOfObjectsToShow: Int = Int.random(in: 1...10)
-
-	lazy var groupsOfObjectsToShow: Int = {
-		return numberOfObjectsToShow / countingBy
-	}()
+	func getLayout() -> (rows: Int, columns: Int) {
+		let columns: Int
+		let rows: Int
+		switch numberOfObjectsToShow {
+			case 4...6:
+				columns = 3
+				rows = 2
+			default:
+				// 1...3
+				columns = numberOfObjectsToShow
+				rows = 1
+		}
+		return (rows: rows, columns: columns)
+	}
 
 	// MARK: - Game Logic
 
 	mutating func newQuestion(countingBy: Int) {
-		self.countingBy = countingBy
+		let countingBy = currentObject.quantity
 		currentObject = GameBrain.objects.randomElement()!
 		numberOfObjectsToShow = Int.random(in: 1*countingBy...4*countingBy)
 	}

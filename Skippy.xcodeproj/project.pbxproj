@@ -15,7 +15,18 @@
 		8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */; };
 		8D8EC9CB299ADD9400043D39 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9CA299ADD9400043D39 /* Object.swift */; };
 		8DA6D96A299C2F4300ED533F /* GameBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA6D969299C2F4300ED533F /* GameBrain.swift */; };
+		8DC42EC829B1429E0005413B /* SkippyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC42EC729B1429E0005413B /* SkippyTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8DC42EC929B1429E0005413B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D8EC9AA299AD7B300043D39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D8EC9B1299AD7B300043D39;
+			remoteInfo = Skippy;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8D7B7A1829A5656A00D3C727 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -29,10 +40,19 @@
 		8D8EC9C9299AD7BC00043D39 /* Skippy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Skippy.entitlements; sourceTree = "<group>"; };
 		8D8EC9CA299ADD9400043D39 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		8DA6D969299C2F4300ED533F /* GameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBrain.swift; sourceTree = "<group>"; };
+		8DC42EC529B1429E0005413B /* SkippyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkippyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DC42EC729B1429E0005413B /* SkippyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkippyTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8D8EC9AF299AD7B300043D39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DC42EC229B1429E0005413B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				8D8EC9B4299AD7B300043D39 /* Skippy */,
+				8DC42EC629B1429E0005413B /* SkippyTests */,
 				8D8EC9B3299AD7B300043D39 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				8D8EC9B2299AD7B300043D39 /* Skippy.app */,
+				8DC42EC529B1429E0005413B /* SkippyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +105,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		8DC42EC629B1429E0005413B /* SkippyTests */ = {
+			isa = PBXGroup;
+			children = (
+				8DC42EC729B1429E0005413B /* SkippyTests.swift */,
+			);
+			path = SkippyTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,6 +133,24 @@
 			productReference = 8D8EC9B2299AD7B300043D39 /* Skippy.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8DC42EC429B1429E0005413B /* SkippyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DC42ECD29B1429E0005413B /* Build configuration list for PBXNativeTarget "SkippyTests" */;
+			buildPhases = (
+				8DC42EC129B1429E0005413B /* Sources */,
+				8DC42EC229B1429E0005413B /* Frameworks */,
+				8DC42EC329B1429E0005413B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8DC42ECA29B1429E0005413B /* PBXTargetDependency */,
+			);
+			name = SkippyTests;
+			productName = SkippyTests;
+			productReference = 8DC42EC529B1429E0005413B /* SkippyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -115,6 +163,10 @@
 				TargetAttributes = {
 					8D8EC9B1299AD7B300043D39 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					8DC42EC429B1429E0005413B = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 8D8EC9B1299AD7B300043D39;
 					};
 				};
 			};
@@ -132,6 +184,7 @@
 			projectRoot = "";
 			targets = (
 				8D8EC9B1299AD7B300043D39 /* Skippy */,
+				8DC42EC429B1429E0005413B /* SkippyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -144,6 +197,13 @@
 				8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */,
 				8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */,
 				8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DC42EC329B1429E0005413B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +222,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8DC42EC129B1429E0005413B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC42EC829B1429E0005413B /* SkippyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8DC42ECA29B1429E0005413B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D8EC9B1299AD7B300043D39 /* Skippy */;
+			targetProxy = 8DC42EC929B1429E0005413B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8D8EC9BB299AD7B300043D39 /* Main.storyboard */ = {
@@ -364,6 +440,50 @@
 			};
 			name = Release;
 		};
+		8DC42ECB29B1429E0005413B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3B6G4T54X3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TechWithTyler.SkippyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Skippy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Skippy";
+			};
+			name = Debug;
+		};
+		8DC42ECC29B1429E0005413B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3B6G4T54X3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TechWithTyler.SkippyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Skippy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Skippy";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -381,6 +501,15 @@
 			buildConfigurations = (
 				8D8EC9C7299AD7B400043D39 /* Debug */,
 				8D8EC9C8299AD7B400043D39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DC42ECD29B1429E0005413B /* Build configuration list for PBXNativeTarget "SkippyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DC42ECB29B1429E0005413B /* Debug */,
+				8DC42ECC29B1429E0005413B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
