@@ -23,6 +23,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	@IBOutlet weak var choice4Button: UIButton!
 
+	@IBOutlet weak var choice5Button: UIButton!
+
+	@IBOutlet weak var choice6Button: UIButton!
+
 	@IBOutlet weak var newQuestionButton: UIButton!
 
 	private let sectionInsets = UIEdgeInsets(
@@ -32,6 +36,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		right: 20.0)
 
 	var gameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
+
+	// MARK: - Setup
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -50,6 +56,28 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.reloadData()
 	}
 
+	func setChoices() {
+		let choices = gameBrain.getChoices()
+		choice1Button.setTitle("\(choices[0])", for: .normal)
+		choice2Button.setTitle("\(choices[1])", for: .normal)
+		choice3Button.setTitle("\(choices[2])", for: .normal)
+		choice4Button.setTitle("\(choices[3])", for: .normal)
+		choice5Button.setTitle("\(choices[4])", for: .normal)
+		choice6Button.setTitle("\(choices[5])", for: .normal)
+	}
+
+	func setColors() {
+		view.backgroundColor = gameBrain.getColors().background
+		objectCollectionView.backgroundColor = gameBrain.getColors().background
+		choice1Button.tintColor = gameBrain.getColors().buttons
+		choice2Button.tintColor = gameBrain.getColors().buttons
+		choice3Button.tintColor = gameBrain.getColors().buttons
+		choice4Button.tintColor = gameBrain.getColors().buttons
+		choice5Button.tintColor = gameBrain.getColors().buttons
+		choice6Button.tintColor = gameBrain.getColors().buttons
+		newQuestionButton.tintColor = gameBrain.getColors().buttons
+	}
+
 	@IBAction func answerSelected(_ sender: UIButton) {
 		guard let answer = sender.currentTitle else { return }
 		let correct = gameBrain.checkAnswer(answer)
@@ -60,24 +88,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			conditionLabel.text = "Incorrect!"
 			// Play sound here
 		}
-	}
-
-	func setChoices() {
-		let choices = gameBrain.getChoices()
-		choice1Button.setTitle("\(choices[0])", for: .normal)
-		choice2Button.setTitle("\(choices[1])", for: .normal)
-		choice3Button.setTitle("\(choices[2])", for: .normal)
-		choice4Button.setTitle("\(choices[3])", for: .normal)
-	}
-
-	func setColors() {
-		view.backgroundColor = gameBrain.getColors().background
-		objectCollectionView.backgroundColor = gameBrain.getColors().background
-		choice1Button.tintColor = gameBrain.getColors().buttons
-		choice2Button.tintColor = gameBrain.getColors().buttons
-		choice3Button.tintColor = gameBrain.getColors().buttons
-		choice4Button.tintColor = gameBrain.getColors().buttons
-		newQuestionButton.tintColor = gameBrain.getColors().buttons
 	}
 
 }

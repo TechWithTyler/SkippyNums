@@ -38,11 +38,16 @@ struct GameBrain {
 	}
 
 	func getChoices() -> [String] {
+		// Below correct answer
 		let choice1 = numberOfObjectsToShow * currentObject.quantity / 8
 		let choice2 = numberOfObjectsToShow * currentObject.quantity / 4
 		let choice3 = numberOfObjectsToShow * currentObject.quantity / 2
+		// Correct answer
 		let choice4 = numberOfObjectsToShow * currentObject.quantity
-		let shuffledChoices = [String(choice1), String(choice2), String(choice3), String(choice4)].shuffled()
+		// Above correct answer
+		let choice5 = numberOfObjectsToShow * currentObject.quantity * 2
+		let choice6 = numberOfObjectsToShow * currentObject.quantity * 4
+		let shuffledChoices = [String(choice1), String(choice2), String(choice3), String(choice4), String(choice5), String(choice6)].shuffled()
 		return shuffledChoices
 	}
 
