@@ -29,7 +29,7 @@ struct GameBrain {
 	}
 
 	func getQuestionText() -> String {
-		let text = "How many \(currentObject.displayPluralName) are there?"
+		let text = "Count the \(currentObject.displayPluralName) by \(currentObject.quantity)s."
 		return text
 	}
 
