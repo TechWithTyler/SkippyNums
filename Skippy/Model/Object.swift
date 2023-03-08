@@ -21,20 +21,24 @@ protocol Object {
 
 	var attributionText: String? { get set }
 
+	var soundFilename: String { get set }
+
 }
 
-struct Cherry: Object {
+struct Cow: Object {
 	
-	var displayPluralName: String = "cherries"
+	var displayPluralName: String = "cows"
 
-	var imageName: String = "cherries.svg"
+	var imageName: String = "cows.svg"
 
 	var quantity: Int = 2
 
-	var backgroundColor: UIColor = UIColor(red: 0.65, green: 0, blue: 0, alpha: 1)
+	var backgroundColor: UIColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
 
-	var buttonColor: UIColor = UIColor(red: 0, green: 0.75, blue: 0, alpha: 1)
+	var buttonColor: UIColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
 
 	var attributionText: String? = nil
 
+	var soundFilename: String = ""
+	
 }

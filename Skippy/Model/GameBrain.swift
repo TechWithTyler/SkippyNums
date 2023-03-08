@@ -12,7 +12,7 @@ struct GameBrain {
 	// MARK: - Properties
 
 	static var objects: [Object] = [
-		Cherry()
+		Cow()
 		// Add more objects here
 	]
 
