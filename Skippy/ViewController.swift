@@ -25,9 +25,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	@IBOutlet weak var newQuestionButton: UIButton!
 
-	var gameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
+	private let sectionInsets = UIEdgeInsets(
+		top: 50.0,
+		left: 20.0,
+		bottom: 50.0,
+		right: 20.0)
 
-	var output: (rows: Int, columns: Int) = (0, 0)
+	var gameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -39,12 +43,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	@IBAction func newQuestion(_ sender: Any) {
 		conditionLabel.text?.removeAll()
-		gameBrain.newQuestion(countingBy: 2)
+		gameBrain.newQuestion()
 		questionLabel.text = gameBrain.getQuestionText()
 		setColors()
 		setChoices()
 		objectCollectionView.reloadData()
-		output = gameBrain.getLayout()
 	}
 
 	@IBAction func answerSelected(_ sender: UIButton) {
@@ -83,16 +86,9 @@ extension ViewController {
 
 	// MARK: - Collection View Delegate and Data Source
 
-	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		// Objects per group
-		let number = output.columns
-		print("Number of rows: \(number)")
-		return number
-	}
-
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		// Groups of objects
-		let number = output.rows
+		// Columns
+		let number = gameBrain.numberOfObjectsToShow
 		print("Number of objects in row \(section): \(number)")
 		return number
 	}
@@ -100,30 +96,27 @@ extension ViewController {
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCell", for: indexPath)
 		// Create and configure the image view
-		let imageView = UIImageView(frame: cell.contentView.bounds)
-		imageView.image = UIImage(named: gameBrain.currentObject.imageName)
-		imageView.contentMode = .scaleAspectFit
-		imageView.clipsToBounds = true
-		imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		imageView.center = cell.contentView.center
-		// Add the image view to the cell's content view
-		cell.contentView.addSubview(imageView)
+			let imageView = UIImageView(frame: cell.contentView.bounds)
+			imageView.image = UIImage(named: gameBrain.currentObject.imageName)
+			imageView.contentMode = .scaleAspectFit
+			imageView.clipsToBounds = true
+			imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+			imageView.center = cell.contentView.center
+			// Add the image view to the cell's content view
+			cell.contentView.addSubview(imageView)
 		return cell
 	}
 
-
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return 20
-	}
-
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let numberOfObjectsInRow = output.columns
-		let availableWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
-		let cellWidth = (availableWidth - CGFloat(numberOfObjectsInRow - 1) * 15) / CGFloat(numberOfObjectsInRow)
-		let numberOfRows = ceil(CGFloat(gameBrain.numberOfObjectsToShow) / CGFloat(numberOfObjectsInRow))
-		let availableHeight = collectionView.bounds.height - collectionView.contentInset.top - collectionView.contentInset.bottom
-		let cellHeight = (availableHeight - CGFloat(numberOfRows - 1) * 15) / CGFloat(numberOfRows)
-		return CGSize(width: cellWidth, height: cellHeight)
+	func collectionView(
+		_ collectionView: UICollectionView,
+		layout collectionViewLayout: UICollectionViewLayout,
+		sizeForItemAt indexPath: IndexPath
+	) -> CGSize {
+		// 2
+		let paddingSpace = sectionInsets.left * 4
+		let availableWidth = view.frame.width - paddingSpace
+		let widthPerItem = availableWidth / 5
+		return CGSize(width: widthPerItem, height: widthPerItem)
 	}
 
 

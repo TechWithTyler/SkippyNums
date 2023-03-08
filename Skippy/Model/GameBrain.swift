@@ -20,27 +20,12 @@ struct GameBrain {
 
 	var numberOfObjectsToShow: Int = 2
 
-	func getLayout() -> (rows: Int, columns: Int) {
-		let columns: Int
-		let rows: Int
-		switch numberOfObjectsToShow {
-			case 4...6:
-				columns = 3
-				rows = 2
-			default:
-				// 1...3
-				columns = numberOfObjectsToShow
-				rows = 1
-		}
-		return (rows: rows, columns: columns)
-	}
-
 	// MARK: - Game Logic
 
-	mutating func newQuestion(countingBy: Int) {
+	mutating func newQuestion() {
 		let countingBy = currentObject.quantity
 		currentObject = GameBrain.objects.randomElement()!
-		numberOfObjectsToShow = Int.random(in: 1*countingBy...4*countingBy)
+		numberOfObjectsToShow = Int.random(in: 1*countingBy...5*countingBy)
 	}
 
 	func getQuestionText() -> String {
