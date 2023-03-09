@@ -122,6 +122,7 @@ extension ViewController {
 		imageView.isAccessibilityElement = true
 		imageView.accessibilityLabel = gameBrain.objectAccessibilityText
 			// Add the image view to the cell's content view
+		cell.contentView.subviews.first?.removeFromSuperview()
 			cell.contentView.addSubview(imageView)
 		return cell
 	}

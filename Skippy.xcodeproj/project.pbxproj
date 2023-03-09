@@ -13,10 +13,11 @@
 		8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9BB299AD7B300043D39 /* Main.storyboard */; };
 		8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9BE299AD7B400043D39 /* Assets.xcassets */; };
 		8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */; };
-		8D8EC9CB299ADD9400043D39 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9CA299ADD9400043D39 /* Object.swift */; };
+		8D8EC9CB299ADD9400043D39 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9CA299ADD9400043D39 /* Objects.swift */; };
 		8DA6D96A299C2F4300ED533F /* GameBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA6D969299C2F4300ED533F /* GameBrain.swift */; };
 		8DC42EC829B1429E0005413B /* SkippyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC42EC729B1429E0005413B /* SkippyTests.swift */; };
 		8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B429B92CF000A8C1FF /* moo.caf */; };
+		8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,11 +40,12 @@
 		8D8EC9BE299AD7B400043D39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D8EC9C1299AD7B400043D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D8EC9C9299AD7BC00043D39 /* Skippy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Skippy.entitlements; sourceTree = "<group>"; };
-		8D8EC9CA299ADD9400043D39 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		8D8EC9CA299ADD9400043D39 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		8DA6D969299C2F4300ED533F /* GameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBrain.swift; sourceTree = "<group>"; };
 		8DC42EC529B1429E0005413B /* SkippyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkippyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC42EC729B1429E0005413B /* SkippyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkippyTests.swift; sourceTree = "<group>"; };
 		8DCC07B429B92CF000A8C1FF /* moo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = moo.caf; sourceTree = "<group>"; };
+		8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = elephantTrumpet.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				8DA6D969299C2F4300ED533F /* GameBrain.swift */,
-				8D8EC9CA299ADD9400043D39 /* Object.swift */,
+				8D8EC9CA299ADD9400043D39 /* Objects.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -119,6 +121,7 @@
 		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */,
 				8DCC07B429B92CF000A8C1FF /* moo.caf */,
 			);
 			path = Sounds;
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */,
+				8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */,
 				8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */,
 				8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */,
 				8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */,
@@ -229,7 +233,7 @@
 				8D8EC9BA299AD7B300043D39 /* ViewController.swift in Sources */,
 				8DA6D96A299C2F4300ED533F /* GameBrain.swift in Sources */,
 				8D8EC9B6299AD7B300043D39 /* AppDelegate.swift in Sources */,
-				8D8EC9CB299ADD9400043D39 /* Object.swift in Sources */,
+				8D8EC9CB299ADD9400043D39 /* Objects.swift in Sources */,
 				8D8EC9B8299AD7B300043D39 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

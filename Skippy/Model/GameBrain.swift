@@ -13,8 +13,8 @@ struct GameBrain {
 	// MARK: - Properties
 
 	static var objects: [Object] = [
-		Cow()
-		// Add more objects here
+		Cow(),
+		Elephant()
 	]
 
 	var currentObject: Object
