@@ -14,7 +14,8 @@ struct GameBrain {
 
 	static var objects: [Object] = [
 		Cow(),
-		Elephant()
+		Elephant(),
+		Car()
 	]
 
 	var currentObject: Object

@@ -60,3 +60,22 @@ struct Elephant: Object {
 	var soundFilename: String = "elephantTrumpet.caf"
 
 }
+
+struct Car: Object {
+
+	var displayPluralName: String = "cars"
+
+	var imageName: String = "cars.svg"
+
+	var quantity: Int = 2
+
+	var backgroundColor: UIColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+
+	var buttonColor: UIColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
+
+	var attributionText: String? = nil
+
+	var soundFilename: String = "carEngine.caf"
+
+}
+
