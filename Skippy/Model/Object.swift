@@ -9,19 +9,19 @@ import UIKit
 
 protocol Object {
 
-	var displayPluralName: String { get set }
+	var displayPluralName: String { get }
 
-	var imageName: String { get set }
+	var imageName: String { get }
 
-	var backgroundColor: UIColor { get set }
+	var backgroundColor: UIColor { get }
 
-	var buttonColor: UIColor { get set }
+	var buttonColor: UIColor { get }
 
-	var quantity: Int { get set }
+	var quantity: Int { get }
 
-	var attributionText: String? { get set }
+	var attributionText: String? { get }
 
-	var soundFilename: String { get set }
+	var soundFilename: String { get }
 
 }
 
@@ -39,6 +39,6 @@ struct Cow: Object {
 
 	var attributionText: String? = nil
 
-	var soundFilename: String = ""
+	var soundFilename: String = "moo.caf"
 	
 }

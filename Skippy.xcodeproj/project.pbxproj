@@ -16,6 +16,7 @@
 		8D8EC9CB299ADD9400043D39 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9CA299ADD9400043D39 /* Object.swift */; };
 		8DA6D96A299C2F4300ED533F /* GameBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA6D969299C2F4300ED533F /* GameBrain.swift */; };
 		8DC42EC829B1429E0005413B /* SkippyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC42EC729B1429E0005413B /* SkippyTests.swift */; };
+		8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B429B92CF000A8C1FF /* moo.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		8DA6D969299C2F4300ED533F /* GameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBrain.swift; sourceTree = "<group>"; };
 		8DC42EC529B1429E0005413B /* SkippyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkippyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC42EC729B1429E0005413B /* SkippyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkippyTests.swift; sourceTree = "<group>"; };
+		8DCC07B429B92CF000A8C1FF /* moo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = moo.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				8D8EC9B9299AD7B300043D39 /* ViewController.swift */,
 				8D8EC9BB299AD7B300043D39 /* Main.storyboard */,
 				8DA6D96C299C2F6000ED533F /* Model */,
+				8DCC07B329B92CF000A8C1FF /* Sounds */,
 				8D8EC9BE299AD7B400043D39 /* Assets.xcassets */,
 				8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */,
 				8D7B7A1829A5656A00D3C727 /* Info.plist */,
@@ -111,6 +114,14 @@
 				8DC42EC729B1429E0005413B /* SkippyTests.swift */,
 			);
 			path = SkippyTests;
+			sourceTree = "<group>";
+		};
+		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8DCC07B429B92CF000A8C1FF /* moo.caf */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +207,7 @@
 			files = (
 				8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */,
 				8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */,
+				8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */,
 				8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

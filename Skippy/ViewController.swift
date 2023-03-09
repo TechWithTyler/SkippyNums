@@ -44,6 +44,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		// Do any additional setup after loading the view.
 		objectCollectionView.dataSource = self
 		objectCollectionView.delegate = self
+		objectCollectionView.isUserInteractionEnabled = true
 		newQuestion(self)
 	}
 
@@ -51,6 +52,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		conditionLabel.text?.removeAll()
 		gameBrain.newQuestion()
 		questionLabel.text = gameBrain.getQuestionText()
+		objectCollectionView.accessibilityLabel = gameBrain.backgroundAccessibilityText
 		setColors()
 		setChoices()
 		objectCollectionView.reloadData()
@@ -107,14 +109,25 @@ extension ViewController {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCell", for: indexPath)
 		// Create and configure the image view
 			let imageView = UIImageView(frame: cell.contentView.bounds)
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+		imageView.isUserInteractionEnabled = true
+		tapGesture.numberOfTouchesRequired = 1
+		tapGesture.numberOfTapsRequired = 1
 			imageView.image = UIImage(named: gameBrain.currentObject.imageName)
 			imageView.contentMode = .scaleAspectFit
 			imageView.clipsToBounds = true
 			imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 			imageView.center = cell.contentView.center
+		imageView.addGestureRecognizer(tapGesture)
+		imageView.isAccessibilityElement = true
+		imageView.accessibilityLabel = gameBrain.objectAccessibilityText
 			// Add the image view to the cell's content view
 			cell.contentView.addSubview(imageView)
 		return cell
+	}
+
+	@objc func imageTapped(_ sender: UITapGestureRecognizer) {
+		gameBrain.playSoundForObject()
 	}
 
 	func collectionView(
