@@ -11,8 +11,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	@IBOutlet weak var questionLabel: UILabel!
 	
-	@IBOutlet weak var conditionLabel: UILabel!
-	
 	@IBOutlet weak var objectCollectionView: UICollectionView!
 
 	@IBOutlet weak var choice1Button: UIButton!
@@ -26,8 +24,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet weak var choice5Button: UIButton!
 
 	@IBOutlet weak var choice6Button: UIButton!
-
-	@IBOutlet weak var newQuestionButton: UIButton!
 
 	private let sectionInsets = UIEdgeInsets(
 		top: 50.0,
@@ -45,11 +41,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.dataSource = self
 		objectCollectionView.delegate = self
 		objectCollectionView.isUserInteractionEnabled = true
-		newQuestion(self)
+		newQuestion()
 	}
 
-	@IBAction func newQuestion(_ sender: Any) {
-		conditionLabel.text?.removeAll()
+	func newQuestion() {
 		gameBrain.newQuestion()
 		questionLabel.text = gameBrain.getQuestionText()
 		objectCollectionView.accessibilityLabel = gameBrain.backgroundAccessibilityText
@@ -83,13 +78,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBAction func answerSelected(_ sender: UIButton) {
 		guard let answer = sender.currentTitle else { return }
 		let correct = gameBrain.checkAnswer(answer)
+		let condition = correct ? "Correct!" : "Incorrect!"
+		let alert = UIAlertController(title: condition, message: nil, preferredStyle: .alert)
 		if correct {
-			conditionLabel.text = "Correct!"
-			// Play sound here
+			let newQuestionAction = UIAlertAction(title: "Next Question", style: .default) {
+				[self] action in
+				newQuestion()
+			}
+			alert.addAction(newQuestionAction)
 		} else {
-			conditionLabel.text = "Incorrect!"
-			// Play sound here
+			let okAction = UIAlertAction(title: "Try Again", style: .default)
+			alert.addAction(okAction)
 		}
+		// Play sound here
+		present(alert, animated: true)
 	}
 
 }
