@@ -140,7 +140,7 @@ extension ViewController {
 		// 2
 		let paddingSpace = sectionInsets.left * 4
 		let availableWidth = view.frame.width - paddingSpace
-		let widthPerItem = availableWidth / 5
+		let widthPerItem = availableWidth / 5.5
 		return CGSize(width: widthPerItem, height: widthPerItem)
 	}
 
