@@ -132,12 +132,7 @@ extension ViewController {
 		gameBrain.playSoundForObject()
 	}
 
-	func collectionView(
-		_ collectionView: UICollectionView,
-		layout collectionViewLayout: UICollectionViewLayout,
-		sizeForItemAt indexPath: IndexPath
-	) -> CGSize {
-		// 2
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		let paddingSpace = sectionInsets.left * 4
 		let availableWidth = view.frame.width - paddingSpace
 		let widthPerItem = availableWidth / 5.5
