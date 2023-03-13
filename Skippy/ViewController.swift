@@ -69,15 +69,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 
 	func setColors() {
-		view.backgroundColor = gameBrain.getColors().background
-		objectCollectionView.backgroundColor = gameBrain.getColors().background
-		choice1Button.tintColor = gameBrain.getColors().buttons
-		choice2Button.tintColor = gameBrain.getColors().buttons
-		choice3Button.tintColor = gameBrain.getColors().buttons
-		choice4Button.tintColor = gameBrain.getColors().buttons
-		choice5Button.tintColor = gameBrain.getColors().buttons
-		choice6Button.tintColor = gameBrain.getColors().buttons
-		newQuestionButton.tintColor = gameBrain.getColors().buttons
+//		view.backgroundColor = gameBrain.getColors().background
+//		objectCollectionView.backgroundColor = gameBrain.getColors().background
+//		choice1Button.tintColor = gameBrain.getColors().buttons
+//		choice2Button.tintColor = gameBrain.getColors().buttons
+//		choice3Button.tintColor = gameBrain.getColors().buttons
+//		choice4Button.tintColor = gameBrain.getColors().buttons
+//		choice5Button.tintColor = gameBrain.getColors().buttons
+//		choice6Button.tintColor = gameBrain.getColors().buttons
+//		newQuestionButton.tintColor = gameBrain.getColors().buttons
 	}
 
 	@IBAction func answerSelected(_ sender: UIButton) {

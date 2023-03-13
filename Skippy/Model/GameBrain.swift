@@ -39,15 +39,12 @@ struct GameBrain {
 		let countingBy = currentObject.quantity
 		currentObject = GameBrain.objects.randomElement()!
 		numberOfObjectsToShow = Int.random(in: 1*countingBy...5*countingBy)
+		soundPlayer?.stop()
 	}
 
 	func getQuestionText() -> String {
 		let text = "Count the \(currentObject.displayPluralName) by \(currentObject.quantity)s."
 		return text
-	}
-
-	func getColors() -> (background: UIColor, buttons: UIColor) {
-		return (background: currentObject.backgroundColor, buttons: currentObject.buttonColor)
 	}
 
 	func getChoices() -> [String] {
