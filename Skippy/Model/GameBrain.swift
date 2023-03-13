@@ -76,13 +76,25 @@ struct GameBrain {
 		}
 	}
 
-	func checkAnswer(_ answer: String) -> Bool {
+	mutating func checkAnswer(_ answer: String) -> Bool {
 		let correctAnswer = String(numberOfObjectsToShow * currentObject.quantity)
-		print("Comparing answer \(answer) to correct \(correctAnswer)")
-		if answer == correctAnswer {
-			return true
-		} else {
-			return false
+		let correct = answer == correctAnswer
+		playAnswerSound(correct)
+		return correct
+	}
+
+	mutating func playAnswerSound(_ correct: Bool) {
+		let filename = correct ? "correct.caf" : "incorrect.caf"
+		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: nil) else {
+			fatalError("Failed to find \(filename) in bundle")
+		}
+		do {
+			soundPlayer?.stop()
+			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+			soundPlayer?.prepareToPlay()
+			soundPlayer?.play()
+		} catch {
+			fatalError("Failed to play \(filename): \(error)")
 		}
 	}
 

@@ -90,7 +90,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			let okAction = UIAlertAction(title: "Try Again", style: .default)
 			alert.addAction(okAction)
 		}
-		// Play sound here
 		present(alert, animated: true)
 	}
 

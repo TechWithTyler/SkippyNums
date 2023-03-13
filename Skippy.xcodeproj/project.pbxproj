@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D0BBD1A29BFB81B00AE7A62 /* correct.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBD1829BFB81B00AE7A62 /* correct.caf */; };
+		8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */; };
 		8D8EC9B6299AD7B300043D39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */; };
 		8D8EC9B8299AD7B300043D39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */; };
 		8D8EC9BA299AD7B300043D39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B9299AD7B300043D39 /* ViewController.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D0BBD1829BFB81B00AE7A62 /* correct.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = correct.caf; sourceTree = "<group>"; };
+		8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incorrect.caf; sourceTree = "<group>"; };
 		8D7B7A1829A5656A00D3C727 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D8EC9B2299AD7B300043D39 /* Skippy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skippy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				8D0BBD1829BFB81B00AE7A62 /* correct.caf */,
+				8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */,
 				8DCC07B829BA8BE900A8C1FF /* carEngine.caf */,
 				8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */,
 				8DCC07B429B92CF000A8C1FF /* moo.caf */,
@@ -211,11 +217,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D0BBD1A29BFB81B00AE7A62 /* correct.caf in Resources */,
 				8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */,
 				8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */,
 				8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */,
 				8DCC07B929BA8BE900A8C1FF /* carEngine.caf in Resources */,
 				8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */,
+				8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */,
 				8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
