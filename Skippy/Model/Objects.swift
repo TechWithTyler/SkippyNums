@@ -59,7 +59,7 @@ struct Car: Object {
 
 	var attributionText: String? = nil
 
-	var soundFilename: String = "carEngine.caf"
+	var soundFilename: String = "carHorn.caf"
 
 }
 
