@@ -20,14 +20,14 @@ final class SkippyTests: XCTestCase {
 
 	func testGetLayout5Objects() {
 		var gameBrain = GameBrain(currentObject: Cherry())
-		gameBrain.numberOfObjectsToShow = 5
+		gameBrain.numberOfImagesToShow = 5
 		let output = gameBrain.getLayout()
 		XCTAssertEqual(output.rows, 2, "Expected 2 rows but found \(output.rows)")
 	}
 
 	func testGetLayout9Objects() {
 		var gameBrain = GameBrain(currentObject: Cherry())
-		gameBrain.numberOfObjectsToShow = 9
+		gameBrain.numberOfImagesToShow = 9
 		let output = gameBrain.getLayout()
 		XCTAssertEqual(output.rows, 3, "Expected 3 rows but found \(output.rows)")
 	}

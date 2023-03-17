@@ -95,7 +95,7 @@ extension ViewController {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		// Columns
-		let number = gameBrain.numberOfObjectsToShow
+		let number = gameBrain.numberOfImagesToShow
 		print("Number of objects in row \(section): \(number)")
 		return number
 	}
@@ -115,6 +115,7 @@ extension ViewController {
 			imageView.center = cell.contentView.center
 		imageView.addGestureRecognizer(tapGesture)
 		imageView.isAccessibilityElement = true
+		imageView.accessibilityTraits = [.startsMediaSession, .image]
 		imageView.accessibilityLabel = gameBrain.objectAccessibilityText
 			// Add the image view to the cell's content view
 		cell.contentView.subviews.first?.removeFromSuperview()

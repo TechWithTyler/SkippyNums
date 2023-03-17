@@ -20,7 +20,7 @@ struct GameBrain {
 
 	var currentObject: Object
 
-	var numberOfObjectsToShow: Int = 2
+	var numberOfImagesToShow: Int = 2
 
 	var soundPlayer: AVAudioPlayer? = nil
 
@@ -29,16 +29,25 @@ struct GameBrain {
 	}
 
 	var backgroundAccessibilityText: String {
-		let groupSingularPlural = (numberOfObjectsToShow == 1) ? "group" : "groups"
-		return "\(numberOfObjectsToShow) \(groupSingularPlural) of \(currentObject.quantity) \(currentObject.displayPluralName)"
+		let groupSingularPlural = (numberOfImagesToShow == 1) ? "group" : "groups"
+		return "\(numberOfImagesToShow) \(groupSingularPlural) of \(currentObject.quantity) \(currentObject.displayPluralName)"
 	}
 
 	// MARK: - Game Logic
 
+	init(currentObject: Object) {
+		self.currentObject = currentObject
+		do {
+			try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+		} catch {
+			fatalError("Error: \(error.localizedDescription)")
+		}
+	}
+
 	mutating func newQuestion() {
 		let countingBy = currentObject.quantity
 		currentObject = GameBrain.objects.randomElement()!
-		numberOfObjectsToShow = Int.random(in: 1*countingBy...5*countingBy)
+		numberOfImagesToShow = Int.random(in: 1*countingBy...5*countingBy)
 		soundPlayer?.stop()
 	}
 
@@ -49,12 +58,12 @@ struct GameBrain {
 
 	func getChoices() -> [String] {
 		// Below correct answer
-		let choice1 = numberOfObjectsToShow * currentObject.quantity / 4
-		let choice2 = numberOfObjectsToShow * currentObject.quantity / 2
+		let choice1 = numberOfImagesToShow * currentObject.quantity / 4
+		let choice2 = numberOfImagesToShow * currentObject.quantity / 2
 		// Correct answer
-		let choice3 = numberOfObjectsToShow * currentObject.quantity
+		let choice3 = numberOfImagesToShow * currentObject.quantity
 		// Above correct answer
-		let choice4 = numberOfObjectsToShow * currentObject.quantity * 2
+		let choice4 = numberOfImagesToShow * currentObject.quantity * 2
 		let shuffledChoices = [String(choice1), String(choice2), String(choice3), String(choice4)].shuffled()
 		return shuffledChoices
 	}
@@ -77,7 +86,7 @@ struct GameBrain {
 	}
 
 	mutating func checkAnswer(_ answer: String) -> Bool {
-		let correctAnswer = String(numberOfObjectsToShow * currentObject.quantity)
+		let correctAnswer = String(numberOfImagesToShow * currentObject.quantity)
 		let correct = answer == correctAnswer
 		playAnswerSound(correct)
 		return correct
