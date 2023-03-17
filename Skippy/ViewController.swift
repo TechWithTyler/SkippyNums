@@ -51,10 +51,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	func setChoices() {
 		let choices = gameBrain.getChoices()
-		choice1Button.setTitle("\(choices[0])", for: .normal)
-		choice2Button.setTitle("\(choices[1])", for: .normal)
-		choice3Button.setTitle("\(choices[2])", for: .normal)
-		choice4Button.setTitle("\(choices[3])", for: .normal)
+		choice1Button.setTitle(choices[0], for: .normal)
+		choice2Button.setTitle(choices[1], for: .normal)
+		choice3Button.setTitle(choices[2], for: .normal)
+		choice4Button.setTitle(choices[3], for: .normal)
 	}
 
 	func setFontsAndColors() {
@@ -67,12 +67,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				}
 			}
 		}
-//		view.backgroundColor = gameBrain.getColors().background
-//		objectCollectionView.backgroundColor = gameBrain.getColors().background
-//		choice1Button.tintColor = gameBrain.getColors().buttons
-//		choice2Button.tintColor = gameBrain.getColors().buttons
-//		choice3Button.tintColor = gameBrain.getColors().buttons
-//		choice4Button.tintColor = gameBrain.getColors().buttons
 	}
 
 	@IBAction func answerSelected(_ sender: UIButton) {
