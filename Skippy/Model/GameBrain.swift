@@ -2,7 +2,7 @@
 //  GameBrain.swift
 //  Skippy
 //
-//  Created by Tyler Sheft on 2/14/23.
+//  Created by TechWithTyler on 2/14/23.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ struct GameBrain {
 
 	static var objects: [Object] = [
 		Cow(),
-		Elephant(),
+//		Elephant(), // Replace with different object later?
 		Car()
 	]
 
@@ -24,7 +24,7 @@ struct GameBrain {
 
 	var soundPlayer: AVAudioPlayer? = nil
 
-	var objectAccessibilityText: String {
+	var imageAccessibilityText: String {
 		return "Group of \(currentObject.quantity) \(currentObject.displayPluralName)"
 	}
 

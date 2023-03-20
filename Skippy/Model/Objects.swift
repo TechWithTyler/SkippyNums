@@ -1,8 +1,8 @@
 //
 //  Object.swift
-//  Skipy
+//  Skippy
 //
-//  Created by Tyler Sheft on 2/13/23.
+//  Created by TechWithTyler on 2/13/23.
 //
 
 import UIKit

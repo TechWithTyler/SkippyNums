@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  Skipy
+//  Skippy
 //
-//  Created by Tyler Sheft on 2/13/23.
+//  Created by TechWithTyler on 2/13/23.
 //
 
 import UIKit
@@ -27,6 +27,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		bottom: 50.0,
 		right: 20.0)
 
+	private let gradientColorsLight: [CGColor] = [UIColor.systemRed.cgColor, UIColor.systemCyan.cgColor]
+
+	private let gradientColorsDark: [CGColor] = [UIColor.systemPurple.cgColor, UIColor.black.cgColor]
+
 	var gameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
 
 	// MARK: - Setup
@@ -38,6 +42,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.delegate = self
 		objectCollectionView.isUserInteractionEnabled = true
 		newQuestion()
+		// Create gradient layer
+		let gradientLayer = CAGradientLayer()
+		gradientLayer.frame = view.bounds
+		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+
+		gradientLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+		// Add gradient layer to view
+		view.layer.insertSublayer(gradientLayer, at: 0)
+		objectCollectionView.backgroundColor = .clear
+	}
+
+	@objc func updateBackgroundColors() {
+		// Update gradient colors based on device's dark/light mode
+		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+		}
+	}
+
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		super.traitCollectionDidChange(previousTraitCollection)
+		// Update gradient colors when device's dark/light mode changes
+		updateBackgroundColors()
 	}
 
 	func newQuestion() {
@@ -45,7 +73,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		questionLabel.text = gameBrain.getQuestionText()
 		objectCollectionView.accessibilityLabel = gameBrain.backgroundAccessibilityText
 		setChoices()
-		setFontsAndColors()
+		setFonts()
 		objectCollectionView.reloadData()
 	}
 
@@ -57,7 +85,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		choice4Button.setTitle(choices[3], for: .normal)
 	}
 
-	func setFontsAndColors() {
+	func setFonts() {
 		for view in view.subviews {
 			if let button = view as? UIButton {
 				button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
@@ -114,9 +142,10 @@ extension ViewController {
 			imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 			imageView.center = cell.contentView.center
 		imageView.addGestureRecognizer(tapGesture)
+		// Configure accessibility
 		imageView.isAccessibilityElement = true
 		imageView.accessibilityTraits = [.startsMediaSession, .image]
-		imageView.accessibilityLabel = gameBrain.objectAccessibilityText
+		imageView.accessibilityLabel = "\(gameBrain.imageAccessibilityText)"
 			// Add the image view to the cell's content view
 		cell.contentView.subviews.first?.removeFromSuperview()
 			cell.contentView.addSubview(imageView)
