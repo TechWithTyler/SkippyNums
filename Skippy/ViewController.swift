@@ -48,8 +48,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
 		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
 		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-
-		gradientLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
 		objectCollectionView.backgroundColor = .clear
@@ -66,6 +64,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		super.traitCollectionDidChange(previousTraitCollection)
 		// Update gradient colors when device's dark/light mode changes
 		updateBackgroundColors()
+	}
+
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+			gradientLayer.frame = view.bounds
+		}
 	}
 
 	func newQuestion() {
