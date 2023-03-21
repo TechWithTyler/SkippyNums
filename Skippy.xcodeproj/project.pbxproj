@@ -21,6 +21,9 @@
 		8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B429B92CF000A8C1FF /* moo.caf */; };
 		8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */; };
 		8DCC07B929BA8BE900A8C1FF /* carHorn.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B829BA8BE900A8C1FF /* carHorn.caf */; };
+		8DD741D129CA404900BE0E46 /* bear.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DD741CE29CA404800BE0E46 /* bear.caf */; };
+		8DD741D229CA404900BE0E46 /* airplane.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DD741CF29CA404900BE0E46 /* airplane.caf */; };
+		8DD741D329CA404900BE0E46 /* robot.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DD741D029CA404900BE0E46 /* robot.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		8DCC07B429B92CF000A8C1FF /* moo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = moo.caf; sourceTree = "<group>"; };
 		8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = elephantTrumpet.caf; sourceTree = "<group>"; };
 		8DCC07B829BA8BE900A8C1FF /* carHorn.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = carHorn.caf; sourceTree = "<group>"; };
+		8DD741CE29CA404800BE0E46 /* bear.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bear.caf; sourceTree = "<group>"; };
+		8DD741CF29CA404900BE0E46 /* airplane.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = airplane.caf; sourceTree = "<group>"; };
+		8DD741D029CA404900BE0E46 /* robot.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = robot.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,9 @@
 		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				8DD741CF29CA404900BE0E46 /* airplane.caf */,
+				8DD741CE29CA404800BE0E46 /* bear.caf */,
+				8DD741D029CA404900BE0E46 /* robot.caf */,
 				8D0BBD1829BFB81B00AE7A62 /* correct.caf */,
 				8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */,
 				8DCC07B829BA8BE900A8C1FF /* carHorn.caf */,
@@ -217,13 +226,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DD741D129CA404900BE0E46 /* bear.caf in Resources */,
 				8D0BBD1A29BFB81B00AE7A62 /* correct.caf in Resources */,
+				8DD741D229CA404900BE0E46 /* airplane.caf in Resources */,
 				8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */,
 				8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */,
 				8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */,
 				8DCC07B929BA8BE900A8C1FF /* carHorn.caf in Resources */,
 				8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */,
 				8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */,
+				8DD741D329CA404900BE0E46 /* robot.caf in Resources */,
 				8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,7 +421,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Skippy/Skippy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Skippy/Info.plist;
@@ -424,7 +436,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = TechWithTyler.Skippy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -443,7 +455,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Skippy/Skippy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Skippy/Info.plist;
@@ -458,7 +470,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = TechWithTyler.Skippy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -11,6 +11,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	@IBOutlet weak var questionLabel: UILabel!
 	
+	@IBOutlet weak var scoreLabel: UILabel!
+	
 	@IBOutlet weak var objectCollectionView: UICollectionView!
 
 	@IBOutlet weak var choice1Button: UIButton!
@@ -41,6 +43,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.dataSource = self
 		objectCollectionView.delegate = self
 		objectCollectionView.isUserInteractionEnabled = true
+		resetStats()
 		newQuestion()
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
@@ -71,6 +74,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
 			gradientLayer.frame = view.bounds
 		}
+	}
+
+	@IBAction func newGame(_ sender: Any) {
+		let newGameAlert = UIAlertController(title: "Start a new game?", message: "Your progress will be lost!", preferredStyle: .alert)
+		let newGameAction = UIAlertAction(title: "Yes", style: .default) { [self] action in
+			resetStats()
+			newQuestion()
+		}
+		let cancelAction = UIAlertAction(title: "No", style: .cancel)
+		newGameAlert.addAction(newGameAction)
+		newGameAlert.addAction(cancelAction)
+		present(newGameAlert, animated: true)
+	}
+
+	func resetStats() {
+		gameBrain.score = 0
+		updateStatDisplay()
+	}
+
+	func updateStatDisplay() {
+		scoreLabel.text = "Score: \(gameBrain.score)"
 	}
 
 	func newQuestion() {
@@ -107,6 +131,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		let correct = gameBrain.checkAnswer(answer)
 		let condition = correct ? "Correct!" : "Incorrect!"
 		let alert = UIAlertController(title: condition, message: nil, preferredStyle: .alert)
+		updateStatDisplay()
 		if correct {
 			let newQuestionAction = UIAlertAction(title: "Next Question", style: .default) {
 				[self] action in
@@ -151,13 +176,19 @@ extension ViewController {
 		imageView.isAccessibilityElement = true
 		imageView.accessibilityTraits = [.startsMediaSession, .image]
 		imageView.accessibilityLabel = "\(gameBrain.imageAccessibilityText)"
-			// Add the image view to the cell's content view
+		cell.focusEffect = nil
+		// Add the image view to the cell's content view
 		cell.contentView.subviews.first?.removeFromSuperview()
 			cell.contentView.addSubview(imageView)
 		return cell
 	}
 
-	@objc func imageTapped(_ sender: UITapGestureRecognizer) {
+	func collectionView(_ collectionView: UICollectionView, canPerformPrimaryActionForItemAt indexPath: IndexPath) -> Bool {
+		imageTapped(collectionView)
+		return true
+	}
+
+	@objc func imageTapped(_ sender: Any) {
 		gameBrain.playSoundForObject()
 	}
 

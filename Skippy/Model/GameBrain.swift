@@ -14,13 +14,15 @@ struct GameBrain {
 
 	static var objects: [Object] = [
 		Cow(),
-//		Elephant(), // Replace with different object later?
+		Elephant(),
 		Car()
 	]
 
 	var currentObject: Object
 
 	var numberOfImagesToShow: Int = 2
+
+	var score: Int = 0
 
 	var soundPlayer: AVAudioPlayer? = nil
 
@@ -89,6 +91,9 @@ struct GameBrain {
 		let correctAnswer = String(numberOfImagesToShow * currentObject.quantity)
 		let correct = answer == correctAnswer
 		playAnswerSound(correct)
+		if correct {
+			score += 1
+		}
 		return correct
 	}
 

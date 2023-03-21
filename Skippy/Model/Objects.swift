@@ -39,7 +39,7 @@ struct Elephant: Object {
 
 	var displayPluralName: String = "elephants"
 
-	var imageName: String = "elephants.svg"
+	var imageName: String = "elephants.png"
 
 	var quantity: Int = 2
 
