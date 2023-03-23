@@ -32,12 +32,12 @@ struct GameBrain {
 	var soundPlayer: AVAudioPlayer? = nil
 
 	var imageAccessibilityText: String {
-		return "Group of \(currentObject.quantity) \(currentObject.displayPluralName)"
+		return "Group of \(currentObject.quantity) \(currentObject.name)"
 	}
 
 	var backgroundAccessibilityText: String {
 		let groupSingularPlural = (numberOfImagesToShow == 1) ? "group" : "groups"
-		return "\(numberOfImagesToShow) \(groupSingularPlural) of \(currentObject.quantity) \(currentObject.displayPluralName)"
+		return "\(numberOfImagesToShow) \(groupSingularPlural) of \(currentObject.quantity) \(currentObject.name)"
 	}
 
 	// MARK: - Game Logic
@@ -54,23 +54,23 @@ struct GameBrain {
 	mutating func newQuestion() {
 		let countingBy = currentObject.quantity
 		currentObject = GameBrain.objects.randomElement()!
-		numberOfImagesToShow = Int.random(in: 1*countingBy...5*countingBy)
+		numberOfImagesToShow = Int.random(in: 2...10)
 		soundPlayer?.stop()
 	}
 
 	func getQuestionText() -> String {
-		let text = "Count the \(currentObject.displayPluralName) by \(currentObject.quantity)s."
+		let text = "Count the \(currentObject.name) by \(currentObject.quantity)s."
 		return text
 	}
 
 	func getChoices() -> [String] {
 		// Below correct answer
-		let choice1 = numberOfImagesToShow * currentObject.quantity / 4
-		let choice2 = numberOfImagesToShow * currentObject.quantity / 2
+		let choice1 = numberOfImagesToShow * currentObject.quantity - (currentObject.quantity * 2)
+		let choice2 = numberOfImagesToShow * currentObject.quantity - currentObject.quantity
 		// Correct answer
 		let choice3 = numberOfImagesToShow * currentObject.quantity
 		// Above correct answer
-		let choice4 = numberOfImagesToShow * currentObject.quantity * 2
+		let choice4 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
 		let shuffledChoices = [String(choice1), String(choice2), String(choice3), String(choice4)].shuffled()
 		return shuffledChoices
 	}

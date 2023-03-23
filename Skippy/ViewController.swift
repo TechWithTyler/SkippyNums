@@ -166,7 +166,7 @@ extension ViewController {
 		imageView.isUserInteractionEnabled = true
 		tapGesture.numberOfTouchesRequired = 1
 		tapGesture.numberOfTapsRequired = 1
-			imageView.image = UIImage(named: gameBrain.currentObject.imageName)
+			imageView.image = UIImage(named: gameBrain.currentObject.name)
 			imageView.contentMode = .scaleAspectFit
 			imageView.clipsToBounds = true
 			imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

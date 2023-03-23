@@ -9,9 +9,7 @@ import UIKit
 
 protocol Object {
 
-	var displayPluralName: String { get }
-
-	var imageName: String { get }
+	var name: String { get }
 
 	var quantity: Int { get }
 
@@ -23,9 +21,7 @@ protocol Object {
 
 struct Cow: Object {
 	
-	var displayPluralName: String = "cows"
-
-	var imageName: String = "cows.svg"
+	var name: String = "cows"
 
 	var quantity: Int = 2
 
@@ -37,9 +33,7 @@ struct Cow: Object {
 
 struct Elephant: Object {
 
-	var displayPluralName: String = "elephants"
-
-	var imageName: String = "elephants.png"
+	var name: String = "elephants"
 
 	var quantity: Int = 2
 
@@ -51,9 +45,7 @@ struct Elephant: Object {
 
 struct Car: Object {
 
-	var displayPluralName: String = "cars"
-
-	var imageName: String = "cars.svg"
+	var name: String = "cars"
 
 	var quantity: Int = 2
 
@@ -65,11 +57,9 @@ struct Car: Object {
 
 struct Airplane: Object {
 
-	var displayPluralName: String = "airplanes"
+	var name: String = "airplanes"
 
-	var imageName: String = "airplanes.svg"
-
-	var quantity: Int = 2
+	var quantity: Int = 5
 
 	var attributionText: String? = nil
 
@@ -79,9 +69,7 @@ struct Airplane: Object {
 
 struct Bear: Object {
 
-	var displayPluralName: String = "bears"
-
-	var imageName: String = "bears.svg"
+	var name: String = "bears"
 
 	var quantity: Int = 2
 
@@ -93,9 +81,7 @@ struct Bear: Object {
 
 struct Monkey: Object {
 
-	var displayPluralName: String = "monkeys"
-
-	var imageName: String = "monkeys.svg"
+	var name: String = "monkeys"
 
 	var quantity: Int = 2
 
@@ -107,9 +93,7 @@ struct Monkey: Object {
 
 struct Robot: Object {
 
-	var displayPluralName: String = "robots"
-
-	var imageName: String = "robots.svg"
+	var name: String = "robots"
 
 	var quantity: Int = 2
 
