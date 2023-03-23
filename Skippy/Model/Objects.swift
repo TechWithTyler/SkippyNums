@@ -63,3 +63,58 @@ struct Car: Object {
 
 }
 
+struct Airplane: Object {
+
+	var displayPluralName: String = "airplanes"
+
+	var imageName: String = "airplanes.svg"
+
+	var quantity: Int = 2
+
+	var attributionText: String? = nil
+
+	var soundFilename: String = "airplane.caf"
+
+}
+
+struct Bear: Object {
+
+	var displayPluralName: String = "bears"
+
+	var imageName: String = "bears.svg"
+
+	var quantity: Int = 2
+
+	var attributionText: String? = nil
+
+	var soundFilename: String = "bear.caf"
+
+}
+
+struct Monkey: Object {
+
+	var displayPluralName: String = "monkeys"
+
+	var imageName: String = "monkeys.svg"
+
+	var quantity: Int = 2
+
+	var attributionText: String? = nil
+
+	var soundFilename: String = "monkey.caf"
+
+}
+
+struct Robot: Object {
+
+	var displayPluralName: String = "robots"
+
+	var imageName: String = "robots.svg"
+
+	var quantity: Int = 2
+
+	var attributionText: String? = nil
+
+	var soundFilename: String = "robot.caf"
+
+}

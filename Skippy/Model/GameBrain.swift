@@ -13,9 +13,14 @@ struct GameBrain {
 	// MARK: - Properties
 
 	static var objects: [Object] = [
+		// Comment out objects if they're not ready to commit or ship.
 		Cow(),
 		Elephant(),
-		Car()
+		Car(),
+		Airplane(),
+//		Robot(),
+//		Monkey(),
+//		Bear()
 	]
 
 	var currentObject: Object
