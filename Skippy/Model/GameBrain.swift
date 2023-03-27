@@ -105,7 +105,7 @@ struct GameBrain {
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
 			soundPlayer?.numberOfLoops = currentObject.quantity - 1
 			soundPlayer?.enableRate = true
-			soundPlayer?.rate = 2
+			soundPlayer?.rate = currentObject.soundRate
 			soundPlayer?.prepareToPlay()
 			soundPlayer?.play()
 		} catch {

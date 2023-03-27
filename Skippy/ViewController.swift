@@ -105,24 +105,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 
 	func resetGame() {
+		let gameStartBlock: (() -> Void) = {
+			[self] in
+			objectCollectionView.isHidden = false
+			newQuestion()
+			updateStatDisplay()
+		}
 		let countingBySelection = UIAlertController(title: "Please choose what you want to count by.", message: nil, preferredStyle: .alert)
 		let twosAction = UIAlertAction(title: "2s", style: .default) {
 			[self] action in
 			gameBrain.countingBy = 2
-			objectCollectionView.isHidden = false
-			newQuestion()
+			gameStartBlock()
 		}
 		let fivesAction = UIAlertAction(title: "5s", style: .default) {
 			[self] action in
 			gameBrain.countingBy = 5
-			objectCollectionView.isHidden = false
-			newQuestion()
+			gameStartBlock()
 		}
 		let randomAction = UIAlertAction(title: "Mix It Up!", style: .default) {
 			[self] action in
 			gameBrain.countingBy = nil
-			objectCollectionView.isHidden = false
-			newQuestion()
+			gameStartBlock()
 		}
 		objectCollectionView.isHidden = true
 		countingBySelection.addAction(twosAction)
@@ -130,7 +133,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		countingBySelection.addAction(randomAction)
 		present(countingBySelection, animated: true)
 		gameBrain.score = 0
-		updateStatDisplay()
 	}
 
 	func updateStatDisplay() {

@@ -17,9 +17,12 @@ protocol Object {
 
 	var soundFilename: String { get }
 
+	var soundRate: Float { get }
+
 }
 
 struct Cow: Object {
+
 	
 	var name: String = "cows"
 
@@ -28,6 +31,8 @@ struct Cow: Object {
 	var attributionText: String? = nil
 
 	var soundFilename: String = "moo.caf"
+
+	var soundRate: Float = 1
 	
 }
 
@@ -41,6 +46,8 @@ struct Elephant: Object {
 
 	var soundFilename: String = "elephantTrumpet.caf"
 
+	var soundRate: Float = 1
+
 }
 
 struct Car: Object {
@@ -52,6 +59,8 @@ struct Car: Object {
 	var attributionText: String? = nil
 
 	var soundFilename: String = "carHorn.caf"
+
+	var soundRate: Float = 1
 
 }
 
@@ -65,6 +74,8 @@ struct Airplane: Object {
 
 	var soundFilename: String = "airplane.caf"
 
+	var soundRate: Float = 2.5
+
 }
 
 struct Bear: Object {
@@ -76,6 +87,8 @@ struct Bear: Object {
 	var attributionText: String? = nil
 
 	var soundFilename: String = "bear.caf"
+
+	var soundRate: Float = 1.5
 
 }
 
@@ -89,6 +102,8 @@ struct Monkey: Object {
 
 	var soundFilename: String = "monkey.caf"
 
+	var soundRate: Float = 1.5
+
 }
 
 struct Robot: Object {
@@ -100,5 +115,7 @@ struct Robot: Object {
 	var attributionText: String? = nil
 
 	var soundFilename: String = "robot.caf"
+
+	var soundRate: Float = 1.5
 
 }
