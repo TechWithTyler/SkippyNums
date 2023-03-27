@@ -81,6 +81,12 @@ struct GameBrain {
 		var finalChoices = Array(shuffledIncorrectChoices.dropLast())
 		finalChoices.append(String(correctChoice))
 		finalChoices.shuffle()
+		// Replace 0 with 1
+		for i in 0...finalChoices.count - 1 {
+			if finalChoices[i] == "0" {
+				finalChoices[i] = "1"
+			}
+		}
 		return finalChoices
 	}
 
