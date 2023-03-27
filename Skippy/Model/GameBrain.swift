@@ -73,12 +73,9 @@ struct GameBrain {
 		let choice3 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
 		let choice4 = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 2)
 		let shuffledIncorrectChoices = [String(choice1), String(choice2), String(choice3), String(choice4)].shuffled()
-		print(shuffledIncorrectChoices)
 		var finalChoices = Array(shuffledIncorrectChoices.dropLast())
 		finalChoices.append(String(correctChoice))
 		finalChoices.shuffle()
-		print(finalChoices)
-		print(finalChoices.count == 4)
 		return finalChoices
 	}
 
