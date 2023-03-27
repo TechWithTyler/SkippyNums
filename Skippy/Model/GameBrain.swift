@@ -84,7 +84,7 @@ struct GameBrain {
 		// Replace 0 with 1
 		for i in 0...finalChoices.count - 1 {
 			if finalChoices[i] == "0" {
-				finalChoices[i] = "1"
+				return [String(choice2), String(choice3), String(choice4), String(correctChoice)].shuffled()
 			}
 		}
 		return finalChoices
