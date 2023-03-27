@@ -12,7 +12,7 @@ struct GameBrain {
 
 	// MARK: - Properties
 
-	static var objects: [Object] = [
+	static var objects: [any Object] = [
 		// Comment out objects if they're not ready to commit or ship.
 		Cow(),
 		Elephant(),
@@ -23,7 +23,7 @@ struct GameBrain {
 //		Bear()
 	]
 
-	var currentObject: Object
+	var currentObject: any Object
 
 	var numberOfImagesToShow: Int = 2
 
@@ -52,9 +52,14 @@ struct GameBrain {
 	}
 
 	mutating func newQuestion() {
-		let countingBy = currentObject.quantity
+		let previousObjectName = currentObject.name
+		let previousNumberOfImages = numberOfImagesToShow
 		currentObject = GameBrain.objects.randomElement()!
 		numberOfImagesToShow = Int.random(in: 2...10)
+		if currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages {
+			// If the next question is identical to the previous one, try again until a different question is generated.
+			newQuestion()
+		}
 		soundPlayer?.stop()
 	}
 
