@@ -178,9 +178,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				newQuestion()
 			}
 			alert.addAction(newQuestionAction)
+			alert.preferredAction = newQuestionAction
 		} else {
 			let okAction = UIAlertAction(title: "Try Again", style: .default)
 			alert.addAction(okAction)
+			alert.preferredAction = okAction
 		}
 		present(alert, animated: true)
 	}
