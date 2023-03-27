@@ -43,8 +43,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.dataSource = self
 		objectCollectionView.delegate = self
 		objectCollectionView.isUserInteractionEnabled = true
-		resetStats()
-		newQuestion()
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = view.bounds
@@ -54,6 +52,24 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
 		objectCollectionView.backgroundColor = .clear
+		questionLabel.text = "Loading…"
+		scoreLabel.text = "Score: --"
+		objectCollectionView.isHidden = true
+		choice1Button.setTitle("-", for: .normal)
+		choice2Button.setTitle("-", for: .normal)
+		choice3Button.setTitle("-", for: .normal)
+		choice4Button.setTitle("-", for: .normal)
+		choice1Button.isEnabled = false
+		choice2Button.isEnabled = false
+		choice3Button.isEnabled = false
+		choice4Button.isEnabled = false
+		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) { [self] in
+			choice1Button.isEnabled = true
+			choice2Button.isEnabled = true
+			choice3Button.isEnabled = true
+			choice4Button.isEnabled = true
+			resetGame()
+		}
 	}
 
 	@objc func updateBackgroundColors() {
@@ -79,16 +95,40 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBAction func newGame(_ sender: Any) {
 		let newGameAlert = UIAlertController(title: "Start a new game?", message: "Your progress will be lost!", preferredStyle: .alert)
 		let newGameAction = UIAlertAction(title: "Yes", style: .default) { [self] action in
-			resetStats()
-			newQuestion()
+			resetGame()
 		}
 		let cancelAction = UIAlertAction(title: "No", style: .cancel)
 		newGameAlert.addAction(newGameAction)
 		newGameAlert.addAction(cancelAction)
+		newGameAlert.preferredAction = newGameAction
 		present(newGameAlert, animated: true)
 	}
 
-	func resetStats() {
+	func resetGame() {
+		let countingBySelection = UIAlertController(title: "Please choose what you want to count by.", message: nil, preferredStyle: .alert)
+		let twosAction = UIAlertAction(title: "2s", style: .default) {
+			[self] action in
+			gameBrain.countingBy = 2
+			objectCollectionView.isHidden = false
+			newQuestion()
+		}
+		let fivesAction = UIAlertAction(title: "5s", style: .default) {
+			[self] action in
+			gameBrain.countingBy = 5
+			objectCollectionView.isHidden = false
+			newQuestion()
+		}
+		let randomAction = UIAlertAction(title: "Mix It Up!", style: .default) {
+			[self] action in
+			gameBrain.countingBy = nil
+			objectCollectionView.isHidden = false
+			newQuestion()
+		}
+		objectCollectionView.isHidden = true
+		countingBySelection.addAction(twosAction)
+		countingBySelection.addAction(fivesAction)
+		countingBySelection.addAction(randomAction)
+		present(countingBySelection, animated: true)
 		gameBrain.score = 0
 		updateStatDisplay()
 	}

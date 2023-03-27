@@ -29,6 +29,8 @@ struct GameBrain {
 
 	var score: Int = 0
 
+	var countingBy: Int?
+
 	var soundPlayer: AVAudioPlayer? = nil
 
 	var imageAccessibilityText: String {
@@ -54,7 +56,11 @@ struct GameBrain {
 	mutating func newQuestion() {
 		let previousObjectName = currentObject.name
 		let previousNumberOfImages = numberOfImagesToShow
-		currentObject = GameBrain.objects.randomElement()!
+		if countingBy == nil {
+			currentObject = GameBrain.objects.randomElement()!
+		} else {
+			currentObject = GameBrain.objects.filter({$0.quantity == countingBy}).randomElement()!
+		}
 		numberOfImagesToShow = Int.random(in: 2...10)
 		if currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages {
 			// If the next question is identical to the previous one, try again until a different question is generated.
