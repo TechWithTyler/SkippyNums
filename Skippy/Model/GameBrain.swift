@@ -68,11 +68,18 @@ struct GameBrain {
 		let choice1 = numberOfImagesToShow * currentObject.quantity - (currentObject.quantity * 2)
 		let choice2 = numberOfImagesToShow * currentObject.quantity - currentObject.quantity
 		// Correct answer
-		let choice3 = numberOfImagesToShow * currentObject.quantity
+		let correctChoice = numberOfImagesToShow * currentObject.quantity
 		// Above correct answer
-		let choice4 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
-		let shuffledChoices = [String(choice1), String(choice2), String(choice3), String(choice4)].shuffled()
-		return shuffledChoices
+		let choice3 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
+		let choice4 = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 2)
+		let shuffledIncorrectChoices = [String(choice1), String(choice2), String(choice3), String(choice4)].shuffled()
+		print(shuffledIncorrectChoices)
+		var finalChoices = Array(shuffledIncorrectChoices.dropLast())
+		finalChoices.append(String(correctChoice))
+		finalChoices.shuffle()
+		print(finalChoices)
+		print(finalChoices.count == 4)
+		return finalChoices
 	}
 
 	mutating func playSoundForObject() {
