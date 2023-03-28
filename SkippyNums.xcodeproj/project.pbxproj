@@ -40,17 +40,17 @@
 		8D0BBD1829BFB81B00AE7A62 /* correct.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = correct.caf; sourceTree = "<group>"; };
 		8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incorrect.caf; sourceTree = "<group>"; };
 		8D7B7A1829A5656A00D3C727 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D8EC9B2299AD7B300043D39 /* NumberHop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NumberHop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D8EC9B2299AD7B300043D39 /* SkippyNums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkippyNums.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8D8EC9B9299AD7B300043D39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8D8EC9BC299AD7B300043D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D8EC9BE299AD7B400043D39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D8EC9C1299AD7B400043D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8D8EC9C9299AD7BC00043D39 /* NumberHop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NumberHop.entitlements; sourceTree = "<group>"; };
+		8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SkippyNums.entitlements; sourceTree = "<group>"; };
 		8D8EC9CA299ADD9400043D39 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		8DA6D969299C2F4300ED533F /* GameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBrain.swift; sourceTree = "<group>"; };
-		8DC42EC529B1429E0005413B /* NumberHopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NumberHopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DC42EC529B1429E0005413B /* SkippyNumsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkippyNumsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC42EC729B1429E0005413B /* SkippyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkippyTests.swift; sourceTree = "<group>"; };
 		8DCC07B429B92CF000A8C1FF /* moo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = moo.caf; sourceTree = "<group>"; };
 		8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = elephantTrumpet.caf; sourceTree = "<group>"; };
@@ -81,8 +81,8 @@
 		8D8EC9A9299AD7B300043D39 = {
 			isa = PBXGroup;
 			children = (
-				8D8EC9B4299AD7B300043D39 /* NumberHop */,
-				8DC42EC629B1429E0005413B /* NumberHopTests */,
+				8D8EC9B4299AD7B300043D39 /* SkippyNums */,
+				8DC42EC629B1429E0005413B /* SkippyNumsTests */,
 				8D8EC9B3299AD7B300043D39 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,16 +90,16 @@
 		8D8EC9B3299AD7B300043D39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D8EC9B2299AD7B300043D39 /* NumberHop.app */,
-				8DC42EC529B1429E0005413B /* NumberHopTests.xctest */,
+				8D8EC9B2299AD7B300043D39 /* SkippyNums.app */,
+				8DC42EC529B1429E0005413B /* SkippyNumsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8D8EC9B4299AD7B300043D39 /* NumberHop */ = {
+		8D8EC9B4299AD7B300043D39 /* SkippyNums */ = {
 			isa = PBXGroup;
 			children = (
-				8D8EC9C9299AD7BC00043D39 /* NumberHop.entitlements */,
+				8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */,
 				8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */,
 				8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */,
 				8D8EC9B9299AD7B300043D39 /* ViewController.swift */,
@@ -110,7 +110,7 @@
 				8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */,
 				8D7B7A1829A5656A00D3C727 /* Info.plist */,
 			);
-			path = NumberHop;
+			path = SkippyNums;
 			sourceTree = "<group>";
 		};
 		8DA6D96C299C2F6000ED533F /* Model */ = {
@@ -122,12 +122,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		8DC42EC629B1429E0005413B /* NumberHopTests */ = {
+		8DC42EC629B1429E0005413B /* SkippyNumsTests */ = {
 			isa = PBXGroup;
 			children = (
 				8DC42EC729B1429E0005413B /* SkippyTests.swift */,
 			);
-			path = NumberHopTests;
+			path = SkippyNumsTests;
 			sourceTree = "<group>";
 		};
 		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
@@ -148,9 +148,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D8EC9B1299AD7B300043D39 /* NumberHop */ = {
+		8D8EC9B1299AD7B300043D39 /* SkippyNums */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8D8EC9C6299AD7B400043D39 /* Build configuration list for PBXNativeTarget "NumberHop" */;
+			buildConfigurationList = 8D8EC9C6299AD7B400043D39 /* Build configuration list for PBXNativeTarget "SkippyNums" */;
 			buildPhases = (
 				8D8EC9AE299AD7B300043D39 /* Sources */,
 				8D8EC9AF299AD7B300043D39 /* Frameworks */,
@@ -160,14 +160,14 @@
 			);
 			dependencies = (
 			);
-			name = NumberHop;
+			name = SkippyNums;
 			productName = Skipy;
-			productReference = 8D8EC9B2299AD7B300043D39 /* NumberHop.app */;
+			productReference = 8D8EC9B2299AD7B300043D39 /* SkippyNums.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8DC42EC429B1429E0005413B /* NumberHopTests */ = {
+		8DC42EC429B1429E0005413B /* SkippyNumsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8DC42ECD29B1429E0005413B /* Build configuration list for PBXNativeTarget "NumberHopTests" */;
+			buildConfigurationList = 8DC42ECD29B1429E0005413B /* Build configuration list for PBXNativeTarget "SkippyNumsTests" */;
 			buildPhases = (
 				8DC42EC129B1429E0005413B /* Sources */,
 				8DC42EC229B1429E0005413B /* Frameworks */,
@@ -178,9 +178,9 @@
 			dependencies = (
 				8DC42ECA29B1429E0005413B /* PBXTargetDependency */,
 			);
-			name = NumberHopTests;
+			name = SkippyNumsTests;
 			productName = SkippyTests;
-			productReference = 8DC42EC529B1429E0005413B /* NumberHopTests.xctest */;
+			productReference = 8DC42EC529B1429E0005413B /* SkippyNumsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -202,7 +202,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8D8EC9AD299AD7B300043D39 /* Build configuration list for PBXProject "NumberHop" */;
+			buildConfigurationList = 8D8EC9AD299AD7B300043D39 /* Build configuration list for PBXProject "SkippyNums" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -215,8 +215,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D8EC9B1299AD7B300043D39 /* NumberHop */,
-				8DC42EC429B1429E0005413B /* NumberHopTests */,
+				8D8EC9B1299AD7B300043D39 /* SkippyNums */,
+				8DC42EC429B1429E0005413B /* SkippyNumsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -275,7 +275,7 @@
 /* Begin PBXTargetDependency section */
 		8DC42ECA29B1429E0005413B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8D8EC9B1299AD7B300043D39 /* NumberHop */;
+			target = 8D8EC9B1299AD7B300043D39 /* SkippyNums */;
 			targetProxy = 8DC42EC929B1429E0005413B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -419,12 +419,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = NumberHop/NumberHop.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SkippyNums/SkippyNums.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NumberHop/Info.plist;
+				INFOPLIST_FILE = SkippyNums/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -437,7 +437,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = TechWithTyler.NumberHop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weebly.techwithtyler20.SkippyNums;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -453,12 +453,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = NumberHop/NumberHop.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SkippyNums/SkippyNums.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NumberHop/Info.plist;
+				INFOPLIST_FILE = SkippyNums/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -471,7 +471,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = TechWithTyler.NumberHop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weebly.techwithtyler20.SkippyNums;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -500,7 +500,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NumberHop.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NumberHop";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkippyNums.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SkippyNums";
 			};
 			name = Debug;
 		};
@@ -522,14 +522,14 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NumberHop.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NumberHop";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkippyNums.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SkippyNums";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8D8EC9AD299AD7B300043D39 /* Build configuration list for PBXProject "NumberHop" */ = {
+		8D8EC9AD299AD7B300043D39 /* Build configuration list for PBXProject "SkippyNums" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D8EC9C4299AD7B400043D39 /* Debug */,
@@ -538,7 +538,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8D8EC9C6299AD7B400043D39 /* Build configuration list for PBXNativeTarget "NumberHop" */ = {
+		8D8EC9C6299AD7B400043D39 /* Build configuration list for PBXNativeTarget "SkippyNums" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D8EC9C7299AD7B400043D39 /* Debug */,
@@ -547,7 +547,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8DC42ECD29B1429E0005413B /* Build configuration list for PBXNativeTarget "NumberHopTests" */ = {
+		8DC42ECD29B1429E0005413B /* Build configuration list for PBXNativeTarget "SkippyNumsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8DC42ECB29B1429E0005413B /* Debug */,
