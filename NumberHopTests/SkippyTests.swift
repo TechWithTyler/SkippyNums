@@ -1,14 +1,14 @@
 //
-//  SkippyTests.swift
-//  SkippyTests
+//  NumberHopTests.swift
+//  NumberHopTests
 //
 //  Created by TechWithTyler on 3/2/23.
 //
 
 import XCTest
-@testable import Skippy
+@testable import NumberHop
 
-final class SkippyTests: XCTestCase {
+final class NumberHopTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

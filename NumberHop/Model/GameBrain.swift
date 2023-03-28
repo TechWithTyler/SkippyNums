@@ -1,6 +1,6 @@
 //
 //  GameBrain.swift
-//  Skippy
+//  NumberHop
 //
 //  Created by TechWithTyler on 2/14/23.
 //
