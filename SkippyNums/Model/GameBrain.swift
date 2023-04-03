@@ -29,9 +29,15 @@ struct GameBrain {
 
 	var score: Int = 0
 
+	var numberOfIncorrectAnswers = 0
+
 	var countingBy: Int?
 
 	var soundPlayer: AVAudioPlayer? = nil
+
+	var tooManyIncorrect: Bool {
+		return numberOfIncorrectAnswers == 3
+	}
 
 	var imageAccessibilityText: String {
 		return "Group of \(currentObject.quantity) \(currentObject.name)"
@@ -62,6 +68,7 @@ struct GameBrain {
 			currentObject = GameBrain.objects.filter({$0.quantity == countingBy}).randomElement()!
 		}
 		numberOfImagesToShow = Int.random(in: 2...10)
+		numberOfIncorrectAnswers = 0
 		if currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages {
 			// If the next question is identical to the previous one, try again until a different question is generated.
 			newQuestion()
@@ -113,12 +120,18 @@ struct GameBrain {
 		}
 	}
 
+	func getCorrectAnswer() -> String {
+		return String(numberOfImagesToShow * currentObject.quantity)
+	}
+
 	mutating func checkAnswer(_ answer: String) -> Bool {
-		let correctAnswer = String(numberOfImagesToShow * currentObject.quantity)
+		let correctAnswer = getCorrectAnswer()
 		let correct = answer == correctAnswer
 		playAnswerSound(correct)
 		if correct {
 			score += 1
+		} else {
+			numberOfIncorrectAnswers += 1
 		}
 		return correct
 	}

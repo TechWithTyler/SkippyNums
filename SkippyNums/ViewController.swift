@@ -171,10 +171,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBAction func answerSelected(_ sender: UIButton) {
 		guard let answer = sender.currentTitle else { return }
 		let correct = gameBrain.checkAnswer(answer)
-		let condition = correct ? "Correct!" : "Incorrect!"
-		let alert = UIAlertController(title: condition, message: nil, preferredStyle: .alert)
+		let correctAnswer = gameBrain.getCorrectAnswer()
+		let incorrectTooManyTimes = !correct && gameBrain.tooManyIncorrect
+		var message: String {
+			if correct { return "Correct!" }
+			if incorrectTooManyTimes {
+				return "Incorrect! The correct answer is \(correctAnswer)."
+			} else {
+				return "Incorrect!"
+			}
+		}
+		let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
 		updateStatDisplay()
-		if correct {
+		if correct || incorrectTooManyTimes {
 			let newQuestionAction = UIAlertAction(title: "Next Question", style: .default) {
 				[self] action in
 				newQuestion()
