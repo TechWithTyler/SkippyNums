@@ -33,7 +33,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	private let gradientColorsDark: [CGColor] = [UIColor.systemPurple.cgColor, UIColor.black.cgColor]
 
-	var gameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
+	var gameBrain = GameBrain.shared
 
 	// MARK: - Setup
 
@@ -43,6 +43,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.dataSource = self
 		objectCollectionView.delegate = self
 		objectCollectionView.isUserInteractionEnabled = true
+		navigationItem.hidesBackButton = true
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = view.bounds
@@ -52,24 +53,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
 		objectCollectionView.backgroundColor = .clear
-		questionLabel.text = "Loading…"
-		scoreLabel.text = "Score: --"
-		objectCollectionView.isHidden = true
-		choice1Button.setTitle("-", for: .normal)
-		choice2Button.setTitle("-", for: .normal)
-		choice3Button.setTitle("-", for: .normal)
-		choice4Button.setTitle("-", for: .normal)
-		choice1Button.isEnabled = false
-		choice2Button.isEnabled = false
-		choice3Button.isEnabled = false
-		choice4Button.isEnabled = false
-		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) { [self] in
-			choice1Button.isEnabled = true
-			choice2Button.isEnabled = true
-			choice3Button.isEnabled = true
-			choice4Button.isEnabled = true
-			resetGame()
-		}
+		newQuestion()
 	}
 
 	@objc func updateBackgroundColors() {
@@ -93,46 +77,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 
 	@IBAction func newGame(_ sender: Any) {
-		let newGameAlert = UIAlertController(title: "Start a new game?", message: "Your progress will be lost!", preferredStyle: .alert)
-		let newGameAction = UIAlertAction(title: "Yes", style: .default) { [self] action in
-			resetGame()
-		}
-		let cancelAction = UIAlertAction(title: "No", style: .cancel)
-		newGameAlert.addAction(newGameAction)
-		newGameAlert.addAction(cancelAction)
-		newGameAlert.preferredAction = newGameAction
-		present(newGameAlert, animated: true)
+		resetGame()
 	}
 
 	func resetGame() {
-		let gameStartBlock: (() -> Void) = {
-			[self] in
-			objectCollectionView.isHidden = false
-			newQuestion()
-			updateStatDisplay()
-		}
-		let countingBySelection = UIAlertController(title: "Please choose what you want to count by.", message: nil, preferredStyle: .alert)
-		let twosAction = UIAlertAction(title: "2s", style: .default) {
-			[self] action in
-			gameBrain.countingBy = 2
-			gameStartBlock()
-		}
-		let fivesAction = UIAlertAction(title: "5s", style: .default) {
-			[self] action in
-			gameBrain.countingBy = 5
-			gameStartBlock()
-		}
-		let randomAction = UIAlertAction(title: "Mix It Up!", style: .default) {
-			[self] action in
-			gameBrain.countingBy = nil
-			gameStartBlock()
-		}
-		objectCollectionView.isHidden = true
-		countingBySelection.addAction(twosAction)
-		countingBySelection.addAction(fivesAction)
-		countingBySelection.addAction(randomAction)
-		present(countingBySelection, animated: true)
 		gameBrain.score = 0
+		navigationController?.popViewController(animated: true)
 	}
 
 	func updateStatDisplay() {
@@ -146,6 +96,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		setChoices()
 		setFonts()
 		objectCollectionView.reloadData()
+		updateStatDisplay()
 	}
 
 	func setChoices() {
@@ -171,31 +122,37 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBAction func answerSelected(_ sender: UIButton) {
 		guard let answer = sender.currentTitle else { return }
 		let correct = gameBrain.checkAnswer(answer)
-		let correctAnswer = gameBrain.getCorrectAnswer()
 		let incorrectTooManyTimes = !correct && gameBrain.tooManyIncorrect
-		var message: String {
-			if correct { return "Correct!" }
-			if incorrectTooManyTimes {
-				return "Incorrect! The correct answer is \(correctAnswer)."
-			} else {
-				return "Incorrect!"
-			}
-		}
-		let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-		updateStatDisplay()
-		if correct || incorrectTooManyTimes {
-			let newQuestionAction = UIAlertAction(title: "Next Question", style: .default) {
-				[self] action in
-				newQuestion()
-			}
-			alert.addAction(newQuestionAction)
-			alert.preferredAction = newQuestionAction
+		if correct {
+			performSegue(withIdentifier: "Correct", sender: sender)
+			newQuestion()
+		} else if incorrectTooManyTimes {
+			performSegue(withIdentifier: "TooManyIncorrect", sender: sender)
+			newQuestion()
 		} else {
-			let okAction = UIAlertAction(title: "Try Again", style: .default)
-			alert.addAction(okAction)
-			alert.preferredAction = okAction
+			performSegue(withIdentifier: "Incorrect", sender: sender)
 		}
-		present(alert, animated: true)
+
+	}
+
+	// MARK: - Navigation
+
+	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		// Get the new view controller using segue.destination.
+		// Pass the selected object to the new view controller.
+		guard let answerCheckViewController = segue.destination as? AnswerCheckViewController else { return }
+		switch segue.identifier {
+			case "Incorrect":
+				answerCheckViewController.messageText = "Incorrect! Try again!"
+				answerCheckViewController.imageName = "x"
+			case "TooManyIncorrect":
+				answerCheckViewController.messageText = "Incorrect! The correct answer is \(gameBrain.getCorrectAnswer())"
+				answerCheckViewController.imageName = "x"
+			default:
+				answerCheckViewController.messageText = "Correct!"
+				answerCheckViewController.imageName = "checkmark"
+		}
 	}
 
 }

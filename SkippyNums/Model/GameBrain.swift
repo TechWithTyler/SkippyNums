@@ -12,6 +12,8 @@ struct GameBrain {
 
 	// MARK: - Properties
 
+	static var shared: GameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
+
 	static var objects: [any Object] = [
 		// Comment out objects if they're not ready to commit or ship.
 		Cow(),
@@ -52,11 +54,6 @@ struct GameBrain {
 
 	init(currentObject: Object) {
 		self.currentObject = currentObject
-		do {
-			try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-		} catch {
-			fatalError("Error: \(error.localizedDescription)")
-		}
 	}
 
 	mutating func newQuestion() {
@@ -73,11 +70,16 @@ struct GameBrain {
 			// If the next question is identical to the previous one, try again until a different question is generated.
 			newQuestion()
 		}
-		soundPlayer?.stop()
 	}
 
 	func getQuestionText() -> String {
-		let text = "Count the \(currentObject.name) by \(currentObject.quantity)s."
+		var quantityWord: String {
+			switch currentObject.quantity {
+				case 5: return "fives"
+				default: return "twos"
+			}
+		}
+		let text = "Count the \(currentObject.name) by \(quantityWord)."
 		return text
 	}
 
