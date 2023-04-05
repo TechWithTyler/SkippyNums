@@ -32,7 +32,7 @@ struct Cow: Object {
 
 	var soundFilename: String = "moo.caf"
 
-	var soundRate: Float = 1
+	var soundRate: Float = 2
 	
 }
 
@@ -46,7 +46,7 @@ struct Elephant: Object {
 
 	var soundFilename: String = "elephantTrumpet.caf"
 
-	var soundRate: Float = 1
+	var soundRate: Float = 2.5
 
 }
 
@@ -60,7 +60,7 @@ struct Car: Object {
 
 	var soundFilename: String = "carHorn.caf"
 
-	var soundRate: Float = 1
+	var soundRate: Float = 2.5
 
 }
 
@@ -74,7 +74,7 @@ struct Airplane: Object {
 
 	var soundFilename: String = "airplane.caf"
 
-	var soundRate: Float = 2.5
+	var soundRate: Float = 5
 
 }
 

@@ -147,7 +147,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				answerCheckViewController.messageText = "Incorrect! Try again!"
 				answerCheckViewController.imageName = "x"
 			case "TooManyIncorrect":
-				answerCheckViewController.messageText = "Incorrect! The correct answer is \(gameBrain.getCorrectAnswer())"
+				answerCheckViewController.messageText = "Incorrect! The correct answer is \(gameBrain.getCorrectAnswer())."
 				answerCheckViewController.imageName = "x"
 			default:
 				answerCheckViewController.messageText = "Correct!"

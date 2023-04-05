@@ -147,6 +147,10 @@ struct GameBrain {
 			soundPlayer?.stop()
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
 			soundPlayer?.prepareToPlay()
+			if !correct {
+				soundPlayer?.enableRate = true
+				soundPlayer?.rate = 0.5
+			}
 			soundPlayer?.play()
 		} catch {
 			fatalError("Failed to play \(filename): \(error)")

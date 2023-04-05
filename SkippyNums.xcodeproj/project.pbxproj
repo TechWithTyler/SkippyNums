@@ -105,16 +105,14 @@
 			children = (
 				8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */,
 				8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */,
-				8D04D70D29DCBD6C009670F2 /* AnswerCheckViewController.swift */,
+				8DC26FB429DDEE3200703ECA /* View Controllers */,
 				8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */,
-				8D8EC9B9299AD7B300043D39 /* ViewController.swift */,
 				8D8EC9BB299AD7B300043D39 /* Main.storyboard */,
 				8DA6D96C299C2F6000ED533F /* Model */,
 				8DCC07B329B92CF000A8C1FF /* Sounds */,
 				8D8EC9BE299AD7B400043D39 /* Assets.xcassets */,
 				8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */,
 				8D7B7A1829A5656A00D3C727 /* Info.plist */,
-				8D04D70B29DCB71A009670F2 /* NewGameViewController.swift */,
 			);
 			path = SkippyNums;
 			sourceTree = "<group>";
@@ -126,6 +124,16 @@
 				8D8EC9CA299ADD9400043D39 /* Objects.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8DC26FB429DDEE3200703ECA /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8D04D70B29DCB71A009670F2 /* NewGameViewController.swift */,
+				8D8EC9B9299AD7B300043D39 /* ViewController.swift */,
+				8D04D70D29DCBD6C009670F2 /* AnswerCheckViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		8DC42EC629B1429E0005413B /* SkippyNumsTests */ = {
