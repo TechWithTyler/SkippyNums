@@ -186,8 +186,12 @@ extension ViewController {
 		imageView.isAccessibilityElement = true
 		imageView.accessibilityTraits = [.startsMediaSession, .image]
 		imageView.accessibilityLabel = "\(gameBrain.imageAccessibilityText)"
-		imageView.accessibilityHint = "Activate to play the sound for this group of objects."
-
+		#if targetEnvironment(macCatalyst)
+		let gesture = "Activate"
+		#else
+		let gesture = "Double-tap"
+		#endif
+		imageView.accessibilityHint = "\(gesture) to play the sound for this group of objects."
 		cell.focusEffect = nil
 		// Add the image view to the cell's content view
 		cell.contentView.subviews.first?.removeFromSuperview()
