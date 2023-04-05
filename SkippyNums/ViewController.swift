@@ -162,9 +162,7 @@ extension ViewController {
 	// MARK: - Collection View Delegate and Data Source
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		// Columns
 		let number = gameBrain.numberOfImagesToShow
-		print("Number of objects in row \(section): \(number)")
 		return number
 	}
 
