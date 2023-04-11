@@ -19,6 +19,8 @@
 		8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */; };
 		8D8EC9CB299ADD9400043D39 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9CA299ADD9400043D39 /* Objects.swift */; };
 		8DA6D96A299C2F4300ED533F /* GameBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA6D969299C2F4300ED533F /* GameBrain.swift */; };
+		8DAFF7CD29E4A8E2006F1598 /* monkey.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DAFF7CB29E4A8E2006F1598 /* monkey.caf */; };
+		8DAFF7CE29E4A8E2006F1598 /* bird.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DAFF7CC29E4A8E2006F1598 /* bird.caf */; };
 		8DC42EC829B1429E0005413B /* SkippyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC42EC729B1429E0005413B /* SkippyTests.swift */; };
 		8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B429B92CF000A8C1FF /* moo.caf */; };
 		8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */; };
@@ -54,6 +56,8 @@
 		8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SkippyNums.entitlements; sourceTree = "<group>"; };
 		8D8EC9CA299ADD9400043D39 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		8DA6D969299C2F4300ED533F /* GameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBrain.swift; sourceTree = "<group>"; };
+		8DAFF7CB29E4A8E2006F1598 /* monkey.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = monkey.caf; sourceTree = "<group>"; };
+		8DAFF7CC29E4A8E2006F1598 /* bird.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bird.caf; sourceTree = "<group>"; };
 		8DC42EC529B1429E0005413B /* SkippyNumsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkippyNumsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC42EC729B1429E0005413B /* SkippyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkippyTests.swift; sourceTree = "<group>"; };
 		8DCC07B429B92CF000A8C1FF /* moo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = moo.caf; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				8DAFF7CC29E4A8E2006F1598 /* bird.caf */,
+				8DAFF7CB29E4A8E2006F1598 /* monkey.caf */,
 				8DD741CF29CA404900BE0E46 /* airplane.caf */,
 				8DD741CE29CA404800BE0E46 /* bear.caf */,
 				8DD741D029CA404900BE0E46 /* robot.caf */,
@@ -241,9 +247,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD741D129CA404900BE0E46 /* bear.caf in Resources */,
+				8DAFF7CD29E4A8E2006F1598 /* monkey.caf in Resources */,
 				8D0BBD1A29BFB81B00AE7A62 /* correct.caf in Resources */,
 				8DD741D229CA404900BE0E46 /* airplane.caf in Resources */,
 				8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */,
+				8DAFF7CE29E4A8E2006F1598 /* bird.caf in Resources */,
 				8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */,
 				8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */,
 				8DCC07B929BA8BE900A8C1FF /* carHorn.caf in Resources */,

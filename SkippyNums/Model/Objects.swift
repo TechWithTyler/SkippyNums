@@ -22,7 +22,6 @@ protocol Object {
 }
 
 struct Cow: Object {
-
 	
 	var name: String = "cows"
 
@@ -117,5 +116,33 @@ struct Robot: Object {
 	var soundFilename: String = "robot.caf"
 
 	var soundRate: Float = 1.5
+
+}
+
+struct Bird2: Object {
+
+	var name: String = "2birds"
+
+	var quantity: Int = 2
+
+	var attributionText: String? = nil
+
+	var soundFilename: String = "bird.caf"
+
+	var soundRate: Float = 1
+
+}
+
+struct Bird5: Object {
+
+	var name: String = "5birds"
+
+	var quantity: Int = 5
+
+	var attributionText: String? = nil
+
+	var soundFilename: String = "bird.caf"
+
+	var soundRate: Float = 1
 
 }

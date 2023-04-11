@@ -20,6 +20,8 @@ struct GameBrain {
 		Elephant(),
 		Car(),
 		Airplane(),
+		Bird2(),
+		Bird5(),
 //		Robot(),
 //		Monkey(),
 //		Bear()
@@ -42,12 +44,12 @@ struct GameBrain {
 	}
 
 	var imageAccessibilityText: String {
-		return "Group of \(currentObject.quantity) \(currentObject.name)"
+		return "Group of \(currentObject.quantity) \(getDisplayNameForObject())"
 	}
 
 	var backgroundAccessibilityText: String {
 		let groupSingularPlural = (numberOfImagesToShow == 1) ? "group" : "groups"
-		return "\(numberOfImagesToShow) \(groupSingularPlural) of \(currentObject.quantity) \(currentObject.name)"
+		return "\(numberOfImagesToShow) \(groupSingularPlural) of \(currentObject.quantity) \(getDisplayNameForObject())"
 	}
 
 	// MARK: - Game Logic
@@ -72,6 +74,10 @@ struct GameBrain {
 		}
 	}
 
+	func getDisplayNameForObject() -> String {
+		return currentObject.name.filter { $0.isLetter }
+	}
+
 	func getQuestionText() -> String {
 		var quantityWord: String {
 			switch currentObject.quantity {
@@ -79,7 +85,7 @@ struct GameBrain {
 				default: return "twos"
 			}
 		}
-		let text = "Count the \(currentObject.name) by \(quantityWord)."
+		let text = "Count the \(getDisplayNameForObject()) by \(quantityWord)."
 		return text
 	}
 
