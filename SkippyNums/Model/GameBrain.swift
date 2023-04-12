@@ -20,10 +20,12 @@ struct GameBrain {
 		Elephant(),
 		Car(),
 		Airplane(),
-		Bird2(),
-		Bird5(),
-//		Robot(),
-//		Monkey(),
+		Bird(quantity: 2),
+		Bird(quantity: 5),
+		Robot(quantity: 2),
+		Robot(quantity: 5),
+		Monkey(quantity: 2),
+		Monkey(quantity: 5),
 //		Bear()
 	]
 

@@ -5,7 +5,9 @@
 //  Created by TechWithTyler on 2/13/23.
 //
 
-import UIKit
+import Foundation
+
+// MARK - Object Protocol
 
 protocol Object {
 
@@ -20,6 +22,8 @@ protocol Object {
 	var soundRate: Float { get }
 
 }
+
+// MARK: - Twos
 
 struct Cow: Object {
 	
@@ -63,6 +67,8 @@ struct Car: Object {
 
 }
 
+// MARK: - Fives
+
 struct Airplane: Object {
 
 	var name: String = "airplanes"
@@ -76,6 +82,8 @@ struct Airplane: Object {
 	var soundRate: Float = 5
 
 }
+
+// MARK: - Twos or Fives
 
 struct Bear: Object {
 
@@ -93,7 +101,9 @@ struct Bear: Object {
 
 struct Monkey: Object {
 
-	var name: String = "monkeys"
+	var name: String {
+		return "\(quantity)monkeys"
+	}
 
 	var quantity: Int = 2
 
@@ -107,7 +117,9 @@ struct Monkey: Object {
 
 struct Robot: Object {
 
-	var name: String = "robots"
+	var name: String {
+		return "\(quantity)robots"
+	}
 
 	var quantity: Int = 2
 
@@ -119,25 +131,13 @@ struct Robot: Object {
 
 }
 
-struct Bird2: Object {
+struct Bird: Object {
 
-	var name: String = "2birds"
+	var name: String {
+		return "\(quantity)birds"
+	}
 
 	var quantity: Int = 2
-
-	var attributionText: String? = nil
-
-	var soundFilename: String = "bird.caf"
-
-	var soundRate: Float = 1
-
-}
-
-struct Bird5: Object {
-
-	var name: String = "5birds"
-
-	var quantity: Int = 5
 
 	var attributionText: String? = nil
 
