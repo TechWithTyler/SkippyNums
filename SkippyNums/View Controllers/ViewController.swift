@@ -106,12 +106,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		#if targetEnvironment(macCatalyst)
 		let message = "Move to each group of \(gameBrain.getDisplayNameForObject()) and count them, then activate to play the sound."
 		#else
-		let message = "Drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then double-tap to play the sound."
+		let message = "Drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then split-tap (keep your finger on the screen and tap with a second) to play the sound."
 		#endif
 		let secondsToWait: TimeInterval = 15
 		announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: false, block: { [self] timer in
 			timer.invalidate()
 			announcementTimer = nil
+			guard presentedViewController == nil else { return }
 			UIAccessibility.post(notification: .announcement, argument: message)
 		})
 	}
