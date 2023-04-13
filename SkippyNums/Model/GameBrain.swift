@@ -26,6 +26,7 @@ struct GameBrain {
 		Robot(quantity: 5),
 		Monkey(quantity: 2),
 		Monkey(quantity: 5),
+		Monkey(quantity: 10),
 //		Bear()
 	]
 
@@ -84,6 +85,7 @@ struct GameBrain {
 		var quantityWord: String {
 			switch currentObject.quantity {
 				case 5: return "fives"
+				case 10: return "tens"
 				default: return "twos"
 			}
 		}

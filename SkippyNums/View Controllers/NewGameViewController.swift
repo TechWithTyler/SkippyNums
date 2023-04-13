@@ -67,6 +67,10 @@ class NewGameViewController: UIViewController {
 		performSegue(withIdentifier: "NewGame5", sender: sender)
 	}
 
+	@IBAction func tensSelected(_ sender: Any) {
+		performSegue(withIdentifier: "NewGame10", sender: sender)
+	}
+
 	@IBAction func mixSelected(_ sender: Any) {
 		performSegue(withIdentifier: "NewGameMix", sender: sender)
 	}
@@ -83,6 +87,8 @@ class NewGameViewController: UIViewController {
 				gameViewController.gameBrain.countingBy = 2
 			case "NewGame5":
 				gameViewController.gameBrain.countingBy = 5
+			case "NewGame10":
+				gameViewController.gameBrain.countingBy = 10
 			default:
 				gameViewController.gameBrain.countingBy = nil
 		}

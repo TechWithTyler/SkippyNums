@@ -54,7 +54,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCZ-Bq-zCb">
-                                <rect key="frame" x="318" y="337" width="497" height="110"/>
+                                <rect key="frame" x="318" y="327" width="497" height="110"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -72,6 +72,25 @@
                                     <action selector="fivesSelected:" destination="MBZ-me-mQQ" eventType="touchUpInside" id="Vsu-7Q-WwK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yG4-xe-JIe">
+                                <rect key="frame" x="318" y="445" width="497" height="110"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Tens">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="35" name="Helvetica"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="tensSelected:" destination="MBZ-me-mQQ" eventType="touchUpInside" id="2af-6y-ELg"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to SkippyNums! Choose your game." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qT2-9p-fQW">
                                 <rect key="frame" x="249" y="47" width="634" height="110"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -80,7 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhA-Ww-wSH">
-                                <rect key="frame" x="318" y="465" width="497" height="110"/>
+                                <rect key="frame" x="318" y="563" width="497" height="110"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -88,7 +107,7 @@
                                         <fragment content="Mix it up!">
                                             <attributes>
                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <font key="NSFont" size="30" name="Helvetica"/>
+                                                <font key="NSFont" size="35" name="Helvetica"/>
                                                 <font key="NSOriginalFont" size="12" name="Helvetica"/>
                                             </attributes>
                                         </fragment>
@@ -107,6 +126,7 @@
                         <segue destination="BYZ-38-t0r" kind="show" identifier="NewGame2" id="ssb-df-K6n"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="NewGame5" id="rWo-Aa-UxV"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="NewGameMix" id="XZr-A8-zGU"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="NewGame10" id="zPS-Kx-g1q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uvs-Ik-aA1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -322,7 +342,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="MRR-36-b4x"/>
-        <segue reference="XZr-A8-zGU"/>
+        <segue reference="zPS-Kx-g1q"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
