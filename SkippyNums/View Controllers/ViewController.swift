@@ -109,10 +109,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		let message = "Drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then split-tap (keep your finger on the screen and tap with a second) to play the sound."
 		#endif
 		let secondsToWait: TimeInterval = 15
-		announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: false, block: { [self] timer in
+		announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true, block: { [self] timer in
+			guard presentedViewController == nil else { return }
 			timer.invalidate()
 			announcementTimer = nil
-			guard presentedViewController == nil else { return }
 			UIAccessibility.post(notification: .announcement, argument: message)
 		})
 	}
