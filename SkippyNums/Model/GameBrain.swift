@@ -27,7 +27,7 @@ struct GameBrain {
 		Monkey(quantity: 2),
 		Monkey(quantity: 5),
 		Monkey(quantity: 10),
-//		Bear()
+		//		Bear()
 	]
 
 	var currentObject: any Object
@@ -47,12 +47,20 @@ struct GameBrain {
 	}
 
 	var imageAccessibilityText: String {
-		return "Group of \(currentObject.quantity) \(getDisplayNameForObject())"
+		return "\(currentObject.quantity) \(getDisplayNameForObject())"
 	}
 
 	var backgroundAccessibilityText: String {
 		let groupSingularPlural = (numberOfImagesToShow == 1) ? "group" : "groups"
 		return "\(numberOfImagesToShow) \(groupSingularPlural) of \(currentObject.quantity) \(getDisplayNameForObject())"
+	}
+
+	var shortSoundsForTens: Bool {
+		get {
+			return UserDefaults.standard.bool(forKey: "shortSoundsForTens")
+		} set {
+			UserDefaults.standard.set(newValue, forKey: "shortSoundsForTens")
+		}
 	}
 
 	// MARK: - Game Logic
@@ -129,6 +137,20 @@ struct GameBrain {
 			soundPlayer?.play()
 		} catch {
 			fatalError("Failed to play \(currentObject.soundFilename): \(error)")
+		}
+	}
+
+	mutating func playTenChord() {
+		guard let soundURL = Bundle.main.url(forResource: "tenChord.caf", withExtension: nil) else {
+			fatalError("Failed to find tenChord.caf in bundle")
+		}
+		do {
+			soundPlayer?.stop()
+			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+			soundPlayer?.prepareToPlay()
+			soundPlayer?.play()
+		} catch {
+			fatalError("Failed to play tenChord.caf: \(error)")
 		}
 	}
 

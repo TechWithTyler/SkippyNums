@@ -15,6 +15,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	@IBOutlet weak var objectCollectionView: UICollectionView!
 
+	@IBOutlet weak var shortSoundsButton: UIButton!
+
 	@IBOutlet weak var choice1Button: UIButton!
 
 	@IBOutlet weak var choice2Button: UIButton!
@@ -100,13 +102,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.reloadData()
 		updateStatDisplay()
 		resetAnnouncementTimer()
+		configureShortSoundsButtonTitle()
+//		if gameBrain.countingBy == 10 {
+//			shortSoundsButton.isHidden = false
+//		} else {
+//			shortSoundsButton.isHidden = true
+//		}
+		shortSoundsButton.isHidden = true
 	}
 
 	func resetAnnouncementTimer() {
 		#if targetEnvironment(macCatalyst)
-		let message = "Move to each group of \(gameBrain.getDisplayNameForObject()) and count them, then activate to play the sound."
+		let message = "Move to each group of \(gameBrain.getDisplayNameForObject()) and count them, then if you'd like, activate to play the sound."
 		#else
-		let message = "Drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then split-tap (keep your finger on the screen and tap with a second) to play the sound."
+		let message = "Drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
 		#endif
 		let secondsToWait: TimeInterval = 15
 		announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true, block: { [self] timer in
@@ -135,6 +144,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				}
 			}
 		}
+	}
+
+	func configureShortSoundsButtonTitle() {
+		shortSoundsButton.setTitle(gameBrain.shortSoundsForTens ? "Use Long Sounds" : "Use Short Sounds", for: .normal)
+	}
+
+	@IBAction func toggleShortSounds(_ sender: UIButton) {
+		gameBrain.shortSoundsForTens.toggle()
+		configureShortSoundsButtonTitle()
 	}
 
 	@IBAction func answerSelected(_ sender: UIButton) {
@@ -175,6 +193,24 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 }
 
+class ObjectImageView: UIImageView {
+	override func accessibilityElementDidBecomeFocused() {
+		super.accessibilityElementDidBecomeFocused()
+		GameBrain.shared.playTenChord()
+		// Find the view controller that contains this image view
+		var responder: UIResponder? = self
+		while let next = responder?.next {
+			responder = next
+			if let viewController = responder as? ViewController {
+				// Reset the VoiceOver announcement timer
+				viewController.announcementTimer?.invalidate()
+				viewController.announcementTimer = nil
+				break
+			}
+		}
+	}
+}
+
 extension ViewController {
 
 	// MARK: - Collection View Delegate and Data Source
@@ -187,7 +223,7 @@ extension ViewController {
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCell", for: indexPath)
 		// Create and configure the image view
-			let imageView = UIImageView(frame: cell.contentView.bounds)
+			let imageView = ObjectImageView(frame: cell.contentView.bounds)
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
 		imageView.isUserInteractionEnabled = true
 		tapGesture.numberOfTouchesRequired = 1
@@ -207,7 +243,7 @@ extension ViewController {
 		#else
 		let gesture = "Double-tap"
 		#endif
-		imageView.accessibilityHint = "\(gesture) to play the sound for this group of objects."
+		imageView.accessibilityHint = "\(gesture) if you want to play the sound for this group of objects."
 		cell.focusEffect = nil
 		// Add the image view to the cell's content view
 		cell.contentView.subviews.first?.removeFromSuperview()

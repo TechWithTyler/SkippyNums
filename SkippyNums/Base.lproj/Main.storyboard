@@ -251,17 +251,28 @@
                                     <action selector="newGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z5m-qF-peQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Count the &lt;blank&gt;s by &lt;number&gt;s" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-dK-aEE">
-                                <rect key="frame" x="281" y="32" width="570" height="110"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: &lt;score&gt;" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zb-rR-Obm">
                                 <rect key="frame" x="281" y="533" width="570" height="65"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L68-Cs-zOj">
+                                <rect key="frame" x="20" y="55" width="273" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Use Short Sounds">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="32"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="toggleShortSounds:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5GX-kh-ozJ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Count the &lt;blank&gt;s by &lt;number&gt;s" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-dK-aEE">
+                                <rect key="frame" x="308" y="32" width="516" height="110"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -279,6 +290,7 @@
                         <outlet property="objectCollectionView" destination="1KS-f4-rKK" id="wKG-0S-SHB"/>
                         <outlet property="questionLabel" destination="ks8-dK-aEE" id="u1w-FJ-uDn"/>
                         <outlet property="scoreLabel" destination="6Zb-rR-Obm" id="5pH-Ra-Y6F"/>
+                        <outlet property="shortSoundsButton" destination="L68-Cs-zOj" id="Okd-JH-vFQ"/>
                         <segue destination="TrZ-Tj-9NZ" kind="presentation" identifier="Correct" id="doz-wO-aqk"/>
                         <segue destination="TrZ-Tj-9NZ" kind="presentation" identifier="Incorrect" id="2KP-CP-OUq"/>
                         <segue destination="TrZ-Tj-9NZ" kind="presentation" identifier="TooManyIncorrect" id="MRR-36-b4x"/>

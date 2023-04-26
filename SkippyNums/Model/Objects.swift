@@ -83,7 +83,7 @@ struct Airplane: Object {
 
 }
 
-// MARK: - Twos or Fives
+// MARK: - Tens
 
 struct Bear: Object {
 
@@ -98,6 +98,8 @@ struct Bear: Object {
 	var soundRate: Float = 1.5
 
 }
+
+// MARK: - Mix
 
 struct Monkey: Object {
 
