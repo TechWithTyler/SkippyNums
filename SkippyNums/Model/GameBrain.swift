@@ -54,14 +54,6 @@ struct GameBrain {
 		return "\(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject())"
 	}
 
-//	var shortSoundsForTens: Bool {
-//		get {
-//			return UserDefaults.standard.bool(forKey: "shortSoundsForTens")
-//		} set {
-//			UserDefaults.standard.set(newValue, forKey: "shortSoundsForTens")
-//		}
-//	}
-
 	// MARK: - Game Logic
 
 	init(currentObject: Object) {

@@ -15,8 +15,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	@IBOutlet weak var objectCollectionView: UICollectionView!
 
-	@IBOutlet weak var shortSoundsButton: UIButton!
-
 	@IBOutlet weak var choice1Button: UIButton!
 
 	@IBOutlet weak var choice2Button: UIButton!
@@ -102,13 +100,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.reloadData()
 		updateStatDisplay()
 		resetAnnouncementTimer()
-		configureShortSoundsButtonTitle()
-//		if gameBrain.countingBy == 10 {
-//			shortSoundsButton.isHidden = false
-//		} else {
-//			shortSoundsButton.isHidden = true
-//		}
-		shortSoundsButton.isHidden = true
 	}
 
 	func resetAnnouncementTimer() {
@@ -144,15 +135,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				}
 			}
 		}
-	}
-
-	func configureShortSoundsButtonTitle() {
-		shortSoundsButton.setTitle(gameBrain.shortSoundsForTens ? "Use Long Sounds" : "Use Short Sounds", for: .normal)
-	}
-
-	@IBAction func toggleShortSounds(_ sender: UIButton) {
-		gameBrain.shortSoundsForTens.toggle()
-		configureShortSoundsButtonTitle()
 	}
 
 	@IBAction func answerSelected(_ sender: UIButton) {
