@@ -76,7 +76,8 @@ struct GameBrain {
 		} else {
 			currentObject = GameBrain.objects.filter({$0.quantity == countingBy}).randomElement()!
 		}
-		numberOfImagesToShow = Int.random(in: 2...10)
+		let maxNumber = 10
+		numberOfImagesToShow = Int.random(in: 2...maxNumber)
 		numberOfIncorrectAnswers = 0
 		if currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages {
 			// If the next question is identical to the previous one, try again until a different question is generated.
