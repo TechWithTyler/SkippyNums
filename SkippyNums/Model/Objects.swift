@@ -89,7 +89,7 @@ struct Bear: Object {
 
 	var name: String = "bears"
 
-	var quantity: Int = 2
+	var quantity: Int = 10
 
 	var attributionText: String? = nil
 
@@ -107,7 +107,7 @@ struct Monkey: Object {
 		return "\(quantity)monkeys"
 	}
 
-	var quantity: Int = 2
+	var quantity: Int
 
 	var attributionText: String? = nil
 
@@ -123,7 +123,7 @@ struct Robot: Object {
 		return "\(quantity)robots"
 	}
 
-	var quantity: Int = 2
+	var quantity: Int
 
 	var attributionText: String? = nil
 
@@ -139,7 +139,7 @@ struct Bird: Object {
 		return "\(quantity)birds"
 	}
 
-	var quantity: Int = 2
+	var quantity: Int
 
 	var attributionText: String? = nil
 

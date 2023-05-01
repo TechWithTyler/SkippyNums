@@ -178,7 +178,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 class ObjectImageView: UIImageView {
 	override func accessibilityElementDidBecomeFocused() {
 		super.accessibilityElementDidBecomeFocused()
-		GameBrain.shared.playTenChord()
+		GameBrain.shared.playChord()
 		// Find the view controller that contains this image view
 		var responder: UIResponder? = self
 		while let next = responder?.next {

@@ -11,6 +11,8 @@
 		8D04D70E29DCBD6C009670F2 /* AnswerCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D04D70D29DCBD6C009670F2 /* AnswerCheckViewController.swift */; };
 		8D0BBD1A29BFB81B00AE7A62 /* correct.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBD1829BFB81B00AE7A62 /* correct.caf */; };
 		8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */; };
+		8D7F2B212A00346600A7322B /* twoNote.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B1F2A00346600A7322B /* twoNote.caf */; };
+		8D7F2B222A00346600A7322B /* fiveChord.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B202A00346600A7322B /* fiveChord.caf */; };
 		8D8EC9B6299AD7B300043D39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */; };
 		8D8EC9B8299AD7B300043D39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */; };
 		8D8EC9BA299AD7B300043D39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B9299AD7B300043D39 /* ViewController.swift */; };
@@ -47,6 +49,8 @@
 		8D0BBD1829BFB81B00AE7A62 /* correct.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = correct.caf; sourceTree = "<group>"; };
 		8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incorrect.caf; sourceTree = "<group>"; };
 		8D7B7A1829A5656A00D3C727 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D7F2B1F2A00346600A7322B /* twoNote.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = twoNote.caf; sourceTree = "<group>"; };
+		8D7F2B202A00346600A7322B /* fiveChord.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fiveChord.caf; sourceTree = "<group>"; };
 		8D8EC9B2299AD7B300043D39 /* SkippyNums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkippyNums.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				8D7F2B202A00346600A7322B /* fiveChord.caf */,
+				8D7F2B1F2A00346600A7322B /* twoNote.caf */,
 				8DCD11C829F99B9F0046D6B3 /* tenChord.caf */,
 				8DAFF7CC29E4A8E2006F1598 /* bird.caf */,
 				8DAFF7CB29E4A8E2006F1598 /* monkey.caf */,
@@ -262,7 +268,9 @@
 				8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */,
 				8DCD11C929F99B9F0046D6B3 /* tenChord.caf in Resources */,
 				8DD741D329CA404900BE0E46 /* robot.caf in Resources */,
+				8D7F2B212A00346600A7322B /* twoNote.caf in Resources */,
 				8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */,
+				8D7F2B222A00346600A7322B /* fiveChord.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

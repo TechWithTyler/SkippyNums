@@ -8,7 +8,7 @@
 import UIKit
 import AVKit
 
-struct GameBrain {
+class GameBrain {
 
 	// MARK: - Properties
 
@@ -60,7 +60,7 @@ struct GameBrain {
 		self.currentObject = currentObject
 	}
 
-	mutating func newQuestion() {
+	func newQuestion() {
 		let previousObjectName = currentObject.name
 		let previousNumberOfImages = numberOfImagesToShow
 		if countingBy == nil {
@@ -115,7 +115,7 @@ struct GameBrain {
 		return finalChoices
 	}
 
-	mutating func playSoundForObject() {
+	func playSoundForObject() {
 		guard let soundURL = Bundle.main.url(forResource: currentObject.soundFilename, withExtension: nil) else {
 			fatalError("Failed to find \(currentObject.soundFilename) in bundle")
 		}
@@ -125,6 +125,7 @@ struct GameBrain {
 			soundPlayer?.numberOfLoops = currentObject.quantity - 1
 			soundPlayer?.enableRate = true
 			soundPlayer?.rate = currentObject.soundRate
+			soundPlayer?.volume = 1
 			soundPlayer?.prepareToPlay()
 			soundPlayer?.play()
 		} catch {
@@ -132,17 +133,25 @@ struct GameBrain {
 		}
 	}
 
-	mutating func playTenChord() {
-		guard let soundURL = Bundle.main.url(forResource: "tenChord.caf", withExtension: nil) else {
-			fatalError("Failed to find tenChord.caf in bundle")
+	func playChord() {
+		var filename: String {
+			switch currentObject.quantity {
+				case 10: return "tenChord"
+				case 5: return "fiveChord"
+				default: return "twoNote"
+			}
+		}
+		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: "caf") else {
+			fatalError("Failed to find \(filename).caf in bundle")
 		}
 		do {
 			soundPlayer?.stop()
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+			soundPlayer?.volume = 0.25
 			soundPlayer?.prepareToPlay()
 			soundPlayer?.play()
 		} catch {
-			fatalError("Failed to play tenChord.caf: \(error)")
+			fatalError("Failed to play \(filename).caf: \(error)")
 		}
 	}
 
@@ -150,7 +159,7 @@ struct GameBrain {
 		return String(numberOfImagesToShow * currentObject.quantity)
 	}
 
-	mutating func checkAnswer(_ answer: String) -> Bool {
+	func checkAnswer(_ answer: String) -> Bool {
 		let correctAnswer = getCorrectAnswer()
 		let correct = answer == correctAnswer
 		playAnswerSound(correct)
@@ -162,7 +171,7 @@ struct GameBrain {
 		return correct
 	}
 
-	mutating func playAnswerSound(_ correct: Bool) {
+	func playAnswerSound(_ correct: Bool) {
 		let filename = correct ? "correct.caf" : "incorrect.caf"
 		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: nil) else {
 			fatalError("Failed to find \(filename) in bundle")
@@ -170,11 +179,12 @@ struct GameBrain {
 		do {
 			soundPlayer?.stop()
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
-			soundPlayer?.prepareToPlay()
 			if !correct {
 				soundPlayer?.enableRate = true
 				soundPlayer?.rate = 0.5
 			}
+			soundPlayer?.volume = 1
+			soundPlayer?.prepareToPlay()
 			soundPlayer?.play()
 		} catch {
 			fatalError("Failed to play \(filename): \(error)")
