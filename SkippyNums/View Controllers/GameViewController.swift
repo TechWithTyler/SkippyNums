@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GameViewController.swift
 //  SkippyNums
 //
 //  Created by TechWithTyler on 2/13/23.
@@ -7,11 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
 	@IBOutlet weak var questionLabel: UILabel!
 	
 	@IBOutlet weak var scoreLabel: UILabel!
+
+	@IBOutlet weak var secondsLeftLabel: UILabel!
 	
 	@IBOutlet weak var objectCollectionView: UICollectionView!
 
@@ -46,6 +48,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.delegate = self
 		objectCollectionView.isUserInteractionEnabled = true
 		navigationItem.hidesBackButton = true
+		secondsLeftLabel.text = "Loading…"
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = view.bounds
@@ -56,6 +59,26 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		view.layer.insertSublayer(gradientLayer, at: 0)
 		objectCollectionView.backgroundColor = .clear
 		newQuestion()
+	}
+
+	override func viewDidAppear(_ animated: Bool) {
+		gameBrain.setupGameTimer { [self] time in
+			if let time = time {
+				let secondsSingularOrPlural = time == 1 ? "second" : "seconds"
+				secondsLeftLabel.text = "\(Int(time)) \(secondsSingularOrPlural) left"
+			} else {
+				secondsLeftLabel.text = "Untimed"
+			}
+		} timerEndHandler: { [self] in
+			performSegue(withIdentifier: "TimeUp", sender: self)
+			gameBrain.playTimeUpSound()
+		}
+		super.viewDidAppear(animated)
+	}
+
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		gameBrain.resetGameTimer()
 	}
 
 	@objc func updateBackgroundColors() {
@@ -83,12 +106,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 
 	func resetGame() {
-		gameBrain.score = 0
-		navigationController?.popViewController(animated: true)
+		gameBrain.correctAnswersInGame = 0
+		gameBrain.triesInGame = 0
+		navigationController?.popToRootViewController(animated: true)
 	}
 
 	func updateStatDisplay() {
-		scoreLabel.text = "Score: \(gameBrain.score)"
+		scoreLabel.text = "\(gameBrain.correctAnswersInGame) out of \(gameBrain.triesInGame) tries correct"
 	}
 
 	func newQuestion() {
@@ -97,8 +121,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		objectCollectionView.accessibilityLabel = gameBrain.backgroundAccessibilityText
 		setChoices()
 		setFonts()
-		objectCollectionView.reloadData()
 		updateStatDisplay()
+		objectCollectionView.reloadData()
 		resetAnnouncementTimer()
 	}
 
@@ -141,6 +165,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		guard let answer = sender.currentTitle else { return }
 		let correct = gameBrain.checkAnswer(answer)
 		let incorrectTooManyTimes = !correct && gameBrain.tooManyIncorrect
+		updateStatDisplay()
 		if correct {
 			performSegue(withIdentifier: "Correct", sender: sender)
 			newQuestion()
@@ -159,17 +184,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		// Get the new view controller using segue.destination.
 		// Pass the selected object to the new view controller.
-		guard let answerCheckViewController = segue.destination as? AnswerCheckViewController else { return }
-		switch segue.identifier {
-			case "Incorrect":
-				answerCheckViewController.messageText = "Incorrect! Try again!"
-				answerCheckViewController.imageName = "x"
-			case "TooManyIncorrect":
-				answerCheckViewController.messageText = "Incorrect! The correct answer is \(gameBrain.getCorrectAnswer())."
-				answerCheckViewController.imageName = "x"
-			default:
-				answerCheckViewController.messageText = "Correct!"
-				answerCheckViewController.imageName = "checkmark"
+		if let answerCheckViewController = segue.destination as? AnswerCheckViewController {
+			switch segue.identifier {
+				case "Incorrect":
+					answerCheckViewController.messageText = "Incorrect! Try again!"
+					answerCheckViewController.imageName = "x"
+				case "TooManyIncorrect":
+					answerCheckViewController.messageText = "Incorrect! The correct answer is \(gameBrain.getCorrectAnswer())."
+					answerCheckViewController.imageName = "x"
+				default:
+					answerCheckViewController.messageText = "Correct!"
+					answerCheckViewController.imageName = "checkmark"
+			}
+		} else if let timeUpViewController = segue.destination as? TimeUpViewController {
+			timeUpViewController.messageText = "Time's up! You got \(gameBrain.correctAnswersInGame) of \(gameBrain.triesInGame) tries correct!"
 		}
 	}
 
@@ -183,7 +211,7 @@ class ObjectImageView: UIImageView {
 		var responder: UIResponder? = self
 		while let next = responder?.next {
 			responder = next
-			if let viewController = responder as? ViewController {
+			if let viewController = responder as? GameViewController {
 				// Reset the VoiceOver announcement timer
 				viewController.announcementTimer?.invalidate()
 				viewController.announcementTimer = nil
@@ -193,7 +221,7 @@ class ObjectImageView: UIImageView {
 	}
 }
 
-extension ViewController {
+extension GameViewController {
 
 	// MARK: - Collection View Delegate and Data Source
 

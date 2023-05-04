@@ -34,7 +34,13 @@ class GameBrain {
 
 	var numberOfImagesToShow: Int = 2
 
-	var score: Int = 0
+	var correctAnswersInGame: Int = 0
+
+	var triesInGame: Int = 0
+
+	var gameTimeLeft: TimeInterval? = nil
+
+	var gameTimer: Timer? = nil
 
 	var numberOfIncorrectAnswers = 0
 
@@ -147,7 +153,8 @@ class GameBrain {
 		do {
 			soundPlayer?.stop()
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
-			soundPlayer?.volume = 0.25
+			// How to detect VoiceOver audio ducking on/off and change volume accordingly?
+			soundPlayer?.volume = 0.1
 			soundPlayer?.prepareToPlay()
 			soundPlayer?.play()
 		} catch {
@@ -164,8 +171,10 @@ class GameBrain {
 		let correct = answer == correctAnswer
 		playAnswerSound(correct)
 		if correct {
-			score += 1
+			triesInGame += 1
+			correctAnswersInGame += 1
 		} else {
+			triesInGame += 1
 			numberOfIncorrectAnswers += 1
 		}
 		return correct
@@ -189,6 +198,48 @@ class GameBrain {
 		} catch {
 			fatalError("Failed to play \(filename): \(error)")
 		}
+	}
+
+	func playTimeUpSound() {
+		let filename = "timeUp.caf"
+		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: nil) else {
+			fatalError("Failed to find \(filename) in bundle")
+		}
+		do {
+			soundPlayer?.stop()
+			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+			soundPlayer?.volume = 1
+			soundPlayer?.prepareToPlay()
+			soundPlayer?.play()
+		} catch {
+			fatalError("Failed to play \(filename): \(error)")
+		}
+	}
+
+	func setupGameTimer(_ timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
+		guard gameTimeLeft != nil else {
+			timerFireHandler(nil)
+			return }
+		timerFireHandler(gameTimeLeft)
+		gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] timer in
+			gameTimeLeft! -= 1
+			if gameTimeLeft! <= 0 {
+				resetGameTimer()
+				timerEndHandler()
+			} else {
+				timerFireHandler(gameTimeLeft)
+			}
+		})
+	}
+
+	func pauseGameTimer() {
+		gameTimer?.invalidate()
+	}
+
+	func resetGameTimer() {
+		gameTimer?.invalidate()
+		gameTimer = nil
+		gameTimeLeft = nil
 	}
 
 }

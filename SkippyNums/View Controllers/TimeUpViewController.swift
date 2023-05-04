@@ -1,23 +1,27 @@
 //
-//  NewGameViewController.swift
+//  TimeUpViewController.swift
 //  SkippyNums
 //
-//  Created by TechWithTyler on 4/4/23.
+//  Created by Tyler Sheft on 5/3/23.
 //
 
 import UIKit
 
-class NewGameViewController: UIViewController {
+class TimeUpViewController: UIViewController {
+
+	@IBOutlet weak var messageLabel: UILabel!
+
+	var messageText: String?
 
 	private let gradientColorsLight: [CGColor] = [UIColor.systemRed.cgColor, UIColor.systemCyan.cgColor, UIColor.white.cgColor]
 
 	private let gradientColorsDark: [CGColor] = [UIColor.systemPurple.cgColor, UIColor.black.cgColor]
 
-	var gameBrain = GameBrain.shared
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		// Do any additional setup after loading the view.
+		guard let messageText = messageText else { return }
+		messageLabel.text = messageText
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = view.bounds
@@ -27,7 +31,8 @@ class NewGameViewController: UIViewController {
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
 		setFonts()
-    }
+		navigationItem.hidesBackButton = true
+	}
 
 	func setFonts() {
 		for view in view.subviews {
@@ -61,39 +66,9 @@ class NewGameViewController: UIViewController {
 		}
 	}
 
-	@IBAction func twosSelected(_ sender: Any) {
-		performSegue(withIdentifier: "NewGame2", sender: sender)
+	@IBAction func dismiss(_ sender: Any) {
+		navigationController?.popToRootViewController(animated: true)
 	}
-
-	@IBAction func fivesSelected(_ sender: Any) {
-		performSegue(withIdentifier: "NewGame5", sender: sender)
-	}
-
-	@IBAction func tensSelected(_ sender: Any) {
-		performSegue(withIdentifier: "NewGame10", sender: sender)
-	}
-
-	@IBAction func mixSelected(_ sender: Any) {
-		performSegue(withIdentifier: "NewGameMix", sender: sender)
-	}
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-		guard let timeViewController = segue.destination as? TimeViewController else { return }
-		switch segue.identifier {
-			case "NewGame2":
-				gameBrain.countingBy = 2
-			case "NewGame5":
-				gameBrain.countingBy = 5
-			case "NewGame10":
-				gameBrain.countingBy = 10
-			default:
-				gameBrain.countingBy = nil
-		}
-    }
 
 }
+

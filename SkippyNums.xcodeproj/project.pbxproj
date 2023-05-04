@@ -11,11 +11,14 @@
 		8D04D70E29DCBD6C009670F2 /* AnswerCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D04D70D29DCBD6C009670F2 /* AnswerCheckViewController.swift */; };
 		8D0BBD1A29BFB81B00AE7A62 /* correct.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBD1829BFB81B00AE7A62 /* correct.caf */; };
 		8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */; };
+		8D0E1EED2A03282000B3FA70 /* TimeUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E1EEC2A03282000B3FA70 /* TimeUpViewController.swift */; };
+		8D4FB98A2A0445BB00F66392 /* timeUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D4FB9892A0445BB00F66392 /* timeUp.caf */; };
 		8D7F2B212A00346600A7322B /* twoNote.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B1F2A00346600A7322B /* twoNote.caf */; };
 		8D7F2B222A00346600A7322B /* fiveChord.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B202A00346600A7322B /* fiveChord.caf */; };
+		8D7F2B242A0051D800A7322B /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F2B232A0051D800A7322B /* TimeViewController.swift */; };
 		8D8EC9B6299AD7B300043D39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */; };
 		8D8EC9B8299AD7B300043D39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */; };
-		8D8EC9BA299AD7B300043D39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B9299AD7B300043D39 /* ViewController.swift */; };
+		8D8EC9BA299AD7B300043D39 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9B9299AD7B300043D39 /* GameViewController.swift */; };
 		8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9BB299AD7B300043D39 /* Main.storyboard */; };
 		8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9BE299AD7B400043D39 /* Assets.xcassets */; };
 		8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */; };
@@ -48,13 +51,16 @@
 		8D04D70D29DCBD6C009670F2 /* AnswerCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCheckViewController.swift; sourceTree = "<group>"; };
 		8D0BBD1829BFB81B00AE7A62 /* correct.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = correct.caf; sourceTree = "<group>"; };
 		8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incorrect.caf; sourceTree = "<group>"; };
+		8D0E1EEC2A03282000B3FA70 /* TimeUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUpViewController.swift; sourceTree = "<group>"; };
+		8D4FB9892A0445BB00F66392 /* timeUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = timeUp.caf; sourceTree = "<group>"; };
 		8D7B7A1829A5656A00D3C727 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7F2B1F2A00346600A7322B /* twoNote.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = twoNote.caf; sourceTree = "<group>"; };
 		8D7F2B202A00346600A7322B /* fiveChord.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fiveChord.caf; sourceTree = "<group>"; };
+		8D7F2B232A0051D800A7322B /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		8D8EC9B2299AD7B300043D39 /* SkippyNums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkippyNums.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8D8EC9B9299AD7B300043D39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8D8EC9B9299AD7B300043D39 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		8D8EC9BC299AD7B300043D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D8EC9BE299AD7B400043D39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D8EC9C1299AD7B400043D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -140,8 +146,10 @@
 			isa = PBXGroup;
 			children = (
 				8D04D70B29DCB71A009670F2 /* NewGameViewController.swift */,
-				8D8EC9B9299AD7B300043D39 /* ViewController.swift */,
+				8D7F2B232A0051D800A7322B /* TimeViewController.swift */,
+				8D8EC9B9299AD7B300043D39 /* GameViewController.swift */,
 				8D04D70D29DCBD6C009670F2 /* AnswerCheckViewController.swift */,
+				8D0E1EEC2A03282000B3FA70 /* TimeUpViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -157,6 +165,7 @@
 		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				8D4FB9892A0445BB00F66392 /* timeUp.caf */,
 				8D7F2B202A00346600A7322B /* fiveChord.caf */,
 				8D7F2B1F2A00346600A7322B /* twoNote.caf */,
 				8DCD11C829F99B9F0046D6B3 /* tenChord.caf */,
@@ -258,6 +267,7 @@
 				8DD741D129CA404900BE0E46 /* bear.caf in Resources */,
 				8DAFF7CD29E4A8E2006F1598 /* monkey.caf in Resources */,
 				8D0BBD1A29BFB81B00AE7A62 /* correct.caf in Resources */,
+				8D4FB98A2A0445BB00F66392 /* timeUp.caf in Resources */,
 				8DD741D229CA404900BE0E46 /* airplane.caf in Resources */,
 				8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */,
 				8DAFF7CE29E4A8E2006F1598 /* bird.caf in Resources */,
@@ -288,12 +298,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D8EC9BA299AD7B300043D39 /* ViewController.swift in Sources */,
+				8D8EC9BA299AD7B300043D39 /* GameViewController.swift in Sources */,
+				8D7F2B242A0051D800A7322B /* TimeViewController.swift in Sources */,
 				8DA6D96A299C2F4300ED533F /* GameBrain.swift in Sources */,
 				8D04D70E29DCBD6C009670F2 /* AnswerCheckViewController.swift in Sources */,
 				8D8EC9B6299AD7B300043D39 /* AppDelegate.swift in Sources */,
 				8D8EC9CB299ADD9400043D39 /* Objects.swift in Sources */,
 				8D8EC9B8299AD7B300043D39 /* SceneDelegate.swift in Sources */,
+				8D0E1EED2A03282000B3FA70 /* TimeUpViewController.swift in Sources */,
 				8D04D70C29DCB71A009670F2 /* NewGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
