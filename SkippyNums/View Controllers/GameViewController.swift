@@ -106,6 +106,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 
 	func resetGame() {
+		gameBrain.soundPlayer?.stop()
 		gameBrain.correctAnswersInGame = 0
 		gameBrain.triesInGame = 0
 		navigationController?.popToRootViewController(animated: true)
@@ -270,10 +271,14 @@ extension GameViewController {
 		gameBrain.playSoundForObject()
 	}
 
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 30
+	}
+
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let paddingSpace = sectionInsets.left * 4
+		let paddingSpace = sectionInsets.left * 2
 		let availableWidth = view.frame.width - paddingSpace
-		let widthPerItem = availableWidth / 5.5
+		let widthPerItem = availableWidth / 6.2
 		return CGSize(width: widthPerItem, height: widthPerItem)
 	}
 
