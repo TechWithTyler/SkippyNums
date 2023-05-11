@@ -83,7 +83,6 @@ class NewGameViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-		guard let timeViewController = segue.destination as? TimeViewController else { return }
 		switch segue.identifier {
 			case "NewGame2":
 				gameBrain.countingBy = 2
