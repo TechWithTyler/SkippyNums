@@ -13,6 +13,8 @@ class TimeUpViewController: UIViewController {
 
 	var messageText: String?
 
+	var gameBrain = GameBrain.shared
+
 	private let gradientColorsLight: [CGColor] = [UIColor.systemRed.cgColor, UIColor.systemCyan.cgColor, UIColor.white.cgColor]
 
 	private let gradientColorsDark: [CGColor] = [UIColor.systemPurple.cgColor, UIColor.black.cgColor]
@@ -66,7 +68,13 @@ class TimeUpViewController: UIViewController {
 		}
 	}
 
-	@IBAction func dismiss(_ sender: Any) {
+	@IBAction func nextRound(_ sender: Any) {
+		navigationController?.popToRootViewController(animated: true)
+	}
+
+	@IBAction func resetScore(_ sender: Any) {
+		gameBrain.correctAnswersInGame = 0
+		gameBrain.triesInGame = 0
 		navigationController?.popToRootViewController(animated: true)
 	}
 

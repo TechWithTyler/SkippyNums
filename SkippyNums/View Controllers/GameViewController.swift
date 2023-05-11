@@ -198,7 +198,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 					answerCheckViewController.imageName = "checkmark"
 			}
 		} else if let timeUpViewController = segue.destination as? TimeUpViewController {
-			timeUpViewController.messageText = "Time's up! You got \(gameBrain.correctAnswersInGame) of \(gameBrain.triesInGame) tries correct!"
+			timeUpViewController.messageText = "Time's up! You answered \(gameBrain.correctAnswersInGame) of \(gameBrain.triesInGame) tries correct!"
 		}
 	}
 
