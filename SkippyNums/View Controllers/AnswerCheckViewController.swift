@@ -42,6 +42,10 @@ class AnswerCheckViewController: UIViewController {
 					outgoing.font = UIFont.systemFont(ofSize: 40)
 					return outgoing
 				}
+				button.layer.shadowColor = UIColor.black.cgColor
+				button.layer.shadowOffset = CGSize(width: 2, height: 2)
+				button.layer.shadowOpacity = 0.5
+				button.layer.shadowRadius = 4
 			}
 		}
 	}

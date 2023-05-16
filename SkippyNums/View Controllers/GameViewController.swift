@@ -24,7 +24,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var choice3Button: UIButton!
 
 	@IBOutlet weak var choice4Button: UIButton!
-
+	
+	@IBOutlet weak var newGameButton: UIButton!
+	
 	private let sectionInsets = UIEdgeInsets(
 		top: 50.0,
 		left: 20.0,
@@ -153,11 +155,17 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func setFonts() {
 		for view in view.subviews {
 			if let button = view as? UIButton {
-				button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-					var outgoing = incoming
-					outgoing.font = UIFont.systemFont(ofSize: 40)
-					return outgoing
+				if button != newGameButton {
+					button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+						var outgoing = incoming
+						outgoing.font = UIFont(name: "Verdana", size: 50)
+						return outgoing
+					}
 				}
+				button.layer.shadowColor = UIColor.black.cgColor
+				button.layer.shadowOffset = CGSize(width: 2, height: 2)
+				button.layer.shadowOpacity = 0.5
+				button.layer.shadowRadius = 4
 			}
 		}
 	}
