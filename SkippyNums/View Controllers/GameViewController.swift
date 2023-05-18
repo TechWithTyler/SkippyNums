@@ -51,6 +51,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		objectCollectionView.isUserInteractionEnabled = true
 		navigationItem.hidesBackButton = true
 		secondsLeftLabel.text = "Loading…"
+		scoreLabel.isAccessibilityElement = true
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = view.bounds
@@ -140,7 +141,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 			guard presentedViewController == nil else { return }
 			timer.invalidate()
 			announcementTimer = nil
-			UIAccessibility.post(notification: .announcement, argument: message)
+			speakVoiceOverMessage(message)
 		})
 	}
 
@@ -210,6 +211,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 
+	func speakVoiceOverMessage(_ message: String) {
+		UIAccessibility.post(notification: .announcement, argument: message)
+	}
+
 }
 
 class ObjectImageView: UIImageView {
@@ -262,7 +267,11 @@ extension GameViewController {
 		#else
 		let gesture = "Double-tap"
 		#endif
-		imageView.accessibilityHint = "\(gesture) if you want to play the sound for this group of objects."
+		if indexPath.item == gameBrain.numberOfImagesToShow - 1 {
+			imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
+		} else {
+			imageView.accessibilityHint = "\(gesture) if you want to play the sound for this group of objects."
+		}
 		cell.focusEffect = nil
 		// Add the image view to the cell's content view
 		cell.contentView.subviews.first?.removeFromSuperview()
