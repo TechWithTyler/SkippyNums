@@ -80,6 +80,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		gameBrain.resetGameTimer()
+		gameBrain.objectsCountedWithVoiceOverSoFar.removeAll()
 	}
 
 	@objc func updateBackgroundColors() {
@@ -216,9 +217,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 }
 
 class ObjectImageView: UIImageView {
+
 	override func accessibilityElementDidBecomeFocused() {
 		super.accessibilityElementDidBecomeFocused()
 		GameBrain.shared.playChord()
+
 		// Find the view controller that contains this image view
 		var responder: UIResponder? = self
 		while let next = responder?.next {
@@ -230,7 +233,27 @@ class ObjectImageView: UIImageView {
 				break
 			}
 		}
+
+		if !GameBrain.shared.objectsCountedWithVoiceOverSoFar.contains(tag) {
+			GameBrain.shared.objectsCountedWithVoiceOverSoFar.append(tag)
+		}
+
+		print("Objects counted so far: \(GameBrain.shared.objectsCountedWithVoiceOverSoFar.count), tag of image: \(tag), images: \(GameBrain.shared.numberOfImagesToShow)")
+
+		if GameBrain.shared.objectsCountedWithVoiceOverSoFar.contains(tag) && GameBrain.shared.numberOfImagesToShow == GameBrain.shared.objectsCountedWithVoiceOverSoFar.count {
+			UIAccessibility.post(notification: .pauseAssistiveTechnology, argument: UIAccessibility.AssistiveTechnologyIdentifier.notificationVoiceOver)
+			accessibilityHint = "That's all the \(GameBrain.shared.getDisplayNameForObject()), how many \(GameBrain.shared.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
+			UIAccessibility.post(notification: .resumeAssistiveTechnology, argument: UIAccessibility.AssistiveTechnologyIdentifier.notificationVoiceOver)
+		}
 	}
+
+	@objc func announceCompletion() {
+		print("Announcing")
+		NotificationCenter.default.removeObserver(self, name: UIAccessibility.announcementDidFinishNotification, object: nil)
+		UIAccessibility.post(notification: .announcement , argument: "That's all the \(GameBrain.shared.getDisplayNameForObject()), how many \(GameBrain.shared.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen.")
+	}
+
+
 }
 
 extension GameViewController {
@@ -257,6 +280,7 @@ extension GameViewController {
 			imageView.center = cell.contentView.center
 		imageView.addGestureRecognizer(tapGesture)
 		// Configure accessibility
+		imageView.tag = indexPath.item + 1
 		imageView.isAccessibilityElement = true
 		imageView.accessibilityTraits = [.startsMediaSession, .image]
 		imageView.accessibilityLabel = "\(gameBrain.imageAccessibilityText)"
