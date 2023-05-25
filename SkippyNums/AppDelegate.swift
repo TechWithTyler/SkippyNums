@@ -7,6 +7,10 @@
 
 import UIKit
 
+let gradientColorsLight: [CGColor] = [(UIColor(named: "LightGradientBottom")?.cgColor)!, (UIColor(named: "LightGradientTop")?.cgColor)!, UIColor.white.cgColor]
+
+let gradientColorsDark: [CGColor] = [(UIColor(named: "DarkGradientBottom")?.cgColor)!, (UIColor(named: "DarkGradientTop")?.cgColor)!, UIColor.black.cgColor]
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
