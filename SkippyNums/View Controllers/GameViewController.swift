@@ -265,9 +265,7 @@ extension GameViewController {
 		#else
 		let gesture = "Double-tap"
 		#endif
-		if indexPath.item == gameBrain.numberOfImagesToShow - 1 {
-			imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
-		} else {
+		if indexPath.item == 0 {
 			imageView.accessibilityHint = "\(gesture) if you want to play the sound for this group of objects."
 		}
 		cell.focusEffect = nil
