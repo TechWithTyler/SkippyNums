@@ -32,8 +32,6 @@ class GameBrain {
 
 	var currentObject: any Object
 
-	var objectsCountedWithVoiceOverSoFar: [Int] = []
-
 	var numberOfImagesToShow: Int = 2
 
 	var correctAnswersInGame: Int = 0
