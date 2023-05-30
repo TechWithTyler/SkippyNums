@@ -9,7 +9,7 @@ import UIKit
 
 class TimeViewController: UIViewController {
 
-	
+	@IBOutlet weak var untimedGameButton: UIButton!
 
 	var gameBrain = GameBrain.shared
 
@@ -26,6 +26,13 @@ class TimeViewController: UIViewController {
 		view.layer.insertSublayer(gradientLayer, at: 0)
 		setFonts()
 		navigationItem.hidesBackButton = true
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if gameBrain.triesInGame > 0 {
+			untimedGameButton.isHidden = true
+		}
 	}
 
 	func setFonts() {
