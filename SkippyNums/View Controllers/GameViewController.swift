@@ -130,11 +130,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 	func resetAnnouncementTimer() {
 		#if targetEnvironment(macCatalyst)
-		let message = "Move to each group of \(gameBrain.getDisplayNameForObject()) and count them, then if you'd like, activate to play the sound."
+		let message = "Starting from the top-left of the screen, move to each group of \(gameBrain.getDisplayNameForObject()) and count them, then if you'd like, activate to play the sound."
 		#else
-		let message = "Drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
+		let message = "Starting from the top-left of the screen, drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
 		#endif
 		let secondsToWait: TimeInterval = 15
+		announcementTimer?.invalidate()
+		announcementTimer = nil
 		announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true, block: { [self] timer in
 			guard presentedViewController == nil else { return }
 			timer.invalidate()
@@ -216,6 +218,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 }
 
 class ObjectImageView: UIImageView {
+
 	override func accessibilityElementDidBecomeFocused() {
 		super.accessibilityElementDidBecomeFocused()
 		GameBrain.shared.playChord()
@@ -231,6 +234,7 @@ class ObjectImageView: UIImageView {
 			}
 		}
 	}
+
 }
 
 extension GameViewController {
@@ -257,16 +261,23 @@ extension GameViewController {
 			imageView.center = cell.contentView.center
 		imageView.addGestureRecognizer(tapGesture)
 		// Configure accessibility
+		imageView.tag = indexPath.item + 1
 		imageView.isAccessibilityElement = true
 		imageView.accessibilityTraits = [.startsMediaSession, .image]
 		imageView.accessibilityLabel = "\(gameBrain.imageAccessibilityText)"
 		#if targetEnvironment(macCatalyst)
-		let gesture = "Activate"
+		let soundGesture = "Activate"
+		let moveGesture = "Move"
 		#else
-		let gesture = "Double-tap"
+		let soundGesture = "Double-tap"
+		let moveGesture = "Flick"
 		#endif
 		if indexPath.item == 0 {
-			imageView.accessibilityHint = "\(gesture) if you want to play the sound for this group of objects."
+			imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of objects."
+		} else if indexPath.item == 4 && gameBrain.numberOfImagesToShow > 5 {
+			imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
+		} else if indexPath.item == gameBrain.numberOfImagesToShow - 1 {
+			imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
 		}
 		cell.focusEffect = nil
 		// Add the image view to the cell's content view
