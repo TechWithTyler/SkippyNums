@@ -30,6 +30,8 @@ class GameBrain {
 		//		Bear()
 	]
 
+	var settingsData = SettingsData()
+
 	var currentObject: any Object
 
 	var numberOfImagesToShow: Int = 2
@@ -74,7 +76,7 @@ class GameBrain {
 		} else {
 			currentObject = GameBrain.objects.filter({$0.quantity == countingBy}).randomElement()!
 		}
-		let maxNumber = 10
+		let maxNumber = settingsData.tenFrame ? 10 : 5
 		numberOfImagesToShow = Int.random(in: 2...maxNumber)
 		numberOfIncorrectAnswers = 0
 		if currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages {

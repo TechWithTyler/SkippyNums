@@ -9,7 +9,11 @@ import UIKit
 
 class NewGameViewController: UIViewController {
 
+	@IBOutlet weak var fiveTenFrameToggleButton: UIButton!
+	
 	var gameBrain = GameBrain.shared
+
+	var settingsData = SettingsData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +26,7 @@ class NewGameViewController: UIViewController {
 		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
+		configureFiveTenFrameButtonTitle()
 		setFonts()
     }
 
@@ -59,6 +64,17 @@ class NewGameViewController: UIViewController {
 		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
 			gradientLayer.frame = view.bounds
 		}
+	}
+
+	func configureFiveTenFrameButtonTitle() {
+		let frameCount: Int = settingsData.tenFrame ? 5 : 10
+		fiveTenFrameToggleButton.setTitle("Switch to \(frameCount)-Frame", for: .normal)
+	}
+
+	@IBAction func toggleFiveTenFrame(_ sender: UIButton) {
+		settingsData.tenFrame.toggle()
+		configureFiveTenFrameButtonTitle()
+		setFonts()
 	}
 
 	@IBAction func twosSelected(_ sender: Any) {
