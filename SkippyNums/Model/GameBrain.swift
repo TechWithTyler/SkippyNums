@@ -10,6 +10,12 @@ import AVKit
 
 class GameBrain {
 
+	enum GameType {
+		case play
+		case practice
+		case learn
+	}
+
 	// MARK: - Properties
 
 	static var shared: GameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
@@ -31,6 +37,8 @@ class GameBrain {
 	]
 
 	var settingsData = SettingsData()
+
+	var gameType: GameType? = nil
 
 	var currentObject: any Object
 

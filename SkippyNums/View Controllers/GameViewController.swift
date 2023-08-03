@@ -102,14 +102,12 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 
-	@IBAction func newGame(_ sender: Any) {
-		resetGame()
-	}
-
 	func resetGame() {
 		gameBrain.soundPlayer?.stop()
 		gameBrain.correctAnswersInGame = 0
 		gameBrain.triesInGame = 0
+		gameBrain.countingBy = nil
+		gameBrain.gameType = nil
 		navigationController?.popToRootViewController(animated: true)
 	}
 
@@ -185,7 +183,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else {
 			performSegue(withIdentifier: "Incorrect", sender: sender)
 		}
+	}
 
+	@IBAction func newGame(_ sender: Any) {
+		resetGame()
 	}
 
 	// MARK: - Navigation
