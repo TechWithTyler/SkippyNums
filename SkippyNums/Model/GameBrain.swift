@@ -11,9 +11,13 @@ import AVKit
 class GameBrain {
 
 	enum GameType {
+		
 		case play
+
 		case practice
+
 		case learn
+
 	}
 
 	// MARK: - Properties
@@ -22,16 +26,20 @@ class GameBrain {
 
 	static var objects: [any Object] = [
 		// Comment out objects if they're not ready to commit or ship.
+		// Twos
 		Cow(),
 		Elephant(),
 		Car(),
-		Airplane(),
 		Bird(quantity: 2),
-		Bird(quantity: 5),
 		Robot(quantity: 2),
-		Robot(quantity: 5),
 		Monkey(quantity: 2),
+		// Fives
+		Airplane(),
+		Bird(quantity: 5),
+		Robot(quantity: 5),
 		Monkey(quantity: 5),
+		// Tens
+		Bird(quantity: 10),
 		Monkey(quantity: 10),
 		//		Bear()
 	]
@@ -74,6 +82,22 @@ class GameBrain {
 
 	init(currentObject: Object) {
 		self.currentObject = currentObject
+	}
+
+	func startMonkeyLearnMode() {
+		if countingBy == nil {
+			currentObject = GameBrain.objects.filter({$0.name.contains("monkey")}).randomElement()!
+		} else {
+			currentObject = GameBrain.objects.filter({$0.name.contains("monkey") && $0.quantity == countingBy}).randomElement()!
+		}
+	}
+
+	func startBirdLearnMode() {
+		if countingBy == nil {
+			currentObject = GameBrain.objects.filter({$0.name.contains("bird")}).randomElement()!
+		} else {
+			currentObject = GameBrain.objects.filter({$0.name.contains("bird") && $0.quantity == countingBy}).randomElement()!
+		}
 	}
 
 	func newQuestion() {
@@ -250,6 +274,15 @@ class GameBrain {
 		gameTimer?.invalidate()
 		gameTimer = nil
 		gameTimeLeft = nil
+	}
+
+	func resetGame() {
+		soundPlayer?.stop()
+		correctAnswersInGame = 0
+		triesInGame = 0
+		countingBy = nil
+		gameType = nil
+		resetGameTimer()
 	}
 
 }
