@@ -14,6 +14,7 @@ class NewGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+		navigationItem.hidesBackButton = true
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = view.bounds
@@ -62,19 +63,43 @@ class NewGameViewController: UIViewController {
 	}
 
 	@IBAction func twosSelected(_ sender: Any) {
-		performSegue(withIdentifier: "NewGame2", sender: sender)
+		if gameBrain.gameType == .play {
+			performSegue(withIdentifier: "NewGame2", sender: sender)
+		} else if gameBrain.gameType == .learn {
+			performSegue(withIdentifier: "Learn2", sender: sender)
+		} else {
+			performSegue(withIdentifier: "Practice2", sender: sender)
+		}
 	}
 
 	@IBAction func fivesSelected(_ sender: Any) {
-		performSegue(withIdentifier: "NewGame5", sender: sender)
+		if gameBrain.gameType == .play {
+			performSegue(withIdentifier: "NewGame5", sender: sender)
+		} else if gameBrain.gameType == .learn {
+			performSegue(withIdentifier: "Learn5", sender: sender)
+		} else {
+			performSegue(withIdentifier: "Practice5", sender: sender)
+		}
 	}
 
 	@IBAction func tensSelected(_ sender: Any) {
-		performSegue(withIdentifier: "NewGame10", sender: sender)
+		if gameBrain.gameType == .play {
+			performSegue(withIdentifier: "NewGame10", sender: sender)
+		} else if gameBrain.gameType == .learn {
+			performSegue(withIdentifier: "Learn10", sender: sender)
+		} else {
+			performSegue(withIdentifier: "Practice10", sender: sender)
+		}
 	}
 
 	@IBAction func mixSelected(_ sender: Any) {
-		performSegue(withIdentifier: "NewGameMix", sender: sender)
+		if gameBrain.gameType == .play {
+			performSegue(withIdentifier: "NewGameMix", sender: sender)
+		} else if gameBrain.gameType == .learn {
+			performSegue(withIdentifier: "LearnMix", sender: sender)
+		} else {
+			performSegue(withIdentifier: "PracticeMix", sender: sender)
+		}
 	}
 
 	@IBAction func back(_ sender: UIButton) {
@@ -88,11 +113,11 @@ class NewGameViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
 		switch segue.identifier {
-			case "NewGame2":
+			case "NewGame2", "Learn2", "Practice2":
 				gameBrain.countingBy = 2
-			case "NewGame5":
+			case "NewGame5", "Learn5", "Practice5":
 				gameBrain.countingBy = 5
-			case "NewGame10":
+			case "NewGame10", "Learn10", "Practice10":
 				gameBrain.countingBy = 10
 			default:
 				gameBrain.countingBy = nil

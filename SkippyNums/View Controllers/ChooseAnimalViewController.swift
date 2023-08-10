@@ -1,23 +1,20 @@
 //
-//  WelcomeViewController.swift
+//  ChooseAnimalViewController.swift
 //  SkippyNums
 //
-//  Created by TechWithTyler on 8/3/23.
+//  Created by Tyler Sheft on 8/7/23.
 //
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
-
-	@IBOutlet weak var fiveTenFrameToggleButton: UIButton!
+class ChooseAnimalViewController: UIViewController {
 
 	var gameBrain = GameBrain.shared
-
-	var settingsData = SettingsData()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
+		navigationItem.hidesBackButton = true
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = view.bounds
@@ -26,7 +23,6 @@ class WelcomeViewController: UIViewController {
 		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
-		configureFiveTenFrameButtonTitle()
 		setFonts()
 	}
 
@@ -66,38 +62,28 @@ class WelcomeViewController: UIViewController {
 		}
 	}
 
-	func configureFiveTenFrameButtonTitle() {
-		let frameCount: Int = settingsData.tenFrame ? 5 : 10
-		fiveTenFrameToggleButton.setTitle("Switch to \(frameCount)-Frame", for: .normal)
+	@IBAction func back(_ sender: UIButton) {
+		navigationController?.popViewController(animated: true)
 	}
 
-	@IBAction func toggleFiveTenFrame(_ sender: UIButton) {
-		settingsData.tenFrame.toggle()
-		configureFiveTenFrameButtonTitle()
-		setFonts()
+	@IBAction func birdsSelected(_ sender: Any) {
+		gameBrain.startBirdLearnMode()
+		performSegue(withIdentifier: "StartLearn", sender: sender)
 	}
 
-	@IBAction func playSelected(_ sender: Any) {
-		gameBrain.gameType = .play
-		performSegue(withIdentifier: "ChooseGame", sender: sender)
+	@IBAction func monkeysSelected(_ sender: Any) {
+		gameBrain.startMonkeyLearnMode()
+		performSegue(withIdentifier: "StartLearn", sender: sender)
 	}
 
-	@IBAction func practiceSelected(_ sender: Any) {
-		gameBrain.gameType = .practice
-		performSegue(withIdentifier: "ChooseGame", sender: sender)
-	}
+    /*
+    // MARK: - Navigation
 
-	@IBAction func learnSelected(_ sender: Any) {
-		gameBrain.gameType = .learn
-		performSegue(withIdentifier: "ChooseGame", sender: sender)
-	}
-
-	// MARK: - Navigation
-
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		// Get the new view controller using segue.destination.
-		// Pass the selected object to the new view controller.
-	}
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }
