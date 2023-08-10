@@ -21,8 +21,6 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		bottom: 50.0,
 		right: 20.0)
 
-
-
 	var gameBrain = GameBrain.shared
 
 	var announcementTimer: Timer? = nil
@@ -35,6 +33,12 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		objectCollectionView.dataSource = self
 		objectCollectionView.delegate = self
 		objectCollectionView.isUserInteractionEnabled = true
+		objectCollectionView.isAccessibilityElement = true
+		objectCollectionView.accessibilityTraits = [.startsMediaSession]
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+		tapGesture.numberOfTouchesRequired = 1
+		tapGesture.numberOfTapsRequired = 1
+		objectCollectionView.addGestureRecognizer(tapGesture)
 		navigationItem.hidesBackButton = true
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
@@ -54,6 +58,14 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
+	}
+
+	@objc func imageTapped(_ sender: Any) {
+		if let player = gameBrain.soundPlayer, player.isPlaying {
+			player.stop()
+		} else {
+			gameBrain.playSoundForObject()
+		}
 	}
 
 	@objc func updateBackgroundColors() {
@@ -85,37 +97,23 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		gameBrain.newQuestion()
 		questionLabel.text = gameBrain.getQuestionText()
 		objectCollectionView.accessibilityLabel = gameBrain.backgroundAccessibilityText
+#if targetEnvironment(macCatalyst)
+		let soundGesture = "Activate"
+#else
+		let soundGesture = "Double-tap"
+#endif
+		objectCollectionView.accessibilityHint = "\(soundGesture) to hear the \(gameBrain.getDisplayNameForObject())."
 		setFonts()
 		objectCollectionView.reloadData()
-		resetAnnouncementTimer()
-	}
-
-	func resetAnnouncementTimer() {
-#if targetEnvironment(macCatalyst)
-		let message = "Starting from the top-left of the screen, move to each group of \(gameBrain.getDisplayNameForObject()) and count them, then if you'd like, activate to play the sound."
-#else
-		let message = "Starting from the top-left of the screen, drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
-#endif
-		let secondsToWait: TimeInterval = 15
-		announcementTimer?.invalidate()
-		announcementTimer = nil
-		announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true, block: { [self] timer in
-			guard presentedViewController == nil else { return }
-			timer.invalidate()
-			announcementTimer = nil
-			speakVoiceOverMessage(message)
-		})
 	}
 
 	func setFonts() {
 		for view in view.subviews {
 			if let button = view as? UIButton {
-				if button != newGameButton {
-					button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-						var outgoing = incoming
-						outgoing.font = UIFont(name: "Verdana", size: 50)
-						return outgoing
-					}
+				button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+					var outgoing = incoming
+					outgoing.font = UIFont.systemFont(ofSize: 40)
+					return outgoing
 				}
 				button.layer.shadowColor = UIColor.black.cgColor
 				button.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -125,6 +123,10 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 	}
 
+	@IBAction func newExample(_ sender: Any) {
+		newQuestion()
+	}
+	
 	@IBAction func newGame(_ sender: Any) {
 		resetGame()
 	}
@@ -136,10 +138,6 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		// Get the new view controller using segue.destination.
 		// Pass the selected object to the new view controller.
 
-	}
-
-	func speakVoiceOverMessage(_ message: String) {
-		UIAccessibility.post(notification: .announcement, argument: message)
 	}
 
 }
@@ -157,49 +155,16 @@ extension LearnViewController {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCellLearn", for: indexPath)
 		// Create and configure the image view
 		let imageView = ObjectImageView(frame: cell.contentView.bounds)
-		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
-		imageView.isUserInteractionEnabled = true
-		tapGesture.numberOfTouchesRequired = 1
-		tapGesture.numberOfTapsRequired = 1
 		imageView.image = UIImage(named: gameBrain.currentObject.name)
 		imageView.contentMode = .scaleAspectFit
 		imageView.clipsToBounds = true
 		imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		imageView.center = cell.contentView.center
-		imageView.addGestureRecognizer(tapGesture)
-		// Configure accessibility
-		imageView.tag = indexPath.item + 1
-		imageView.isAccessibilityElement = true
-		imageView.accessibilityTraits = [.startsMediaSession, .image]
-		imageView.accessibilityLabel = "\(gameBrain.imageAccessibilityText)"
-#if targetEnvironment(macCatalyst)
-		let soundGesture = "Activate"
-		let moveGesture = "Move"
-#else
-		let soundGesture = "Double-tap"
-		let moveGesture = "Flick"
-#endif
-		if indexPath.item == 0 {
-			imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of objects."
-		} else if indexPath.item == 4 && gameBrain.numberOfImagesToShow > 5 {
-			imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
-		} else if indexPath.item == gameBrain.numberOfImagesToShow - 1 {
-			imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
-		}
 		cell.focusEffect = nil
 		// Add the image view to the cell's content view
 		cell.contentView.subviews.first?.removeFromSuperview()
 		cell.contentView.addSubview(imageView)
 		return cell
-	}
-
-	func collectionView(_ collectionView: UICollectionView, canPerformPrimaryActionForItemAt indexPath: IndexPath) -> Bool {
-		imageTapped(collectionView)
-		return true
-	}
-
-	@objc func imageTapped(_ sender: Any) {
-		gameBrain.playSoundForObject()
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

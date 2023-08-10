@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
@@ -32,8 +33,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		left: 20.0,
 		bottom: 50.0,
 		right: 20.0)
-
-	
 
 	var gameBrain = GameBrain.shared
 
@@ -68,7 +67,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 				let secondsSingularOrPlural = time == 1 ? "second" : "seconds"
 				secondsLeftLabel.text = "\(Int(time)) \(secondsSingularOrPlural) left"
 			} else {
-				secondsLeftLabel.text = "Untimed"
+				secondsLeftLabel.text = gameBrain.gameType == .play ? "Untimed" : "Practice"
 			}
 		} timerEndHandler: { [self] in
 			performSegue(withIdentifier: "TimeUp", sender: self)
@@ -248,9 +247,9 @@ extension GameViewController {
 		// Create and configure the image view
 			let imageView = ObjectImageView(frame: cell.contentView.bounds)
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
-		imageView.isUserInteractionEnabled = true
 		tapGesture.numberOfTouchesRequired = 1
 		tapGesture.numberOfTapsRequired = 1
+		imageView.isUserInteractionEnabled = true
 			imageView.image = UIImage(named: gameBrain.currentObject.name)
 			imageView.contentMode = .scaleAspectFit
 			imageView.clipsToBounds = true
@@ -283,12 +282,12 @@ extension GameViewController {
 		return cell
 	}
 
-	func collectionView(_ collectionView: UICollectionView, canPerformPrimaryActionForItemAt indexPath: IndexPath) -> Bool {
-		imageTapped(collectionView)
-		return true
-	}
-
-	@objc func imageTapped(_ sender: Any) {
+	@objc func imageTapped(_ sender: UIGestureRecognizer) {
+		if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {
+			guard let image = sender.view as? ObjectImageView else { return }
+			gameBrain.speechSynthesizer.stopSpeaking(at: .immediate)
+			gameBrain.speechSynthesizer.speak(AVSpeechUtterance(string: "\(image.tag * gameBrain.currentObject.quantity)"))
+		}
 		gameBrain.playSoundForObject()
 	}
 

@@ -67,6 +67,8 @@ class NewGameViewController: UIViewController {
 			performSegue(withIdentifier: "NewGame2", sender: sender)
 		} else if gameBrain.gameType == .learn {
 			performSegue(withIdentifier: "Learn2", sender: sender)
+		} else {
+			performSegue(withIdentifier: "Practice2", sender: sender)
 		}
 	}
 
@@ -75,6 +77,8 @@ class NewGameViewController: UIViewController {
 			performSegue(withIdentifier: "NewGame5", sender: sender)
 		} else if gameBrain.gameType == .learn {
 			performSegue(withIdentifier: "Learn5", sender: sender)
+		} else {
+			performSegue(withIdentifier: "Practice5", sender: sender)
 		}
 	}
 
@@ -83,6 +87,8 @@ class NewGameViewController: UIViewController {
 			performSegue(withIdentifier: "NewGame10", sender: sender)
 		} else if gameBrain.gameType == .learn {
 			performSegue(withIdentifier: "Learn10", sender: sender)
+		} else {
+			performSegue(withIdentifier: "Practice10", sender: sender)
 		}
 	}
 
@@ -91,6 +97,8 @@ class NewGameViewController: UIViewController {
 			performSegue(withIdentifier: "NewGameMix", sender: sender)
 		} else if gameBrain.gameType == .learn {
 			performSegue(withIdentifier: "LearnMix", sender: sender)
+		} else {
+			performSegue(withIdentifier: "PracticeMix", sender: sender)
 		}
 	}
 

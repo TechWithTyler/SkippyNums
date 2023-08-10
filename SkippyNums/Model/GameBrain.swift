@@ -44,6 +44,8 @@ class GameBrain {
 		//		Bear()
 	]
 
+	var speechSynthesizer = AVSpeechSynthesizer()
+
 	var settingsData = SettingsData()
 
 	var gameType: GameType? = nil
@@ -64,6 +66,8 @@ class GameBrain {
 
 	var countingBy: Int?
 
+	let learnModeNumbers: [Int] = [2, 5, 10]
+
 	var soundPlayer: AVAudioPlayer? = nil
 
 	var tooManyIncorrect: Bool {
@@ -75,7 +79,20 @@ class GameBrain {
 	}
 
 	var backgroundAccessibilityText: String {
-		return "\(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject())"
+		let normalString = "\(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject())"
+		if gameType == .learn {
+			var learnString = "There are \(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject()): "
+			for n in 1...numberOfImagesToShow {
+				learnString.append("\(n*currentObject.quantity)")
+				if n != numberOfImagesToShow {
+					learnString.append(", ")
+				}
+			}
+			learnString.append(". There are \(numberOfImagesToShow*currentObject.quantity) \(getDisplayNameForObject()) altogether.")
+			return learnString
+		} else {
+			return normalString
+		}
 	}
 
 	// MARK: - Game Logic
@@ -85,35 +102,35 @@ class GameBrain {
 	}
 
 	func startMonkeyLearnMode() {
-		if countingBy == nil {
-			currentObject = GameBrain.objects.filter({$0.name.contains("monkey")}).randomElement()!
-		} else {
-			currentObject = GameBrain.objects.filter({$0.name.contains("monkey") && $0.quantity == countingBy}).randomElement()!
-		}
+		currentObject = Monkey(quantity: countingBy ?? learnModeNumbers.randomElement()!)
 	}
 
 	func startBirdLearnMode() {
-		if countingBy == nil {
-			currentObject = GameBrain.objects.filter({$0.name.contains("bird")}).randomElement()!
-		} else {
-			currentObject = GameBrain.objects.filter({$0.name.contains("bird") && $0.quantity == countingBy}).randomElement()!
-		}
+		currentObject = Bird(quantity: countingBy ?? learnModeNumbers.randomElement()!)
 	}
 
 	func newQuestion() {
-		let previousObjectName = currentObject.name
-		let previousNumberOfImages = numberOfImagesToShow
-		if countingBy == nil {
-			currentObject = GameBrain.objects.randomElement()!
-		} else {
-			currentObject = GameBrain.objects.filter({$0.quantity == countingBy}).randomElement()!
-		}
 		let maxNumber = settingsData.tenFrame ? 10 : 5
 		numberOfImagesToShow = Int.random(in: 2...maxNumber)
 		numberOfIncorrectAnswers = 0
-		if currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages {
-			// If the next question is identical to the previous one, try again until a different question is generated.
-			newQuestion()
+		if gameType == .learn {
+			if currentObject is Monkey {
+				startMonkeyLearnMode()
+			} else {
+				startBirdLearnMode()
+			}
+		} else {
+			let previousObjectName = currentObject.name
+			let previousNumberOfImages = numberOfImagesToShow
+			if countingBy == nil {
+				currentObject = GameBrain.objects.randomElement()!
+			} else {
+				currentObject = GameBrain.objects.filter({$0.quantity == countingBy}).randomElement()!
+			}
+			if currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages {
+				// If the next question is identical to the previous one, try again until a different question is generated.
+				newQuestion()
+			}
 		}
 	}
 
@@ -130,7 +147,7 @@ class GameBrain {
 			}
 		}
 		let text = "Count the \(getDisplayNameForObject()) by \(quantityWord)."
-		return text
+		return gameType != .learn ? text : backgroundAccessibilityText
 	}
 
 	func getChoices() -> [String] {
@@ -160,9 +177,13 @@ class GameBrain {
 			fatalError("Failed to find \(currentObject.soundFilename) in bundle")
 		}
 		do {
-			soundPlayer?.stop()
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
-			soundPlayer?.numberOfLoops = currentObject.quantity - 1
+			if gameType == .learn {
+				soundPlayer?.numberOfLoops = currentObject.quantity * numberOfImagesToShow - 1
+			} else {
+				soundPlayer?.numberOfLoops = currentObject.quantity - 1
+			}
+			soundPlayer?.stop()
 			soundPlayer?.enableRate = true
 			soundPlayer?.rate = currentObject.soundRate
 			soundPlayer?.volume = 1
@@ -277,6 +298,7 @@ class GameBrain {
 	}
 
 	func resetGame() {
+		speechSynthesizer.stopSpeaking(at: .immediate)
 		soundPlayer?.stop()
 		correctAnswersInGame = 0
 		triesInGame = 0
