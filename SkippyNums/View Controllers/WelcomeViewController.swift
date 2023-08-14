@@ -7,11 +7,13 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-	@IBOutlet weak var fiveTenFrameToggleButton: UIButton!
+	@IBOutlet weak var rowsPicker: UIPickerView!
 
 	var gameBrain = GameBrain.shared
+
+	var rowsOptions = ["5", "10"]
 
 	var settingsData = SettingsData()
 
@@ -24,9 +26,9 @@ class WelcomeViewController: UIViewController {
 		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
 		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
 		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+		configureRowsPicker()
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
-		configureFiveTenFrameButtonTitle()
 		setFonts()
 	}
 
@@ -66,17 +68,6 @@ class WelcomeViewController: UIViewController {
 		}
 	}
 
-	func configureFiveTenFrameButtonTitle() {
-		let frameCount: Int = settingsData.tenFrame ? 5 : 10
-		fiveTenFrameToggleButton.setTitle("Switch to \(frameCount)-Frame", for: .normal)
-	}
-
-	@IBAction func toggleFiveTenFrame(_ sender: UIButton) {
-		settingsData.tenFrame.toggle()
-		configureFiveTenFrameButtonTitle()
-		setFonts()
-	}
-
 	@IBAction func playSelected(_ sender: Any) {
 		gameBrain.gameType = .play
 		performSegue(withIdentifier: "ChooseGame", sender: sender)
@@ -98,6 +89,43 @@ class WelcomeViewController: UIViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		// Get the new view controller using segue.destination.
 		// Pass the selected object to the new view controller.
+	}
+
+}
+
+extension WelcomeViewController {
+
+	// MARK: - Rows Picker
+
+	func configureRowsPicker() {
+		rowsPicker.isAccessibilityElement = true
+		rowsPicker.accessibilityLabel = "Maximum number of groups"
+		rowsPicker.delegate = self
+		rowsPicker.dataSource = self
+		rowsPicker.selectRow(settingsData.tenFrame ? 1 : 0, inComponent: 0, animated: true)
+	}
+
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		return 1
+	}
+
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		return 2
+	}
+
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		settingsData.tenFrame = row == 1 ? true : false
+	}
+
+	func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+		var pickerLabel: UILabel? = (view as? UILabel)
+		if pickerLabel == nil {
+			pickerLabel = UILabel()
+			pickerLabel?.font = UIFont(name: "Helvetica", size: 30)
+			pickerLabel?.textAlignment = .center
+		}
+		pickerLabel?.text = rowsOptions[row]
+		return pickerLabel!
 	}
 
 }
