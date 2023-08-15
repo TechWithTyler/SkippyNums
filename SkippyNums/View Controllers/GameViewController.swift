@@ -213,26 +213,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 }
 
-class ObjectImageView: UIImageView {
-
-	override func accessibilityElementDidBecomeFocused() {
-		super.accessibilityElementDidBecomeFocused()
-		GameBrain.shared.playChord()
-		// Find the view controller that contains this image view
-		var responder: UIResponder? = self
-		while let next = responder?.next {
-			responder = next
-			if let viewController = responder as? GameViewController {
-				// Reset the VoiceOver announcement timer
-				viewController.announcementTimer?.invalidate()
-				viewController.announcementTimer = nil
-				break
-			}
-		}
-	}
-
-}
-
 extension GameViewController {
 
 	// MARK: - Collection View Delegate and Data Source
@@ -285,6 +265,7 @@ extension GameViewController {
 	@objc func imageTapped(_ sender: UIGestureRecognizer) {
 		if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {
 			guard let image = sender.view as? ObjectImageView else { return }
+			image.highlightBackground()
 			gameBrain.speechSynthesizer.stopSpeaking(at: .immediate)
 			gameBrain.speechSynthesizer.speak(AVSpeechUtterance(string: "\(image.tag * gameBrain.currentObject.quantity)"))
 		}
