@@ -103,6 +103,10 @@ class NewGameViewController: UIViewController {
 	}
 
 	@IBAction func back(_ sender: UIButton) {
+		gameBrain.countingBy = nil
+		gameBrain.triesInGame = 0
+		gameBrain.correctAnswersInGame = 0
+		gameBrain.isNewRoundInCurrentGame = false
 		navigationController?.popViewController(animated: true)
 	}
 

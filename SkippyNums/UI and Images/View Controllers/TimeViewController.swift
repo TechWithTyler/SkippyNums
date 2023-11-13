@@ -30,7 +30,7 @@ class TimeViewController: UIViewController {
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		if gameBrain.triesInGame > 0 {
+		if gameBrain.isNewRoundInCurrentGame {
 			untimedGameButton.isHidden = true
 		}
 	}
@@ -96,7 +96,7 @@ class TimeViewController: UIViewController {
 		// Pass the selected object to the new view controller.
 		switch segue.identifier {
 			case "TimedGame1":
-				gameBrain.gameTimeLeft = 60
+				gameBrain.gameTimeLeft = 5
 			case "TimedGame2":
 				gameBrain.gameTimeLeft = 120
 			default:

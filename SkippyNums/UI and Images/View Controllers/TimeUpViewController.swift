@@ -69,12 +69,20 @@ class TimeUpViewController: UIViewController {
 	}
 
 	@IBAction func nextRound(_ sender: Any) {
-		navigationController?.popToRootViewController(animated: true)
+		// Make sure there are at least three view controllers in the stack. If there are, get the third-to-last view controller. Since the index starts at 0, we need to subtract 4, not 3, from the view controller count.
+		let viewControllers = navigationController?.viewControllers
+		guard let viewControllerCount = viewControllers?.count, viewControllerCount >= 3, let newGameViewController = viewControllers?[viewControllerCount - 4] as? NewGameViewController else {
+			return
+		}
+		gameBrain.isNewRoundInCurrentGame = true
+			navigationController?.popToViewController(newGameViewController, animated: true)
 	}
+
 
 	@IBAction func resetScore(_ sender: Any) {
 		gameBrain.correctAnswersInGame = 0
 		gameBrain.triesInGame = 0
+		gameBrain.isNewRoundInCurrentGame = false
 		navigationController?.popToRootViewController(animated: true)
 	}
 

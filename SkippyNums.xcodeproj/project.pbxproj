@@ -118,6 +118,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		8D87C7CA2B02C40E009BBE56 /* UI and Images */ = {
+			isa = PBXGroup;
+			children = (
+				8DC26FB429DDEE3200703ECA /* View Controllers */,
+				8D61C7782A8C0AFA008703D7 /* Views */,
+				8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */,
+				8D8EC9BB299AD7B300043D39 /* Main.storyboard */,
+				8D8EC9BE299AD7B400043D39 /* Assets.xcassets */,
+				8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */,
+			);
+			path = "UI and Images";
+			sourceTree = "<group>";
+		};
 		8D8EC9A9299AD7B300043D39 = {
 			isa = PBXGroup;
 			children = (
@@ -142,14 +155,9 @@
 				8DA632382A799C9D00A60458 /* PrivacyInfo.xcprivacy */,
 				8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */,
 				8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */,
-				8DC26FB429DDEE3200703ECA /* View Controllers */,
-				8D61C7782A8C0AFA008703D7 /* Views */,
-				8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */,
-				8D8EC9BB299AD7B300043D39 /* Main.storyboard */,
+				8D87C7CA2B02C40E009BBE56 /* UI and Images */,
 				8DA6D96C299C2F6000ED533F /* Model */,
 				8DCC07B329B92CF000A8C1FF /* Sounds */,
-				8D8EC9BE299AD7B400043D39 /* Assets.xcassets */,
-				8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */,
 				8D7B7A1829A5656A00D3C727 /* Info.plist */,
 			);
 			path = SkippyNums;
@@ -503,7 +511,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SkippyNums/SkippyNums.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 200;
 				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SkippyNums/Info.plist;
@@ -519,7 +527,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2023.11;
+				MARKETING_VERSION = 2023.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tylersheft.SkippyNums;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -539,7 +547,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SkippyNums/SkippyNums.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 200;
 				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SkippyNums/Info.plist;
@@ -555,7 +563,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2023.11;
+				MARKETING_VERSION = 2023.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tylersheft.SkippyNums;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -10,6 +10,8 @@ import AVKit
 
 class GameBrain {
 
+	// MARK: - Game Type Enum
+
 	enum GameType {
 		
 		case play
@@ -20,9 +22,11 @@ class GameBrain {
 
 	}
 
-	// MARK: - Properties
+	// MARK: - Properties - Shared GameBrain
 
 	static var shared: GameBrain = GameBrain(currentObject: GameBrain.objects.randomElement()!)
+
+	// MARK: - Properties - Objects to Count
 
 	static var objects: [any Object] = [
 		// Comment out objects if they're not ready to commit or ship.
@@ -44,13 +48,23 @@ class GameBrain {
 		//		Bear()
 	]
 
+	// MARK: - Properties - Speech Synthesizer
+
 	var speechSynthesizer = AVSpeechSynthesizer()
+
+	// MARK: - Properties - Settings Data
 
 	var settingsData = SettingsData()
 
+	// MARK: - Properties - Game Type
+
 	var gameType: GameType? = nil
 
+	// MARK: - Properties - Current Object
+
 	var currentObject: any Object
+
+	// MARK: - Properties - Integers
 
 	var numberOfImagesToShow: Int = 2
 
@@ -58,21 +72,35 @@ class GameBrain {
 
 	var triesInGame: Int = 0
 
+	var numberOfIncorrectAnswers = 0
+	
+	var countingBy: Int?
+
+	// MARK: - Properties - Time Intervals
+
 	var gameTimeLeft: TimeInterval? = nil
+
+	// MARK: - Properties - Game Timer
 
 	var gameTimer: Timer? = nil
 
-	var numberOfIncorrectAnswers = 0
-
-	var countingBy: Int?
+	// MARK: - Properties - Lean Mode Numbers
 
 	let learnModeNumbers: [Int] = [2, 5, 10]
 
+	// MARK: - Properties - Sound Player
+
 	var soundPlayer: AVAudioPlayer? = nil
+
+	// MARK: - Properties - Booleans
+
+	var isNewRoundInCurrentGame: Bool = false
 
 	var tooManyIncorrect: Bool {
 		return numberOfIncorrectAnswers == 3
 	}
+
+	// MARK: - Properties - Strings
 
 	var imageAccessibilityText: String {
 		return "\(currentObject.quantity) \(getDisplayNameForObject())"
@@ -95,11 +123,13 @@ class GameBrain {
 		}
 	}
 
-	// MARK: - Game Logic
+	// MARK: - Initialization
 
 	init(currentObject: Object) {
 		self.currentObject = currentObject
 	}
+
+	// MARK: - Lean Mode
 
 	func startMonkeyLearnMode() {
 		currentObject = Monkey(quantity: countingBy ?? learnModeNumbers.randomElement()!)
@@ -108,6 +138,8 @@ class GameBrain {
 	func startBirdLearnMode() {
 		currentObject = Bird(quantity: countingBy ?? learnModeNumbers.randomElement()!)
 	}
+
+	// MARK: - New Question
 
 	func newQuestion() {
 		let maxNumber = settingsData.tenFrame ? 10 : 5
@@ -133,6 +165,8 @@ class GameBrain {
 			}
 		}
 	}
+
+	// MARK: - Get Data to Display
 
 	func getDisplayNameForObject() -> String {
 		return currentObject.name.filter { $0.isLetter }
@@ -171,6 +205,8 @@ class GameBrain {
 		}
 		return finalChoices
 	}
+
+	// MARK: - Sounds
 
 	func playSoundForObject() {
 		guard let soundURL = Bundle.main.url(forResource: currentObject.soundFilename, withExtension: nil) else {
@@ -217,24 +253,6 @@ class GameBrain {
 		}
 	}
 
-	func getCorrectAnswer() -> String {
-		return String(numberOfImagesToShow * currentObject.quantity)
-	}
-
-	func checkAnswer(_ answer: String) -> Bool {
-		let correctAnswer = getCorrectAnswer()
-		let correct = answer == correctAnswer
-		playAnswerSound(correct)
-		if correct {
-			triesInGame += 1
-			correctAnswersInGame += 1
-		} else {
-			triesInGame += 1
-			numberOfIncorrectAnswers += 1
-		}
-		return correct
-	}
-
 	func playAnswerSound(_ correct: Bool) {
 		let filename = correct ? "correct.caf" : "incorrect.caf"
 		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: nil) else {
@@ -271,6 +289,28 @@ class GameBrain {
 		}
 	}
 
+	// MARK: - Answer Checking
+
+	func getCorrectAnswer() -> String {
+		return String(numberOfImagesToShow * currentObject.quantity)
+	}
+
+	func checkAnswer(_ answer: String) -> Bool {
+		let correctAnswer = getCorrectAnswer()
+		let correct = answer == correctAnswer
+		playAnswerSound(correct)
+		if correct {
+			triesInGame += 1
+			correctAnswersInGame += 1
+		} else {
+			triesInGame += 1
+			numberOfIncorrectAnswers += 1
+		}
+		return correct
+	}
+
+	// MARK: - Game Timer
+
 	func setupGameTimer(_ timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
 		guard gameTimeLeft != nil else {
 			timerFireHandler(nil)
@@ -296,6 +336,8 @@ class GameBrain {
 		gameTimer = nil
 		gameTimeLeft = nil
 	}
+
+	// MARK: - Reset Game
 
 	func resetGame() {
 		speechSynthesizer.stopSpeaking(at: .immediate)
