@@ -207,6 +207,24 @@ class GameBrain {
 	}
 
 	// MARK: - Sounds
+    
+    func startAudio() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            fatalError("Couldn't start audio: \(error)")
+        }
+    }
+    
+    func stopAudio() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.ambient)
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            fatalError("Couldn't stop audio: \(error)")
+        }
+    }
 
 	func playSoundForObject() {
 		guard let soundURL = Bundle.main.url(forResource: currentObject.soundFilename, withExtension: nil) else {

@@ -61,7 +61,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		newQuestion()
 	}
 
-	override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        gameBrain.startAudio()
 		gameBrain.setupGameTimer { [self] time in
 			if let time = time {
 				let secondsSingularOrPlural = time == 1 ? "second" : "seconds"
