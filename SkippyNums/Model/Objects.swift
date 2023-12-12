@@ -2,7 +2,8 @@
 //  Object.swift
 //  SkippyNums
 //
-//  Created by TechWithTyler on 2/13/23.
+//  Created by Tyler Sheft on 2/13/23.
+//  Copyright © 2023 SheftApps. All rights reserved.
 //
 
 import Foundation

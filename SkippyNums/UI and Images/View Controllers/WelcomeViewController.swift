@@ -2,7 +2,8 @@
 //  WelcomeViewController.swift
 //  SkippyNums
 //
-//  Created by TechWithTyler on 8/3/23.
+//  Created by Tyler Sheft on 8/3/23.
+//  Copyright © 2023 SheftApps. All rights reserved.
 //
 
 import UIKit

@@ -2,7 +2,8 @@
 //  SkippyNumsTests.swift
 //  SkippyNumsTests
 //
-//  Created by TechWithTyler on 3/2/23.
+//  Created by Tyler Sheft on 3/2/23.
+//  Copyright © 2023 SheftApps. All rights reserved.
 //
 
 import XCTest

@@ -2,7 +2,8 @@
 //  NewGameViewController.swift
 //  SkippyNums
 //
-//  Created by TechWithTyler on 4/4/23.
+//  Created by Tyler Sheft on 4/4/23.
+//  Copyright © 2023 SheftApps. All rights reserved.
 //
 
 import UIKit

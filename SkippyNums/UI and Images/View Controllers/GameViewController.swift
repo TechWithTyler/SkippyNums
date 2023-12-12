@@ -2,7 +2,8 @@
 //  GameViewController.swift
 //  SkippyNums
 //
-//  Created by TechWithTyler on 2/13/23.
+//  Created by Tyler Sheft on 2/13/23.
+//  Copyright © 2023 SheftApps. All rights reserved.
 //
 
 import UIKit
@@ -62,7 +63,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 
     override func viewDidAppear(_ animated: Bool) {
-        gameBrain.startAudio()
 		gameBrain.setupGameTimer { [self] time in
 			if let time = time {
 				let secondsSingularOrPlural = time == 1 ? "second" : "seconds"

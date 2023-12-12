@@ -3,6 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 5/3/23.
+//  Copyright © 2023 SheftApps. All rights reserved.
 //
 
 import UIKit
@@ -75,7 +76,6 @@ class TimeUpViewController: UIViewController {
 			return
 		}
 		gameBrain.isNewRoundInCurrentGame = true
-        gameBrain.stopAudio()
         navigationController?.popToViewController(newGameViewController, animated: true)
 	}
 
@@ -83,7 +83,6 @@ class TimeUpViewController: UIViewController {
 		gameBrain.correctAnswersInGame = 0
 		gameBrain.triesInGame = 0
 		gameBrain.isNewRoundInCurrentGame = false
-        gameBrain.stopAudio()
         navigationController?.popToRootViewController(animated: true)
 	}
 

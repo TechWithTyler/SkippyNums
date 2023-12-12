@@ -2,15 +2,22 @@
 //  SceneDelegate.swift
 //  SkippyNums
 //
-//  Created by TechWithTyler on 2/13/23.
+//  Created by Tyler Sheft on 2/13/23.
+//  Copyright © 2023 SheftApps. All rights reserved.
 //
 
 import UIKit
 import AVKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
+    // MARK: - Properties - Window
 
 	var window: UIWindow?
+    
+    var gameBrain = GameBrain.shared
+    
+    // MARK: - Scene Lifecycle - Connect
 
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -21,6 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		windowScene.titlebar?.titleVisibility = .hidden
 		#endif
 	}
+    
+    // MARK: - Scene Lifecycle - Disconnect
 
 	func sceneDidDisconnect(_ scene: UIScene) {
 		// Called as the scene is being released by the system.
@@ -28,16 +37,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Release any resources associated with this scene that can be re-created the next time the scene connects.
 		// The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
 	}
+    
+    // MARK: - Scene Lifecycle - Activation
 
 	func sceneDidBecomeActive(_ scene: UIScene) {
 		// Called when the scene has moved from an inactive state to an active state.
 		// Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        gameBrain.startAudio()
 	}
 
 	func sceneWillResignActive(_ scene: UIScene) {
 		// Called when the scene will move from an active state to an inactive state.
 		// This may occur due to temporary interruptions (ex. an incoming phone call).
+        gameBrain.stopAudio()
 	}
+    
+    // MARK: - Scene Lifecycle - Background/Foreground
 
 	func sceneWillEnterForeground(_ scene: UIScene) {
 		// Called as the scene transitions from the background to the foreground.

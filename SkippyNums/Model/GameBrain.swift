@@ -2,7 +2,8 @@
 //  GameBrain.swift
 //  SkippyNums
 //
-//  Created by TechWithTyler on 2/14/23.
+//  Created by Tyler Sheft on 2/14/23.
+//  Copyright © 2023 SheftApps. All rights reserved.
 //
 
 import UIKit

@@ -3,6 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 5/1/23.
+//  Copyright © 2023 SheftApps. All rights reserved.
 //
 
 import UIKit
