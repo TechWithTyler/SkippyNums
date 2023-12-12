@@ -10,11 +10,11 @@ import UIKit
 
 class AnswerCheckViewController: UIViewController {
 
-	@IBOutlet weak var messageLabel: UILabel!
+	@IBOutlet weak var messageLabel: UILabel?
 
-	@IBOutlet weak var checkXImageView: UIImageView!
+	@IBOutlet weak var checkXImageView: UIImageView?
 
-	@IBOutlet weak var dismissButton: UIButton!
+	@IBOutlet weak var dismissButton: UIButton?
 
 	var messageText: String?
 
@@ -24,13 +24,13 @@ class AnswerCheckViewController: UIViewController {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
 		guard let messageText = messageText, let imageName = imageName else { return }
-		messageLabel.text = messageText
-		checkXImageView.image = UIImage(systemName: "\(imageName).circle.fill")
-		checkXImageView.tintColor = imageName == "x" ? .systemRed : .systemGreen
+        messageLabel?.text = messageText
+        checkXImageView?.image = UIImage(systemName: "\(imageName).circle.fill")
+        checkXImageView?.tintColor = imageName == "x" ? .systemRed : .systemGreen
 		if messageText.lowercased().components(separatedBy: [" ", "!"]).contains("correct") {
-			dismissButton.setTitle("Next Question", for: .normal)
+            dismissButton?.setTitle("Next Question", for: .normal)
 		} else {
-			dismissButton.setTitle("Try Again", for: .normal)
+            dismissButton?.setTitle("Try Again", for: .normal)
 		}
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()

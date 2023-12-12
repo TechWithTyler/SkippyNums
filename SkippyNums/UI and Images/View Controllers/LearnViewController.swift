@@ -10,11 +10,11 @@ import UIKit
 
 class LearnViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
-	@IBOutlet weak var questionLabel: UILabel!
+	@IBOutlet weak var questionLabel: UILabel?
 
-	@IBOutlet weak var objectCollectionView: UICollectionView!
+	@IBOutlet weak var objectCollectionView: UICollectionView?
 
-	@IBOutlet weak var newGameButton: UIButton!
+	@IBOutlet weak var newGameButton: UIButton?
 
 	private let sectionInsets = UIEdgeInsets(
 		top: 50.0,
@@ -31,15 +31,15 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		objectCollectionView.dataSource = self
-		objectCollectionView.delegate = self
-		objectCollectionView.isUserInteractionEnabled = true
-		objectCollectionView.isAccessibilityElement = true
-		objectCollectionView.accessibilityTraits = [.startsMediaSession]
+		objectCollectionView?.dataSource = self
+		objectCollectionView?.delegate = self
+		objectCollectionView?.isUserInteractionEnabled = true
+		objectCollectionView?.isAccessibilityElement = true
+		objectCollectionView?.accessibilityTraits = [.startsMediaSession]
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
 		tapGesture.numberOfTouchesRequired = 1
 		tapGesture.numberOfTapsRequired = 1
-		objectCollectionView.addGestureRecognizer(tapGesture)
+		objectCollectionView?.addGestureRecognizer(tapGesture)
 		navigationItem.hidesBackButton = true
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
@@ -49,7 +49,7 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
-		objectCollectionView.backgroundColor = .clear
+		objectCollectionView?.backgroundColor = .clear
 		newQuestion()
 	}
 
@@ -96,16 +96,16 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 	func newQuestion() {
 		gameBrain.newQuestion()
-		questionLabel.text = gameBrain.getQuestionText()
-		objectCollectionView.accessibilityLabel = gameBrain.backgroundAccessibilityText
+		questionLabel?.text = gameBrain.getQuestionText()
+		objectCollectionView?.accessibilityLabel = gameBrain.backgroundAccessibilityText
 #if targetEnvironment(macCatalyst)
 		let soundGesture = "Activate"
 #else
 		let soundGesture = "Double-tap"
 #endif
-		objectCollectionView.accessibilityHint = "\(soundGesture) to hear the \(gameBrain.getDisplayNameForObject())."
+		objectCollectionView?.accessibilityHint = "\(soundGesture) to hear the \(gameBrain.getDisplayNameForObject())."
 		setFonts()
-		objectCollectionView.reloadData()
+		objectCollectionView?.reloadData()
 	}
 
 	func setFonts() {

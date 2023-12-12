@@ -11,23 +11,23 @@ import AVFoundation
 
 class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
-	@IBOutlet weak var questionLabel: UILabel!
+	@IBOutlet weak var questionLabel: UILabel?
 	
-	@IBOutlet weak var scoreLabel: UILabel!
+	@IBOutlet weak var scoreLabel: UILabel?
 
-	@IBOutlet weak var secondsLeftLabel: UILabel!
+	@IBOutlet weak var secondsLeftLabel: UILabel?
 	
-	@IBOutlet weak var objectCollectionView: UICollectionView!
+	@IBOutlet weak var objectCollectionView: UICollectionView?
 
-	@IBOutlet weak var choice1Button: UIButton!
+	@IBOutlet weak var choice1Button: UIButton?
 
-	@IBOutlet weak var choice2Button: UIButton!
+	@IBOutlet weak var choice2Button: UIButton?
 
-	@IBOutlet weak var choice3Button: UIButton!
+	@IBOutlet weak var choice3Button: UIButton?
 
-	@IBOutlet weak var choice4Button: UIButton!
+	@IBOutlet weak var choice4Button: UIButton?
 	
-	@IBOutlet weak var newGameButton: UIButton!
+	@IBOutlet weak var newGameButton: UIButton?
 	
 	private let sectionInsets = UIEdgeInsets(
 		top: 50.0,
@@ -44,12 +44,12 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		objectCollectionView.dataSource = self
-		objectCollectionView.delegate = self
-		objectCollectionView.isUserInteractionEnabled = true
+        objectCollectionView?.dataSource = self
+        objectCollectionView?.delegate = self
+        objectCollectionView?.isUserInteractionEnabled = true
 		navigationItem.hidesBackButton = true
-		secondsLeftLabel.text = "Loading…"
-		scoreLabel.isAccessibilityElement = true
+        secondsLeftLabel?.text = "Loading…"
+        scoreLabel?.isAccessibilityElement = true
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = view.bounds
@@ -58,7 +58,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
-		objectCollectionView.backgroundColor = .clear
+        objectCollectionView?.backgroundColor = .clear
 		newQuestion()
 	}
 
@@ -66,9 +66,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		gameBrain.setupGameTimer { [self] time in
 			if let time = time {
 				let secondsSingularOrPlural = time == 1 ? "second" : "seconds"
-				secondsLeftLabel.text = "\(Int(time)) \(secondsSingularOrPlural) left"
+                secondsLeftLabel?.text = "\(Int(time)) \(secondsSingularOrPlural) left"
 			} else {
-				secondsLeftLabel.text = gameBrain.gameType == .play ? "Untimed" : "Practice"
+                secondsLeftLabel?.text = gameBrain.gameType == .play ? "Untimed" : "Practice"
 			}
 		} timerEndHandler: { [self] in
 			performSegue(withIdentifier: "TimeUp", sender: self)
@@ -108,17 +108,17 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 
 	func updateStatDisplay() {
-		scoreLabel.text = "\(gameBrain.correctAnswersInGame) out of \(gameBrain.triesInGame) tries correct"
+        scoreLabel?.text = "\(gameBrain.correctAnswersInGame) out of \(gameBrain.triesInGame) tries correct"
 	}
 
 	func newQuestion() {
 		gameBrain.newQuestion()
-		questionLabel.text = gameBrain.getQuestionText()
-		objectCollectionView.accessibilityLabel = gameBrain.backgroundAccessibilityText
+        questionLabel?.text = gameBrain.getQuestionText()
+		objectCollectionView?.accessibilityLabel = gameBrain.backgroundAccessibilityText
 		setChoices()
 		setFonts()
 		updateStatDisplay()
-		objectCollectionView.reloadData()
+		objectCollectionView?.reloadData()
 		resetAnnouncementTimer()
 	}
 
@@ -141,10 +141,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 	func setChoices() {
 		let choices = gameBrain.getChoices()
-		choice1Button.setTitle(choices[0], for: .normal)
-		choice2Button.setTitle(choices[1], for: .normal)
-		choice3Button.setTitle(choices[2], for: .normal)
-		choice4Button.setTitle(choices[3], for: .normal)
+		choice1Button?.setTitle(choices[0], for: .normal)
+		choice2Button?.setTitle(choices[1], for: .normal)
+		choice3Button?.setTitle(choices[2], for: .normal)
+		choice4Button?.setTitle(choices[3], for: .normal)
 	}
 
 	func setFonts() {

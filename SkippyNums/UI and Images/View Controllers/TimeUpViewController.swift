@@ -10,7 +10,7 @@ import UIKit
 
 class TimeUpViewController: UIViewController {
 
-	@IBOutlet weak var messageLabel: UILabel!
+	@IBOutlet weak var messageLabel: UILabel?
 
 	var messageText: String?
 
@@ -20,7 +20,7 @@ class TimeUpViewController: UIViewController {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
 		guard let messageText = messageText else { return }
-		messageLabel.text = messageText
+        messageLabel?.text = messageText
 		// Create gradient layer
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = view.bounds

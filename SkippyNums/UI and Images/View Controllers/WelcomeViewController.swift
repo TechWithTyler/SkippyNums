@@ -10,7 +10,7 @@ import UIKit
 
 class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-	@IBOutlet weak var rowsPicker: UIPickerView!
+	@IBOutlet weak var rowsPicker: UIPickerView?
 
 	var gameBrain = GameBrain.shared
 
@@ -99,11 +99,11 @@ extension WelcomeViewController {
 	// MARK: - Rows Picker
 
 	func configureRowsPicker() {
-		rowsPicker.isAccessibilityElement = true
-		rowsPicker.accessibilityLabel = "Maximum number of groups"
-		rowsPicker.delegate = self
-		rowsPicker.dataSource = self
-		rowsPicker.selectRow(settingsData.tenFrame ? 1 : 0, inComponent: 0, animated: true)
+        rowsPicker?.isAccessibilityElement = true
+		rowsPicker?.accessibilityLabel = "Maximum number of groups"
+		rowsPicker?.delegate = self
+		rowsPicker?.dataSource = self
+		rowsPicker?.selectRow(settingsData.tenFrame ? 1 : 0, inComponent: 0, animated: true)
 	}
 
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {

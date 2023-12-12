@@ -13,6 +13,14 @@
 		8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */; };
 		8D0E1EED2A03282000B3FA70 /* TimeUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E1EEC2A03282000B3FA70 /* TimeUpViewController.swift */; };
 		8D31D8582B27F834009F29EE /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D8572B27F834009F29EE /* Globals.swift */; };
+		8D31D85E2B27FB15009F29EE /* Cow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D85D2B27FB15009F29EE /* Cow.swift */; };
+		8D31D8602B27FB3B009F29EE /* Elephant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D85F2B27FB3B009F29EE /* Elephant.swift */; };
+		8D31D8622B27FB44009F29EE /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D8612B27FB44009F29EE /* Car.swift */; };
+		8D31D8642B27FB70009F29EE /* Airplane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D8632B27FB70009F29EE /* Airplane.swift */; };
+		8D31D8662B27FB8A009F29EE /* Bear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D8652B27FB8A009F29EE /* Bear.swift */; };
+		8D31D8682B27FBA4009F29EE /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D8672B27FBA4009F29EE /* Monkey.swift */; };
+		8D31D86A2B27FBC9009F29EE /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D8692B27FBC9009F29EE /* Robot.swift */; };
+		8D31D86C2B27FBD8009F29EE /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D86B2B27FBD8009F29EE /* Bird.swift */; };
 		8D454C3E2A799A6300639479 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D454C3D2A799A6300639479 /* SettingsData.swift */; };
 		8D4FB98A2A0445BB00F66392 /* timeUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D4FB9892A0445BB00F66392 /* timeUp.caf */; };
 		8D61C77A2A8C0B0D008703D7 /* ObjectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */; };
@@ -26,7 +34,7 @@
 		8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9BB299AD7B300043D39 /* Main.storyboard */; };
 		8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9BE299AD7B400043D39 /* Assets.xcassets */; };
 		8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */; };
-		8D8EC9CB299ADD9400043D39 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9CA299ADD9400043D39 /* Objects.swift */; };
+		8D8EC9CB299ADD9400043D39 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9CA299ADD9400043D39 /* Object.swift */; };
 		8DA632392A799C9D00A60458 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8DA632382A799C9D00A60458 /* PrivacyInfo.xcprivacy */; };
 		8DA6D96A299C2F4300ED533F /* GameBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA6D969299C2F4300ED533F /* GameBrain.swift */; };
 		8DA7D5562A7C45D2005AC588 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7D5552A7C45D2005AC588 /* LearnViewController.swift */; };
@@ -60,6 +68,14 @@
 		8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incorrect.caf; sourceTree = "<group>"; };
 		8D0E1EEC2A03282000B3FA70 /* TimeUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUpViewController.swift; sourceTree = "<group>"; };
 		8D31D8572B27F834009F29EE /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		8D31D85D2B27FB15009F29EE /* Cow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cow.swift; sourceTree = "<group>"; };
+		8D31D85F2B27FB3B009F29EE /* Elephant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elephant.swift; sourceTree = "<group>"; };
+		8D31D8612B27FB44009F29EE /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		8D31D8632B27FB70009F29EE /* Airplane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airplane.swift; sourceTree = "<group>"; };
+		8D31D8652B27FB8A009F29EE /* Bear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bear.swift; sourceTree = "<group>"; };
+		8D31D8672B27FBA4009F29EE /* Monkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
+		8D31D8692B27FBC9009F29EE /* Robot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		8D31D86B2B27FBD8009F29EE /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
 		8D454C3D2A799A6300639479 /* SettingsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		8D4FB9892A0445BB00F66392 /* timeUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = timeUp.caf; sourceTree = "<group>"; };
 		8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectImageView.swift; sourceTree = "<group>"; };
@@ -76,7 +92,7 @@
 		8D8EC9BE299AD7B400043D39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D8EC9C1299AD7B400043D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SkippyNums.entitlements; sourceTree = "<group>"; };
-		8D8EC9CA299ADD9400043D39 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
+		8D8EC9CA299ADD9400043D39 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		8DA632382A799C9D00A60458 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8DA6D969299C2F4300ED533F /* GameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBrain.swift; sourceTree = "<group>"; };
 		8DA7D5552A7C45D2005AC588 /* LearnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +137,42 @@
 				8D7B7A1829A5656A00D3C727 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8D31D8592B27FACD009F29EE /* Twos */ = {
+			isa = PBXGroup;
+			children = (
+				8D31D85D2B27FB15009F29EE /* Cow.swift */,
+				8D31D85F2B27FB3B009F29EE /* Elephant.swift */,
+				8D31D8612B27FB44009F29EE /* Car.swift */,
+			);
+			path = Twos;
+			sourceTree = "<group>";
+		};
+		8D31D85A2B27FAD8009F29EE /* Fives */ = {
+			isa = PBXGroup;
+			children = (
+				8D31D8632B27FB70009F29EE /* Airplane.swift */,
+			);
+			path = Fives;
+			sourceTree = "<group>";
+		};
+		8D31D85B2B27FAE4009F29EE /* Tens */ = {
+			isa = PBXGroup;
+			children = (
+				8D31D8652B27FB8A009F29EE /* Bear.swift */,
+			);
+			path = Tens;
+			sourceTree = "<group>";
+		};
+		8D31D85C2B27FAEE009F29EE /* Mix */ = {
+			isa = PBXGroup;
+			children = (
+				8D31D8672B27FBA4009F29EE /* Monkey.swift */,
+				8D31D8692B27FBC9009F29EE /* Robot.swift */,
+				8D31D86B2B27FBD8009F29EE /* Bird.swift */,
+			);
+			path = Mix;
 			sourceTree = "<group>";
 		};
 		8D61C7782A8C0AFA008703D7 /* Views */ = {
@@ -177,8 +229,12 @@
 		8DA6D96C299C2F6000ED533F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8D31D8592B27FACD009F29EE /* Twos */,
+				8D31D85A2B27FAD8009F29EE /* Fives */,
+				8D31D85B2B27FAE4009F29EE /* Tens */,
+				8D31D85C2B27FAEE009F29EE /* Mix */,
 				8DA6D969299C2F4300ED533F /* GameBrain.swift */,
-				8D8EC9CA299ADD9400043D39 /* Objects.swift */,
+				8D8EC9CA299ADD9400043D39 /* Object.swift */,
 				8D454C3D2A799A6300639479 /* SettingsData.swift */,
 			);
 			path = Model;
@@ -274,7 +330,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					8D8EC9B1299AD7B300043D39 = {
 						CreatedOnToolsVersion = 14.2;
@@ -347,18 +403,26 @@
 				8D8EC9BA299AD7B300043D39 /* GameViewController.swift in Sources */,
 				8D61C77A2A8C0B0D008703D7 /* ObjectImageView.swift in Sources */,
 				8D7F2B242A0051D800A7322B /* TimeViewController.swift in Sources */,
+				8D31D8662B27FB8A009F29EE /* Bear.swift in Sources */,
 				8D863D262A7C3E7700AD621E /* WelcomeViewController.swift in Sources */,
 				8D454C3E2A799A6300639479 /* SettingsData.swift in Sources */,
 				8DA6D96A299C2F4300ED533F /* GameBrain.swift in Sources */,
 				8D04D70E29DCBD6C009670F2 /* AnswerCheckViewController.swift in Sources */,
+				8D31D8602B27FB3B009F29EE /* Elephant.swift in Sources */,
 				8DA7D5562A7C45D2005AC588 /* LearnViewController.swift in Sources */,
 				8D31D8582B27F834009F29EE /* Globals.swift in Sources */,
 				8D8EC9B6299AD7B300043D39 /* AppDelegate.swift in Sources */,
-				8D8EC9CB299ADD9400043D39 /* Objects.swift in Sources */,
+				8D31D86C2B27FBD8009F29EE /* Bird.swift in Sources */,
+				8D31D86A2B27FBC9009F29EE /* Robot.swift in Sources */,
+				8D8EC9CB299ADD9400043D39 /* Object.swift in Sources */,
 				8D8EC9B8299AD7B300043D39 /* SceneDelegate.swift in Sources */,
 				8D0E1EED2A03282000B3FA70 /* TimeUpViewController.swift in Sources */,
+				8D31D8642B27FB70009F29EE /* Airplane.swift in Sources */,
+				8D31D8622B27FB44009F29EE /* Car.swift in Sources */,
+				8D31D85E2B27FB15009F29EE /* Cow.swift in Sources */,
 				8DA7D5582A818098005AC588 /* ChooseAnimalViewController.swift in Sources */,
 				8D04D70C29DCB71A009670F2 /* NewGameViewController.swift in Sources */,
+				8D31D8682B27FBA4009F29EE /* Monkey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

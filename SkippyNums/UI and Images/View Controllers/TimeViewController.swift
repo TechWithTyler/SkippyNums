@@ -10,7 +10,7 @@ import UIKit
 
 class TimeViewController: UIViewController {
 
-	@IBOutlet weak var untimedGameButton: UIButton!
+	@IBOutlet weak var untimedGameButton: UIButton?
 
 	var gameBrain = GameBrain.shared
 
@@ -32,7 +32,7 @@ class TimeViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		if gameBrain.isNewRoundInCurrentGame {
-			untimedGameButton.isHidden = true
+            untimedGameButton?.isHidden = true
 		}
 	}
 

@@ -8,10 +8,13 @@
 
 import UIKit
 
+// Displays a group of objects to count.
 class ObjectImageView: UIImageView {
 
+    // The timer used to highlight the image's background for a second when it's tapped/clicked or VoiceOver focuses on it in practice mode.
 	var backgroundHighlightTimer: Timer? = nil
 
+    // This method highlights the image's background.
 	func highlightBackground() {
 		backgroundColor = .gray.withAlphaComponent(0.3)
 		backgroundHighlightTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [self] timer in
@@ -19,6 +22,7 @@ class ObjectImageView: UIImageView {
 		})
 	}
 
+    // This method plays a chord or note, resets the VoiceOver announcement timer, and in practice mode, highlights the image's background, when VoiceOver focuses on it.
 	override func accessibilityElementDidBecomeFocused() {
 		super.accessibilityElementDidBecomeFocused()
 		GameBrain.shared.playChord()
