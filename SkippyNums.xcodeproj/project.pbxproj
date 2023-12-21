@@ -186,9 +186,9 @@
 		8D87C7CA2B02C40E009BBE56 /* UI and Images */ = {
 			isa = PBXGroup;
 			children = (
+				8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */,
 				8DC26FB429DDEE3200703ECA /* View Controllers */,
 				8D61C7782A8C0AFA008703D7 /* Views */,
-				8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */,
 				8D8EC9BB299AD7B300043D39 /* Main.storyboard */,
 				8D8EC9BE299AD7B400043D39 /* Assets.xcassets */,
 				8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */,
@@ -229,13 +229,13 @@
 		8DA6D96C299C2F6000ED533F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8DA6D969299C2F4300ED533F /* GameBrain.swift */,
+				8D454C3D2A799A6300639479 /* SettingsData.swift */,
+				8D8EC9CA299ADD9400043D39 /* Object.swift */,
 				8D31D8592B27FACD009F29EE /* Twos */,
 				8D31D85A2B27FAD8009F29EE /* Fives */,
 				8D31D85B2B27FAE4009F29EE /* Tens */,
 				8D31D85C2B27FAEE009F29EE /* Mix */,
-				8DA6D969299C2F4300ED533F /* GameBrain.swift */,
-				8D8EC9CA299ADD9400043D39 /* Object.swift */,
-				8D454C3D2A799A6300639479 /* SettingsData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
