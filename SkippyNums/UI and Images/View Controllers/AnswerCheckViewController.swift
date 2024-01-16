@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SheftAppsStylishUI
 
 class AnswerCheckViewController: UIViewController {
 
@@ -14,7 +15,7 @@ class AnswerCheckViewController: UIViewController {
 
 	@IBOutlet weak var checkXImageView: UIImageView?
 
-	@IBOutlet weak var dismissButton: UIButton?
+	@IBOutlet weak var dismissButton: SAIAccessibleButton?
 
 	var messageText: String?
 
@@ -40,7 +41,6 @@ class AnswerCheckViewController: UIViewController {
 		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
-		setFonts()
 	}
 
 	@objc func updateBackgroundColors() {
@@ -56,28 +56,12 @@ class AnswerCheckViewController: UIViewController {
 		updateBackgroundColors()
 	}
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.frame = view.bounds
-		}
-	}
-
-	func setFonts() {
-		for view in view.subviews {
-			if let button = view as? UIButton {
-				button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-					var outgoing = incoming
-					outgoing.font = UIFont.systemFont(ofSize: 40)
-					return outgoing
-				}
-				button.layer.shadowColor = UIColor.black.cgColor
-				button.layer.shadowOffset = CGSize(width: 2, height: 2)
-				button.layer.shadowOpacity = 0.5
-				button.layer.shadowRadius = 4
-			}
-		}
-	}
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.frame = view.bounds
+        }
+    }
 
 	@IBAction func dismiss(_ sender: Any) {
 		dismiss(animated: true)

@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import SheftAppsStylishUI
 
 class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
@@ -19,15 +20,15 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	@IBOutlet weak var objectCollectionView: UICollectionView?
 
-	@IBOutlet weak var choice1Button: UIButton?
+	@IBOutlet weak var choice1Button: SAIAccessibleButton?
 
-	@IBOutlet weak var choice2Button: UIButton?
+	@IBOutlet weak var choice2Button: SAIAccessibleButton?
 
-	@IBOutlet weak var choice3Button: UIButton?
+	@IBOutlet weak var choice3Button: SAIAccessibleButton?
 
-	@IBOutlet weak var choice4Button: UIButton?
+	@IBOutlet weak var choice4Button: SAIAccessibleButton?
 	
-	@IBOutlet weak var newGameButton: UIButton?
+	@IBOutlet weak var newGameButton: SAIAccessibleButton?
 	
 	private let sectionInsets = UIEdgeInsets(
 		top: 50.0,
@@ -116,7 +117,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         questionLabel?.text = gameBrain.getQuestionText()
 		objectCollectionView?.accessibilityLabel = gameBrain.backgroundAccessibilityText
 		setChoices()
-		setFonts()
 		updateStatDisplay()
 		objectCollectionView?.reloadData()
 		resetAnnouncementTimer()
@@ -147,25 +147,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		choice4Button?.setTitle(choices[3], for: .normal)
 	}
 
-	func setFonts() {
-		for view in view.subviews {
-			if let button = view as? UIButton {
-				if button != newGameButton {
-					button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-						var outgoing = incoming
-						outgoing.font = UIFont(name: "Verdana", size: 50)
-						return outgoing
-					}
-				}
-				button.layer.shadowColor = UIColor.black.cgColor
-				button.layer.shadowOffset = CGSize(width: 2, height: 2)
-				button.layer.shadowOpacity = 0.5
-				button.layer.shadowRadius = 4
-			}
-		}
-	}
-
-	@IBAction func answerSelected(_ sender: UIButton) {
+	@IBAction func answerSelected(_ sender: SAIAccessibleButton) {
 		guard let answer = sender.currentTitle else { return }
 		let correct = gameBrain.checkAnswer(answer)
 		let incorrectTooManyTimes = !correct && gameBrain.tooManyIncorrect

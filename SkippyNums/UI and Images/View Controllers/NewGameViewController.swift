@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SheftAppsStylishUI
 
 class NewGameViewController: UIViewController {
 	
@@ -15,33 +16,16 @@ class NewGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-		navigationItem.hidesBackButton = true
-		// Create gradient layer
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-		// Add gradient layer to view
-		view.layer.insertSublayer(gradientLayer, at: 0)
-		setFonts()
+        navigationItem.hidesBackButton = true
+        // Create gradient layer
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        // Add gradient layer to view
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
-
-	func setFonts() {
-		for view in view.subviews {
-			if let button = view as? UIButton {
-				button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-					var outgoing = incoming
-					outgoing.font = UIFont.systemFont(ofSize: 40)
-					return outgoing
-				}
-			button.layer.shadowColor = UIColor.black.cgColor
-			button.layer.shadowOffset = CGSize(width: 2, height: 2)
-			button.layer.shadowOpacity = 0.5
-			button.layer.shadowRadius = 4
-			}
-		}
-	}
 
 	@objc func updateBackgroundColors() {
 		// Update gradient colors based on device's dark/light mode
@@ -103,7 +87,7 @@ class NewGameViewController: UIViewController {
 		}
 	}
 
-	@IBAction func back(_ sender: UIButton) {
+	@IBAction func back(_ sender: SAIAccessibleButton) {
 		gameBrain.countingBy = nil
 		gameBrain.triesInGame = 0
 		gameBrain.correctAnswersInGame = 0

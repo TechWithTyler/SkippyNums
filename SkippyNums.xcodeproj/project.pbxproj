@@ -21,6 +21,8 @@
 		8D31D8682B27FBA4009F29EE /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D8672B27FBA4009F29EE /* Monkey.swift */; };
 		8D31D86A2B27FBC9009F29EE /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D8692B27FBC9009F29EE /* Robot.swift */; };
 		8D31D86C2B27FBD8009F29EE /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D86B2B27FBD8009F29EE /* Bird.swift */; };
+		8D3E75542B57044D00522BB8 /* SheftAppsStylishUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3E75532B57044D00522BB8 /* SheftAppsStylishUI.framework */; };
+		8D3E75552B57044D00522BB8 /* SheftAppsStylishUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3E75532B57044D00522BB8 /* SheftAppsStylishUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8D454C3E2A799A6300639479 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D454C3D2A799A6300639479 /* SettingsData.swift */; };
 		8D4FB98A2A0445BB00F66392 /* timeUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D4FB9892A0445BB00F66392 /* timeUp.caf */; };
 		8D61C77A2A8C0B0D008703D7 /* ObjectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */; };
@@ -61,6 +63,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8D3E75562B57044D00522BB8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8D3E75552B57044D00522BB8 /* SheftAppsStylishUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8D04D70B29DCB71A009670F2 /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
 		8D04D70D29DCBD6C009670F2 /* AnswerCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCheckViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +92,7 @@
 		8D31D8672B27FBA4009F29EE /* Monkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
 		8D31D8692B27FBC9009F29EE /* Robot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
 		8D31D86B2B27FBD8009F29EE /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
+		8D3E75532B57044D00522BB8 /* SheftAppsStylishUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SheftAppsStylishUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D454C3D2A799A6300639479 /* SettingsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		8D4FB9892A0445BB00F66392 /* timeUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = timeUp.caf; sourceTree = "<group>"; };
 		8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectImageView.swift; sourceTree = "<group>"; };
@@ -115,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D3E75542B57044D00522BB8 /* SheftAppsStylishUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +193,14 @@
 			path = Mix;
 			sourceTree = "<group>";
 		};
+		8D3E75522B57044D00522BB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D3E75532B57044D00522BB8 /* SheftAppsStylishUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8D61C7782A8C0AFA008703D7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +228,7 @@
 				8D8EC9B4299AD7B300043D39 /* SkippyNums */,
 				8DC42EC629B1429E0005413B /* SkippyNumsTests */,
 				8D8EC9B3299AD7B300043D39 /* Products */,
+				8D3E75522B57044D00522BB8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -294,6 +321,7 @@
 				8D8EC9AE299AD7B300043D39 /* Sources */,
 				8D8EC9AF299AD7B300043D39 /* Frameworks */,
 				8D8EC9B0299AD7B300043D39 /* Resources */,
+				8D3E75562B57044D00522BB8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

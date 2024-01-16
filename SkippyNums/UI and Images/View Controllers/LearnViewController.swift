@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SheftAppsStylishUI
 
 class LearnViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
@@ -14,7 +15,7 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 	@IBOutlet weak var objectCollectionView: UICollectionView?
 
-	@IBOutlet weak var newGameButton: UIButton?
+	@IBOutlet weak var newGameButton: SAIAccessibleButton?
 
 	private let sectionInsets = UIEdgeInsets(
 		top: 50.0,
@@ -104,24 +105,7 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		let soundGesture = "Double-tap"
 #endif
 		objectCollectionView?.accessibilityHint = "\(soundGesture) to hear the \(gameBrain.getDisplayNameForObject())."
-		setFonts()
 		objectCollectionView?.reloadData()
-	}
-
-	func setFonts() {
-		for view in view.subviews {
-			if let button = view as? UIButton {
-				button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-					var outgoing = incoming
-					outgoing.font = UIFont.systemFont(ofSize: 40)
-					return outgoing
-				}
-				button.layer.shadowColor = UIColor.black.cgColor
-				button.layer.shadowOffset = CGSize(width: 2, height: 2)
-				button.layer.shadowOpacity = 0.5
-				button.layer.shadowRadius = 4
-			}
-		}
 	}
 
 	@IBAction func newExample(_ sender: Any) {

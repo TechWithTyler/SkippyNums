@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SheftAppsStylishUI
 
 class ChooseAnimalViewController: UIViewController {
 
@@ -24,23 +25,6 @@ class ChooseAnimalViewController: UIViewController {
 		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
-		setFonts()
-	}
-
-	func setFonts() {
-		for view in view.subviews {
-			if let button = view as? UIButton {
-				button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-					var outgoing = incoming
-					outgoing.font = UIFont.systemFont(ofSize: 40)
-					return outgoing
-				}
-				button.layer.shadowColor = UIColor.black.cgColor
-				button.layer.shadowOffset = CGSize(width: 2, height: 2)
-				button.layer.shadowOpacity = 0.5
-				button.layer.shadowRadius = 4
-			}
-		}
 	}
 
 	@objc func updateBackgroundColors() {
@@ -63,7 +47,7 @@ class ChooseAnimalViewController: UIViewController {
 		}
 	}
 
-	@IBAction func back(_ sender: UIButton) {
+	@IBAction func back(_ sender: SAIAccessibleButton) {
 		navigationController?.popViewController(animated: true)
 	}
 

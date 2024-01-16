@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SheftAppsStylishUI
 
 class TimeViewController: UIViewController {
 
-	@IBOutlet weak var untimedGameButton: UIButton?
+	@IBOutlet weak var untimedGameButton: SAIAccessibleButton?
 
 	var gameBrain = GameBrain.shared
 
@@ -25,7 +26,6 @@ class TimeViewController: UIViewController {
 		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
 		// Add gradient layer to view
 		view.layer.insertSublayer(gradientLayer, at: 0)
-		setFonts()
 		navigationItem.hidesBackButton = true
 	}
 
@@ -33,22 +33,6 @@ class TimeViewController: UIViewController {
 		super.viewWillAppear(animated)
 		if gameBrain.isNewRoundInCurrentGame {
             untimedGameButton?.isHidden = true
-		}
-	}
-
-	func setFonts() {
-		for view in view.subviews {
-			if let button = view as? UIButton {
-				button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-					var outgoing = incoming
-					outgoing.font = UIFont.systemFont(ofSize: 40)
-					return outgoing
-				}
-				button.layer.shadowColor = UIColor.black.cgColor
-				button.layer.shadowOffset = CGSize(width: 2, height: 2)
-				button.layer.shadowOpacity = 0.5
-				button.layer.shadowRadius = 4
-			}
 		}
 	}
 
@@ -84,7 +68,7 @@ class TimeViewController: UIViewController {
 		performSegue(withIdentifier: "UntimedGame", sender: sender)
 	}
 
-	@IBAction func back(_ sender: UIButton) {
+	@IBAction func back(_ sender: SAIAccessibleButton) {
 		navigationController?.popViewController(animated: true)
 	}
 
