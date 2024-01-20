@@ -359,6 +359,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1520;
+				ORGANIZATIONNAME = SheftApps;
 				TargetAttributes = {
 					8D8EC9B1299AD7B300043D39 = {
 						CreatedOnToolsVersion = 14.2;
