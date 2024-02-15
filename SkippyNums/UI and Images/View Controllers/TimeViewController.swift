@@ -81,7 +81,7 @@ class TimeViewController: UIViewController {
 		// Pass the selected object to the new view controller.
 		switch segue.identifier {
 			case "TimedGame1":
-				gameBrain.gameTimeLeft = 5
+				gameBrain.gameTimeLeft = 60
 			case "TimedGame2":
 				gameBrain.gameTimeLeft = 120
 			default:

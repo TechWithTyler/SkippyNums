@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AVKit
+import AVFoundation
 
 // This is the main model object of this game.
 class GameBrain {
