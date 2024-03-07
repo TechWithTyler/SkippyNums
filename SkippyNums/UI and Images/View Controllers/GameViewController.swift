@@ -103,14 +103,20 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 
+    // MARK: - Reset Game
+
 	func resetGame() {
 		gameBrain.resetGame()
 		navigationController?.popToRootViewController(animated: true)
 	}
 
+    // MARK: - Stats Update
+
 	func updateStatDisplay() {
         scoreLabel?.text = "\(gameBrain.correctAnswersInGame) out of \(gameBrain.triesInGame) tries correct"
 	}
+
+    // MARK: - New Question
 
 	func newQuestion() {
 		gameBrain.newQuestion()
@@ -142,9 +148,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func setChoices() {
 		let choices = gameBrain.getChoices()
 		choice1Button?.setTitle(choices[0], for: .normal)
+        choice1Button?.textSize = 50
 		choice2Button?.setTitle(choices[1], for: .normal)
+        choice2Button?.textSize = 50
 		choice3Button?.setTitle(choices[2], for: .normal)
+        choice3Button?.textSize = 50
 		choice4Button?.setTitle(choices[3], for: .normal)
+        choice4Button?.textSize = 50
 	}
 
 	@IBAction func answerSelected(_ sender: SAIAccessibleButton) {
