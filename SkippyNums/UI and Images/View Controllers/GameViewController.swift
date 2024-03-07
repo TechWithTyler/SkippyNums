@@ -12,31 +12,52 @@ import SheftAppsStylishUI
 
 class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
+    // MARK: - @IBOutlets - Buttons
+
+    @IBOutlet weak var choice1Button: SAIAccessibleButton?
+
+    @IBOutlet weak var choice2Button: SAIAccessibleButton?
+
+    @IBOutlet weak var choice3Button: SAIAccessibleButton?
+
+    @IBOutlet weak var choice4Button: SAIAccessibleButton?
+
+    @IBOutlet weak var newGameButton: SAIAccessibleButton?
+
+    // MARK: - @IBOutlets - Labels
+
 	@IBOutlet weak var questionLabel: UILabel?
 	
 	@IBOutlet weak var scoreLabel: UILabel?
 
 	@IBOutlet weak var secondsLeftLabel: UILabel?
-	
+
+    // MARK: - @IBOutlets - Other
+
 	@IBOutlet weak var objectCollectionView: UICollectionView?
 
-	@IBOutlet weak var choice1Button: SAIAccessibleButton?
+    // MARK: - Properties - Edge Insets
 
-	@IBOutlet weak var choice2Button: SAIAccessibleButton?
+    private var objectInsets: UIEdgeInsets {
+        let verticalInsets: CGFloat = 50
+        let horizontalInsets: CGFloat = 20
+        let insets = UIEdgeInsets(
+            top: verticalInsets,
+            left: horizontalInsets,
+            bottom: verticalInsets,
+            right: horizontalInsets)
+        return insets
+    }
 
-	@IBOutlet weak var choice3Button: SAIAccessibleButton?
+    // MARK: - Properties - Floats
 
-	@IBOutlet weak var choice4Button: SAIAccessibleButton?
-	
-	@IBOutlet weak var newGameButton: SAIAccessibleButton?
-	
-	private let sectionInsets = UIEdgeInsets(
-		top: 50.0,
-		left: 20.0,
-		bottom: 50.0,
-		right: 20.0)
+    private let choiceButtonTextSize: CGFloat = 50
+
+    // MARK: - Properties - Objects
 
 	var gameBrain = GameBrain.shared
+
+    // MARK: - Properties - Inactivity VoiceOver Announcement Timer
 
 	var announcementTimer: Timer? = nil
 
@@ -128,34 +149,19 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		resetAnnouncementTimer()
 	}
 
-	func resetAnnouncementTimer() {
-		#if targetEnvironment(macCatalyst)
-		let message = "Starting from the top-left of the screen, move to each group of \(gameBrain.getDisplayNameForObject()) and count them, then if you'd like, activate to play the sound."
-		#else
-		let message = "Starting from the top-left of the screen, drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
-		#endif
-		let secondsToWait: TimeInterval = 15
-		announcementTimer?.invalidate()
-		announcementTimer = nil
-		announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true, block: { [self] timer in
-			guard presentedViewController == nil else { return }
-			timer.invalidate()
-			announcementTimer = nil
-			speakVoiceOverMessage(message)
-		})
-	}
-
 	func setChoices() {
 		let choices = gameBrain.getChoices()
 		choice1Button?.setTitle(choices[0], for: .normal)
-        choice1Button?.textSize = 50
+        choice1Button?.textSize = choiceButtonTextSize
 		choice2Button?.setTitle(choices[1], for: .normal)
-        choice2Button?.textSize = 50
+        choice2Button?.textSize = choiceButtonTextSize
 		choice3Button?.setTitle(choices[2], for: .normal)
-        choice3Button?.textSize = 50
+        choice3Button?.textSize = choiceButtonTextSize
 		choice4Button?.setTitle(choices[3], for: .normal)
-        choice4Button?.textSize = 50
+        choice4Button?.textSize = choiceButtonTextSize
 	}
+
+    // MARK: - @IBActions
 
 	@IBAction func answerSelected(_ sender: SAIAccessibleButton) {
 		guard let answer = sender.currentTitle else { return }
@@ -181,10 +187,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		// Get the new view controller using segue.destination.
+		// 1. Get the new view controller using segue.destination.
 		// Pass the selected object to the new view controller.
 		if let answerCheckViewController = segue.destination as? AnswerCheckViewController {
 			switch segue.identifier {
+                // 2. If segue is used to present the AnswerCheckViewController (sheet), set the messageText and imageName of the AnswerCheckViewController based on which segue is used to present it. The segue to use to present it depends on whether the chosen answer is correct, incorrect, or the 3rd incorrect one in a row.
 				case "Incorrect":
 					answerCheckViewController.messageText = "Incorrect! Try again!"
 					answerCheckViewController.imageName = "x"
@@ -196,9 +203,29 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 					answerCheckViewController.imageName = "checkmark"
 			}
 		} else if let timeUpViewController = segue.destination as? TimeUpViewController {
+            // 3. If segue is used to present the TimeUpViewController (navigation), set the messageText of the TimeUpViewController.
 			timeUpViewController.messageText = "Time's up! You answered \(gameBrain.correctAnswersInGame) of \(gameBrain.triesInGame) tries correct!"
 		}
 	}
+
+    // MARK: - Inactivity VoiceOver Announcement
+
+    func resetAnnouncementTimer() {
+        #if targetEnvironment(macCatalyst)
+        let message = "Starting from the top-left of the screen, move to each group of \(gameBrain.getDisplayNameForObject()) and count them, then if you'd like, activate to play the sound."
+        #else
+        let message = "Starting from the top-left of the screen, drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
+        #endif
+        let secondsToWait: TimeInterval = 15
+        announcementTimer?.invalidate()
+        announcementTimer = nil
+        announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true, block: { [self] timer in
+            guard presentedViewController == nil else { return }
+            timer.invalidate()
+            announcementTimer = nil
+            speakVoiceOverMessage(message)
+        })
+    }
 
 	func speakVoiceOverMessage(_ message: String) {
 		UIAccessibility.post(notification: .announcement, argument: message)
@@ -270,7 +297,7 @@ extension GameViewController {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let paddingSpace = sectionInsets.left * 2
+		let paddingSpace = objectInsets.left * 2
 		let availableWidth = view.frame.width - paddingSpace
 		let widthPerItem = availableWidth / 6.2
 		return CGSize(width: widthPerItem, height: widthPerItem)
