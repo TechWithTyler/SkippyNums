@@ -1,5 +1,5 @@
 //
-//  Object.swift
+//  CountableObject.swift
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 2/13/23.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-// MARK - Object Protocol
+// MARK - CountableObject Protocol
 
 // An object to count.
-protocol Object {
+protocol CountableObject {
 
     // The name of the object.
 	var name: String { get }
@@ -19,7 +19,7 @@ protocol Object {
     // The number of times this object appears in an image.
 	var quantity: Int { get }
 
-    // The attribution text for the image.
+    // The attribution text for the image, if any.
 	var attributionText: String? { get }
 
     // The filename of the sound that plays when the image is tapped/clicked.

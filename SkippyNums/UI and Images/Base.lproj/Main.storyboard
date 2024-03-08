@@ -627,7 +627,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose game length." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyd-6X-zFa">
-                                <rect key="frame" x="249" y="24" width="634" height="110"/>
+                                <rect key="frame" x="249" y="51" width="634" height="110"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
@@ -821,7 +821,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="pQa-gG-mWZ"/>
         <segue reference="MRR-36-b4x"/>
-        <segue reference="hXV-Hx-KXv"/>
+        <segue reference="BIv-E0-hxl"/>
         <segue reference="HN7-Uw-0DH"/>
     </inferredMetricsTieBreakers>
     <resources>

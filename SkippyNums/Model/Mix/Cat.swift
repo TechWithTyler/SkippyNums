@@ -1,24 +1,24 @@
 //
-//  Robot.swift
+//  Cat.swift
 //  SkippyNums
 //
-//  Created by Tyler Sheft on 12/11/23.
+//  Created by Tyler Sheft on 3/8/24.
 //  Copyright © 2023-2024 SheftApps. All rights reserved.
 //
 
 import Foundation
 
-struct Robot: CountableObject {
+struct Cat: CountableObject {
 
     var name: String {
-        return "\(quantity)robots"
+        return "\(quantity)cats"
     }
 
     var quantity: Int
 
     var attributionText: String? = nil
 
-    var soundFilename: String = "robot.caf"
+    var soundFilename: String = "meow.caf"
 
     var soundRate: Float = 1.5
 

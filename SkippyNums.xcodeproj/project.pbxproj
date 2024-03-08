@@ -36,7 +36,7 @@
 		8D8EC9BD299AD7B300043D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9BB299AD7B300043D39 /* Main.storyboard */; };
 		8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9BE299AD7B400043D39 /* Assets.xcassets */; };
 		8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D8EC9C0299AD7B400043D39 /* LaunchScreen.storyboard */; };
-		8D8EC9CB299ADD9400043D39 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9CA299ADD9400043D39 /* Object.swift */; };
+		8D8EC9CB299ADD9400043D39 /* CountableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EC9CA299ADD9400043D39 /* CountableObject.swift */; };
 		8DA632392A799C9D00A60458 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8DA632382A799C9D00A60458 /* PrivacyInfo.xcprivacy */; };
 		8DA6D96A299C2F4300ED533F /* GameBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA6D969299C2F4300ED533F /* GameBrain.swift */; };
 		8DA7D5562A7C45D2005AC588 /* LearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7D5552A7C45D2005AC588 /* LearnViewController.swift */; };
@@ -44,6 +44,9 @@
 		8DAFF7CD29E4A8E2006F1598 /* monkey.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DAFF7CB29E4A8E2006F1598 /* monkey.caf */; };
 		8DAFF7CE29E4A8E2006F1598 /* bird.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DAFF7CC29E4A8E2006F1598 /* bird.caf */; };
 		8DC42EC829B1429E0005413B /* SkippyNumsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC42EC729B1429E0005413B /* SkippyNumsTests.swift */; };
+		8DC7D98C2B9BCF9200DECADC /* meow.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DC7D98A2B9BCF9200DECADC /* meow.caf */; };
+		8DC7D98D2B9BCF9200DECADC /* bark.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DC7D98B2B9BCF9200DECADC /* bark.caf */; };
+		8DCB2D1A2B9BB4AD0034D1D9 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB2D192B9BB4AD0034D1D9 /* Cat.swift */; };
 		8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B429B92CF000A8C1FF /* moo.caf */; };
 		8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */; };
 		8DCC07B929BA8BE900A8C1FF /* carHorn.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B829BA8BE900A8C1FF /* carHorn.caf */; };
@@ -109,7 +112,7 @@
 		8D8EC9BE299AD7B400043D39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D8EC9C1299AD7B400043D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SkippyNums.entitlements; sourceTree = "<group>"; };
-		8D8EC9CA299ADD9400043D39 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		8D8EC9CA299ADD9400043D39 /* CountableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountableObject.swift; sourceTree = "<group>"; };
 		8DA632382A799C9D00A60458 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8DA6D969299C2F4300ED533F /* GameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBrain.swift; sourceTree = "<group>"; };
 		8DA7D5552A7C45D2005AC588 /* LearnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +121,9 @@
 		8DAFF7CC29E4A8E2006F1598 /* bird.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bird.caf; sourceTree = "<group>"; };
 		8DC42EC529B1429E0005413B /* SkippyNumsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkippyNumsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC42EC729B1429E0005413B /* SkippyNumsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkippyNumsTests.swift; sourceTree = "<group>"; };
+		8DC7D98A2B9BCF9200DECADC /* meow.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = meow.caf; sourceTree = "<group>"; };
+		8DC7D98B2B9BCF9200DECADC /* bark.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bark.caf; sourceTree = "<group>"; };
+		8DCB2D192B9BB4AD0034D1D9 /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
 		8DCC07B429B92CF000A8C1FF /* moo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = moo.caf; sourceTree = "<group>"; };
 		8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = elephantTrumpet.caf; sourceTree = "<group>"; };
 		8DCC07B829BA8BE900A8C1FF /* carHorn.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = carHorn.caf; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 				8D31D8672B27FBA4009F29EE /* Monkey.swift */,
 				8D31D8692B27FBC9009F29EE /* Robot.swift */,
 				8D31D86B2B27FBD8009F29EE /* Bird.swift */,
+				8DCB2D192B9BB4AD0034D1D9 /* Cat.swift */,
 			);
 			path = Mix;
 			sourceTree = "<group>";
@@ -258,7 +265,7 @@
 			children = (
 				8DA6D969299C2F4300ED533F /* GameBrain.swift */,
 				8D454C3D2A799A6300639479 /* SettingsData.swift */,
-				8D8EC9CA299ADD9400043D39 /* Object.swift */,
+				8D8EC9CA299ADD9400043D39 /* CountableObject.swift */,
 				8D31D8592B27FACD009F29EE /* Twos */,
 				8D31D85A2B27FAD8009F29EE /* Fives */,
 				8D31D85B2B27FAE4009F29EE /* Tens */,
@@ -293,6 +300,8 @@
 		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				8DC7D98B2B9BCF9200DECADC /* bark.caf */,
+				8DC7D98A2B9BCF9200DECADC /* meow.caf */,
 				8D4FB9892A0445BB00F66392 /* timeUp.caf */,
 				8D7F2B202A00346600A7322B /* fiveChord.caf */,
 				8D7F2B1F2A00346600A7322B /* twoNote.caf */,
@@ -402,7 +411,9 @@
 				8D8EC9C2299AD7B400043D39 /* LaunchScreen.storyboard in Resources */,
 				8DAFF7CE29E4A8E2006F1598 /* bird.caf in Resources */,
 				8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */,
+				8DC7D98D2B9BCF9200DECADC /* bark.caf in Resources */,
 				8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */,
+				8DC7D98C2B9BCF9200DECADC /* meow.caf in Resources */,
 				8DCC07B929BA8BE900A8C1FF /* carHorn.caf in Resources */,
 				8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */,
 				8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */,
@@ -443,12 +454,13 @@
 				8D8EC9B6299AD7B300043D39 /* AppDelegate.swift in Sources */,
 				8D31D86C2B27FBD8009F29EE /* Bird.swift in Sources */,
 				8D31D86A2B27FBC9009F29EE /* Robot.swift in Sources */,
-				8D8EC9CB299ADD9400043D39 /* Object.swift in Sources */,
+				8D8EC9CB299ADD9400043D39 /* CountableObject.swift in Sources */,
 				8D8EC9B8299AD7B300043D39 /* SceneDelegate.swift in Sources */,
 				8D0E1EED2A03282000B3FA70 /* TimeUpViewController.swift in Sources */,
 				8D31D8642B27FB70009F29EE /* Airplane.swift in Sources */,
 				8D31D8622B27FB44009F29EE /* Car.swift in Sources */,
 				8D31D85E2B27FB15009F29EE /* Cow.swift in Sources */,
+				8DCB2D1A2B9BB4AD0034D1D9 /* Cat.swift in Sources */,
 				8DA7D5582A818098005AC588 /* ChooseAnimalViewController.swift in Sources */,
 				8D04D70C29DCB71A009670F2 /* NewGameViewController.swift in Sources */,
 				8D31D8682B27FBA4009F29EE /* Monkey.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Monkey: Object {
+struct Monkey: CountableObject {
 
     var name: String {
         return "\(quantity)monkeys"

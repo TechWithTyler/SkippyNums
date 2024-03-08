@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Car: Object {
+struct Car: CountableObject {
 
     var name: String = "cars"
 

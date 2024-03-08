@@ -32,7 +32,7 @@ class GameBrain {
 	// MARK: - Properties - Objects to Count
 
     // The set of objects to count.
-	static var objects: [any Object] = [
+	static var objectsToCount: [any CountableObject] = [
 		// Comment out objects if they're not ready to commit or ship.
         // For objects only available in the twos, fives, or tens game, the quantity isn't specified when initializing the object.
 		// Twos
@@ -44,13 +44,15 @@ class GameBrain {
         // Tens
         // Bear(),
         // Mix
-        // Objects that are available in any game are initialized with a quantity, which determines which image to use.
+        // Objects that are available in more than one game are initialized with a quantity, which determines which image to use.
         Bird(quantity: 2),
         Robot(quantity: 2),
         Monkey(quantity: 2),
+        Cat(quantity: 2),
         Bird(quantity: 5),
         Robot(quantity: 5),
         Monkey(quantity: 5),
+        Cat(quantity: 5),
         Bird(quantity: 10),
         Monkey(quantity: 10)
 	]
@@ -73,7 +75,7 @@ class GameBrain {
 	// MARK: - Properties - Current Object
 
     // The object currently being counted.
-    var currentObject: any Object = GameBrain.objects.randomElement()!
+    var currentObject: any CountableObject = GameBrain.objectsToCount.randomElement()!
 
 	// MARK: - Properties - Integers
 
@@ -102,7 +104,7 @@ class GameBrain {
     // The game timer.
 	var gameTimer: Timer? = nil
 
-	// MARK: - Properties - Lean Mode Numbers
+	// MARK: - Properties - Learn Mode Numbers
 
     // An array of numbers which learn mode randomly picks from when showing example questions.
 	let learnModeNumbers: [Int] = [2, 5, 10]
@@ -176,9 +178,9 @@ class GameBrain {
 			let previousObjectName = currentObject.name
 			let previousNumberOfImages = numberOfImagesToShow
 			if countingBy == nil {
-				currentObject = GameBrain.objects.randomElement()!
+				currentObject = GameBrain.objectsToCount.randomElement()!
 			} else {
-				currentObject = GameBrain.objects.filter({$0.quantity == countingBy}).randomElement()!
+				currentObject = GameBrain.objectsToCount.filter({$0.quantity == countingBy}).randomElement()!
 			}
 			if currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages {
 				// If the next question is identical to the previous one, try again until a different question is shown.
