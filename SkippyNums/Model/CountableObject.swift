@@ -13,14 +13,15 @@ import Foundation
 // An object to count.
 protocol CountableObject {
 
+    // MARK: - Image/Accessibility
+
     // The name of the object.
 	var name: String { get }
 
     // The number of times this object appears in an image.
 	var quantity: Int { get }
 
-    // The attribution text for the image, if any.
-	var attributionText: String? { get }
+    // MARK: - Sound
 
     // The filename of the sound that plays when the image is tapped/clicked.
 	var soundFilename: String { get }

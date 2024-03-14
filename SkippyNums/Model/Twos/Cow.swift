@@ -14,8 +14,6 @@ struct Cow: CountableObject {
 
     var quantity: Int = 2
 
-    var attributionText: String? = nil
-
     var soundFilename: String = "moo.caf"
 
     var soundRate: Float = 2

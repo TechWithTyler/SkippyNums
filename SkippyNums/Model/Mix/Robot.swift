@@ -16,8 +16,6 @@ struct Robot: CountableObject {
 
     var quantity: Int
 
-    var attributionText: String? = nil
-
     var soundFilename: String = "robot.caf"
 
     var soundRate: Float = 1.5

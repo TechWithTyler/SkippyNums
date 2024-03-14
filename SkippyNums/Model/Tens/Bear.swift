@@ -14,10 +14,8 @@ struct Bear: CountableObject {
 
     var quantity: Int = 10
 
-    var attributionText: String? = nil
-
     var soundFilename: String = "bear.caf"
 
-    var soundRate: Float = 1.5
+    var soundRate: Float = 2
 
 }

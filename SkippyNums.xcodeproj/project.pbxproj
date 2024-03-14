@@ -46,6 +46,7 @@
 		8DC42EC829B1429E0005413B /* SkippyNumsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC42EC729B1429E0005413B /* SkippyNumsTests.swift */; };
 		8DC7D98C2B9BCF9200DECADC /* meow.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DC7D98A2B9BCF9200DECADC /* meow.caf */; };
 		8DC7D98D2B9BCF9200DECADC /* bark.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DC7D98B2B9BCF9200DECADC /* bark.caf */; };
+		8DC7D98F2BA0F35B00DECADC /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7D98E2BA0F35B00DECADC /* Dog.swift */; };
 		8DCB2D1A2B9BB4AD0034D1D9 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB2D192B9BB4AD0034D1D9 /* Cat.swift */; };
 		8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B429B92CF000A8C1FF /* moo.caf */; };
 		8DCC07B729BA849D00A8C1FF /* elephantTrumpet.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */; };
@@ -123,6 +124,7 @@
 		8DC42EC729B1429E0005413B /* SkippyNumsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkippyNumsTests.swift; sourceTree = "<group>"; };
 		8DC7D98A2B9BCF9200DECADC /* meow.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = meow.caf; sourceTree = "<group>"; };
 		8DC7D98B2B9BCF9200DECADC /* bark.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bark.caf; sourceTree = "<group>"; };
+		8DC7D98E2BA0F35B00DECADC /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
 		8DCB2D192B9BB4AD0034D1D9 /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
 		8DCC07B429B92CF000A8C1FF /* moo.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = moo.caf; sourceTree = "<group>"; };
 		8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = elephantTrumpet.caf; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				8D31D8692B27FBC9009F29EE /* Robot.swift */,
 				8D31D86B2B27FBD8009F29EE /* Bird.swift */,
 				8DCB2D192B9BB4AD0034D1D9 /* Cat.swift */,
+				8DC7D98E2BA0F35B00DECADC /* Dog.swift */,
 			);
 			path = Mix;
 			sourceTree = "<group>";
@@ -297,25 +300,73 @@
 			path = SkippyNumsTests;
 			sourceTree = "<group>";
 		};
-		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
+		8DC7D9902BA0F3B200DECADC /* Mix */ = {
 			isa = PBXGroup;
 			children = (
 				8DC7D98B2B9BCF9200DECADC /* bark.caf */,
 				8DC7D98A2B9BCF9200DECADC /* meow.caf */,
-				8D4FB9892A0445BB00F66392 /* timeUp.caf */,
-				8D7F2B202A00346600A7322B /* fiveChord.caf */,
-				8D7F2B1F2A00346600A7322B /* twoNote.caf */,
-				8DCD11C829F99B9F0046D6B3 /* tenChord.caf */,
 				8DAFF7CC29E4A8E2006F1598 /* bird.caf */,
 				8DAFF7CB29E4A8E2006F1598 /* monkey.caf */,
-				8DD741CF29CA404900BE0E46 /* airplane.caf */,
-				8DD741CE29CA404800BE0E46 /* bear.caf */,
 				8DD741D029CA404900BE0E46 /* robot.caf */,
-				8D0BBD1829BFB81B00AE7A62 /* correct.caf */,
-				8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */,
+			);
+			path = Mix;
+			sourceTree = "<group>";
+		};
+		8DC7D9912BA0F3CC00DECADC /* Twos */ = {
+			isa = PBXGroup;
+			children = (
 				8DCC07B829BA8BE900A8C1FF /* carHorn.caf */,
 				8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */,
 				8DCC07B429B92CF000A8C1FF /* moo.caf */,
+			);
+			path = Twos;
+			sourceTree = "<group>";
+		};
+		8DC7D9922BA0F3D800DECADC /* Fives */ = {
+			isa = PBXGroup;
+			children = (
+				8DD741CF29CA404900BE0E46 /* airplane.caf */,
+			);
+			path = Fives;
+			sourceTree = "<group>";
+		};
+		8DC7D9932BA0F3E000DECADC /* Tens */ = {
+			isa = PBXGroup;
+			children = (
+				8DD741CE29CA404800BE0E46 /* bear.caf */,
+			);
+			path = Tens;
+			sourceTree = "<group>";
+		};
+		8DC7D9942BA0F3FD00DECADC /* Earcons */ = {
+			isa = PBXGroup;
+			children = (
+				8D7F2B202A00346600A7322B /* fiveChord.caf */,
+				8D7F2B1F2A00346600A7322B /* twoNote.caf */,
+				8DCD11C829F99B9F0046D6B3 /* tenChord.caf */,
+			);
+			path = Earcons;
+			sourceTree = "<group>";
+		};
+		8DC7D9952BA0F40900DECADC /* Game Progress */ = {
+			isa = PBXGroup;
+			children = (
+				8D4FB9892A0445BB00F66392 /* timeUp.caf */,
+				8D0BBD1829BFB81B00AE7A62 /* correct.caf */,
+				8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */,
+			);
+			path = "Game Progress";
+			sourceTree = "<group>";
+		};
+		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8DC7D9912BA0F3CC00DECADC /* Twos */,
+				8DC7D9922BA0F3D800DECADC /* Fives */,
+				8DC7D9932BA0F3E000DECADC /* Tens */,
+				8DC7D9902BA0F3B200DECADC /* Mix */,
+				8DC7D9952BA0F40900DECADC /* Game Progress */,
+				8DC7D9942BA0F3FD00DECADC /* Earcons */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -458,6 +509,7 @@
 				8D8EC9B8299AD7B300043D39 /* SceneDelegate.swift in Sources */,
 				8D0E1EED2A03282000B3FA70 /* TimeUpViewController.swift in Sources */,
 				8D31D8642B27FB70009F29EE /* Airplane.swift in Sources */,
+				8DC7D98F2BA0F35B00DECADC /* Dog.swift in Sources */,
 				8D31D8622B27FB44009F29EE /* Car.swift in Sources */,
 				8D31D85E2B27FB15009F29EE /* Cow.swift in Sources */,
 				8DCB2D1A2B9BB4AD0034D1D9 /* Cat.swift in Sources */,

@@ -16,8 +16,6 @@ struct Cat: CountableObject {
 
     var quantity: Int
 
-    var attributionText: String? = nil
-
     var soundFilename: String = "meow.caf"
 
     var soundRate: Float = 1.5

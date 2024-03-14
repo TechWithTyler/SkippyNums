@@ -14,8 +14,6 @@ struct Airplane: CountableObject {
 
     var quantity: Int = 5
 
-    var attributionText: String? = nil
-
     var soundFilename: String = "airplane.caf"
 
     var soundRate: Float = 5

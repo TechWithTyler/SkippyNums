@@ -14,13 +14,16 @@ class GameBrain {
 
 	// MARK: - Game Type Enum
 
-    // Types of gameplay
+    // Types of gameplay.
 	enum GameType {
 		
+        // Player is asked to choose the correct answer, can be 1min, 2min, or untimed.
 		case play
 
+        // Player is asked to choose the correct answer, untimed, announces number in the sequence when tapped/clicked/VoiceOver focused.
 		case practice
 
+        // Player is given all information.
 		case learn
 
 	}
@@ -34,27 +37,31 @@ class GameBrain {
     // The set of objects to count.
 	static var objectsToCount: [any CountableObject] = [
 		// Comment out objects if they're not ready to commit or ship.
-        // For objects only available in the twos, fives, or tens game, the quantity isn't specified when initializing the object.
-		// Twos
-		Cow(),
-		Elephant(),
-		Car(),
+        // For objects only available in the twos, fives, or tens game, the quantity isn't specified when initializing the object. Objects that are available in more than one game are initialized with a quantity, which determines which image to use.
+        // Twos
+        Cow(), // Introduced in version 2023.11
+        Elephant(), // Introduced in version 2023.11
+        Car(), // Introduced in version 2023.11
         // Fives
-        Airplane(),
+        Airplane(), // Introduced in version 2023.11
         // Tens
-        // Bear(),
-        // Mix
-        // Objects that are available in more than one game are initialized with a quantity, which determines which image to use.
-        Bird(quantity: 2),
-        Robot(quantity: 2),
-        Monkey(quantity: 2),
-        Cat(quantity: 2),
-        Bird(quantity: 5),
-        Robot(quantity: 5),
-        Monkey(quantity: 5),
-        Cat(quantity: 5),
-        Bird(quantity: 10),
-        Monkey(quantity: 10)
+        Bear(), // Introduced in version 2024.3
+        // Mix (twos/fives/tens)
+        Bird(quantity: 2), // Introduced in version 2023.11
+        Monkey(quantity: 2), // Introduced in version 2023.11
+        Cat(quantity: 2), // Introduced in version 2024.3
+        Dog(quantity: 2), // Introduced in version 2024.3
+        Bird(quantity: 5), // Introduced in version 2023.11
+        Monkey(quantity: 5), // Introduced in version 2023.11
+        Cat(quantity: 5), // Introduced in version 2024.3
+        Dog(quantity: 5), // Introduced in version 2024.3
+        Bird(quantity: 10), // Introduced in version 2023.11
+        Monkey(quantity: 10), // Introduced in version 2023.11
+        Cat(quantity: 10), // Introduced in version 2024.3
+        Dog(quantity: 10), // Introduced in version 2024.3
+        // Mix (twos and fives)
+        Robot(quantity: 2), // Introduced in version 2023.11
+        Robot(quantity: 5) // Introduced in version 2023.11
 	]
 
 	// MARK: - Properties - Speech Synthesizer
@@ -74,12 +81,12 @@ class GameBrain {
 
 	// MARK: - Properties - Current Object
 
-    // The object currently being counted.
+    // The current question's object (the object currently being counted).
     var currentObject: any CountableObject = GameBrain.objectsToCount.randomElement()!
 
 	// MARK: - Properties - Integers
 
-    // The number of images to show.
+    // The number of images to show (any number between 2 and 10). Each image contains 2, 5, or 10 (depending on the quantity) instances of the object being counted.
 	var numberOfImagesToShow: Int = 2
 
     // The number of correct answers in the current game.
@@ -91,7 +98,7 @@ class GameBrain {
     // The number of incorrect answers for the current question.
 	var numberOfIncorrectAnswers = 0
 	
-    // The number the player is counting by, or nil if playing the Mix game.
+    // The number the player is counting by, or nil if playing the Mix game. This determines which images to show.
 	var countingBy: Int?
 
 	// MARK: - Properties - Time Intervals

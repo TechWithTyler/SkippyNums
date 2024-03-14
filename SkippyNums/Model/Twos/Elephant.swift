@@ -14,8 +14,6 @@ struct Elephant: CountableObject {
 
     var quantity: Int = 2
 
-    var attributionText: String? = nil
-
     var soundFilename: String = "elephantTrumpet.caf"
 
     var soundRate: Float = 2.5

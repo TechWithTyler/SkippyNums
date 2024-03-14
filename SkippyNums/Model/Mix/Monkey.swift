@@ -16,8 +16,6 @@ struct Monkey: CountableObject {
 
     var quantity: Int
 
-    var attributionText: String? = nil
-
     var soundFilename: String = "monkey.caf"
 
     var soundRate: Float = 1.5
