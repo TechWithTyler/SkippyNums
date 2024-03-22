@@ -682,7 +682,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SkippyNums/Supporting Files/SkippyNums.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 200;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SkippyNums/Supporting Files/Info.plist";
@@ -699,7 +699,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.3;
+				MARKETING_VERSION = 2024.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tylersheft.SkippyNums;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -719,7 +719,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SkippyNums/Supporting Files/SkippyNums.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 200;
+				CURRENT_PROJECT_VERSION = 300;
 				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SkippyNums/Supporting Files/Info.plist";
@@ -736,7 +736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.3;
+				MARKETING_VERSION = 2024.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tylersheft.SkippyNums;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
