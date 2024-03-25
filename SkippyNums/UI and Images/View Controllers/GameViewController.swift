@@ -152,12 +152,16 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func setChoices() {
 		let choices = gameBrain.getChoices()
 		choice1Button?.setTitle(choices[0], for: .normal)
+        choice1Button?.usesMonospacedFont = true
         choice1Button?.textSize = choiceButtonTextSize
 		choice2Button?.setTitle(choices[1], for: .normal)
+        choice2Button?.usesMonospacedFont = true
         choice2Button?.textSize = choiceButtonTextSize
 		choice3Button?.setTitle(choices[2], for: .normal)
+        choice3Button?.usesMonospacedFont = true
         choice3Button?.textSize = choiceButtonTextSize
 		choice4Button?.setTitle(choices[3], for: .normal)
+        choice4Button?.usesMonospacedFont = true
         choice4Button?.textSize = choiceButtonTextSize
 	}
 
