@@ -117,7 +117,7 @@
                     <navigationItem key="navigationItem" id="Z0K-R3-RDj"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="rowsPicker" destination="QVJ-2p-eEp" id="6oB-Ok-IQu"/>
+                        <outlet property="maxGroupsPicker" destination="QVJ-2p-eEp" id="skN-9K-QfJ"/>
                         <segue destination="MBZ-me-mQQ" kind="show" identifier="ChooseGame" id="uBC-uY-H5s"/>
                     </connections>
                 </viewController>

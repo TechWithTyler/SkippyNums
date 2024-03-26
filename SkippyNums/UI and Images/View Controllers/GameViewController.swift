@@ -61,7 +61,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 	var announcementTimer: Timer? = nil
 
-	// MARK: - Setup
+	// MARK: - View Setup/Update
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -198,13 +198,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 // 2. If segue is used to present the AnswerCheckViewController (sheet), set the messageText and imageName of the AnswerCheckViewController based on which segue is used to present it. The segue to use to present it depends on whether the chosen answer is correct, incorrect, or the 3rd incorrect one in a row.
 				case "Incorrect":
 					answerCheckViewController.messageText = "Incorrect! Try again!"
-					answerCheckViewController.imageName = "x"
+					answerCheckViewController.baseImageName = "x"
 				case "TooManyIncorrect":
 					answerCheckViewController.messageText = "Incorrect! The correct answer is \(gameBrain.getCorrectAnswer())."
-					answerCheckViewController.imageName = "x"
+					answerCheckViewController.baseImageName = "x"
 				default:
 					answerCheckViewController.messageText = "Correct!"
-					answerCheckViewController.imageName = "checkmark"
+					answerCheckViewController.baseImageName = "checkmark"
 			}
 		} else if let timeUpViewController = segue.destination as? TimeUpViewController {
             // 3. If segue is used to present the TimeUpViewController (navigation), set the messageText of the TimeUpViewController.
@@ -223,12 +223,12 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         let secondsToWait: TimeInterval = 15
         announcementTimer?.invalidate()
         announcementTimer = nil
-        announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true, block: { [self] timer in
+        announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true) { [self] timer in
             guard presentedViewController == nil else { return }
             timer.invalidate()
             announcementTimer = nil
             speakVoiceOverMessage(message)
-        })
+        }
     }
 
 	func speakVoiceOverMessage(_ message: String) {
@@ -239,7 +239,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 extension GameViewController {
 
-	// MARK: - Collection View Delegate and Data Source
+	// MARK: - Collection View - Delegate and Data Source
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		let number = gameBrain.numberOfImagesToShow
@@ -248,8 +248,8 @@ extension GameViewController {
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCell", for: indexPath)
-		// Create and configure the image view
-			let imageView = ObjectImageView(frame: cell.contentView.bounds)
+		// 1. Create and configure the image view.
+        let imageView = ObjectImageView(frame: cell.contentView.bounds)
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
 		tapGesture.numberOfTouchesRequired = 1
 		tapGesture.numberOfTapsRequired = 1
@@ -260,7 +260,7 @@ extension GameViewController {
 			imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 			imageView.center = cell.contentView.center
 		imageView.addGestureRecognizer(tapGesture)
-		// Configure accessibility
+		// 2. Configure accessibility.
 		imageView.tag = indexPath.item + 1
 		imageView.isAccessibilityElement = true
 		imageView.accessibilityTraits = [.startsMediaSession, .image]
@@ -280,24 +280,15 @@ extension GameViewController {
 			imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
 		}
 		cell.focusEffect = nil
-		// Add the image view to the cell's content view
+		// 3. Add the image view to the cell's content view.
 		cell.contentView.subviews.first?.removeFromSuperview()
 			cell.contentView.addSubview(imageView)
 		return cell
 	}
 
-	@objc func imageTapped(_ sender: UIGestureRecognizer) {
-		if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {
-			guard let image = sender.view as? ObjectImageView else { return }
-			image.highlightBackground()
-			gameBrain.speechSynthesizer.stopSpeaking(at: .immediate)
-			gameBrain.speechSynthesizer.speak(AVSpeechUtterance(string: "\(image.tag * gameBrain.currentObject.quantity)"))
-		}
-		gameBrain.playSoundForObject()
-	}
-
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		return 30
+        let sectionSpacing: CGFloat = 30
+		return sectionSpacing
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -307,5 +298,19 @@ extension GameViewController {
 		return CGSize(width: widthPerItem, height: widthPerItem)
 	}
 
+    // MARK: - Collection View - Image Activation Handler
+
+    @objc func imageTapped(_ sender: UIGestureRecognizer) {
+        // 1. If in practice mode and VoiceOver is off, use a dedicated speech synthesizer/highlight effect.
+        if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {
+            guard let image = sender.view as? ObjectImageView else { return }
+            let skipCountNumber = image.tag * gameBrain.currentObject.quantity
+            image.highlightBackground()
+            gameBrain.speechSynthesizer.stopSpeaking(at: .immediate)
+            gameBrain.speechSynthesizer.speak(AVSpeechUtterance(string: String(skipCountNumber)))
+        }
+        // 2. Play the object's sound (e.g., "moo, moo" for a group of 2 cows or "woof, woof, woof, woof, woof" for a group of 5 dogs).
+        gameBrain.playSoundForObject()
+    }
 
 }

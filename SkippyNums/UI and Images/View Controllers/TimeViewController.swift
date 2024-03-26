@@ -11,9 +11,15 @@ import SheftAppsStylishUI
 
 class TimeViewController: UIViewController {
 
+    // MARK: - @IBOutlets
+
 	@IBOutlet weak var untimedGameButton: SAIAccessibleButton?
 
+    // MARK: - Properties - Objects
+
 	var gameBrain = GameBrain.shared
+
+    // MARK: - View Setup/Update
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -56,6 +62,8 @@ class TimeViewController: UIViewController {
 		}
 	}
 
+    // MARK: - @IBActions - Game Time Selection
+
 	@IBAction func oneMinuteGame(_ sender: Any) {
 		performSegue(withIdentifier: "TimedGame1", sender: sender)
 	}
@@ -68,25 +76,27 @@ class TimeViewController: UIViewController {
 		performSegue(withIdentifier: "UntimedGame", sender: sender)
 	}
 
+    // MARK: - Navigation - Back @IBAction
+
 	@IBAction func back(_ sender: SAIAccessibleButton) {
 		navigationController?.popViewController(animated: true)
 	}
 
-
-	// MARK: - Navigation
+	// MARK: - Navigation - Storyboard Segue Preparation
 
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		// Get the new view controller using segue.destination.
 		// Pass the selected object to the new view controller.
-		switch segue.identifier {
-			case "TimedGame1":
-				gameBrain.gameTimeLeft = 60
-			case "TimedGame2":
-				gameBrain.gameTimeLeft = 120
-			default:
-				gameBrain.gameTimeLeft = nil
-		}
+        if let segueIdentifier = segue.identifier {
+            // Set gameBrain.gameTimeLeft to the segue identifier's trailing number times 60, or nil if selecting "Untimed".
+            if segueIdentifier.hasPrefix("Untimed") {
+                gameBrain.countingBy = nil
+            } else {
+                let gameTimeLeftFromSegueIdentifier = (TimeInterval(String(segueIdentifier.filter( { $0.isNumber } ))))! * 60
+                gameBrain.gameTimeLeft = gameTimeLeftFromSegueIdentifier
+            }
+        }
 	}
 
 }

@@ -19,12 +19,12 @@ class AnswerCheckViewController: UIViewController {
 
 	var messageText: String?
 
-	var imageName: String?
+	var baseImageName: String?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		guard let messageText = messageText, let imageName = imageName else { return }
+		guard let messageText = messageText, let imageName = baseImageName else { return }
         messageLabel?.text = messageText
         checkXImageView?.image = UIImage(systemName: "\(imageName).circle.fill")
         checkXImageView?.tintColor = imageName == "x" ? .systemRed : .systemGreen

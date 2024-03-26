@@ -10,13 +10,24 @@ import UIKit
 
 class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-	@IBOutlet weak var rowsPicker: UIPickerView?
+    // MARK: - @IBOutlets
 
+	@IBOutlet weak var maxGroupsPicker: UIPickerView?
+
+    // MARK: - Properties - Objects
+
+    // Handles gameplay.
 	var gameBrain = GameBrain.shared
 
-	var rowsOptions = ["5", "10"]
+    // Stores settings for the game.
+    var settingsData = SettingsData()
 
-	var settingsData = SettingsData()
+    // MARK: - Properties - Arrays
+
+    // The options in the "maximum number of groups" picker.
+    var maxGroupsOptions = [5, 10]
+
+    // MARK: - View Setup/Update
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -52,6 +63,8 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 		}
 	}
 
+    // MARK: - @IBActions
+
 	@IBAction func playSelected(_ sender: Any) {
 		gameBrain.gameType = .play
 		performSegue(withIdentifier: "ChooseGame", sender: sender)
@@ -67,27 +80,21 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 		performSegue(withIdentifier: "ChooseGame", sender: sender)
 	}
 
-	// MARK: - Navigation
-
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		// Get the new view controller using segue.destination.
-		// Pass the selected object to the new view controller.
-	}
-
 }
 
 extension WelcomeViewController {
 
-	// MARK: - Rows Picker
+	// MARK: - Max Groups Picker - Configuration
 
 	func configureRowsPicker() {
-        rowsPicker?.isAccessibilityElement = true
-		rowsPicker?.accessibilityLabel = "Maximum number of groups"
-		rowsPicker?.delegate = self
-		rowsPicker?.dataSource = self
-		rowsPicker?.selectRow(settingsData.tenFrame ? 1 : 0, inComponent: 0, animated: true)
+        maxGroupsPicker?.isAccessibilityElement = true
+		maxGroupsPicker?.accessibilityLabel = "Maximum number of groups"
+		maxGroupsPicker?.delegate = self
+		maxGroupsPicker?.dataSource = self
+		maxGroupsPicker?.selectRow(settingsData.tenFrame ? 1 : 0, inComponent: 0, animated: true)
 	}
+
+    // MARK: - Max Groups Picker - Delegate and Data Source
 
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {
 		return 1
@@ -108,7 +115,8 @@ extension WelcomeViewController {
 			pickerLabel?.font = UIFont(name: "Helvetica", size: 30)
 			pickerLabel?.textAlignment = .center
 		}
-		pickerLabel?.text = rowsOptions[row]
+        let optionTitle = String(maxGroupsOptions[row])
+		pickerLabel?.text = optionTitle
 		return pickerLabel!
 	}
 

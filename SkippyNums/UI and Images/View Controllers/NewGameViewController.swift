@@ -10,8 +10,12 @@ import UIKit
 import SheftAppsStylishUI
 
 class NewGameViewController: UIViewController {
-	
+
+    // MARK: - Properties - Objects
+
 	var gameBrain = GameBrain.shared
+
+    // MARK: - View Setup/Update
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +50,10 @@ class NewGameViewController: UIViewController {
 			gradientLayer.frame = view.bounds
 		}
 	}
+
+    // MARK: - @IBActions - Quantity Selection
+
+    // For these @IBActions, the segue to use depends on the game type (play/practice/learn) selected on the main menu.
 
 	@IBAction func twosSelected(_ sender: Any) {
 		if gameBrain.gameType == .play {
@@ -87,6 +95,8 @@ class NewGameViewController: UIViewController {
 		}
 	}
 
+    // MARK: - Navigation - Back @IBAction
+
 	@IBAction func back(_ sender: SAIAccessibleButton) {
 		gameBrain.countingBy = nil
 		gameBrain.triesInGame = 0
@@ -95,22 +105,21 @@ class NewGameViewController: UIViewController {
 		navigationController?.popViewController(animated: true)
 	}
 
-    // MARK: - Navigation
+    // MARK: - Navigation - Storyboard Segue Preparation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-		switch segue.identifier {
-			case "NewGame2", "Learn2", "Practice2":
-				gameBrain.countingBy = 2
-			case "NewGame5", "Learn5", "Practice5":
-				gameBrain.countingBy = 5
-			case "NewGame10", "Learn10", "Practice10":
-				gameBrain.countingBy = 10
-			default:
-				gameBrain.countingBy = nil
-		}
+        if let segueIdentifier = segue.identifier {
+            // Set gameBrain.countingBy to the segue identifier's trailing number, or nil if not provided (i.e., the suffix is "Mix" instead of a number).
+            if segueIdentifier.hasSuffix("Mix") {
+                gameBrain.countingBy = nil
+            } else {
+                let countingByFromSegueIdentifier = Int(String(segueIdentifier.filter( { $0.isNumber } )))
+                gameBrain.countingBy = countingByFromSegueIdentifier
+            }
+        }
     }
 
 }
