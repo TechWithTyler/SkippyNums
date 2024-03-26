@@ -273,7 +273,7 @@ extension GameViewController {
 		let moveGesture = "Flick"
 		#endif
 		if indexPath.item == 0 {
-			imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of objects."
+            imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(gameBrain.getDisplayNameForObject())."
 		} else if indexPath.item == 4 && gameBrain.numberOfImagesToShow > 5 {
 			imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
 		} else if indexPath.item == gameBrain.numberOfImagesToShow - 1 {
