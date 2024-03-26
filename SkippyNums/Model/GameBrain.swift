@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-// This is the main model object of this game.
+// This is the main model object (i.e., the brain) of this game.
 class GameBrain {
 
 	// MARK: - Game Type Enum
@@ -23,13 +23,14 @@ class GameBrain {
         // Player is asked to choose the correct answer, untimed, announces number in the sequence when tapped/clicked/VoiceOver focused.
 		case practice
 
-        // Player is given all information.
+        // Player is given all information to learn how to skip-count.
 		case learn
 
 	}
 
 	// MARK: - Properties - Shared GameBrain
 
+    // A shared instance of GameBrain that can be used by any view controller.
 	static var shared: GameBrain = GameBrain()
 
 	// MARK: - Properties - Objects to Count
@@ -66,7 +67,7 @@ class GameBrain {
 
 	// MARK: - Properties - Speech Synthesizer
 
-    // The speech synthesizer which announces an object's quantity when tapping/clicking it in Pratice mode with VoiceOver off.
+    // The speech synthesizer which announces an object's quantity when tapping/clicking it in Practice mode with VoiceOver off.
 	var speechSynthesizer = AVSpeechSynthesizer()
 
 	// MARK: - Properties - Settings Data
@@ -76,7 +77,7 @@ class GameBrain {
 
 	// MARK: - Properties - Game Type
 
-    // The type of game (play, practice, or learn).
+    // The type of game (play, practice, or learn), or nil if on the main menu.
 	var gameType: GameType? = nil
 
 	// MARK: - Properties - Current Object
@@ -103,7 +104,7 @@ class GameBrain {
 
 	// MARK: - Properties - Time Intervals
 
-    // The number of seconds left in the current game, or nil if playing an untimed or practice game.
+    // The number of seconds left in the current game, or nil if playing an untimed or practice game or in learn mode.
 	var gameTimeLeft: TimeInterval? = nil
 
 	// MARK: - Properties - Game Timer
@@ -123,7 +124,7 @@ class GameBrain {
 
 	// MARK: - Properties - Booleans
 
-    // Whether the player is starting a new game or new round in the current game when the timer goes off.
+    // Whether the player is starting a new game (true) or new round in the current game (false) when the timer goes off.
 	var isNewRoundInCurrentGame: Bool = false
 
     // Whether the player got too many incorrect answers in a row.
@@ -376,16 +377,21 @@ class GameBrain {
 
     // This method winds up the game timer, calling the timer fire handler every second, and calling the timer end handler when the timer ends.
 	func setupGameTimer(_ timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
+        // 1. If gameTimeLeft is nil, call the timer fire handler with a nil value and don't start the timer.
 		guard gameTimeLeft != nil else {
 			timerFireHandler(nil)
 			return }
+        // 2. If gameTimeLeft is specified, call the timer fire handler with the initial value and start the gameTimer.
 		timerFireHandler(gameTimeLeft)
 		gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] timer in
+            // 3. Decrease gameTimeLeft by 1 every second.
 			gameTimeLeft! -= 1
+            // 4. If gameTimeLeft is (or falls below) 0 seconds, reset the gameTimer and call the timer end handler.
 			if gameTimeLeft! <= 0 {
 				resetGameTimer()
 				timerEndHandler()
 			} else {
+                // 5. Otherwise, call the timer fire handler with the new value.
 				timerFireHandler(gameTimeLeft)
 			}
 		})
@@ -396,22 +402,28 @@ class GameBrain {
 		gameTimer?.invalidate()
 	}
 
-    // This method stops the game timer.
+    // This method stops the game timer and resets the properties back to default.
 	func resetGameTimer() {
+        // 1. Stop the gameTimer.
 		gameTimer?.invalidate()
 		gameTimer = nil
+        // 2. Reset gameTimeLeft to nil.
 		gameTimeLeft = nil
 	}
 
 	// MARK: - Reset Game
 
-    // This method stops all audio, stops the game timer, and resets the properties back to default.
+    // This method stops all audio, stops the game timer, and resets the properties back to default. If choosing to play another round in the current game, stats and the game type aren't reset.
 	func resetGame() {
+        // 1. Stop all sounds and non-VoiceOver speech.
 		speechSynthesizer.stopSpeaking(at: .immediate)
         soundPlayer?.stop()
+        // 2. Reset the gameTimer.
         resetGameTimer()
+        // 3. Reset the game stats to default.
         correctAnswersInGame = 0
         triesInGame = 0
+        // 4. Reset the gameplay properties to nil. gameTimeLeft was already reset to nil when resetting the gameTimer.
         countingBy = nil
         gameType = nil
 	}

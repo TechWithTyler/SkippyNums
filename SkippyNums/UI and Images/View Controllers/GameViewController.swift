@@ -86,6 +86,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     override func viewDidAppear(_ animated: Bool) {
 		gameBrain.setupGameTimer { [self] time in
+            // This block is still used for untimed/practice games--the block is called immediately and no timer is started.
 			if let time = time {
 				let secondsSingularOrPlural = time == 1 ? "second" : "seconds"
                 secondsLeftLabel?.text = "\(Int(time)) \(secondsSingularOrPlural) left"
