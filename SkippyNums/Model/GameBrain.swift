@@ -159,14 +159,9 @@ class GameBrain {
 
 	// MARK: - Learn Mode
 
-    // This method starts learn mode with monkeys.
-	func startMonkeyLearnMode() {
-		currentObject = Monkey(quantity: countingBy ?? learnModeNumbers.randomElement()!)
-	}
-
-    // This method starts learn mode with birds.
-	func startBirdLearnMode() {
-		currentObject = Bird(quantity: countingBy ?? learnModeNumbers.randomElement()!)
+    // This method starts learn mode with the given object.
+    func newLearnModeExample(withObject object: CountableObject.Type) {
+        currentObject = object.init(quantity: countingBy ?? learnModeNumbers.randomElement()!)
 	}
 
 	// MARK: - New Question
@@ -177,11 +172,7 @@ class GameBrain {
 		numberOfImagesToShow = Int.random(in: 2...maxNumber)
 		numberOfIncorrectAnswers = 0
 		if gameType == .learn {
-			if currentObject is Monkey {
-				startMonkeyLearnMode()
-			} else {
-				startBirdLearnMode()
-			}
+            newLearnModeExample(withObject: type(of: currentObject))
 		} else {
 			let previousObjectName = currentObject.name
 			let previousNumberOfImages = numberOfImagesToShow

@@ -20,4 +20,8 @@ struct Dog: CountableObject {
 
     var soundRate: Float = 1
 
+    init(quantity: Int) {
+        self.quantity = quantity
+    }
+
 }

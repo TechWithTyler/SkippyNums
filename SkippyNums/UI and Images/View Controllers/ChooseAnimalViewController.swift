@@ -52,23 +52,23 @@ class ChooseAnimalViewController: UIViewController {
 	}
 
 	@IBAction func birdsSelected(_ sender: Any) {
-		gameBrain.startBirdLearnMode()
+        gameBrain.newLearnModeExample(withObject: Bird.self)
 		performSegue(withIdentifier: "StartLearn", sender: sender)
 	}
 
 	@IBAction func monkeysSelected(_ sender: Any) {
-		gameBrain.startMonkeyLearnMode()
+		gameBrain.newLearnModeExample(withObject: Monkey.self)
 		performSegue(withIdentifier: "StartLearn", sender: sender)
 	}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func dogsSelected(_ sender: Any) {
+        gameBrain.newLearnModeExample(withObject: Dog.self)
+        performSegue(withIdentifier: "StartLearn", sender: sender)
     }
-    */
+
+    @IBAction func catsSelected(_ sender: Any) {
+        gameBrain.newLearnModeExample(withObject: Cat.self)
+        performSegue(withIdentifier: "StartLearn", sender: sender)
+    }
 
 }

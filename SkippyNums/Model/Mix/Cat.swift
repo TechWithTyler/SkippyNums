@@ -20,4 +20,8 @@ struct Cat: CountableObject {
 
     var soundRate: Float = 1.5
 
+    init(quantity: Int) {
+        self.quantity = quantity
+    }
+
 }

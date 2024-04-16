@@ -12,10 +12,14 @@ struct Cow: CountableObject {
     
     var name: String = "cows"
 
-    var quantity: Int = 2
+    var quantity: Int
 
     var soundFilename: String = "moo.caf"
 
     var soundRate: Float = 2
-    
+
+    init(quantity: Int = 2) {
+        self.quantity = quantity
+    }
+
 }
