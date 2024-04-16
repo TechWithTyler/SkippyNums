@@ -172,6 +172,7 @@ class GameBrain {
 		numberOfImagesToShow = Int.random(in: 2...maxNumber)
 		numberOfIncorrectAnswers = 0
 		if gameType == .learn {
+            // type(of:) allows you to get the dynamic type (e.g. Dog) from the given value's static type (e.g. currentObject which is anything that conforms to CountableObject).
             newLearnModeExample(withObject: type(of: currentObject))
 		} else {
 			let previousObjectName = currentObject.name
@@ -181,8 +182,9 @@ class GameBrain {
 			} else {
 				currentObject = GameBrain.objectsToCount.filter({$0.quantity == countingBy}).randomElement()!
 			}
-			if currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages {
-				// If the next question is identical to the previous one, try again until a different question is shown.
+            let isSameQuestionContent = currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages
+			if isSameQuestionContent {
+				// If the next question/learn mode example is identical to the previous one, try again until a different question is shown.
 				newQuestion()
 			}
 		}
@@ -190,13 +192,14 @@ class GameBrain {
 
 	// MARK: - Get Data to Display
 
-    // This method gets the display name for the current object, removing the leading number if any.
+    // This method gets the display name for the current object, removing the leading number if any. For example, if the current object's name is "2monkeys", use that full name to look up the image to use, but drop the leading 2 so the displayed/announced name is "monkeys". For objects that only have one quantity (e.g. cows only come in twos), the name has no leading number so nothing will be dropped from it (e.g. "cows").
 	func getDisplayNameForObject() -> String {
 		return currentObject.name.filter { $0.isLetter }
 	}
 
     // This method gets the current object's quantity and display name and returns a question created from that data.
 	func getQuestionText() -> String {
+        // 1. Convert the quantity number to words.
 		var quantityWord: String {
 			switch currentObject.quantity {
 				case 5: return "fives"
@@ -204,11 +207,17 @@ class GameBrain {
 				default: return "twos"
 			}
 		}
-		let text = "Count the \(getDisplayNameForObject()) by \(quantityWord)."
-		return gameType != .learn ? text : backgroundAccessibilityText
+        // 2. If in learn mode, use the background's accessibility text as the question text.
+        if gameType == .learn {
+            return backgroundAccessibilityText
+        } else {
+            // 3. If in play or practice mode, construct and return the question text.
+            let text = "Count the \(getDisplayNameForObject()) by \(quantityWord)."
+            return text
+        }
 	}
 
-    // This method creates 5 choices, one of which is correct and 4 of which are displayed to the player in random order.
+    // This method creates 5 choices based on the number of images to show and the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed choice is used only to assist with randomizing the available choices to the correct one isn't always in an obvious place.
 	func getChoices() -> [String] {
         // 1. Create choices.
         // Below correct answer
