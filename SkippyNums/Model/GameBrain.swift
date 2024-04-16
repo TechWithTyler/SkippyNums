@@ -217,29 +217,24 @@ class GameBrain {
         }
 	}
 
-    // This method creates 5 choices based on the number of images to show and the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed choice is used only to assist with randomizing the available choices to the correct one isn't always in an obvious place.
+    // This method creates 5 choices based on the number of images to show and the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place.
 	func getChoices() -> [String] {
         // 1. Create choices.
         // Below correct answer
-		let choice1 = numberOfImagesToShow * currentObject.quantity - (currentObject.quantity * 2)
-		let choice2 = numberOfImagesToShow * currentObject.quantity - currentObject.quantity
+		let incorrectChoice1A = numberOfImagesToShow * currentObject.quantity - (currentObject.quantity * 2)
+        let incorrectChoice1B = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 3)
+		let incorrectChoice2 = numberOfImagesToShow * currentObject.quantity - currentObject.quantity
 		// Correct answer
 		let correctChoice = numberOfImagesToShow * currentObject.quantity
 		// Above correct answer
-		let choice3 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
-		let choice4 = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 2)
-        // 2. Shuffle the incorrect answers.
-		let shuffledIncorrectChoices = [String(choice1), String(choice2), String(choice3), String(choice4)].shuffled()
+		let incorrectChoice3 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
+		let incorrectChoice4 = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 2)
+        // 2. Shuffle the incorrect answers. If incorrect choice 1A resolves to 0, use incorrect choice 1B instead, which is 1 multiple higher than incorrect choice 4.
+        let shuffledIncorrectChoices = [String(incorrectChoice1A == 0 ? incorrectChoice1B : incorrectChoice1A), String(incorrectChoice2), String(incorrectChoice3), String(incorrectChoice4)].shuffled()
         // 3. Drop the last incorrect choice and append the correct choice.
-		var finalChoices = Array(shuffledIncorrectChoices.dropLast())
-		finalChoices.append(String(correctChoice))
-        // 4. If any choice is 0, replace them with 1.
-        for i in 0...finalChoices.count - 1 {
-            if finalChoices[i] == "0" {
-                return [String(choice2), String(choice3), String(choice4), String(correctChoice)]
-            }
-        }
-        // 5. Re-shuffle the choices.
+        var finalChoices = Array(shuffledIncorrectChoices.dropLast())
+        finalChoices.append(String(correctChoice))
+        // 4. Re-shuffle the choices and return them.
         finalChoices.shuffle()
 		return finalChoices
 	}
