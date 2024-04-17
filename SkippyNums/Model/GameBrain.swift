@@ -239,8 +239,8 @@ class GameBrain {
 		return finalChoices
 	}
 
-	// MARK: - Sounds
-    
+	// MARK: - Audio
+
     // This method starts the game's audio.
     func startAudio() {
         do {
@@ -261,31 +261,39 @@ class GameBrain {
         }
     }
 
-    // This method plays the current object's sound when it's tapped/clicked.
+    // This method plays the current object's sound when it's tapped/clicked. The sound is played as many times as the object appears in the tapped/clicked image.
 	func playSoundForObject() {
+        // 1. Make sure the current object's sound exists in the app bundle.
 		guard let soundURL = Bundle.main.url(forResource: currentObject.soundFilename, withExtension: nil) else {
 			fatalError("Failed to find \(currentObject.soundFilename) in bundle")
 		}
 		do {
+            // 2. Try to load the sound into the player.
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            // 3. Set the number of loops for the sound. If in learn mode, play the sound as many times as the object appears on the screen. For example, if there are 4 groups of 5 dogs, play the dog sound 20 times (play it once, then loop it 19 times). If in play or practice mode, play the sound as many times as the object appears in the tapped/clicked image.
 			if gameType == .learn {
 				soundPlayer?.numberOfLoops = currentObject.quantity * numberOfImagesToShow - 1
 			} else {
 				soundPlayer?.numberOfLoops = currentObject.quantity - 1
 			}
+            // 4. Stop any playing sound.
 			soundPlayer?.stop()
+            // 5. Enable rate adjustment and set the rate to the current object's specified rate. Objects whose sounds are more than half a second long are sped up.
 			soundPlayer?.enableRate = true
 			soundPlayer?.rate = currentObject.soundRate
+            // 6. Prepare and play the sound.
 			soundPlayer?.volume = 1
 			soundPlayer?.prepareToPlay()
 			soundPlayer?.play()
 		} catch {
+            // 7. If an error occurs, throw a fatal error.
 			fatalError("Failed to play \(currentObject.soundFilename): \(error)")
 		}
 	}
 
     // This function plays a chord or note as a VoiceOver earcon when it focuses on an image.
 	func playChord() {
+        // 1. Select the appropriate earcon based on the current object's quantity.
 		var filename: String {
 			switch currentObject.quantity {
 				case 10: return "tenChord"
@@ -293,55 +301,73 @@ class GameBrain {
 				default: return "twoNote"
 			}
 		}
+        // 2. Make sure the sound exists in the app bundle.
 		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: "caf") else {
 			fatalError("Failed to find \(filename).caf in bundle")
 		}
 		do {
+            // 3. Stop any playing sound.
 			soundPlayer?.stop()
+            // 4. Try to load the sound into the player.
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
 			// How to detect VoiceOver audio ducking on/off and change volume accordingly?
+            // 5. Set the volume to 10% (0.1).
 			soundPlayer?.volume = 0.1
+            // 6. Prepare and play the sound.
 			soundPlayer?.prepareToPlay()
 			soundPlayer?.play()
 		} catch {
+            // 7. If an error occurs, throw a fatal error.
 			fatalError("Failed to play \(filename).caf: \(error)")
 		}
 	}
 
     // This method plays a "correct answer" or "incorrect answer" sound when choosing an answer.
 	func playAnswerSound(_ correct: Bool) {
-		let filename = correct ? "correct.caf" : "incorrect.caf"
-		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: nil) else {
+        // 1. Choose the appropriate sound based on whether the player's answer is correct.
+		let filename = correct ? "correct" : "incorrect"
+        // 2. Make sure the sound exists in the app bundle.
+		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: "caf") else {
 			fatalError("Failed to find \(filename) in bundle")
 		}
 		do {
+            // 3. Stop any playing sound.
 			soundPlayer?.stop()
+            // 4. Try to load the sound into the player.
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
 			if !correct {
+                // 5. For the "incorrect answer" sound, slow it down to half-speed.
 				soundPlayer?.enableRate = true
 				soundPlayer?.rate = 0.5
 			}
+            // 6. Prepare and play the sound.
 			soundPlayer?.volume = 1
 			soundPlayer?.prepareToPlay()
 			soundPlayer?.play()
 		} catch {
+            // 7. If an error occurs, throw a fatal error.
 			fatalError("Failed to play \(filename): \(error)")
 		}
 	}
 
     // This method plays a buzzer when the game timer finishes.
 	func playTimeUpSound() {
-		let filename = "timeUp.caf"
-		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: nil) else {
+        // 1. Make sure the sound exists in the app bundle.
+		let filename = "timeUp"
+		guard let soundURL = Bundle.main.url(forResource: filename, withExtension: "caf") else {
 			fatalError("Failed to find \(filename) in bundle")
 		}
 		do {
+            // 2. Stop any playing sound.
 			soundPlayer?.stop()
+            // 3. Try to load the sound into the player.
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            // 4. Prepare and play the sound.
 			soundPlayer?.volume = 1
 			soundPlayer?.prepareToPlay()
 			soundPlayer?.play()
 		} catch {
+            // 5. If an error occurs, throw a fatal error.
 			fatalError("Failed to play \(filename): \(error)")
 		}
 	}
