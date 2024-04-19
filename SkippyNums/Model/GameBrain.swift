@@ -218,7 +218,7 @@ class GameBrain {
 	}
 
     // This method creates 5 choices based on the number of images to show and the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place.
-	func getChoices() -> [String] {
+	func getChoices() -> [Int] {
         // 1. Create choices.
         // Below correct answer
 		let incorrectChoice1A = numberOfImagesToShow * currentObject.quantity - (currentObject.quantity * 2)
@@ -230,10 +230,10 @@ class GameBrain {
 		let incorrectChoice3 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
 		let incorrectChoice4 = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 2)
         // 2. Shuffle the incorrect answers. If incorrect choice 1A resolves to 0, use incorrect choice 1B instead, which is 1 multiple higher than incorrect choice 4.
-        let shuffledIncorrectChoices = [String(incorrectChoice1A == 0 ? incorrectChoice1B : incorrectChoice1A), String(incorrectChoice2), String(incorrectChoice3), String(incorrectChoice4)].shuffled()
+        let shuffledIncorrectChoices = [incorrectChoice1A == 0 ? incorrectChoice1B : incorrectChoice1A, incorrectChoice2, incorrectChoice3, incorrectChoice4].shuffled()
         // 3. Drop the last incorrect choice and append the correct choice.
         var finalChoices = Array(shuffledIncorrectChoices.dropLast())
-        finalChoices.append(String(correctChoice))
+        finalChoices.append(correctChoice)
         // 4. Re-shuffle the choices and return them.
         finalChoices.shuffle()
 		return finalChoices

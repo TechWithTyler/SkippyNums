@@ -151,7 +151,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 
 	func setChoices() {
-		let choices = gameBrain.getChoices()
+        // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results).
+        let choices = gameBrain.getChoices().map { String($0) }
+        // 2. Set each choice button's title to the corresponding item in the choices array, and set the font properties.
 		choice1Button?.setTitle(choices[0], for: .normal)
         choice1Button?.usesMonospacedFont = true
         choice1Button?.textSize = choiceButtonTextSize
@@ -169,17 +171,23 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - @IBActions
 
 	@IBAction func answerSelected(_ sender: SAIAccessibleButton) {
+        // 1. Check whether the selected answer is correct, incorrect, or the 3rd incorrect one in a row.
 		guard let answer = sender.currentTitle else { return }
 		let correct = gameBrain.checkAnswer(answer)
 		let incorrectTooManyTimes = !correct && gameBrain.tooManyIncorrect
-		updateStatDisplay()
+		// 2. Update the stat display.
+        updateStatDisplay()
+        // 3. Choose the sheet to show and decide whether to advance to a new question based on whether the answer is correct, incorrect, or the 3rd incorrect one in a row.
 		if correct {
+            // Correct answer, advance to new question
 			performSegue(withIdentifier: "Correct", sender: sender)
 			newQuestion()
 		} else if incorrectTooManyTimes {
+            // 3rd incorrect answer in a row, advance to new question
 			performSegue(withIdentifier: "TooManyIncorrect", sender: sender)
 			newQuestion()
 		} else {
+            // Incorrect answer, don't advance to new question
 			performSegue(withIdentifier: "Incorrect", sender: sender)
 		}
 	}
@@ -197,6 +205,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		if let answerCheckViewController = segue.destination as? AnswerCheckViewController {
 			switch segue.identifier {
                 // 2. If segue is used to present the AnswerCheckViewController (sheet), set the messageText and imageName of the AnswerCheckViewController based on which segue is used to present it. The segue to use to present it depends on whether the chosen answer is correct, incorrect, or the 3rd incorrect one in a row.
+                // The "correct or incorrect" image's name is always "something.circle", so we only pass that something to AnswerCheckViewController which constructs the full image name.
 				case "Incorrect":
 					answerCheckViewController.messageText = "Incorrect! Try again!"
 					answerCheckViewController.baseImageName = "x"
@@ -242,11 +251,13 @@ extension GameViewController {
 
 	// MARK: - Collection View - Delegate and Data Source
 
+    // Specifies the number of images to show.
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		let number = gameBrain.numberOfImagesToShow
 		return number
 	}
 
+    // Shows an image in the collection view cell.
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCell", for: indexPath)
 		// 1. Create and configure the image view.
@@ -287,11 +298,13 @@ extension GameViewController {
 		return cell
 	}
 
+    // Specifies spacing between the images in the collection view.
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         let sectionSpacing: CGFloat = 30
 		return sectionSpacing
 	}
 
+    // Specifies sizing of the images in the collection view.
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		let paddingSpace = objectInsets.left * 2
 		let availableWidth = view.frame.width - paddingSpace
@@ -302,7 +315,7 @@ extension GameViewController {
     // MARK: - Collection View - Image Activation Handler
 
     @objc func imageTapped(_ sender: UIGestureRecognizer) {
-        // 1. If in practice mode and VoiceOver is off, use a dedicated speech synthesizer/highlight effect.
+        // 1. If in practice mode and VoiceOver is off, get the tapped image view and its tag (representing the skip count number) and use a dedicated speech synthesizer/highlight effect.
         if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {
             guard let image = sender.view as? ObjectImageView else { return }
             let skipCountNumber = image.tag * gameBrain.currentObject.quantity
