@@ -211,6 +211,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8D43C3D12BD30EBD003D1997 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				8D8EC9CA299ADD9400043D39 /* CountableObject.swift */,
+				8D31D8592B27FACD009F29EE /* Twos */,
+				8D31D85A2B27FAD8009F29EE /* Fives */,
+				8D31D85B2B27FAE4009F29EE /* Tens */,
+				8D31D85C2B27FAEE009F29EE /* Mix */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		8D61C7782A8C0AFA008703D7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,11 +280,7 @@
 			children = (
 				8DA6D969299C2F4300ED533F /* GameBrain.swift */,
 				8D454C3D2A799A6300639479 /* SettingsData.swift */,
-				8D8EC9CA299ADD9400043D39 /* CountableObject.swift */,
-				8D31D8592B27FACD009F29EE /* Twos */,
-				8D31D85A2B27FAD8009F29EE /* Fives */,
-				8D31D85B2B27FAE4009F29EE /* Tens */,
-				8D31D85C2B27FAEE009F29EE /* Mix */,
+				8D43C3D12BD30EBD003D1997 /* Objects */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -286,8 +294,8 @@
 				8D8EC9B9299AD7B300043D39 /* GameViewController.swift */,
 				8D04D70D29DCBD6C009670F2 /* AnswerCheckViewController.swift */,
 				8D0E1EEC2A03282000B3FA70 /* TimeUpViewController.swift */,
-				8DA7D5552A7C45D2005AC588 /* LearnViewController.swift */,
 				8DA7D5572A818098005AC588 /* ChooseAnimalViewController.swift */,
+				8DA7D5552A7C45D2005AC588 /* LearnViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -300,7 +308,7 @@
 			path = SkippyNumsTests;
 			sourceTree = "<group>";
 		};
-		8DC7D9902BA0F3B200DECADC /* Mix */ = {
+		8DC7D9902BA0F3B200DECADC /* Objects - Mix */ = {
 			isa = PBXGroup;
 			children = (
 				8DC7D98B2B9BCF9200DECADC /* bark.caf */,
@@ -309,33 +317,33 @@
 				8DAFF7CB29E4A8E2006F1598 /* monkey.caf */,
 				8DD741D029CA404900BE0E46 /* robot.caf */,
 			);
-			path = Mix;
+			path = "Objects - Mix";
 			sourceTree = "<group>";
 		};
-		8DC7D9912BA0F3CC00DECADC /* Twos */ = {
+		8DC7D9912BA0F3CC00DECADC /* Objects - Twos */ = {
 			isa = PBXGroup;
 			children = (
 				8DCC07B829BA8BE900A8C1FF /* carHorn.caf */,
 				8DCC07B629BA849D00A8C1FF /* elephantTrumpet.caf */,
 				8DCC07B429B92CF000A8C1FF /* moo.caf */,
 			);
-			path = Twos;
+			path = "Objects - Twos";
 			sourceTree = "<group>";
 		};
-		8DC7D9922BA0F3D800DECADC /* Fives */ = {
+		8DC7D9922BA0F3D800DECADC /* Objects - Fives */ = {
 			isa = PBXGroup;
 			children = (
 				8DD741CF29CA404900BE0E46 /* airplane.caf */,
 			);
-			path = Fives;
+			path = "Objects - Fives";
 			sourceTree = "<group>";
 		};
-		8DC7D9932BA0F3E000DECADC /* Tens */ = {
+		8DC7D9932BA0F3E000DECADC /* Objects - Tens */ = {
 			isa = PBXGroup;
 			children = (
 				8DD741CE29CA404800BE0E46 /* bear.caf */,
 			);
-			path = Tens;
+			path = "Objects - Tens";
 			sourceTree = "<group>";
 		};
 		8DC7D9942BA0F3FD00DECADC /* Earcons */ = {
@@ -361,10 +369,10 @@
 		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				8DC7D9912BA0F3CC00DECADC /* Twos */,
-				8DC7D9922BA0F3D800DECADC /* Fives */,
-				8DC7D9932BA0F3E000DECADC /* Tens */,
-				8DC7D9902BA0F3B200DECADC /* Mix */,
+				8DC7D9912BA0F3CC00DECADC /* Objects - Twos */,
+				8DC7D9922BA0F3D800DECADC /* Objects - Fives */,
+				8DC7D9932BA0F3E000DECADC /* Objects - Tens */,
+				8DC7D9902BA0F3B200DECADC /* Objects - Mix */,
 				8DC7D9952BA0F40900DECADC /* Game Progress */,
 				8DC7D9942BA0F3FD00DECADC /* Earcons */,
 			);
