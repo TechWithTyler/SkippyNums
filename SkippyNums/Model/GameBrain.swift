@@ -20,10 +20,10 @@ class GameBrain {
         // Player is asked to choose the correct answer, can be 1min, 2min, or untimed.
 		case play
 
-        // Player is asked to choose the correct answer, untimed, announces number in the sequence when tapped/clicked/VoiceOver focused.
+        // Player is asked to choose the correct answer, untimed, announces number in the sequence/highlights image when tapped/clicked/VoiceOver focused.
 		case practice
 
-        // Player is given all information to learn how to skip-count.
+        // Player is given all information to learn how to skip-count, tapping any image plays the sound as many times as there are the given object.
 		case learn
 
 	}
@@ -40,6 +40,7 @@ class GameBrain {
 		// Comment out objects if they're not ready to commit or ship.
         // For objects only available in the twos, fives, or tens game, the quantity isn't specified when initializing the object. Objects that are available in more than one game are initialized with a quantity, which determines which image to use.
         // Twos
+        // Cherries were used in the very early days of development (February-March 2023) while we were implementing the core functionality of the game. We switched to cows as the first shipping object as there's no obvious sound associated with cherries.
         Cow(), // Introduced in version 2023.11
         Elephant(), // Introduced in version 2023.11
         Car(), // Introduced in version 2023.11
@@ -48,6 +49,7 @@ class GameBrain {
         // Tens
         Bear(), // Introduced in version 2024.3
         // Mix (twos/fives/tens)
+        // Objects in this group are eligible for learn mode.
         Bird(quantity: 2), // Introduced in version 2023.11
         Monkey(quantity: 2), // Introduced in version 2023.11
         Cat(quantity: 2), // Introduced in version 2024.3
