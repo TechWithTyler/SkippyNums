@@ -136,6 +136,10 @@ class GameBrain {
 
 	// MARK: - Properties - Strings
 
+    var triesSingularOrPlural: String {
+        return "\(triesInGame) " + (triesInGame == 1 ? "try" : "tries")
+    }
+
     // The accessibility text for the current question's images (e.g. "2 cows" or "5 birds").
 	var imageAccessibilityText: String {
 		return "\(currentObject.quantity) \(getDisplayNameForObject())"

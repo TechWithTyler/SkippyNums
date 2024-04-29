@@ -135,7 +135,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - Stats Update
 
 	func updateStatDisplay() {
-        scoreLabel?.text = "\(gameBrain.correctAnswersInGame) out of \(gameBrain.triesInGame) tries correct"
+        scoreLabel?.text = "\(gameBrain.correctAnswersInGame) out of \(gameBrain.triesSingularOrPlural) correct"
 	}
 
     // MARK: - New Question
@@ -218,7 +218,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 			}
 		} else if let timeUpViewController = segue.destination as? TimeUpViewController {
             // 3. If segue is used to present the TimeUpViewController (navigation), set the messageText of the TimeUpViewController.
-			timeUpViewController.messageText = "Time's up! You answered \(gameBrain.correctAnswersInGame) of \(gameBrain.triesInGame) tries correct!"
+			timeUpViewController.messageText = "Time's up! You answered \(gameBrain.correctAnswersInGame) of \(gameBrain.triesSingularOrPlural) correct!"
 		}
 	}
 
