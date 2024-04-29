@@ -136,8 +136,13 @@ class GameBrain {
 
 	// MARK: - Properties - Strings
 
+    // The number of tries in the current game with "try" or "tries" based on whether triesInGame is 1.
     var triesSingularOrPlural: String {
         return "\(triesInGame) " + (triesInGame == 1 ? "try" : "tries")
+    }
+
+    var scoreText: String {
+        return "\(correctAnswersInGame) of \(triesSingularOrPlural) correct"
     }
 
     // The accessibility text for the current question's images (e.g. "2 cows" or "5 birds").

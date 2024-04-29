@@ -218,7 +218,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 			}
 		} else if let timeUpViewController = segue.destination as? TimeUpViewController {
             // 3. If segue is used to present the TimeUpViewController (navigation), set the messageText of the TimeUpViewController.
-			timeUpViewController.messageText = "Time's up! You answered \(gameBrain.correctAnswersInGame) of \(gameBrain.triesSingularOrPlural) correct!"
+			timeUpViewController.messageText = "Time's up! You answered \(gameBrain.scoreText)!"
 		}
 	}
 
