@@ -228,7 +228,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         #if targetEnvironment(macCatalyst)
         let message = "Starting from the top-left of the screen, move to each group of \(gameBrain.getDisplayNameForObject()) and count them, then if you'd like, activate to play the sound."
         #else
-        let message = "Starting from the top-left of the screen, drag your finger accross each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
+        let message = "Starting from the top-left of the screen, drag your finger across each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
         #endif
         let secondsToWait: TimeInterval = 15
         announcementTimer?.invalidate()
