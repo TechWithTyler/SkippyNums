@@ -124,7 +124,8 @@ extension WelcomeViewController {
         // 2. Get the title for the label based on the row being configured.
         let optionTitle = String(maxGroupsOptions[row])
         pickerLabel?.text = optionTitle
-        // 3. Set the background color of the row.
+        // 3. Set the background color and text color of the row.
+        pickerLabel?.textColor = .white
         pickerLabel?.layer.backgroundColor = UIColor.tintColor.cgColor
         // 4. Return the label as the picker item's view.
 		return pickerLabel!
