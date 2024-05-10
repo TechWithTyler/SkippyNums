@@ -20,14 +20,20 @@ class NewGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        // 1. Hide the system-provided back button--a more visually-accessible back button is used instead.
         navigationItem.hidesBackButton = true
-        // Create gradient layer
+        // 2. Set up the gradient layer.
+        setupGradient()
+    }
+
+    func setupGradient() {
+        // 1. Create the gradient layer.
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
         gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-        // Add gradient layer to view
+        // 2. Add the gradient layer to the view.
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
 

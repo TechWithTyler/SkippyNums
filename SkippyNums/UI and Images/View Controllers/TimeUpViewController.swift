@@ -19,20 +19,27 @@ class TimeUpViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
+        // 1. Set the message text.
 		guard let messageText = messageText else { return }
         messageLabel?.text = messageText
-		// Create gradient layer
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-		// Add gradient layer to view
-		view.layer.insertSublayer(gradientLayer, at: 0)
-		navigationItem.hidesBackButton = true
-	}
+        // 2. Hide the system-provided back button--a more visually-accessible back button is used instead.
+        navigationItem.hidesBackButton = true
+        // 3. Set up the gradient layer.
+        setupGradient()
+    }
 
-	@objc func updateBackgroundColors() {
+    func setupGradient() {
+        // 1. Create the gradient layer.
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        // 2. Add the gradient layer to the view.
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+	func updateBackgroundColors() {
 		// Update gradient colors based on device's dark/light mode
 		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
 			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
@@ -53,19 +60,25 @@ class TimeUpViewController: UIViewController {
 	}
 
 	@IBAction func nextRound(_ sender: Any) {
-		// Make sure there are at least 3 view controllers in the stack. If there are, get the third-to-last view controller. Since the index starts at 0, we need to subtract 4, not 3, from the view controller count.
-		let viewControllers = navigationController?.viewControllers
-		guard let viewControllerCount = viewControllers?.count, viewControllerCount >= 3, let newGameViewController = viewControllers?[viewControllerCount - 4] as? NewGameViewController else {
+		// 1. Get the 2nd view controller (NewGameViewController, the view controller at index 1) in the stack.
+        /* View controller stack:
+         4: TimeUpViewController
+         3: GameViewController
+         2: TimeViewController
+         1: NewGameViewController
+         0: WelcomeViewController
+         */
+        guard let viewControllers = navigationController?.viewControllers, let newGameViewController = viewControllers[1] as? NewGameViewController else {
 			return
 		}
+        // 2. Tell the GameBrain that a new round in the current game is starting, which will hide the Untimed option from the TimeViewController. The game resets if the player backs out from the NewGameViewController.
 		gameBrain.isNewRoundInCurrentGame = true
+        // 3. Go back to the NewGameViewController.
         navigationController?.popToViewController(newGameViewController, animated: true)
 	}
 
 	@IBAction func resetScore(_ sender: Any) {
-		gameBrain.correctAnswersInGame = 0
-		gameBrain.triesInGame = 0
-		gameBrain.isNewRoundInCurrentGame = false
+        gameBrain.resetGame()
         navigationController?.popToRootViewController(animated: true)
 	}
 

@@ -61,57 +61,27 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     // MARK: - Properties - Inactivity VoiceOver Announcement Timer
 
-	var announcementTimer: Timer? = nil
+	var voiceOverAnnouncementTimer: Timer? = nil
 
 	// MARK: - View Setup/Update
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-        objectCollectionView?.dataSource = self
-        objectCollectionView?.delegate = self
-        objectCollectionView?.isUserInteractionEnabled = true
-		navigationItem.hidesBackButton = true
-        secondsLeftLabel?.text = "Loading…"
-        scoreLabel?.isAccessibilityElement = true
-		// Create gradient layer
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-		// Add gradient layer to view
-		view.layer.insertSublayer(gradientLayer, at: 0)
-        objectCollectionView?.backgroundColor = .clear
+        // 1. Hide the system-provided back button--a more visually-accessible "end game" button is used instead.
+        navigationItem.hidesBackButton = true
+        // 2. Set up the objectCollectionView's delegate and data source.
+        setupObjectCollectionView()
+        // 3. Set up the labels.
+        setupLabels()
+		// 4. Set up the gradient layer.
+        setupGradient()
+        // 5. Display a question to the player.
 		newQuestion()
 	}
 
     override func viewDidAppear(_ animated: Bool) {
-        secondsLeftBar?.progress = 1
-		gameBrain.setupGameTimer { [self] time in
-            // This block is still used for untimed/practice games--the block is called immediately and no timer is started.
-            if let time = time, let initialGameTimeLeft = gameBrain.initialGameTimeLeft {
-				let secondsSingularOrPlural = time == 1 ? "second" : "seconds"
-                let secondsLeftDisplay = "\(Int(time)) \(secondsSingularOrPlural) left"
-                let progress = (time / initialGameTimeLeft)
-                secondsLeftLabel?.text = secondsLeftDisplay
-                secondsLeftBar?.accessibilityValue = secondsLeftDisplay
-                secondsLeftBar?.setProgress(Float(progress), animated: true)
-                switch time {
-                case 0...10:
-                    secondsLeftBar?.progressTintColor = .systemRed
-                default:
-                    secondsLeftBar?.progressTintColor = .systemGreen
-                }
-                secondsLeftBar?.isHidden = false
-			} else {
-                secondsLeftLabel?.text = gameBrain.gameType == .play ? "Untimed" : "Practice"
-                secondsLeftBar?.isHidden = true
-			}
-		} timerEndHandler: { [self] in
-			performSegue(withIdentifier: "TimeUp", sender: self)
-			gameBrain.playTimeUpSound()
-		}
+        setupGameTimer()
 		super.viewDidAppear(animated)
 	}
 
@@ -120,7 +90,23 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		gameBrain.resetGameTimer()
 	}
 
-	@objc func updateBackgroundColors() {
+    func setupLabels() {
+        secondsLeftLabel?.text = "Loading…"
+        scoreLabel?.isAccessibilityElement = true
+    }
+
+    func setupGradient() {
+        // 1. Create the gradient layer.
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        // 2. Add the gradient layer to the view.
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+	func updateBackgroundColors() {
 		// Update gradient colors based on device's dark/light mode
 		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
 			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
@@ -140,12 +126,49 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 
-    // MARK: - Reset Game
+    // MARK: - Game Timer - Setup
 
-	func resetGame() {
-		gameBrain.resetGame()
-		navigationController?.popToRootViewController(animated: true)
-	}
+    func setupGameTimer() {
+        // 1. Set up the gameTimer.
+        gameBrain.setupGameTimer { [self] gameTimeLeft in
+            // 2. Update the display when the timer fires if playing a timed game, or just once if playing an untimed or practice game.
+            updateGameTimeDisplay(for: gameTimeLeft)
+        } timerEndHandler: { [self] in
+            // 3. If playing a timed game, switch to the "time's up!" screen and play a buzzer sound when time runs out.
+            performSegue(withIdentifier: "TimeUp", sender: self)
+            gameBrain.playTimeUpSound()
+        }
+    }
+
+    // MARK: - Game Timer - Update
+
+    func updateGameTimeDisplay(for gameTimeLeft: TimeInterval?) {
+        // The gameTimer's timerFireHandler block (and this method which it calls) is still used for untimed/practice games--the block is called immediately and no timer is started.
+        // 1. Get gameTimeLeft and gameBrain.initialGameTimeLeft as non-Optional constants if playing a timed game. If playing a practice or untimed game, skip to step 6.
+        if let gameTimeLeft = gameTimeLeft, let gameLength = gameBrain.gameLength {
+            // 2. Choose "second" or "seconds" based on whether the game time left is 1 second.
+            let secondsSingularOrPlural = gameTimeLeft == 1 ? "second" : "seconds"
+            // 3. Display the seconds left.
+            let secondsLeftDisplay = "\(Int(gameTimeLeft)) \(secondsSingularOrPlural) left"
+            secondsLeftLabel?.text = secondsLeftDisplay
+            // 4. Divide the game time left by the game length to create the progress value and show it in the secondsLeftBar.
+            let progress = (gameTimeLeft / gameLength)
+            secondsLeftBar?.accessibilityValue = secondsLeftDisplay
+            secondsLeftBar?.setProgress(Float(progress), animated: true)
+            // 5. If time is 10 seconds or less, set the secondsLeftBar's color to red. Otherwise, set it to green.
+            switch gameTimeLeft {
+            case 0...10:
+                secondsLeftBar?.progressTintColor = .systemRed
+            default:
+                secondsLeftBar?.progressTintColor = .systemGreen
+            }
+            secondsLeftBar?.isHidden = false
+        } else {
+            // 6. For an untimed or practice game, display the respective mode instead of a timer, and hide the secondsLeftBar.
+            secondsLeftLabel?.text = gameBrain.gameType == .play ? "Untimed" : "Practice"
+            secondsLeftBar?.isHidden = true
+        }
+    }
 
     // MARK: - Stats Update
 
@@ -156,12 +179,19 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - New Question
 
 	func newQuestion() {
+        // 1. Ask GameBrain for a new question.
 		gameBrain.newQuestion()
+        // 2. Get the question text and display it in the questionLabel.
         questionLabel?.text = gameBrain.getQuestionText()
+        // 3. Configure the accessibility text for the objectCollectionView based on the question.
 		objectCollectionView?.accessibilityLabel = gameBrain.backgroundAccessibilityText
+        // 4. Set the choice buttons.
 		setChoices()
+        // 5. Set the initial stat display.
 		updateStatDisplay()
+        // 6. Reload the objectCollectionView with the images for the question.
 		objectCollectionView?.reloadData()
+        // 7. Reset the VoiceOver announcement timer.
 		resetAnnouncementTimer()
 	}
 
@@ -211,7 +241,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		resetGame()
 	}
 
-	// MARK: - Navigation
+	// MARK: - Navigation - Storyboard Segue Preparation
 
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -237,6 +267,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 
+    // MARK: - Navigation - Reset Game
+
+    func resetGame() {
+        gameBrain.resetGame()
+        navigationController?.popToRootViewController(animated: true)
+    }
+
     // MARK: - Inactivity VoiceOver Announcement
 
     func resetAnnouncementTimer() {
@@ -246,12 +283,12 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         let message = "Starting from the top-left of the screen, drag your finger across each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
         #endif
         let secondsToWait: TimeInterval = 15
-        announcementTimer?.invalidate()
-        announcementTimer = nil
-        announcementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true) { [self] timer in
+        voiceOverAnnouncementTimer?.invalidate()
+        voiceOverAnnouncementTimer = nil
+        voiceOverAnnouncementTimer = Timer.scheduledTimer(withTimeInterval: secondsToWait, repeats: true) { [self] timer in
             guard presentedViewController == nil else { return }
             timer.invalidate()
-            announcementTimer = nil
+            voiceOverAnnouncementTimer = nil
             speakVoiceOverMessage(message)
         }
     }
@@ -264,7 +301,16 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 extension GameViewController {
 
-	// MARK: - Collection View - Delegate and Data Source
+    // MARK: - Object Collection View - Setup
+
+    func setupObjectCollectionView() {
+        objectCollectionView?.dataSource = self
+        objectCollectionView?.delegate = self
+        objectCollectionView?.isUserInteractionEnabled = true
+        objectCollectionView?.backgroundColor = .clear
+    }
+
+	// MARK: - Object Collection View - Delegate and Data Source
 
     // Specifies the number of images to show.
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -327,7 +373,7 @@ extension GameViewController {
 		return CGSize(width: widthPerItem, height: widthPerItem)
 	}
 
-    // MARK: - Collection View - Image Activation Handler
+    // MARK: - Object Collection View - Image Activation Handler
 
     @objc func imageTapped(_ sender: UIGestureRecognizer) {
         // 1. If in practice mode and VoiceOver is off, get the tapped image view and its tag (representing the skip count number) and use a dedicated speech synthesizer/highlight effect.

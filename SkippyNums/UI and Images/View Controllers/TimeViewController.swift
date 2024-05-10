@@ -24,16 +24,22 @@ class TimeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		// Create gradient layer
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-		// Add gradient layer to view
-		view.layer.insertSublayer(gradientLayer, at: 0)
-		navigationItem.hidesBackButton = true
+        // 1. Hide the system-provided back button--a more visually-accessible back button is used instead.
+        navigationItem.hidesBackButton = true
+        // 2. Set up the gradient layer.
+        setupGradient()
 	}
+
+    func setupGradient() {
+        // 1. Create the gradient layer.
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        // 2. Add the gradient layer to the view.
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -91,10 +97,10 @@ class TimeViewController: UIViewController {
         if let segueIdentifier = segue.identifier {
             // Set gameBrain.gameTimeLeft to the segue identifier's trailing number times 60, or nil if selecting "Untimed".
             if segueIdentifier.hasPrefix("Untimed") {
-                gameBrain.countingBy = nil
+                gameBrain.gameLength = nil
             } else {
                 let gameTimeLeftFromSegueIdentifier = (TimeInterval(String(segueIdentifier.filter( { $0.isNumber } ))))! * 60
-                gameBrain.gameTimeLeft = gameTimeLeftFromSegueIdentifier
+                gameBrain.gameLength = gameTimeLeftFromSegueIdentifier
             }
         }
 	}

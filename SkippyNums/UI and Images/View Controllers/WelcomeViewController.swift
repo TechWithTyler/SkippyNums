@@ -32,18 +32,23 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		// Create gradient layer
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-		configureMaxGroupsPicker()
-		// Add gradient layer to view
-		view.layer.insertSublayer(gradientLayer, at: 0)
+		// Set up the gradient layer.
+        setupGradient()
+        configureMaxGroupsPicker()
 	}
 
-	@objc func updateBackgroundColors() {
+    func setupGradient() {
+        // 1. Create the gradient layer.
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        // 2. Add the gradient layer to the view.
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+	func updateBackgroundColors() {
 		// Update gradient colors based on device's dark/light mode
 		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
 			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight

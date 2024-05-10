@@ -35,8 +35,8 @@ class ObjectImageView: UIImageView {
 			responder = next
 			if let viewController = responder as? GameViewController {
 				// Reset the VoiceOver announcement timer
-				viewController.announcementTimer?.invalidate()
-				viewController.announcementTimer = nil
+				viewController.voiceOverAnnouncementTimer?.invalidate()
+				viewController.voiceOverAnnouncementTimer = nil
 				break
 			}
 		}

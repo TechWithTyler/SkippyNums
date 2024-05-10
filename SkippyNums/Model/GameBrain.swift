@@ -109,7 +109,7 @@ class GameBrain {
     // The number of seconds left in the current game, or nil if playing an untimed or practice game or in learn mode.
 	var gameTimeLeft: TimeInterval? = nil
 
-    var initialGameTimeLeft: TimeInterval? = nil
+    var gameLength: TimeInterval? = nil
 
 	// MARK: - Properties - Game Timer
 
@@ -415,8 +415,8 @@ class GameBrain {
 		guard gameTimeLeft != nil else {
 			timerFireHandler(nil)
 			return }
-        // 2. If gameTimeLeft is specified, call the timer fire handler with the initial value and start the gameTimer.
-        initialGameTimeLeft = gameTimeLeft!
+        // 2. If gameLength is specified, call the timer fire handler with the initial value and start the gameTimer.
+        gameTimeLeft = gameLength
         timerFireHandler(gameTimeLeft)
 		gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] timer in
             // 3. Decrease gameTimeLeft by 1 every second.
@@ -444,12 +444,12 @@ class GameBrain {
 		gameTimer = nil
         // 2. Reset gameTimeLeft to nil.
 		gameTimeLeft = nil
-        initialGameTimeLeft = nil
+        gameLength = nil
 	}
 
 	// MARK: - Reset Game
 
-    // This method stops all audio, stops the game timer, and resets the properties back to default. If choosing to play another round in the current game, stats and the game type aren't reset.
+    // This method stops all audio, stops the game timer, and resets the properties back to default. If choosing to play another round in the current game, the game isn't reset and this method won't be called.
 	func resetGame() {
         // 1. Stop all sounds and non-VoiceOver speech.
 		speechSynthesizer.stopSpeaking(at: .immediate)
@@ -459,6 +459,7 @@ class GameBrain {
         // 3. Reset the game stats to default.
         correctAnswersInGame = 0
         triesInGame = 0
+        isNewRoundInCurrentGame = false
         // 4. Reset the gameplay properties to nil. gameTimeLeft was already reset to nil when resetting the gameTimer.
         countingBy = nil
         gameType = nil
