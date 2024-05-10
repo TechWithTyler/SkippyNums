@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="duO-p5-9Oj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="duO-p5-9Oj" initialMenu="lbe-py-9Lu">
     <device id="ipad7_9" orientation="landscape" layout="fullscreen" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -7,10 +7,55 @@
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Root-->
+        <scene sceneID="nj7-gi-n2T">
+            <objects>
+                <menu isSystemItem="YES" title="Root" identifier="com.apple.menu.root" id="lbe-py-9Lu" sceneMemberID="viewController">
+                    <children>
+                        <menu isSystemItem="YES" title="Application" identifier="com.apple.menu.application" id="Mko-rp-rye">
+                            <children>
+                                <menu isSystemItem="YES" title="Preferences" identifier="com.apple.menu.preferences" id="5ON-Lv-B8X">
+                                    <menuOptions key="menuOptions" displayInline="YES"/>
+                                    <systemMenuChildDeletions>
+                                        <itemDeletion anchorAction="orderFrontPreferencesPanel:"/>
+                                    </systemMenuChildDeletions>
+                                </menu>
+                            </children>
+                        </menu>
+                        <menu isSystemItem="YES" title="View" identifier="com.apple.menu.view" id="Vde-Ei-8lk">
+                            <children>
+                                <menu isSystemItem="YES" title="Toolbar" identifier="com.apple.menu.toolbar" id="omW-X7-s6w">
+                                    <menuOptions key="menuOptions" displayInline="YES"/>
+                                    <systemMenuChildDeletions>
+                                        <itemDeletion anchorAction="toggleToolbarShown:"/>
+                                        <itemDeletion anchorAction="runToolbarCustomizationPalette:"/>
+                                    </systemMenuChildDeletions>
+                                </menu>
+                                <menu isSystemItem="YES" title="Fullscreen" identifier="com.apple.menu.fullscreen" id="Ih0-ax-LL5">
+                                    <menuOptions key="menuOptions" displayInline="YES"/>
+                                    <systemMenuChildDeletions>
+                                        <itemDeletion anchorAction="toggleSidebar:"/>
+                                    </systemMenuChildDeletions>
+                                </menu>
+                            </children>
+                        </menu>
+                    </children>
+                    <systemMenuChildDeletions>
+                        <menuDeletion anchor="com.apple.menu.file"/>
+                        <menuDeletion anchor="com.apple.menu.edit"/>
+                        <menuDeletion anchor="com.apple.menu.format"/>
+                        <menuDeletion anchor="com.apple.menu.help"/>
+                    </systemMenuChildDeletions>
+                </menu>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o8s-UY-FYG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-262" y="-2398"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Th-hB-egL">
             <objects>
@@ -424,9 +469,9 @@
                                     <action selector="newGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z5m-qF-peQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-/- tries correct" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zb-rR-Obm">
-                                <rect key="frame" x="20" y="533" width="484" height="65"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- seconds left" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfg-64-DBg">
+                                <rect key="frame" x="632" y="533" width="481" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -514,13 +559,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="24e-k1-d0o">
-                                <rect key="frame" x="632" y="586" width="478" height="4"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="24e-k1-d0o">
+                                <rect key="frame" x="632" y="586" width="478" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                             </progressView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- seconds left" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfg-64-DBg">
-                                <rect key="frame" x="632" y="533" width="481" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- of - tries correct" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zb-rR-Obm">
+                                <rect key="frame" x="19" y="533" width="484" height="45"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
