@@ -34,6 +34,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     // MARK: - @IBOutlets - Other
 
+    @IBOutlet weak var secondsLeftBar: UIProgressView?
+    
 	@IBOutlet weak var objectCollectionView: UICollectionView?
 
     // MARK: - Properties - Edge Insets
@@ -85,13 +87,26 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 
     override func viewDidAppear(_ animated: Bool) {
+        secondsLeftBar?.progress = 1
 		gameBrain.setupGameTimer { [self] time in
             // This block is still used for untimed/practice games--the block is called immediately and no timer is started.
-			if let time = time {
+            if let time = time, let initialGameTimeLeft = gameBrain.initialGameTimeLeft {
 				let secondsSingularOrPlural = time == 1 ? "second" : "seconds"
-                secondsLeftLabel?.text = "\(Int(time)) \(secondsSingularOrPlural) left"
+                let secondsLeftDisplay = "\(Int(time)) \(secondsSingularOrPlural) left"
+                let progress = (time / initialGameTimeLeft)
+                secondsLeftLabel?.text = secondsLeftDisplay
+                secondsLeftBar?.accessibilityValue = secondsLeftDisplay
+                secondsLeftBar?.setProgress(Float(progress), animated: true)
+                switch time {
+                case 0...10:
+                    secondsLeftBar?.progressTintColor = .systemRed
+                default:
+                    secondsLeftBar?.progressTintColor = .systemGreen
+                }
+                secondsLeftBar?.isHidden = false
 			} else {
                 secondsLeftLabel?.text = gameBrain.gameType == .play ? "Untimed" : "Practice"
+                secondsLeftBar?.isHidden = true
 			}
 		} timerEndHandler: { [self] in
 			performSegue(withIdentifier: "TimeUp", sender: self)
@@ -135,7 +150,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - Stats Update
 
 	func updateStatDisplay() {
-        scoreLabel?.text = "\(gameBrain.correctAnswersInGame) out of \(gameBrain.triesSingularOrPlural) correct"
+        scoreLabel?.text = gameBrain.scoreText
 	}
 
     // MARK: - New Question

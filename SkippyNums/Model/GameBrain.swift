@@ -109,6 +109,8 @@ class GameBrain {
     // The number of seconds left in the current game, or nil if playing an untimed or practice game or in learn mode.
 	var gameTimeLeft: TimeInterval? = nil
 
+    var initialGameTimeLeft: TimeInterval? = nil
+
 	// MARK: - Properties - Game Timer
 
     // The game timer.
@@ -414,7 +416,8 @@ class GameBrain {
 			timerFireHandler(nil)
 			return }
         // 2. If gameTimeLeft is specified, call the timer fire handler with the initial value and start the gameTimer.
-		timerFireHandler(gameTimeLeft)
+        initialGameTimeLeft = gameTimeLeft!
+        timerFireHandler(gameTimeLeft)
 		gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] timer in
             // 3. Decrease gameTimeLeft by 1 every second.
 			gameTimeLeft! -= 1
@@ -441,6 +444,7 @@ class GameBrain {
 		gameTimer = nil
         // 2. Reset gameTimeLeft to nil.
 		gameTimeLeft = nil
+        initialGameTimeLeft = nil
 	}
 
 	// MARK: - Reset Game

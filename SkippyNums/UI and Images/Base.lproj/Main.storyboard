@@ -431,13 +431,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- seconds left" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfg-64-DBg">
-                                <rect key="frame" x="629" y="533" width="481" height="65"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYv-2K-VFw" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
                                 <rect key="frame" x="262" y="606" width="136" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -521,6 +514,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="24e-k1-d0o">
+                                <rect key="frame" x="632" y="586" width="478" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- seconds left" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfg-64-DBg">
+                                <rect key="frame" x="632" y="533" width="481" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -536,6 +540,7 @@
                         <outlet property="objectCollectionView" destination="1KS-f4-rKK" id="wKG-0S-SHB"/>
                         <outlet property="questionLabel" destination="ks8-dK-aEE" id="u1w-FJ-uDn"/>
                         <outlet property="scoreLabel" destination="6Zb-rR-Obm" id="5pH-Ra-Y6F"/>
+                        <outlet property="secondsLeftBar" destination="24e-k1-d0o" id="FSm-JD-1aU"/>
                         <outlet property="secondsLeftLabel" destination="Pfg-64-DBg" id="mSb-iL-8WB"/>
                         <segue destination="TrZ-Tj-9NZ" kind="presentation" identifier="Correct" id="doz-wO-aqk"/>
                         <segue destination="TrZ-Tj-9NZ" kind="presentation" identifier="Incorrect" id="2KP-CP-OUq"/>
