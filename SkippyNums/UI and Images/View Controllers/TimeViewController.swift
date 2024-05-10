@@ -95,7 +95,7 @@ class TimeViewController: UIViewController {
 		// Get the new view controller using segue.destination.
 		// Pass the selected object to the new view controller.
         if let segueIdentifier = segue.identifier {
-            // Set gameBrain.gameTimeLeft to the segue identifier's trailing number times 60, or nil if selecting "Untimed".
+            // Set gameBrain.gameLength to the segue identifier's trailing number times 60, or nil if selecting "Untimed".
             if segueIdentifier.hasPrefix("Untimed") {
                 gameBrain.gameLength = nil
             } else {
