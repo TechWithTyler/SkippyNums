@@ -91,7 +91,7 @@ class TimeViewController: UIViewController {
         if let segueIdentifier = segue.identifier {
             // Set gameBrain.gameTimeLeft to the segue identifier's trailing number times 60, or nil if selecting "Untimed".
             if segueIdentifier.hasPrefix("Untimed") {
-                gameBrain.countingBy = nil
+                gameBrain.gameTimeLeft = nil
             } else {
                 let gameTimeLeftFromSegueIdentifier = (TimeInterval(String(segueIdentifier.filter( { $0.isNumber } ))))! * 60
                 gameBrain.gameTimeLeft = gameTimeLeftFromSegueIdentifier
