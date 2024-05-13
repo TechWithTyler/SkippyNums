@@ -32,27 +32,26 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		objectCollectionView?.dataSource = self
-		objectCollectionView?.delegate = self
-		objectCollectionView?.isUserInteractionEnabled = true
-		objectCollectionView?.isAccessibilityElement = true
-		objectCollectionView?.accessibilityTraits = [.startsMediaSession]
-		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
-		tapGesture.numberOfTouchesRequired = 1
-		tapGesture.numberOfTapsRequired = 1
-		objectCollectionView?.addGestureRecognizer(tapGesture)
-		navigationItem.hidesBackButton = true
-		// Create gradient layer
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-		// Add gradient layer to view
-		view.layer.insertSublayer(gradientLayer, at: 0)
-		objectCollectionView?.backgroundColor = .clear
+        // 1. Set up the objectCollectionView and image tap gesture.
+		setupObjectCollectionView()
+        // 2. Hide the system-provided back button--a more visually-accessible "end game" button is used instead.
+        navigationItem.hidesBackButton = true
+        // 3. Set up the gradient layer.
+        setupGradient()
+        // 4. Show an example.
 		newQuestion()
 	}
+
+    func setupGradient() {
+        // 1. Create the gradient layer.
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        // 2. Add the gradient layer to the view.
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -116,20 +115,26 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		resetGame()
 	}
 
-	// MARK: - Navigation
-
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		// Get the new view controller using segue.destination.
-		// Pass the selected object to the new view controller.
-
-	}
-
 }
 
 extension LearnViewController {
 
-	// MARK: - Collection View Delegate and Data Source
+    // MARK: - Object Collection View - Setup
+
+    func setupObjectCollectionView() {
+        objectCollectionView?.dataSource = self
+        objectCollectionView?.delegate = self
+        objectCollectionView?.isUserInteractionEnabled = true
+        objectCollectionView?.isAccessibilityElement = true
+        objectCollectionView?.accessibilityTraits = [.startsMediaSession]
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        tapGesture.numberOfTouchesRequired = 1
+        tapGesture.numberOfTapsRequired = 1
+        objectCollectionView?.addGestureRecognizer(tapGesture)
+        objectCollectionView?.backgroundColor = .clear
+    }
+
+	// MARK: - Object Collection View - Delegate and Data Source
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		let number = gameBrain.numberOfImagesToShow
@@ -138,7 +143,7 @@ extension LearnViewController {
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCellLearn", for: indexPath)
-		// Create and configure the image view
+		// 1. Create and configure the image view
 		let imageView = ObjectImageView(frame: cell.contentView.bounds)
 		imageView.image = UIImage(named: gameBrain.currentObject.name)
 		imageView.contentMode = .scaleAspectFit
@@ -146,7 +151,7 @@ extension LearnViewController {
 		imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		imageView.center = cell.contentView.center
 		cell.focusEffect = nil
-		// Add the image view to the cell's content view
+		// 2. Add the image view to the cell's content view
 		cell.contentView.subviews.first?.removeFromSuperview()
 		cell.contentView.addSubview(imageView)
 		return cell
