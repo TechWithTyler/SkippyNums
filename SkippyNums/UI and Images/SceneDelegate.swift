@@ -26,6 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let windowScene = (scene as? UIWindowScene) else { return }
 		#if targetEnvironment(macCatalyst)
 		windowScene.titlebar?.titleVisibility = .hidden
+        windowScene.sizeRestrictions?.minimumSize = CGSize(width: 1024, height: 768)
 		#endif
 	}
     
