@@ -30,6 +30,13 @@ class TimeViewController: UIViewController {
         setupGradient()
 	}
 
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if gameBrain.isNewRoundInCurrentGame {
+            untimedGameButton?.isHidden = true
+		}
+	}
+
     func setupGradient() {
         // 1. Create the gradient layer.
         let gradientLayer = CAGradientLayer()
@@ -41,32 +48,30 @@ class TimeViewController: UIViewController {
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		if gameBrain.isNewRoundInCurrentGame {
-            untimedGameButton?.isHidden = true
-		}
-	}
+    func updateBackgroundColors() {
+        // Update gradient colors based on device's dark/light mode
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        }
+    }
 
-	@objc func updateBackgroundColors() {
-		// Update gradient colors based on device's dark/light mode
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		}
-	}
+    func updateGradientFrame() {
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.frame = view.bounds
+        }
+    }
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-		super.traitCollectionDidChange(previousTraitCollection)
-		// Update gradient colors when device's dark/light mode changes
-		updateBackgroundColors()
-	}
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update gradient colors when device's dark/light mode changes
+        updateBackgroundColors()
+    }
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.frame = view.bounds
-		}
-	}
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update frame of gradient layer when window size changes
+        updateGradientFrame()
+    }
 
     // MARK: - @IBActions - Game Time Selection
 

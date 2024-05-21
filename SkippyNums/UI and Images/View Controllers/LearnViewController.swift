@@ -42,17 +42,6 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		newQuestion()
 	}
 
-    func setupGradient() {
-        // 1. Create the gradient layer.
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-        // 2. Add the gradient layer to the view.
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 	}
@@ -69,25 +58,41 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 	}
 
-	@objc func updateBackgroundColors() {
-		// Update gradient colors based on device's dark/light mode
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		}
-	}
+    func setupGradient() {
+        // 1. Create the gradient layer.
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        // 2. Add the gradient layer to the view.
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-		super.traitCollectionDidChange(previousTraitCollection)
-		// Update gradient colors when device's dark/light mode changes
-		updateBackgroundColors()
-	}
+    func updateBackgroundColors() {
+        // Update gradient colors based on device's dark/light mode
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        }
+    }
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.frame = view.bounds
-		}
-	}
+    func updateGradientFrame() {
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.frame = view.bounds
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update gradient colors when device's dark/light mode changes
+        updateBackgroundColors()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update frame of gradient layer when window size changes
+        updateGradientFrame()
+    }
 
 	func resetGame() {
 		gameBrain.resetGame()

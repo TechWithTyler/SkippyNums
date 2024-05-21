@@ -56,24 +56,29 @@ class AnswerCheckViewController: UIViewController {
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
-	func updateBackgroundColors() {
-		// Update gradient colors based on device's dark/light mode
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		}
-	}
+    func updateBackgroundColors() {
+        // Update gradient colors based on device's dark/light mode
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        }
+    }
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-		super.traitCollectionDidChange(previousTraitCollection)
-		// Update gradient colors when device's dark/light mode changes
-		updateBackgroundColors()
-	}
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    func updateGradientFrame() {
         if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
             gradientLayer.frame = view.bounds
         }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update gradient colors when device's dark/light mode changes
+        updateBackgroundColors()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update frame of gradient layer when window size changes
+        updateGradientFrame()
     }
 
 	@IBAction func dismiss(_ sender: Any) {

@@ -39,25 +39,30 @@ class TimeUpViewController: UIViewController {
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
-	func updateBackgroundColors() {
-		// Update gradient colors based on device's dark/light mode
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		}
-	}
+    func updateBackgroundColors() {
+        // Update gradient colors based on device's dark/light mode
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        }
+    }
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-		super.traitCollectionDidChange(previousTraitCollection)
-		// Update gradient colors when device's dark/light mode changes
-		updateBackgroundColors()
-	}
+    func updateGradientFrame() {
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.frame = view.bounds
+        }
+    }
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.frame = view.bounds
-		}
-	}
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update gradient colors when device's dark/light mode changes
+        updateBackgroundColors()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update frame of gradient layer when window size changes
+        updateGradientFrame()
+    }
 
 	@IBAction func nextRound(_ sender: Any) {
 		// 1. Get the 2nd view controller (NewGameViewController, the view controller at index 1) in the stack.

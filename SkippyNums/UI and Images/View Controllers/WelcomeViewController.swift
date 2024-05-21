@@ -32,8 +32,9 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		// Set up the gradient layer.
+		// 1. Set up the gradient layer.
         setupGradient()
+        // 2. Configure the "maximum number of groups" picker.
         configureMaxGroupsPicker()
 	}
 
@@ -55,6 +56,12 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 		}
 	}
 
+    func updateGradientFrame() {
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.frame = view.bounds
+        }
+    }
+
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		super.traitCollectionDidChange(previousTraitCollection)
 		// Update gradient colors when device's dark/light mode changes
@@ -63,9 +70,8 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.frame = view.bounds
-		}
+        // Update frame of gradient layer when window size changes
+		updateGradientFrame()
 	}
 
     // MARK: - @IBActions
