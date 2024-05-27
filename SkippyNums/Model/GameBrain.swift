@@ -252,28 +252,6 @@ class GameBrain {
 		return finalChoices
 	}
 
-	// MARK: - Audio
-
-    // This method starts the game's audio.
-    func startAudio() {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            fatalError("Couldn't start audio: \(error)")
-        }
-    }
-    
-    // This method stops the game's audio.
-    func stopAudio() {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.ambient)
-            try AVAudioSession.sharedInstance().setActive(false)
-        } catch {
-            fatalError("Couldn't stop audio: \(error)")
-        }
-    }
-
     // This method plays the current object's sound when it's tapped/clicked. The sound is played as many times as the object appears in the tapped/clicked image.
 	func playSoundForObject() {
         // 1. Make sure the current object's sound exists in the app bundle.
