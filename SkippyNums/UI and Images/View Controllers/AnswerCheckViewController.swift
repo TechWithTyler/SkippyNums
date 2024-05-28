@@ -11,15 +11,25 @@ import SheftAppsStylishUI
 
 class AnswerCheckViewController: UIViewController {
 
+    // MARK: - @IBOutlets
+
 	@IBOutlet weak var messageLabel: UILabel?
 
 	@IBOutlet weak var checkXImageView: UIImageView?
 
 	@IBOutlet weak var dismissButton: SAIAccessibleButton?
 
+    // MARK: - Properties - Strings
+
 	var messageText: String?
 
 	var baseImageName: String?
+
+    // MARK: - Properties - System Theme
+
+    var systemTheme: UIUserInterfaceStyle {
+        return traitCollection.userInterfaceStyle
+    }
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -49,7 +59,7 @@ class AnswerCheckViewController: UIViewController {
         // 1. Create the gradient layer.
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
-        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
         // 2. Add the gradient layer to the view.
@@ -59,7 +69,7 @@ class AnswerCheckViewController: UIViewController {
     func updateBackgroundColors() {
         // Update gradient colors based on device's dark/light mode
         if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
         }
     }
 

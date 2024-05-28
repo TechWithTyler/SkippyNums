@@ -38,19 +38,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
 	@IBOutlet weak var objectCollectionView: UICollectionView?
 
-    // MARK: - Properties - Edge Insets
-
-    private var objectInsets: UIEdgeInsets {
-        let verticalInsets: CGFloat = 50
-        let horizontalInsets: CGFloat = 20
-        let insets = UIEdgeInsets(
-            top: verticalInsets,
-            left: horizontalInsets,
-            bottom: verticalInsets,
-            right: horizontalInsets)
-        return insets
-    }
-
     // MARK: - Properties - Floats
 
     private let choiceButtonTextSize: CGFloat = 50
@@ -62,6 +49,12 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - Properties - Inactivity VoiceOver Announcement Timer
 
 	var voiceOverAnnouncementTimer: Timer? = nil
+
+    // MARK: - Properties - System Theme
+
+    var systemTheme: UIUserInterfaceStyle {
+        return traitCollection.userInterfaceStyle
+    }
 
 	// MARK: - View Setup/Update
 
@@ -99,7 +92,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         // 1. Create the gradient layer.
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
-        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
         // 2. Add the gradient layer to the view.
@@ -109,7 +102,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     func updateBackgroundColors() {
         // Update gradient colors based on device's dark/light mode
         if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
         }
     }
 

@@ -15,6 +15,12 @@ class NewGameViewController: UIViewController {
 
 	var gameBrain = GameBrain.shared
 
+    // MARK: - Properties - System Theme
+
+    var systemTheme: UIUserInterfaceStyle {
+        return traitCollection.userInterfaceStyle
+    }
+
     // MARK: - View Setup/Update
 
     override func viewDidLoad() {
@@ -30,7 +36,7 @@ class NewGameViewController: UIViewController {
         // 1. Create the gradient layer.
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
-        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
         // 2. Add the gradient layer to the view.
@@ -40,7 +46,7 @@ class NewGameViewController: UIViewController {
     func updateBackgroundColors() {
         // Update gradient colors based on device's dark/light mode
         if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
         }
     }
 

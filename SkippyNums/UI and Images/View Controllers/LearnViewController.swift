@@ -11,21 +11,27 @@ import SheftAppsStylishUI
 
 class LearnViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
+    // MARK: - @IBOutlets
+
 	@IBOutlet weak var questionLabel: UILabel?
 
 	@IBOutlet weak var objectCollectionView: UICollectionView?
 
 	@IBOutlet weak var newGameButton: SAIAccessibleButton?
 
-	private let sectionInsets = UIEdgeInsets(
-		top: 50.0,
-		left: 20.0,
-		bottom: 50.0,
-		right: 20.0)
+    // MARK: - Properties - Objects
 
 	var gameBrain = GameBrain.shared
 
+    // MARK: - Properties - Inactivity VoiceOver Announcement Timer
+
 	var announcementTimer: Timer? = nil
+
+    // MARK: - Properties - System Theme
+
+    var systemTheme: UIUserInterfaceStyle {
+        return traitCollection.userInterfaceStyle
+    }
 
 	// MARK: - Setup
 
@@ -62,7 +68,7 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
         // 1. Create the gradient layer.
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
-        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
         // 2. Add the gradient layer to the view.
@@ -72,7 +78,7 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
     func updateBackgroundColors() {
         // Update gradient colors based on device's dark/light mode
         if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
         }
     }
 
@@ -167,7 +173,7 @@ extension LearnViewController {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let paddingSpace = sectionInsets.left * 2
+		let paddingSpace = objectInsets.left * 2
 		let availableWidth = view.frame.width - paddingSpace
 		let widthPerItem = availableWidth / 6.2
 		return CGSize(width: widthPerItem, height: widthPerItem)
