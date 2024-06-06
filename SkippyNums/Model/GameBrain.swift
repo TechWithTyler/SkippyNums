@@ -172,6 +172,11 @@ class GameBrain {
 
 	// MARK: - Learn Mode
 
+    func startLearnMode(withObject object: CountableObject.Type) {
+        newLearnModeExample(withObject: object)
+        playSoundForObject(forLearnModeObjectSelection: true)
+    }
+
     // This method starts learn mode with the given object.
     func newLearnModeExample(withObject object: CountableObject.Type) {
         currentObject = object.init(quantity: countingBy ?? learnModeNumbers.randomElement()!)
@@ -253,7 +258,7 @@ class GameBrain {
 	}
 
     // This method plays the current object's sound when it's tapped/clicked. The sound is played as many times as the object appears in the tapped/clicked image.
-	func playSoundForObject() {
+    func playSoundForObject(forLearnModeObjectSelection: Bool = false) {
         // 1. Make sure the current object's sound exists in the app bundle.
 		guard let soundURL = Bundle.main.url(forResource: currentObject.soundFilename, withExtension: nil) else {
 			fatalError("Failed to find \(currentObject.soundFilename) in bundle")
@@ -262,7 +267,9 @@ class GameBrain {
             // 2. Try to load the sound into the player.
 			soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
             // 3. Set the number of loops for the sound. If in learn mode, play the sound as many times as the object appears on the screen. For example, if there are 4 groups of 5 dogs, play the dog sound 20 times (play it once, then loop it 19 times). If in play or practice mode, play the sound as many times as the object appears in the tapped/clicked image.
-			if gameType == .learn {
+            if forLearnModeObjectSelection {
+                soundPlayer?.numberOfLoops = 0
+            } else if gameType == .learn {
 				soundPlayer?.numberOfLoops = currentObject.quantity * numberOfImagesToShow - 1
 			} else {
 				soundPlayer?.numberOfLoops = currentObject.quantity - 1

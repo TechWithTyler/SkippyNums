@@ -480,7 +480,7 @@
                                 <rect key="frame" x="262" y="606" width="136" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="A">
+                                <buttonConfiguration key="configuration" style="filled" title="2">
                                     <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -491,7 +491,7 @@
                                 <rect key="frame" x="420" y="606" width="135" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="B">
+                                <buttonConfiguration key="configuration" style="filled" title="8">
                                     <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -502,7 +502,7 @@
                                 <rect key="frame" x="578" y="606" width="135" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="C">
+                                <buttonConfiguration key="configuration" style="filled" title="4">
                                     <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -513,7 +513,7 @@
                                 <rect key="frame" x="737" y="606" width="134" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="D">
+                                <buttonConfiguration key="configuration" style="filled" title="10">
                                     <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
                                 </buttonConfiguration>
                                 <connections>

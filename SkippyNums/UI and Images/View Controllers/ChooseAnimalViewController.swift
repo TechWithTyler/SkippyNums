@@ -71,22 +71,22 @@ class ChooseAnimalViewController: UIViewController {
 	}
 
 	@IBAction func birdsSelected(_ sender: Any) {
-        gameBrain.newLearnModeExample(withObject: Bird.self)
+        gameBrain.startLearnMode(withObject: Bird.self)
 		performSegue(withIdentifier: "StartLearn", sender: sender)
 	}
 
 	@IBAction func monkeysSelected(_ sender: Any) {
-		gameBrain.newLearnModeExample(withObject: Monkey.self)
+		gameBrain.startLearnMode(withObject: Monkey.self)
 		performSegue(withIdentifier: "StartLearn", sender: sender)
 	}
 
     @IBAction func dogsSelected(_ sender: Any) {
-        gameBrain.newLearnModeExample(withObject: Dog.self)
+        gameBrain.startLearnMode(withObject: Dog.self)
         performSegue(withIdentifier: "StartLearn", sender: sender)
     }
 
     @IBAction func catsSelected(_ sender: Any) {
-        gameBrain.newLearnModeExample(withObject: Cat.self)
+        gameBrain.startLearnMode(withObject: Cat.self)
         performSegue(withIdentifier: "StartLearn", sender: sender)
     }
 
