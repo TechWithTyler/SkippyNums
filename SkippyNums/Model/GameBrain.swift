@@ -244,7 +244,7 @@ class GameBrain {
         }
     }
 
-    // This method creates 5 choices based on the number of images to show and the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place.
+    // This method creates 5 choices whose Int values are based on the number of images to show and the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place.
     func getChoices() -> [Int] {
         // 1. Create choices.
         // Below correct answer
@@ -256,7 +256,7 @@ class GameBrain {
         // Above correct answer
         let incorrectChoice3 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
         let incorrectChoice4 = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 2)
-        // 2. Shuffle the incorrect answers. If incorrect choice 1A resolves to 0, use incorrect choice 1B instead, which is 1 multiple higher than incorrect choice 4.
+        // 2. Shuffle the 4 incorrect choices. If incorrect choice 1A is 0, use incorrect choice 1B instead, which is 1 multiple higher than incorrect choice 4.
         let shuffledIncorrectChoices = [incorrectChoice1A == 0 ? incorrectChoice1B : incorrectChoice1A, incorrectChoice2, incorrectChoice3, incorrectChoice4].shuffled()
         // 3. Drop the last incorrect choice and append the correct choice.
         var finalChoices = Array(shuffledIncorrectChoices.dropLast())
@@ -265,6 +265,8 @@ class GameBrain {
         finalChoices.shuffle()
         return finalChoices
     }
+
+    // MARK: - Sound
 
     // This method plays the current object's sound when it's tapped/clicked, or when selecting the object to count in learn mode. When tapping/clicking an image, the sound is played as many times as the object appears in the image. When selecting the object to count in learn mode, the sound is played only once.
     func playSoundForObject(forLearnModeObjectSelection: Bool = false) {
