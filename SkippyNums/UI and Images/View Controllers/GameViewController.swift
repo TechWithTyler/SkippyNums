@@ -217,7 +217,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         // 1. Check whether the selected answer is correct, incorrect, or the 3rd incorrect one in a row.
 		guard let answer = sender.currentTitle else { return }
 		let correct = gameBrain.checkAnswer(answer)
-		let incorrectTooManyTimes = !correct && gameBrain.tooManyIncorrect
+		let incorrectTooManyTimes = !correct && gameBrain.tooManyIncorrectAnswers
 		// 2. Update the stat display.
         updateStatDisplay()
         // 3. Choose the sheet to show and decide whether to advance to a new question based on whether the answer is correct, incorrect, or the 3rd incorrect one in a row.
