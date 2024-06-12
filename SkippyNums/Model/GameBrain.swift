@@ -182,6 +182,10 @@ class GameBrain {
 
     // This method presents a new example in learn mode.
     func newLearnModeExample(withObject object: CountableObject.Type) {
+        let playingSoundForObjectSelection = soundPlayer?.numberOfLoops == 0
+        if !playingSoundForObjectSelection {
+            soundPlayer?.stop()
+        }
         currentObject = object.init(quantity: countingBy ?? learnModeNumbers.randomElement()!)
     }
 
