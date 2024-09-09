@@ -115,10 +115,9 @@ class NewGameViewController: UIViewController {
     // MARK: - Navigation - Back @IBAction
 
 	@IBAction func back(_ sender: SAIAccessibleButton) {
-		gameBrain.countingBy = nil
-		gameBrain.triesInGame = 0
-		gameBrain.correctAnswersInGame = 0
-		gameBrain.isNewRoundInCurrentGame = false
+        // 1. Reset the game.
+		gameBrain.resetGame()
+        // 2. Go back to the previous screen.
 		navigationController?.popViewController(animated: true)
 	}
 

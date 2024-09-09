@@ -104,10 +104,13 @@ extension WelcomeViewController {
 	// MARK: - Max Groups Picker - Configuration
 
 	func configureMaxGroupsPicker() {
+        // 1. Configure accessibility of the max groups picker.
         maxGroupsPicker?.isAccessibilityElement = true
 		maxGroupsPicker?.accessibilityLabel = "Maximum number of groups"
+        // 2. Set the delegate and data source.
 		maxGroupsPicker?.delegate = self
 		maxGroupsPicker?.dataSource = self
+        // Select the row corresponding to the current setting.
 		maxGroupsPicker?.selectRow(settingsData.tenFrame ? 1 : 0, inComponent: 0, animated: true)
 	}
 
@@ -115,12 +118,14 @@ extension WelcomeViewController {
 
     // Returns the number of components (wheels) for the picker.
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {
-		return 1
+        let numberOfWheels = 1
+        return numberOfWheels
 	}
 
     // Returns the number of rows for a given component (wheel) in the picker.
 	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		return 2
+        let numberOfOptions = 2
+        return numberOfOptions
 	}
 
     // Handles selection of picker rows on the given wheel.
