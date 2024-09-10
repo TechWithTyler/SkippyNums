@@ -110,8 +110,8 @@ class TimeViewController: UIViewController {
             if segueIdentifier.hasPrefix("Untimed") {
                 gameBrain.gameLength = nil
             } else {
-                let gameTimeLeftFromSegueIdentifier = (TimeInterval(String(segueIdentifier.filter( { $0.isNumber } ))))! * 60
-                gameBrain.gameLength = gameTimeLeftFromSegueIdentifier
+                let gameLengthFromSegueIdentifier = (TimeInterval(String(segueIdentifier.filter( { $0.isNumber } ))))! * 60
+                gameBrain.gameLength = gameLengthFromSegueIdentifier
             }
         }
 	}
