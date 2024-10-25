@@ -90,7 +90,7 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        // Update gradient colors when device's dark/light mode changes
+        // Update the gradient colors when the device's dark/light mode changes
         updateBackgroundColors()
     }
 

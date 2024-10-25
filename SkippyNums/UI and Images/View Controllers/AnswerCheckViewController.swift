@@ -21,8 +21,10 @@ class AnswerCheckViewController: UIViewController {
 
     // MARK: - Properties - Strings
 
+    // The message text passed in from the GameViewController.
 	var messageText: String?
 
+    // The base image name passed in from the GameViewController. The base image name doesn't include the ".circle.fill" suffix as it's common to both images, so it's applied when setting the image here.
 	var baseImageName: String?
 
     // MARK: - Properties - System Theme
@@ -81,7 +83,7 @@ class AnswerCheckViewController: UIViewController {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        // Update gradient colors when device's dark/light mode changes
+        // Update the gradient colors when the device's dark/light mode changes
         updateBackgroundColors()
     }
 
