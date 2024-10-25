@@ -65,8 +65,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         navigationItem.hidesBackButton = true
         // 2. Set up the objectCollectionView's delegate and data source.
         setupObjectCollectionView()
-        // 3. Set up the labels.
+        // 3. Set up the labels and seconds left bar.
         setupLabels()
+        setupSecondsLeftBar()
 		// 4. Set up the gradient layer.
         setupGradient()
         // 5. Display a question to the player.
@@ -99,6 +100,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
+    func setupSecondsLeftBar() {
+        let shouldFillTrack = UIAccessibility.isDarkerSystemColorsEnabled
+        secondsLeftBar?.trackTintColor = shouldFillTrack ? .lightGray.withAlphaComponent(0.8) : .clear
+    }
+
     func updateBackgroundColors() {
         // Update gradient colors based on device's dark/light mode
         if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
@@ -116,6 +122,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.traitCollectionDidChange(previousTraitCollection)
         // Update gradient colors when device's dark/light mode changes
         updateBackgroundColors()
+        setupSecondsLeftBar()
     }
 
     override func viewDidLayoutSubviews() {
