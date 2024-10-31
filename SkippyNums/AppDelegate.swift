@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+        // 1. Configure the game's audio.
         configureAudioSession()
         silentAudioPlayer = SilentAudioPlayer()
 		return true
@@ -50,42 +51,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
-class SilentAudioPlayer {
-    private var audioEngine: AVAudioEngine
-    private var playerNode: AVAudioPlayerNode
-    private var audioFormat: AVAudioFormat
-
-    init() {
-        self.audioEngine = AVAudioEngine()
-        self.playerNode = AVAudioPlayerNode()
-        self.audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)!
-
-        self.audioEngine.attach(self.playerNode)
-        self.audioEngine.connect(self.playerNode, to: self.audioEngine.mainMixerNode, format: self.audioFormat)
-
-        self.scheduleSilentBuffer()
-
-        do {
-            try self.audioEngine.start()
-            self.playerNode.play()
-        } catch {
-            print("Failed to start audio engine: \(error)")
-        }
-    }
-
-    private func scheduleSilentBuffer() {
-        let bufferDuration: TimeInterval = 1 // seconds
-        let frameCount = UInt32(bufferDuration * self.audioFormat.sampleRate)
-
-        if let buffer = AVAudioPCMBuffer(pcmFormat: self.audioFormat, frameCapacity: frameCount) {
-            buffer.frameLength = frameCount
-            memset(buffer.floatChannelData![0], 0, Int(buffer.frameCapacity) * MemoryLayout<Float>.size)
-            memset(buffer.floatChannelData![1], 0, Int(buffer.frameCapacity) * MemoryLayout<Float>.size)
-
-            self.playerNode.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: nil)
-        }
-    }
-}
-
 

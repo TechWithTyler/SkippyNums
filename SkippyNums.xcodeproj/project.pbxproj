@@ -12,6 +12,7 @@
 		8D0BBD1A29BFB81B00AE7A62 /* correct.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBD1829BFB81B00AE7A62 /* correct.caf */; };
 		8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */; };
 		8D0E1EED2A03282000B3FA70 /* TimeUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E1EEC2A03282000B3FA70 /* TimeUpViewController.swift */; };
+		8D2BAF572CD41F0C0016C61E /* SilentAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2BAF562CD41F0C0016C61E /* SilentAudioPlayer.swift */; };
 		8D31D8582B27F834009F29EE /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D8572B27F834009F29EE /* Globals.swift */; };
 		8D31D85E2B27FB15009F29EE /* Cow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D85D2B27FB15009F29EE /* Cow.swift */; };
 		8D31D8602B27FB3B009F29EE /* Elephant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31D85F2B27FB3B009F29EE /* Elephant.swift */; };
@@ -87,6 +88,7 @@
 		8D0BBD1829BFB81B00AE7A62 /* correct.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = correct.caf; sourceTree = "<group>"; };
 		8D0BBD1929BFB81B00AE7A62 /* incorrect.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = incorrect.caf; sourceTree = "<group>"; };
 		8D0E1EEC2A03282000B3FA70 /* TimeUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUpViewController.swift; sourceTree = "<group>"; };
+		8D2BAF562CD41F0C0016C61E /* SilentAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentAudioPlayer.swift; sourceTree = "<group>"; };
 		8D31D8572B27F834009F29EE /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		8D31D85D2B27FB15009F29EE /* Cow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cow.swift; sourceTree = "<group>"; };
 		8D31D85F2B27FB3B009F29EE /* Elephant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elephant.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				8D31D8572B27F834009F29EE /* Globals.swift */,
+				8D2BAF562CD41F0C0016C61E /* SilentAudioPlayer.swift */,
 				8DA632382A799C9D00A60458 /* PrivacyInfo.xcprivacy */,
 				8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */,
 				8D7B7A1829A5656A00D3C727 /* Info.plist */,
@@ -521,6 +524,7 @@
 				8D31D8622B27FB44009F29EE /* Car.swift in Sources */,
 				8D31D85E2B27FB15009F29EE /* Cow.swift in Sources */,
 				8DCB2D1A2B9BB4AD0034D1D9 /* Cat.swift in Sources */,
+				8D2BAF572CD41F0C0016C61E /* SilentAudioPlayer.swift in Sources */,
 				8DA7D5582A818098005AC588 /* ChooseAnimalViewController.swift in Sources */,
 				8D04D70C29DCB71A009670F2 /* NewGameViewController.swift in Sources */,
 				8D31D8682B27FBA4009F29EE /* Monkey.swift in Sources */,
