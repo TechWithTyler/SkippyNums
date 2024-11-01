@@ -70,10 +70,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	}
 
     func pauseGame() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        appDelegate.silentAudioPlayer?.stopSilenceTrack()
         gameBrain.pauseGameTimer()
     }
 
     func resumeGame() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        appDelegate.silentAudioPlayer?.startSilenceTrack()
         if let navigationController = window?.rootViewController as? UINavigationController, let gameViewController = navigationController.topViewController as? GameViewController {
             gameViewController.setupGameTimer(toResume: true)
 

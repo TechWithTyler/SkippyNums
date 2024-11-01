@@ -14,8 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var silentAudioPlayer: SilentAudioPlayer?
 
-    var gameBrain = GameBrain.shared
-
     // MARK: - Application Lifecycle - Setup
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

@@ -62,4 +62,9 @@ class SilentAudioPlayer {
         }
     }
 
+    func stopSilenceTrack() {
+        audioEngine.stop()
+        playerNode.stop()
+    }
+
 }
