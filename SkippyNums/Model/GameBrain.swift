@@ -99,7 +99,7 @@ class GameBrain {
     var triesInGame: Int = 0
 
     // The number of incorrect answers for the current question.
-    var numberOfIncorrectAnswers = 0
+    var numberOfIncorrectAnswersForQuestion = 0
 
     // The number the player is counting by, or nil if playing the Mix game. This determines which images to show.
     var countingBy: Int?
@@ -129,12 +129,12 @@ class GameBrain {
 
     // MARK: - Properties - Booleans
 
-    // Whether the player is starting a new game (true) or new round in the current game (false) when the timer goes off.
+    // Whether the player is starting a new game (true) or a new round in the current game (false) when the timer goes off.
     var isNewRoundInCurrentGame: Bool = false
 
     // Whether the player got too many incorrect answers in a row.
     var tooManyIncorrectAnswers: Bool {
-        return numberOfIncorrectAnswers == 3
+        return numberOfIncorrectAnswersForQuestion == 3
     }
 
     // MARK: - Properties - Strings
@@ -156,7 +156,6 @@ class GameBrain {
 
     // The accessibility text for the background.
     var backgroundAccessibilityText: String {
-        let normalString = "\(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject())"
         if gameType == .learn {
             var learnString = "There are \(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject()): "
             for n in 1...numberOfImagesToShow {
@@ -168,6 +167,7 @@ class GameBrain {
             learnString.append(". There are \(numberOfImagesToShow*currentObject.quantity) \(getDisplayNameForObject()) altogether.")
             return learnString
         } else {
+            let normalString = "\(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject())"
             return normalString
         }
     }
@@ -176,32 +176,37 @@ class GameBrain {
 
     // This method starts learn mode with the given object.
     func startLearnMode(withObject object: CountableObject.Type) {
+        // 1. Get a new learn mode example with object.
         newLearnModeExample(withObject: object)
+        // 2. Play the object's sound once.
         playSoundForObject(forLearnModeObjectSelection: true)
     }
 
     // This method presents a new example in learn mode.
     func newLearnModeExample(withObject object: CountableObject.Type) {
+        // 1. If the object's sound is playing for object selection, stop it.
         let playingSoundForObjectSelection = soundPlayer?.numberOfLoops == 0
         if !playingSoundForObjectSelection {
             soundPlayer?.stop()
         }
+        // 2. Set currentObject to a new instance of object with the selected quantity.
         currentObject = object.init(quantity: countingBy ?? learnModeNumbers.randomElement()!)
     }
 
     // MARK: - New Question
 
-    // This method presents a new question.
+    // This method presents a new question in play or practice mode, or a new learn mode example in learn mode.
     func newQuestion() {
         // 1. Determine the maximum number of images to show.
         let maxNumber = settingsData.tenFrame ? 10 : 5
         numberOfImagesToShow = Int.random(in: 2...maxNumber)
         // 2. Reset the incorrect answer count to 0.
-        numberOfIncorrectAnswers = 0
+        numberOfIncorrectAnswersForQuestion = 0
         // 3. If in learn mode, present a new example.
         if gameType == .learn {
             // type(of:) allows you to get the dynamic type (e.g. Dog) from the given value's static type (e.g. currentObject which is anything that conforms to CountableObject).
-            newLearnModeExample(withObject: type(of: currentObject))
+            let object = type(of: currentObject)
+            newLearnModeExample(withObject: object)
         } else {
             // 4. If in play or practice mode, set the current object to a new object.
             let previousObjectName = currentObject.name
@@ -211,7 +216,7 @@ class GameBrain {
             } else {
                 currentObject = GameBrain.objectsToCount.filter({$0.quantity == countingBy}).randomElement()!
             }
-            // 5. If the next question/learn mode example is identical to the previous one (i.e., the new question's object and number of images to show are the same), try again until a different question (i.e., either the object or number of images to show are different) is shown.
+            // 5. If the next question is identical to the previous one (i.e., the new question's object and number of images to show are the same), try again until a different question (i.e., either the object or number of images to show are different) is shown.
             let isSameQuestionContent = currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages
             if isSameQuestionContent {
                 newQuestion()
@@ -281,11 +286,12 @@ class GameBrain {
         do {
             // 2. Try to load the sound into the player.
             soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
-            // 3. Set the number of loops for the sound. If selecting the object to count in learn mode, play it only once (no loops). If in learn mode, play the sound as many times as the object appears on the screen. For example, if there are 4 groups of 5 dogs, play the dog sound 20 times (play it once, then loop it 19 times). If in play or practice mode, play the sound as many times as the object appears in the tapped/clicked image.
+            // 3. Set the number of loops for the sound. If selecting the object to count in learn mode, play it only once (no loops). If in learn mode, play the sound as many times as the object appears on the screen. For example, if there are 4 groups of 5 dogs, play the dog sound 20 times (play it once, then loop it 19 times). If in play or practice mode, play the sound as many times as the object appears in the tapped/clicked image. For example, for a group of 5 cats, play the cat sound 5 times (play it once, then loop it 4 times).
             if forLearnModeObjectSelection {
                 soundPlayer?.numberOfLoops = 0
             } else if gameType == .learn {
-                soundPlayer?.numberOfLoops = currentObject.quantity * numberOfImagesToShow - 1
+                let numberOfObjectsOnScreen = currentObject.quantity * numberOfImagesToShow
+                soundPlayer?.numberOfLoops = numberOfObjectsOnScreen - 1
             } else {
                 soundPlayer?.numberOfLoops = currentObject.quantity - 1
             }
@@ -348,7 +354,7 @@ class GameBrain {
             // 4. Try to load the sound into the player.
             soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
             if !correct {
-                // 5. For the "incorrect answer" sound, slow it down to half-speed.
+                // 5. For the "incorrect answer" sound, slow it down to half-speed since the sound isn't very long.
                 soundPlayer?.enableRate = true
                 soundPlayer?.rate = 0.5
             }
@@ -402,7 +408,7 @@ class GameBrain {
             correctAnswersInGame += 1
         } else {
             triesInGame += 1
-            numberOfIncorrectAnswers += 1
+            numberOfIncorrectAnswersForQuestion += 1
         }
         return correct
     }
@@ -414,7 +420,8 @@ class GameBrain {
         // 1. If gameTimeLeft is nil, call the timer fire handler with a nil value and don't start the timer.
         guard gameLength != nil else {
             timerFireHandler(nil)
-            return }
+            return
+        }
         // 2. If gameLength is specified, call the timer fire handler with the initial value and start the gameTimer.
         gameTimeLeft = gameLength
         timerFireHandler(gameTimeLeft)
@@ -435,6 +442,7 @@ class GameBrain {
     // This method pauses the game timer.
     func pauseGameTimer() {
         gameTimer?.invalidate()
+        gameTimer = nil
     }
 
     // This method stops the game timer and resets the properties back to default.

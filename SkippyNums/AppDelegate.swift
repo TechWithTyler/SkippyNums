@@ -11,10 +11,12 @@ import AVFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    // MARK: - Application Lifecycle - Setup
 
     var silentAudioPlayer: SilentAudioPlayer?
+
+    var gameBrain = GameBrain.shared
+
+    // MARK: - Application Lifecycle - Setup
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
@@ -23,6 +25,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         silentAudioPlayer = SilentAudioPlayer()
 		return true
 	}
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        silentAudioPlayer?.audioEngine.stop()
+        if gameBrain.gameTimeLeft != nil {
+            gameBrain.pauseGameTimer()
+        }
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        do {
+            try silentAudioPlayer?.audioEngine.start()
+        } catch {
+            print("Failed to resume silence: \(error)")
+        }
+        if let windowScene = application.connectedScenes.first as? UIWindowScene, let window = windowScene.windows.first, let gameViewController = window.rootViewController as? GameViewController {
+            gameViewController.setupGameTimer()
+        }
+    }
 
 	// MARK: - UISceneSession Lifecycle - Configuration
 
@@ -39,6 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
 		// Use this method to release any resources that were specific to the discarded scenes, as they will not return.
 	}
+
+    // MARK: - Audio Session Configuration
 
     func configureAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
