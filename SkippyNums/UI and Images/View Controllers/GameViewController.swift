@@ -134,9 +134,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     // MARK: - Game Timer - Setup
 
-    func setupGameTimer() {
+    func setupGameTimer(toResume: Bool = false) {
         // 1. Set up the gameTimer.
-        gameBrain.setupGameTimer { [self] gameTimeLeft in
+        gameBrain.setupGameTimer(toResume: toResume) { [self] gameTimeLeft in
             // 2. Update the display when the timer fires if playing a timed game, or just once if playing an untimed or practice game.
             updateGameTimeDisplay(for: gameTimeLeft)
         } timerEndHandler: { [self] in

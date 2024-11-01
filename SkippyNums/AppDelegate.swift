@@ -26,24 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		return true
 	}
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        silentAudioPlayer?.audioEngine.stop()
-        if gameBrain.gameTimeLeft != nil {
-            gameBrain.pauseGameTimer()
-        }
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        do {
-            try silentAudioPlayer?.audioEngine.start()
-        } catch {
-            print("Failed to resume silence: \(error)")
-        }
-        if let windowScene = application.connectedScenes.first as? UIWindowScene, let window = windowScene.windows.first, let gameViewController = window.rootViewController as? GameViewController {
-            gameViewController.setupGameTimer()
-        }
-    }
-
 	// MARK: - UISceneSession Lifecycle - Configuration
 
 	func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

@@ -416,15 +416,17 @@ class GameBrain {
     // MARK: - Game Timer
 
     // This method winds up the game timer, calling the timer fire handler every second, and calling the timer end handler when the timer ends.
-    func setupGameTimer(_ timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
-        // 1. If gameTimeLeft is nil, call the timer fire handler with a nil value and don't start the timer.
+    func setupGameTimer(toResume: Bool = false, timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
+        // 1. If gameLength is nil, call the timer fire handler with a nil value and don't start the timer.
         guard gameLength != nil else {
             timerFireHandler(nil)
             return
         }
         // 2. If gameLength is specified, call the timer fire handler with the initial value and start the gameTimer.
-        gameTimeLeft = gameLength
-        timerFireHandler(gameTimeLeft)
+        if !toResume {
+            gameTimeLeft = gameLength
+            timerFireHandler(gameTimeLeft)
+        }
         gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] timer in
             // 3. Decrease gameTimeLeft by 1 every second.
             gameTimeLeft! -= 1
