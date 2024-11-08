@@ -15,41 +15,58 @@ class NewGameViewController: UIViewController {
 
 	var gameBrain = GameBrain.shared
 
+    // MARK: - Properties - System Theme
+
+    var systemTheme: UIUserInterfaceStyle {
+        return traitCollection.userInterfaceStyle
+    }
+
     // MARK: - View Setup/Update
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        // 1. Hide the system-provided back button--a more visually-accessible back button is used instead.
         navigationItem.hidesBackButton = true
-        // Create gradient layer
+        // 2. Set up the gradient layer.
+        setupGradient()
+    }
+
+    func setupGradient() {
+        // 1. Create the gradient layer.
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
-        gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-        // Add gradient layer to view
+        // 2. Add the gradient layer to the view.
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
-	@objc func updateBackgroundColors() {
-		// Update gradient colors based on device's dark/light mode
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		}
-	}
+    func updateBackgroundColors() {
+        // Update gradient colors based on device's dark/light mode
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
+        }
+    }
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-		super.traitCollectionDidChange(previousTraitCollection)
-		// Update gradient colors when device's dark/light mode changes
-		updateBackgroundColors()
-	}
+    func updateGradientFrame() {
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.frame = view.bounds
+        }
+    }
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.frame = view.bounds
-		}
-	}
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update the gradient colors when the device's dark/light mode changes
+        updateBackgroundColors()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update frame of gradient layer when window size changes
+        updateGradientFrame()
+    }
 
     // MARK: - @IBActions - Quantity Selection
 
@@ -98,10 +115,9 @@ class NewGameViewController: UIViewController {
     // MARK: - Navigation - Back @IBAction
 
 	@IBAction func back(_ sender: SAIAccessibleButton) {
-		gameBrain.countingBy = nil
-		gameBrain.triesInGame = 0
-		gameBrain.correctAnswersInGame = 0
-		gameBrain.isNewRoundInCurrentGame = false
+        // 1. Reset the game.
+		gameBrain.resetGame()
+        // 2. Go back to the previous screen.
 		navigationController?.popViewController(animated: true)
 	}
 

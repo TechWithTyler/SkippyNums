@@ -11,63 +11,82 @@ import SheftAppsStylishUI
 
 class ChooseAnimalViewController: UIViewController {
 
+    // MARK: - Properties - Objects
+
 	var gameBrain = GameBrain.shared
+
+    // MARK: - Properties - System Theme
+
+    var systemTheme: UIUserInterfaceStyle {
+        return traitCollection.userInterfaceStyle
+    }
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		navigationItem.hidesBackButton = true
-		// Create gradient layer
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-		// Add gradient layer to view
-		view.layer.insertSublayer(gradientLayer, at: 0)
+        // 1. Hide the system-provided back button--a more visually-accessible back button is used instead.
+        navigationItem.hidesBackButton = true
+        // 2. Set up the gradient layer.
+        setupGradient()
 	}
 
-	@objc func updateBackgroundColors() {
-		// Update gradient colors based on device's dark/light mode
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		}
-	}
+    func setupGradient() {
+        // 1. Create the gradient layer.
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        // 2. Add the gradient layer to the view.
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-		super.traitCollectionDidChange(previousTraitCollection)
-		// Update gradient colors when device's dark/light mode changes
-		updateBackgroundColors()
-	}
+    func updateBackgroundColors() {
+        // Update gradient colors based on device's dark/light mode
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
+        }
+    }
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.frame = view.bounds
-		}
-	}
+    func updateGradientFrame() {
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.frame = view.bounds
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update the gradient colors when the device's dark/light mode changes
+        updateBackgroundColors()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update frame of gradient layer when window size changes
+        updateGradientFrame()
+    }
 
 	@IBAction func back(_ sender: SAIAccessibleButton) {
 		navigationController?.popViewController(animated: true)
 	}
 
 	@IBAction func birdsSelected(_ sender: Any) {
-        gameBrain.newLearnModeExample(withObject: Bird.self)
+        gameBrain.startLearnMode(withObject: Bird.self)
 		performSegue(withIdentifier: "StartLearn", sender: sender)
 	}
 
 	@IBAction func monkeysSelected(_ sender: Any) {
-		gameBrain.newLearnModeExample(withObject: Monkey.self)
+		gameBrain.startLearnMode(withObject: Monkey.self)
 		performSegue(withIdentifier: "StartLearn", sender: sender)
 	}
 
     @IBAction func dogsSelected(_ sender: Any) {
-        gameBrain.newLearnModeExample(withObject: Dog.self)
+        gameBrain.startLearnMode(withObject: Dog.self)
         performSegue(withIdentifier: "StartLearn", sender: sender)
     }
 
     @IBAction func catsSelected(_ sender: Any) {
-        gameBrain.newLearnModeExample(withObject: Cat.self)
+        gameBrain.startLearnMode(withObject: Cat.self)
         performSegue(withIdentifier: "StartLearn", sender: sender)
     }
 

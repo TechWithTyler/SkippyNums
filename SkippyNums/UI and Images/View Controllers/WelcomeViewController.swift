@@ -27,40 +27,57 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     // The options in the "maximum number of groups" picker.
     var maxGroupsOptions = [5, 10]
 
+    // MARK: - Properties - System Theme
+
+    var systemTheme: UIUserInterfaceStyle {
+        return traitCollection.userInterfaceStyle
+    }
+
     // MARK: - View Setup/Update
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		// Create gradient layer
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
-		gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-		gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-		configureMaxGroupsPicker()
-		// Add gradient layer to view
-		view.layer.insertSublayer(gradientLayer, at: 0)
+		// 1. Set up the gradient layer.
+        setupGradient()
+        // 2. Configure the "maximum number of groups" picker.
+        configureMaxGroupsPicker()
 	}
 
-	@objc func updateBackgroundColors() {
+    func setupGradient() {
+        // 1. Create the gradient layer.
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        // 2. Add the gradient layer to the view.
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+	func updateBackgroundColors() {
 		// Update gradient colors based on device's dark/light mode
 		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.colors = traitCollection.userInterfaceStyle == .dark ? gradientColorsDark : gradientColorsLight
+			gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
 		}
 	}
 
+    func updateGradientFrame() {
+        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
+            gradientLayer.frame = view.bounds
+        }
+    }
+
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		super.traitCollectionDidChange(previousTraitCollection)
-		// Update gradient colors when device's dark/light mode changes
+		// Update the gradient colors when the device's dark/light mode changes
 		updateBackgroundColors()
 	}
 
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-			gradientLayer.frame = view.bounds
-		}
+        // Update frame of gradient layer when window size changes
+		updateGradientFrame()
 	}
 
     // MARK: - @IBActions
@@ -87,10 +104,13 @@ extension WelcomeViewController {
 	// MARK: - Max Groups Picker - Configuration
 
 	func configureMaxGroupsPicker() {
+        // 1. Configure accessibility of the max groups picker.
         maxGroupsPicker?.isAccessibilityElement = true
 		maxGroupsPicker?.accessibilityLabel = "Maximum number of groups"
+        // 2. Set the delegate and data source.
 		maxGroupsPicker?.delegate = self
 		maxGroupsPicker?.dataSource = self
+        // Select the row corresponding to the current setting.
 		maxGroupsPicker?.selectRow(settingsData.tenFrame ? 1 : 0, inComponent: 0, animated: true)
 	}
 
@@ -98,12 +118,14 @@ extension WelcomeViewController {
 
     // Returns the number of components (wheels) for the picker.
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {
-		return 1
+        let numberOfWheels = 1
+        return numberOfWheels
 	}
 
     // Returns the number of rows for a given component (wheel) in the picker.
 	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		return 2
+        let numberOfOptions = 2
+        return numberOfOptions
 	}
 
     // Handles selection of picker rows on the given wheel.

@@ -26,7 +26,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let windowScene = (scene as? UIWindowScene) else { return }
 		#if targetEnvironment(macCatalyst)
 		windowScene.titlebar?.titleVisibility = .hidden
+        windowScene.sizeRestrictions?.minimumSize = CGSize(width: 1024, height: 768)
 		#endif
+        if gameBrain.gameLength != nil {
+            resumeGame()
+        }
 	}
     
     // MARK: - Scene Lifecycle - Disconnect
@@ -43,30 +47,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	func sceneDidBecomeActive(_ scene: UIScene) {
 		// Called when the scene has moved from an inactive state to an active state.
 		// Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        gameBrain.startAudio()
-	}
+        resumeGame()
+    }
 
-	func sceneWillResignActive(_ scene: UIScene) {
-		// Called when the scene will move from an active state to an inactive state.
-		// This may occur due to temporary interruptions (ex. an incoming phone call).
-        gameBrain.stopAudio()
-	}
-    
+    func sceneWillResignActive(_ scene: UIScene) {
+        // Called when the scene will move from an active state to an inactive state.
+        // This may occur due to temporary interruptions (ex. an incoming phone call).
+        pauseGame()
+    }
+
     // MARK: - Scene Lifecycle - Background/Foreground
 
-	func sceneWillEnterForeground(_ scene: UIScene) {
-		// Called as the scene transitions from the background to the foreground.
-		// Use this method to undo the changes made on entering the background.
-        gameBrain.startAudio()
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        // Called as the scene transitions from the background to the foreground.
+        // Use this method to undo the changes made on entering the background.
+    }
+
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        // Called as the scene transitions from the foreground to the background.
+        // Use this method to save data, release shared resources, and store enough scene-specific state information
+        // to restore the scene back to its current state.
 	}
 
-	func sceneDidEnterBackground(_ scene: UIScene) {
-		// Called as the scene transitions from the foreground to the background.
-		// Use this method to save data, release shared resources, and store enough scene-specific state information
-		// to restore the scene back to its current state.
-        gameBrain.stopAudio()
-	}
+    func pauseGame() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        appDelegate.silentAudioPlayer?.stopSilenceTrack()
+        gameBrain.pauseGameTimer()
+    }
 
+    func resumeGame() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        appDelegate.silentAudioPlayer?.startSilenceTrack()
+        if let navigationController = window?.rootViewController as? UINavigationController, let gameViewController = navigationController.topViewController as? GameViewController {
+            gameViewController.setupGameTimer(toResume: true)
+
+        }
+    }
 
 }
 

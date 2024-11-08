@@ -17,6 +17,8 @@ class ObjectImageView: UIImageView {
     // This method highlights the image's background.
 	func highlightBackground() {
 		backgroundColor = .gray.withAlphaComponent(0.3)
+        backgroundHighlightTimer?.invalidate()
+        backgroundHighlightTimer = nil
 		backgroundHighlightTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [self] timer in
 			backgroundColor = nil
 		})
@@ -35,8 +37,8 @@ class ObjectImageView: UIImageView {
 			responder = next
 			if let viewController = responder as? GameViewController {
 				// Reset the VoiceOver announcement timer
-				viewController.announcementTimer?.invalidate()
-				viewController.announcementTimer = nil
+				viewController.voiceOverAnnouncementTimer?.invalidate()
+				viewController.voiceOverAnnouncementTimer = nil
 				break
 			}
 		}
