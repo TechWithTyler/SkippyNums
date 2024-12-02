@@ -79,11 +79,11 @@ class TimeUpViewController: UIViewController {
 	@IBAction func nextRound(_ sender: Any) {
 		// 1. Get the 2nd view controller (NewGameViewController, the view controller at index 1) in the stack.
         /* View controller stack:
-         4: TimeUpViewController
-         3: GameViewController
-         2: TimeViewController
-         1: NewGameViewController
-         0: WelcomeViewController
+         Index 4: TimeUpViewController
+         Index 3: GameViewController
+         Index 2: TimeViewController
+         Index 1: NewGameViewController
+         Index 0: WelcomeViewController
          */
         guard let viewControllers = navigationController?.viewControllers, let newGameViewController = viewControllers[1] as? NewGameViewController else {
 			return
