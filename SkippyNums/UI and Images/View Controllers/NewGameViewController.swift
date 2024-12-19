@@ -68,49 +68,45 @@ class NewGameViewController: UIViewController {
         updateGradientFrame()
     }
 
-    // MARK: - @IBActions - Quantity Selection
+    // MARK: - Quantity Selection - @IBActions
 
     // For these @IBActions, the segue to use depends on the game type (play/practice/learn) selected on the main menu.
 
 	@IBAction func twosSelected(_ sender: Any) {
-		if gameBrain.gameType == .play {
-			performSegue(withIdentifier: "NewGame2", sender: sender)
-		} else if gameBrain.gameType == .learn {
-			performSegue(withIdentifier: "Learn2", sender: sender)
-		} else {
-			performSegue(withIdentifier: "Practice2", sender: sender)
-		}
+        handleGameSelection(number: 2, sender: sender)
 	}
 
 	@IBAction func fivesSelected(_ sender: Any) {
-		if gameBrain.gameType == .play {
-			performSegue(withIdentifier: "NewGame5", sender: sender)
-		} else if gameBrain.gameType == .learn {
-			performSegue(withIdentifier: "Learn5", sender: sender)
-		} else {
-			performSegue(withIdentifier: "Practice5", sender: sender)
-		}
+        handleGameSelection(number: 5, sender: sender)
 	}
 
 	@IBAction func tensSelected(_ sender: Any) {
-		if gameBrain.gameType == .play {
-			performSegue(withIdentifier: "NewGame10", sender: sender)
-		} else if gameBrain.gameType == .learn {
-			performSegue(withIdentifier: "Learn10", sender: sender)
-		} else {
-			performSegue(withIdentifier: "Practice10", sender: sender)
-		}
+        handleGameSelection(number: 10, sender: sender)
 	}
 
 	@IBAction func mixSelected(_ sender: Any) {
-		if gameBrain.gameType == .play {
-			performSegue(withIdentifier: "NewGameMix", sender: sender)
-		} else if gameBrain.gameType == .learn {
-			performSegue(withIdentifier: "LearnMix", sender: sender)
-		} else {
-			performSegue(withIdentifier: "PracticeMix", sender: sender)
-		}
+        handleGameSelection(number: nil, sender: sender)
 	}
+
+    // MARK: - Quantity Selection - Selection Handler
+
+    func handleGameSelection(number: Int?, sender: Any) {
+        var quantity: String {
+            if let number = number {
+                return String(number)
+            } else {
+                return "Mix"
+            }
+        }
+        switch gameBrain.gameType {
+        case .practice:
+            performSegue(withIdentifier: "Practice\(quantity)", sender: sender)
+        case .learn:
+            performSegue(withIdentifier: "Learn\(quantity)", sender: sender)
+        default:
+            performSegue(withIdentifier: "NewGame\(quantity)", sender: sender)
+        }
+    }
 
     // MARK: - Navigation - Back @IBAction
 
