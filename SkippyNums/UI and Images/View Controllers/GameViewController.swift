@@ -61,7 +61,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // 1. Hide the system-provided back button--a more visually-accessible "end game" button is used instead.
+        // 1. Hide the system-provided back button--a more visually-accessible "end game" button is used instead, located in the top-right corner.
         navigationItem.hidesBackButton = true
         // 2. Set up the objectCollectionView's delegate and data source.
         setupObjectCollectionView()
@@ -70,13 +70,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         setupSecondsLeftBarTrackColor()
         // 4. Set up the gradient layer.
         setupGradient()
-        // 5. Display a question to the player.
+        // 5. Present a question to the player.
         newQuestion()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setupGameTimer()
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
