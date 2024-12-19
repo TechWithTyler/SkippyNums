@@ -14,6 +14,8 @@ class TimeUpViewController: UIViewController {
 
 	@IBOutlet weak var messageLabel: UILabel?
 
+    @IBOutlet weak var timeUpImageView: UIImageView?
+    
     // MARK: - Properties - Strings
 
 	var messageText: String?
@@ -38,6 +40,10 @@ class TimeUpViewController: UIViewController {
         navigationItem.hidesBackButton = true
         // 3. Set up the gradient layer.
         setupGradient()
+        // 4. Add an animation to the image.
+        if #available(iOS 18, *) {
+            timeUpImageView?.addSymbolEffect(.wiggle, options: .repeat(.periodic(3, delay: 0)).speed(2))
+        }
     }
 
     func setupGradient() {

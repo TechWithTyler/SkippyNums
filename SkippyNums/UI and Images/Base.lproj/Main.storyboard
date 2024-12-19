@@ -790,6 +790,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="messageLabel" destination="10X-cG-LjX" id="a7m-58-ZIs"/>
+                        <outlet property="timeUpImageView" destination="lYt-Jh-MIe" id="7fP-ry-ytN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UV2-IC-976" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
