@@ -112,6 +112,8 @@ class TimeViewController: UIViewController {
             } else {
                 let gameLengthFromSegueIdentifier = (TimeInterval(String(segueIdentifier.filter( { $0.isNumber } ))))! * 60
                 gameBrain.gameLength = gameLengthFromSegueIdentifier
+                // Uncomment the following line to override the time selection from the previous line when a shorter game length is desired for testing changes to the gameTimer ending. Comment out again after testing.
+                // gameBrain.gameLength = 3
             }
         }
 	}
