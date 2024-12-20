@@ -178,9 +178,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - Game Timer - End
 
     func gameTimerEnded() {
-        // 1. Show the "time's up!" screen.
+        // 1. Dismiss the "correct or incorrect" answer sheet if it's being shown when time runs out.
+        if let answerCheckViewController = presentedViewController as? AnswerCheckViewController {
+            answerCheckViewController.dismiss(animated: true)
+        }
+        // 2. Show the "time's up!" screen.
         performSegue(withIdentifier: "TimeUp", sender: self)
-        // 2. Play a buzzer sound.
+        // 3. Play a buzzer sound.
         gameBrain.playTimeUpSound()
     }
 
