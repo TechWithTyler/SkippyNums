@@ -98,6 +98,7 @@ class TimeUpViewController: UIViewController {
         // 2. Tell the GameBrain that a new round in the current game is starting, which will hide the Untimed option from the TimeViewController. The game resets if the player backs out from the NewGameViewController.
 		gameBrain.isNewRoundInCurrentGame = true
         // 3. Go back to the NewGameViewController.
+        gameBrain.soundPlayer?.stop()
         navigationController?.popToViewController(newGameViewController, animated: true)
 	}
 
