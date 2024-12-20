@@ -148,7 +148,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - Game Timer - Update
 
     func updateGameTimeDisplay(for gameTimeLeft: TimeInterval?) {
-        // The gameTimer's timerFireHandler block (and this method which it calls) is still used for untimed/practice games--the block is called immediately and no timer is started.
+        // The gameTimer's timerFireHandler block (and this method which it calls) is still used for untimed/practice games--the block is called immediately and no timer is started in that case.
         // 1. Get gameTimeLeft and gameBrain.gameLength as non-Optional constants if playing a timed game. If playing a practice or untimed game, skip to step 6.
         if let gameTimeLeft = gameTimeLeft, let gameLength = gameBrain.gameLength {
             // 2. Choose "second" or "seconds" based on whether the game time left is 1 second.
@@ -156,7 +156,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             // 3. Display the seconds left.
             let secondsLeftDisplay = "\(Int(gameTimeLeft)) \(secondsSingularOrPlural) left"
             secondsLeftLabel?.text = secondsLeftDisplay
-            // 4. Divide the game time left by the game length to create the progress value and show it in the secondsLeftBar.
+            // 4. Divide the game time left by the game length to create the progress value and show it in the secondsLeftBar. Use the secondsLeftLabel's text as the secondsLeftBar's accessibility value (the value accessibility features like VoiceOver will report).
             let progress = (gameTimeLeft / gameLength)
             secondsLeftBar?.accessibilityValue = secondsLeftDisplay
             secondsLeftBar?.setProgress(Float(progress), animated: true)
