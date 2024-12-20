@@ -27,7 +27,7 @@ class ObjectImageView: UIImageView {
     // This method plays a chord or note, resets the VoiceOver announcement timer, and in practice mode, highlights the image's background, when VoiceOver focuses on it.
 	override func accessibilityElementDidBecomeFocused() {
 		super.accessibilityElementDidBecomeFocused()
-		GameBrain.shared.playChord()
+		GameBrain.shared.playEarcon()
 		if GameBrain.shared.gameType == .practice {
 			highlightBackground()
 		}

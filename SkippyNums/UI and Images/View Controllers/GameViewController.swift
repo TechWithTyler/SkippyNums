@@ -140,7 +140,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             // 2. Update the display when the timer fires if playing a timed game, or just once if playing an untimed or practice game.
             updateGameTimeDisplay(for: gameTimeLeft)
         } timerEndHandler: { [self] in
-            // 3. If playing a timed game, switch to the "time's up!" screen and play a buzzer sound when time runs out.
+            // 3. If playing a timed game, switch to the "time's up!" screen.
             gameTimerEnded()
         }
     }
@@ -184,8 +184,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         // 2. Show the "time's up!" screen.
         performSegue(withIdentifier: "TimeUp", sender: self)
-        // 3. Play a buzzer sound.
-        gameBrain.playTimeUpSound()
     }
 
     // MARK: - Score Update

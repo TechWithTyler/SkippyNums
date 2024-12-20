@@ -119,7 +119,7 @@ class GameBrain {
 
     // MARK: - Properties - Learn Mode Numbers
 
-    // An array of numbers which learn mode randomly picks from when showing example questions.
+    // An array of numbers which learn mode randomly picks from when showing examples.
     let learnModeNumbers: [Int] = [2, 5, 10]
 
     // MARK: - Properties - Sound Player
@@ -253,23 +253,29 @@ class GameBrain {
         }
     }
 
-    // This method creates 5 choices whose Int values are based on the number of images to show and the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place.
+    // This method creates 5 choices whose Int values are based on the number of images to show times the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place.
     func getChoices() -> [Int] {
         // 1. Create choices.
         // Below correct answer
+        // Example: 3 times 2 minus (2 times 2) = 2
         let incorrectChoice1A = numberOfImagesToShow * currentObject.quantity - (currentObject.quantity * 2)
+        // Example: 3 times 2 plus (2 times 3) = 12 (not used in this example since incorrectChoice1A isn't 0)
         let incorrectChoice1B = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 3)
+        // Example: 3 times 2 minus 2 = 4
         let incorrectChoice2 = numberOfImagesToShow * currentObject.quantity - currentObject.quantity
         // Correct answer
-        let correctChoice = getCorrectAnswer()
+        // Example: 3 times 2 = 6
+        let correctChoice = Int(getCorrectAnswer())!
         // Above correct answer
+        // Example: 3 times 2 plus 2 = 8
         let incorrectChoice3 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
+        // Example: 3 times 2 plus (2 times 2) = 10
         let incorrectChoice4 = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 2)
         // 2. Shuffle the 4 incorrect choices. If incorrect choice 1A is 0, use incorrect choice 1B instead, which is 1 multiple higher than incorrect choice 4.
         let shuffledIncorrectChoices = [incorrectChoice1A == 0 ? incorrectChoice1B : incorrectChoice1A, incorrectChoice2, incorrectChoice3, incorrectChoice4].shuffled()
-        // 3. Drop the last incorrect choice and append the correct choice.
+        // 3. Drop the last incorrect choice and append the correct choice. These are the final 4 choices that are displayed to the player.
         var finalChoices = Array(shuffledIncorrectChoices.dropLast())
-        finalChoices.append(Int(correctChoice)!)
+        finalChoices.append(correctChoice)
         // 4. Re-shuffle the remaining 4 choices (the choices offered to the player) and return them.
         finalChoices.shuffle()
         return finalChoices
@@ -311,7 +317,7 @@ class GameBrain {
     }
 
     // This method plays a chord or note as a VoiceOver earcon when it focuses on an image.
-    func playChord() {
+    func playEarcon() {
         // 1. Select the appropriate earcon based on the current object's quantity.
         var filename: String {
             switch currentObject.quantity {
@@ -346,7 +352,7 @@ class GameBrain {
         let filename = correct ? "correct" : "incorrect"
         // 2. Make sure the sound exists in the app bundle.
         guard let soundURL = Bundle.main.url(forResource: filename, withExtension: "caf") else {
-            fatalError("Failed to find \(filename) in bundle")
+            fatalError("Failed to find \(filename).caf in bundle")
         }
         do {
             // 3. Stop any playing sound.
@@ -364,7 +370,7 @@ class GameBrain {
             soundPlayer?.play()
         } catch {
             // 7. If an error occurs, throw a fatal error.
-            fatalError("Failed to play \(filename): \(error)")
+            fatalError("Failed to play \(filename).caf: \(error)")
         }
     }
 
@@ -373,7 +379,7 @@ class GameBrain {
         // 1. Make sure the sound exists in the app bundle.
         let filename = "timeUp"
         guard let soundURL = Bundle.main.url(forResource: filename, withExtension: "caf") else {
-            fatalError("Failed to find \(filename) in bundle")
+            fatalError("Failed to find \(filename).caf in bundle")
         }
         do {
             // 2. Stop any playing sound.
@@ -386,7 +392,7 @@ class GameBrain {
             soundPlayer?.play()
         } catch {
             // 5. If an error occurs, throw a fatal error.
-            fatalError("Failed to play \(filename): \(error)")
+            fatalError("Failed to play \(filename).caf: \(error)")
         }
     }
 
@@ -415,7 +421,7 @@ class GameBrain {
 
     // MARK: - Game Timer
 
-    // This method winds up the game timer, calling the timer fire handler every second, and calling the timer end handler when the timer ends.
+    // This method winds up the game timer, calling the timer fire handler every second (or only once if playing an untimed or practice game), and calling the timer end handler when the timer ends.
     func setupGameTimer(toResume: Bool = false, timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
         // 1. If gameLength is nil, call the timer fire handler with a nil value and don't start the timer.
         guard gameLength != nil else {
@@ -433,6 +439,7 @@ class GameBrain {
             // 4. If gameTimeLeft is (or falls below) 0 seconds, reset the gameTimer and call the timer end handler.
             if gameTimeLeft! <= 0 {
                 resetGameTimer()
+                playTimeUpSound()
                 timerEndHandler()
             } else {
                 // 5. Otherwise, call the timer fire handler with the new value.
