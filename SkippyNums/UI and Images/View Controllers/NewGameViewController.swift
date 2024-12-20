@@ -128,7 +128,8 @@ class NewGameViewController: UIViewController {
             if segueIdentifier.hasSuffix("Mix") {
                 gameBrain.countingBy = nil
             } else {
-                let countingByFromSegueIdentifier = Int(String(segueIdentifier.filter( { $0.isNumber } )))
+                let segueIdentifierTrailingNumber = segueIdentifier.filter { $0.isNumber }
+                let countingByFromSegueIdentifier = Int(segueIdentifierTrailingNumber)
                 gameBrain.countingBy = countingByFromSegueIdentifier
             }
         }
