@@ -50,6 +50,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     var voiceOverAnnouncementTimer: Timer? = nil
 
+    // MARK: - Properties - VoiceOver Focused Images Set
+
+    // A set containing the corresponding skip count numbers for the images that VoiceOver has already focused on.
+    var voiceOverFocusedImages: Set<Int> = []
+
     // MARK: - Properties - System Theme
 
     var systemTheme: UIUserInterfaceStyle {
@@ -209,6 +214,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         objectCollectionView?.reloadData()
         // 7. Reset the VoiceOver announcement timer.
         resetAnnouncementTimer()
+        // 8. Clear the set of images that have been VoiceOver focused.
+        voiceOverFocusedImages.removeAll()
     }
 
     func setChoices() {
@@ -357,28 +364,8 @@ extension GameViewController {
         tapGesture.numberOfTapsRequired = 1
         imageView.addGestureRecognizer(tapGesture)
         // 4. Configure accessibility.
-        imageView.isAccessibilityElement = true
-        imageView.accessibilityTraits = [.startsMediaSession, .image]
-        // The image view's tag is set to the respective skip count number, which will be announced in practice mode.
-        imageView.tag = indexPath.item + 1
-        imageView.accessibilityLabel = gameBrain.gameType == .play ? "\(gameBrain.imageAccessibilityText)" : "\(imageView.tag * gameBrain.currentObject.quantity)"
-#if targetEnvironment(macCatalyst)
-        let soundGesture = "Activate"
-        let moveGesture = "Move"
-#else
-        let soundGesture = "Double-tap"
-        let moveGesture = "Flick"
-#endif
-        if indexPath.item == 0 {
-            // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the first item, tell the player that they can activate the image to play the sound.
-            imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(gameBrain.getDisplayNameForObject())."
-        } else if indexPath.item == 4 && gameBrain.numberOfImagesToShow > 5 {
-            // 6. If it's the 4th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 5th image (the first one in the 2nd row).
-            imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
-        } else if indexPath.item == gameBrain.numberOfImagesToShow - 1 {
-            // 7. If it's the last image, tell the player that they've counted all the objects and to guide them to select an answer at the bottom.
-            imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
-        }
+        imageView.tag = (indexPath.item + 1) * gameBrain.currentObject.quantity
+        configureImageAccessibility(for: imageView)
         // 8. Disable keyboard focus for the cell.
         cell.focusEffect = nil
         // 9. Remove the previous image view (if any) from the cell before adding this one, otherwise multiple image views would overlap each other each time a new question is presented.
@@ -386,6 +373,32 @@ extension GameViewController {
         // 10. Add the image view to the cell's content view and return the cell.
         cell.contentView.addSubview(imageView)
         return cell
+    }
+
+    func configureImageAccessibility(for imageView: ObjectImageView) {
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityTraits = [.startsMediaSession, .image]
+        // The image view's tag is set to the respective skip count number, which will be announced in practice mode.
+        imageView.accessibilityLabel = gameBrain.gameType == .play ? "\(gameBrain.imageAccessibilityText)" : "\(imageView.tag)"
+#if targetEnvironment(macCatalyst)
+        let soundGesture = "Activate"
+        let moveGesture = "Move"
+#else
+        let soundGesture = "Double-tap"
+        let moveGesture = "Flick"
+#endif
+        if voiceOverFocusedImages.count < gameBrain.numberOfImagesToShow {
+            if imageView.tag == (5 * gameBrain.currentObject.quantity) && gameBrain.numberOfImagesToShow > 5 {
+                // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 4th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 5th image (the first one in the 2nd row).
+                imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
+            } else {
+                // 6. If it's any other image, tell the player that they can activate the image to play the sound.
+                imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(gameBrain.getDisplayNameForObject())."
+            }
+        } else {
+            // 7. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom.
+            imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
+        }
     }
 
     // Specifies spacing between the images in the collection view.
