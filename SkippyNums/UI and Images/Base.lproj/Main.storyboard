@@ -18,24 +18,12 @@
                 <menu isSystemItem="YES" title="Root" identifier="com.apple.menu.root" id="lbe-py-9Lu" sceneMemberID="viewController">
                     <children>
                         <menu isSystemItem="YES" title="Application" identifier="com.apple.menu.application" id="Mko-rp-rye">
-                            <children>
-                                <menu isSystemItem="YES" title="Preferences" identifier="com.apple.menu.preferences" id="5ON-Lv-B8X">
-                                    <menuOptions key="menuOptions" displayInline="YES"/>
-                                    <systemMenuChildDeletions>
-                                        <itemDeletion anchorAction="orderFrontPreferencesPanel:"/>
-                                    </systemMenuChildDeletions>
-                                </menu>
-                            </children>
+                            <systemMenuChildDeletions>
+                                <menuDeletion anchor="com.apple.menu.preferences"/>
+                            </systemMenuChildDeletions>
                         </menu>
                         <menu isSystemItem="YES" title="View" identifier="com.apple.menu.view" id="Vde-Ei-8lk">
                             <children>
-                                <menu isSystemItem="YES" title="Toolbar" identifier="com.apple.menu.toolbar" id="omW-X7-s6w">
-                                    <menuOptions key="menuOptions" displayInline="YES"/>
-                                    <systemMenuChildDeletions>
-                                        <itemDeletion anchorAction="toggleToolbarShown:"/>
-                                        <itemDeletion anchorAction="runToolbarCustomizationPalette:"/>
-                                    </systemMenuChildDeletions>
-                                </menu>
                                 <menu isSystemItem="YES" title="Fullscreen" identifier="com.apple.menu.fullscreen" id="Ih0-ax-LL5">
                                     <menuOptions key="menuOptions" displayInline="YES"/>
                                     <systemMenuChildDeletions>
@@ -43,6 +31,9 @@
                                     </systemMenuChildDeletions>
                                 </menu>
                             </children>
+                            <systemMenuChildDeletions>
+                                <menuDeletion anchor="com.apple.menu.toolbar"/>
+                            </systemMenuChildDeletions>
                         </menu>
                     </children>
                     <systemMenuChildDeletions>
