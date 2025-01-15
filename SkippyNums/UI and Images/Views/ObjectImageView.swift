@@ -16,9 +16,13 @@ class ObjectImageView: UIImageView {
 
     // This method highlights the image's background.
 	func highlightBackground() {
-		backgroundColor = .gray.withAlphaComponent(0.3)
+        // 1. Set the background color to gray, with less opacity if Increase Contrast is disabled or more opacity if it's enabled.
+        let increaseContrast = UIAccessibility.isDarkerSystemColorsEnabled
+        backgroundColor = .gray.withAlphaComponent(increaseContrast ? 0.7 : 0.3)
+        // 2. Stop the backgroundHighlightTimer if it's already running.
         backgroundHighlightTimer?.invalidate()
         backgroundHighlightTimer = nil
+        // 3. Start the backgroundHighlightTimer.
 		backgroundHighlightTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [self] timer in
 			backgroundColor = nil
 		})
