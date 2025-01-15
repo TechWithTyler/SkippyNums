@@ -118,18 +118,18 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update frame of gradient layer when window size changes
+        updateGradientFrame()
+    }
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         // 1. Update the gradient colors when the device's dark/light mode changes.
         updateBackgroundColors()
         // 2. Show or hide the seconds left bar's track color when the Increase Contrast accessibility setting changes.
         setupSecondsLeftBarTrackColor()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // Update frame of gradient layer when window size changes
-        updateGradientFrame()
     }
 
     // MARK: - Game Timer - Setup

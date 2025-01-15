@@ -30,6 +30,8 @@ class TimeUpViewController: UIViewController {
         return traitCollection.userInterfaceStyle
     }
 
+    // MARK: - View Setup/Update
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
@@ -70,17 +72,19 @@ class TimeUpViewController: UIViewController {
         }
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update frame of gradient layer when window size changes
+        updateGradientFrame()
+    }
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         // Update the gradient colors when the device's dark/light mode changes
         updateBackgroundColors()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // Update frame of gradient layer when window size changes
-        updateGradientFrame()
-    }
+    // MARK: - @IBActions
 
 	@IBAction func nextRound(_ sender: Any) {
 		// 1. Get the 2nd view controller (NewGameViewController, the view controller at index 1) in the stack.
