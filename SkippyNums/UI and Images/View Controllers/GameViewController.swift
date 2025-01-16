@@ -219,20 +219,25 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     func setChoices() {
-        // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results).
+        // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results). Converting from Int to String almost never produces nil values, so it's safe to use map instead of compactMap here.
         let choices = gameBrain.getChoices().map { String($0) }
         // 2. Set each choice button's title to the corresponding item in the choices array, and set the font properties.
+        let useMonospacedFont: Bool = true
+        // Choice 1
         choice1Button?.setTitle(choices[0], for: .normal)
-        choice1Button?.usesMonospacedFont = true
+        choice1Button?.usesMonospacedFont = useMonospacedFont
         choice1Button?.textSize = choiceButtonTextSize
+        // Choice 2
         choice2Button?.setTitle(choices[1], for: .normal)
-        choice2Button?.usesMonospacedFont = true
+        choice2Button?.usesMonospacedFont = useMonospacedFont
         choice2Button?.textSize = choiceButtonTextSize
+        // Choice 3
         choice3Button?.setTitle(choices[2], for: .normal)
-        choice3Button?.usesMonospacedFont = true
+        choice3Button?.usesMonospacedFont = useMonospacedFont
         choice3Button?.textSize = choiceButtonTextSize
+        // Choice 4
         choice4Button?.setTitle(choices[3], for: .normal)
-        choice4Button?.usesMonospacedFont = true
+        choice4Button?.usesMonospacedFont = useMonospacedFont
         choice4Button?.textSize = choiceButtonTextSize
     }
 
@@ -382,14 +387,15 @@ extension GameViewController {
         imageView.accessibilityLabel = gameBrain.gameType == .play ? "\(gameBrain.imageAccessibilityText)" : "\(imageView.tag)"
 #if targetEnvironment(macCatalyst)
         let soundGesture = "Activate"
-        let moveGesture = "Move"
+        let moveGesture = "move"
 #else
         let soundGesture = "Double-tap"
-        let moveGesture = "Flick"
+        let moveGesture = "flick"
 #endif
+        // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 5th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 6th image (the first one in the 2nd row).
         if voiceOverFocusedImages.count < gameBrain.numberOfImagesToShow {
-            if imageView.tag == (5 * gameBrain.currentObject.quantity) && gameBrain.numberOfImagesToShow > 5 {
-                // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 4th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 5th image (the first one in the 2nd row).
+            let lastImageViewInFirstRow = (5 * gameBrain.currentObject.quantity)
+            if imageView.tag == lastImageViewInFirstRow && gameBrain.numberOfImagesToShow > 5 {
                 imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
             } else {
                 // 6. If it's any other image, tell the player that they can activate the image to play the sound.
@@ -421,7 +427,7 @@ extension GameViewController {
         // 1. If in practice mode and VoiceOver is off, get the tapped image view and its tag (representing the skip count number) and use a dedicated speech synthesizer/highlight effect. VoiceOver is configured to handle this as part of creating the image view.
         if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {
             guard let image = sender.view as? ObjectImageView else { return }
-            let skipCountNumber = image.tag * gameBrain.currentObject.quantity
+            let skipCountNumber = image.tag
             image.highlightBackground()
             gameBrain.speechSynthesizer.stopSpeaking(at: .immediate)
             gameBrain.speechSynthesizer.speak(AVSpeechUtterance(string: String(skipCountNumber)))
