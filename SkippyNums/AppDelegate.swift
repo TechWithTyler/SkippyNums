@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
         // 1. Configure the game's audio.
         configureAudioSession()
+        configureAudioRouteChangeHandlers()
         silentAudioPlayer = SilentAudioPlayer()
 		return true
 	}
@@ -42,11 +43,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Audio Session Configuration
 
+    func configureAudioRouteChangeHandlers() {
+        let audioSession = AVAudioSession.sharedInstance()
+        NotificationCenter.default.addObserver(forName: AVAudioSession.interruptionNotification, object: audioSession, queue: nil) { notification in
+            guard let userInfo = notification.userInfo, let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt, let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+                return
+            }
+            switch type {
+                case .began:
+                self.stopAudio()
+                case .ended:
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                    self.configureAudioSession()
+                }
+                @unknown default:
+                    break
+            }
+        }
+        NotificationCenter.default.addObserver(forName: AVAudioSession.routeChangeNotification, object: audioSession, queue: nil) { notification in
+            self.stopAudio()
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                self.configureAudioSession()
+            }
+        }
+    }
+
+    func stopAudio() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            silentAudioPlayer?.stopSilenceTrack()
+            try audioSession.setCategory(.ambient, mode: .default, options: [])
+            try audioSession.setActive(false)
+        } catch {
+            print("Failed to stop audio session: \(error)")
+        }
+    }
+
     func configureAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
-            try audioSession.setCategory(.playback, mode: .default, options: [])
+            try audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers])
             try audioSession.setActive(true)
+            silentAudioPlayer?.startSilenceTrack()
         } catch {
             print("Failed to set up audio session: \(error)")
         }

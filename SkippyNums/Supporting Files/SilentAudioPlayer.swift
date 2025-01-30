@@ -21,40 +21,43 @@ class SilentAudioPlayer {
     var audioFormat: AVAudioFormat
 
     init() {
-        // 1. Initialize the audio engine components.
+        // Initialize the audio engine components.
         self.audioEngine = AVAudioEngine()
         self.playerNode = AVAudioPlayerNode()
         self.audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)!
-        // 2. Setup the silence track by attaching and connecting nodes.
-        setupSilenceTrack()
-        // 3. Start playing the silence track.
-        startSilenceTrack()
     }
 
     // Configures the silence track by attaching the player node and scheduling silent audio.
     func setupSilenceTrack() {
         audioEngine.attach(playerNode) // Attach the player node to the engine
         audioEngine.connect(playerNode, to: audioEngine.mainMixerNode, format: audioFormat) // Connect player to mixer
+        audioEngine.isAutoShutdownEnabled = false
         scheduleSilentBuffer() // Schedule a silent audio buffer for looping playback
     }
 
     // Creates and schedules a silent audio buffer.
     func scheduleSilentBuffer() {
-        let bufferDuration: TimeInterval = 1 // Duration for the silent buffer in seconds
-        let frameCount = UInt32(bufferDuration * self.audioFormat.sampleRate) // Calculate frame count based on duration
+        let bufferDuration: TimeInterval = 1 // 1-second buffer
+        let frameCount = UInt32(bufferDuration * self.audioFormat.sampleRate)
         if let buffer = AVAudioPCMBuffer(pcmFormat: self.audioFormat, frameCapacity: frameCount) {
-            buffer.frameLength = frameCount // Set the buffer frame length
-            // Fill the buffer's channels with silence by setting data to zero
-            memset(buffer.floatChannelData![0], 0, Int(buffer.frameCapacity) * MemoryLayout<Float>.size)
-            memset(buffer.floatChannelData![1], 0, Int(buffer.frameCapacity) * MemoryLayout<Float>.size)
-            // Schedule the silent buffer to play in a continuous loop
-            playerNode.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: nil)
+            buffer.frameLength = frameCount
+            let volume: Float = 0 // Silence
+            for frame in 0..<Int(frameCount) {
+                buffer.floatChannelData?[0][frame] = (Float.random(in: -1.0...1.0)) * volume
+                buffer.floatChannelData?[1][frame] = (Float.random(in: -1.0...1.0)) * volume
+            }
+            playerNode.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: {
+            })
         }
     }
 
     // Starts the silence track by starting the audio engine and playing the player node.
     func startSilenceTrack() {
+        // 1. Setup the silence track by attaching and connecting nodes.
+        setupSilenceTrack()
+        // 2. Try to play the silent audio track.
         do {
+            audioEngine.prepare()
             try audioEngine.start() // Start the audio engine
             self.playerNode.play() // Begin playback of the player node
         } catch {
@@ -63,8 +66,9 @@ class SilentAudioPlayer {
     }
 
     func stopSilenceTrack() {
-        audioEngine.stop()
         playerNode.stop()
+        audioEngine.stop()
+        audioEngine.reset()
     }
 
 }
