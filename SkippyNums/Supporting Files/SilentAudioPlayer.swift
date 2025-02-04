@@ -37,17 +37,22 @@ class SilentAudioPlayer {
 
     // Creates and schedules a silent audio buffer.
     func scheduleSilentBuffer() {
-        let bufferDuration: TimeInterval = 1 // 1-second buffer
+        let bufferDuration: TimeInterval = 1 // 1-second buffer duration
+        // 1. Calculate the total number of frames required for the buffer.
         let frameCount = UInt32(bufferDuration * self.audioFormat.sampleRate)
+        // 2. Create an audio buffer with the specified format and frame capacity.
         if let buffer = AVAudioPCMBuffer(pcmFormat: self.audioFormat, frameCapacity: frameCount) {
-            buffer.frameLength = frameCount
-            let volume: Float = 0 // Silence
+            buffer.frameLength = frameCount // Set the actual frame length
+            let volume: Float = 0 // Set volume to 0 to create silence
+            let leftChannel = buffer.floatChannelData?[0]
+            let rightChannel = buffer.floatChannelData?[1]
+            // 3. Fill the buffer with silent audio samples for both channels
             for frame in 0..<Int(frameCount) {
-                buffer.floatChannelData?[0][frame] = (Float.random(in: -1.0...1.0)) * volume
-                buffer.floatChannelData?[1][frame] = (Float.random(in: -1.0...1.0)) * volume
+                leftChannel?[frame] = (Float.random(in: -1.0...1.0)) * volume // Left channel
+                rightChannel?[frame] = (Float.random(in: -1.0...1.0)) * volume // Right channel
             }
-            playerNode.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: {
-            })
+            // 4. Schedule the buffer to play in a loop
+            playerNode.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: nil)
         }
     }
 
