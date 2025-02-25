@@ -130,7 +130,7 @@ extension WelcomeViewController {
 
     // Handles selection of picker rows on the given wheel.
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		settingsData.tenFrame = row == 1 ? true : false
+		settingsData.tenFrame = row == 1 
 	}
 
     // Returns the content to display for the given row on the given wheel.
