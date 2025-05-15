@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 5/3/23.
-//  Copyright © 2023-2024 SheftApps. All rights reserved.
+//  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
 import UIKit
@@ -14,6 +14,8 @@ class TimeUpViewController: UIViewController {
 
 	@IBOutlet weak var messageLabel: UILabel?
 
+    @IBOutlet weak var timeUpImageView: UIImageView?
+    
     // MARK: - Properties - Strings
 
 	var messageText: String?
@@ -28,6 +30,8 @@ class TimeUpViewController: UIViewController {
         return traitCollection.userInterfaceStyle
     }
 
+    // MARK: - View Setup/Update
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
@@ -38,6 +42,10 @@ class TimeUpViewController: UIViewController {
         navigationItem.hidesBackButton = true
         // 3. Set up the gradient layer.
         setupGradient()
+        // 4. Add an animation to the image.
+        if #available(iOS 18, *) {
+            timeUpImageView?.addSymbolEffect(.wiggle, options: .repeat(.periodic(3, delay: 0)).speed(2))
+        }
     }
 
     func setupGradient() {
@@ -64,33 +72,37 @@ class TimeUpViewController: UIViewController {
         }
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Update frame of gradient layer when window size changes
         updateGradientFrame()
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update the gradient colors when the device's dark/light mode changes
+        updateBackgroundColors()
+    }
+
+    // MARK: - @IBActions
+
 	@IBAction func nextRound(_ sender: Any) {
 		// 1. Get the 2nd view controller (NewGameViewController, the view controller at index 1) in the stack.
-        /* View controller stack:
-         4: TimeUpViewController
-         3: GameViewController
-         2: TimeViewController
-         1: NewGameViewController
-         0: WelcomeViewController
+        /* View controller stack when TimeUpViewController is presented:
+         Index 4 (top of stack): TimeUpViewController
+         Index 3: GameViewController
+         Index 2: TimeViewController
+         Index 1: NewGameViewController
+         Index 0 (bottom/root of stack): WelcomeViewController
          */
-        guard let viewControllers = navigationController?.viewControllers, let newGameViewController = viewControllers[1] as? NewGameViewController else {
+        let newGameViewControllerIndex = 1
+        guard let viewControllers = navigationController?.viewControllers, let newGameViewController = viewControllers[newGameViewControllerIndex] as? NewGameViewController else {
 			return
 		}
         // 2. Tell the GameBrain that a new round in the current game is starting, which will hide the Untimed option from the TimeViewController. The game resets if the player backs out from the NewGameViewController.
 		gameBrain.isNewRoundInCurrentGame = true
         // 3. Go back to the NewGameViewController.
+        gameBrain.soundPlayer?.stop()
         navigationController?.popToViewController(newGameViewController, animated: true)
 	}
 

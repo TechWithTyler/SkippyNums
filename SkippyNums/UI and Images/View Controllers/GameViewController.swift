@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 2/13/23.
-//  Copyright © 2023-2024 SheftApps. All rights reserved.
+//  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
 import UIKit
@@ -50,6 +50,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     var voiceOverAnnouncementTimer: Timer? = nil
 
+    // MARK: - Properties - VoiceOver Focused Images Set
+
+    // A set containing the corresponding skip count numbers for the images that VoiceOver has already focused on.
+    var voiceOverFocusedImages: Set<Int> = []
+
     // MARK: - Properties - System Theme
 
     var systemTheme: UIUserInterfaceStyle {
@@ -61,7 +66,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // 1. Hide the system-provided back button--a more visually-accessible "end game" button is used instead.
+        // 1. Hide the system-provided back button--a more visually-accessible "end game" button is used instead, located in the top-right corner.
         navigationItem.hidesBackButton = true
         // 2. Set up the objectCollectionView's delegate and data source.
         setupObjectCollectionView()
@@ -70,13 +75,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         setupSecondsLeftBarTrackColor()
         // 4. Set up the gradient layer.
         setupGradient()
-        // 5. Display a question to the player.
+        // 5. Present a question to the player.
         newQuestion()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setupGameTimer()
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -118,18 +123,18 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update frame of gradient layer when window size changes
+        updateGradientFrame()
+    }
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         // 1. Update the gradient colors when the device's dark/light mode changes.
         updateBackgroundColors()
         // 2. Show or hide the seconds left bar's track color when the Increase Contrast accessibility setting changes.
         setupSecondsLeftBarTrackColor()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // Update frame of gradient layer when window size changes
-        updateGradientFrame()
     }
 
     // MARK: - Game Timer - Setup
@@ -140,7 +145,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             // 2. Update the display when the timer fires if playing a timed game, or just once if playing an untimed or practice game.
             updateGameTimeDisplay(for: gameTimeLeft)
         } timerEndHandler: { [self] in
-            // 3. If playing a timed game, switch to the "time's up!" screen and play a buzzer sound when time runs out.
+            // 3. If playing a timed game, switch to the "time's up!" screen.
             gameTimerEnded()
         }
     }
@@ -148,7 +153,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - Game Timer - Update
 
     func updateGameTimeDisplay(for gameTimeLeft: TimeInterval?) {
-        // The gameTimer's timerFireHandler block (and this method which it calls) is still used for untimed/practice games--the block is called immediately and no timer is started.
+        // The gameTimer's timerFireHandler block (and this method which it calls) is still used for untimed/practice games--the block is called immediately and no timer is started in that case.
         // 1. Get gameTimeLeft and gameBrain.gameLength as non-Optional constants if playing a timed game. If playing a practice or untimed game, skip to step 6.
         if let gameTimeLeft = gameTimeLeft, let gameLength = gameBrain.gameLength {
             // 2. Choose "second" or "seconds" based on whether the game time left is 1 second.
@@ -156,7 +161,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             // 3. Display the seconds left.
             let secondsLeftDisplay = "\(Int(gameTimeLeft)) \(secondsSingularOrPlural) left"
             secondsLeftLabel?.text = secondsLeftDisplay
-            // 4. Divide the game time left by the game length to create the progress value and show it in the secondsLeftBar.
+            // 4. Divide the game time left by the game length to create the progress value and show it in the secondsLeftBar. Use the secondsLeftLabel's text as the secondsLeftBar's accessibility value (the value accessibility features like VoiceOver will report).
             let progress = (gameTimeLeft / gameLength)
             secondsLeftBar?.accessibilityValue = secondsLeftDisplay
             secondsLeftBar?.setProgress(Float(progress), animated: true)
@@ -178,10 +183,12 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - Game Timer - End
 
     func gameTimerEnded() {
-        // 1. Show the "time's up!" screen.
+        // 1. Dismiss the "correct or incorrect" answer sheet if it's being shown when time runs out.
+        if let answerCheckViewController = presentedViewController as? AnswerCheckViewController {
+            answerCheckViewController.dismiss(animated: true)
+        }
+        // 2. Show the "time's up!" screen.
         performSegue(withIdentifier: "TimeUp", sender: self)
-        // 2. Play a buzzer sound.
-        gameBrain.playTimeUpSound()
     }
 
     // MARK: - Score Update
@@ -207,23 +214,30 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         objectCollectionView?.reloadData()
         // 7. Reset the VoiceOver announcement timer.
         resetAnnouncementTimer()
+        // 8. Clear the set of images that have been VoiceOver focused.
+        voiceOverFocusedImages.removeAll()
     }
 
     func setChoices() {
-        // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results).
+        // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results). Converting from Int to String almost never produces nil values, so it's safe to use map instead of compactMap here.
         let choices = gameBrain.getChoices().map { String($0) }
         // 2. Set each choice button's title to the corresponding item in the choices array, and set the font properties.
+        let useMonospacedFont: Bool = true
+        // Choice 1
         choice1Button?.setTitle(choices[0], for: .normal)
-        choice1Button?.usesMonospacedFont = true
+        choice1Button?.usesMonospacedFont = useMonospacedFont
         choice1Button?.textSize = choiceButtonTextSize
+        // Choice 2
         choice2Button?.setTitle(choices[1], for: .normal)
-        choice2Button?.usesMonospacedFont = true
+        choice2Button?.usesMonospacedFont = useMonospacedFont
         choice2Button?.textSize = choiceButtonTextSize
+        // Choice 3
         choice3Button?.setTitle(choices[2], for: .normal)
-        choice3Button?.usesMonospacedFont = true
+        choice3Button?.usesMonospacedFont = useMonospacedFont
         choice3Button?.textSize = choiceButtonTextSize
+        // Choice 4
         choice4Button?.setTitle(choices[3], for: .normal)
-        choice4Button?.usesMonospacedFont = true
+        choice4Button?.usesMonospacedFont = useMonospacedFont
         choice4Button?.textSize = choiceButtonTextSize
     }
 
@@ -355,28 +369,8 @@ extension GameViewController {
         tapGesture.numberOfTapsRequired = 1
         imageView.addGestureRecognizer(tapGesture)
         // 4. Configure accessibility.
-        imageView.isAccessibilityElement = true
-        imageView.accessibilityTraits = [.startsMediaSession, .image]
-        // The image view's tag is set to the respective skip count number, which will be announced in practice mode.
-        imageView.tag = indexPath.item + 1
-        imageView.accessibilityLabel = gameBrain.gameType == .play ? "\(gameBrain.imageAccessibilityText)" : "\(imageView.tag * gameBrain.currentObject.quantity)"
-#if targetEnvironment(macCatalyst)
-        let soundGesture = "Activate"
-        let moveGesture = "Move"
-#else
-        let soundGesture = "Double-tap"
-        let moveGesture = "Flick"
-#endif
-        if indexPath.item == 0 {
-            // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the first item, tell the player that they can activate the image to play the sound.
-            imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(gameBrain.getDisplayNameForObject())."
-        } else if indexPath.item == 4 && gameBrain.numberOfImagesToShow > 5 {
-            // 6. If it's the 4th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 5th image (the first one in the 2nd row).
-            imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
-        } else if indexPath.item == gameBrain.numberOfImagesToShow - 1 {
-            // 7. If it's the last image, tell the player that they've counted all the objects and to guide them to select an answer at the bottom.
-            imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
-        }
+        imageView.tag = (indexPath.item + 1) * gameBrain.currentObject.quantity
+        configureImageAccessibility(for: imageView)
         // 8. Disable keyboard focus for the cell.
         cell.focusEffect = nil
         // 9. Remove the previous image view (if any) from the cell before adding this one, otherwise multiple image views would overlap each other each time a new question is presented.
@@ -384,6 +378,33 @@ extension GameViewController {
         // 10. Add the image view to the cell's content view and return the cell.
         cell.contentView.addSubview(imageView)
         return cell
+    }
+
+    func configureImageAccessibility(for imageView: ObjectImageView) {
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityTraits = [.startsMediaSession, .image]
+        // The image view's tag is set to the respective skip count number, which will be announced in practice mode.
+        imageView.accessibilityLabel = gameBrain.gameType == .play ? "\(gameBrain.imageAccessibilityText)" : "\(imageView.tag)"
+#if targetEnvironment(macCatalyst)
+        let soundGesture = "Activate"
+        let moveGesture = "move"
+#else
+        let soundGesture = "Double-tap"
+        let moveGesture = "flick"
+#endif
+        // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 5th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 6th image (the first one in the 2nd row).
+        if voiceOverFocusedImages.count < gameBrain.numberOfImagesToShow {
+            let lastImageViewInFirstRow = (5 * gameBrain.currentObject.quantity)
+            if imageView.tag == lastImageViewInFirstRow && gameBrain.numberOfImagesToShow > 5 {
+                imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
+            } else {
+                // 6. If it's any other image, tell the player that they can activate the image to play the sound.
+                imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(gameBrain.getDisplayNameForObject())."
+            }
+        } else {
+            // 7. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom.
+            imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
+        }
     }
 
     // Specifies spacing between the images in the collection view.
@@ -406,7 +427,7 @@ extension GameViewController {
         // 1. If in practice mode and VoiceOver is off, get the tapped image view and its tag (representing the skip count number) and use a dedicated speech synthesizer/highlight effect. VoiceOver is configured to handle this as part of creating the image view.
         if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {
             guard let image = sender.view as? ObjectImageView else { return }
-            let skipCountNumber = image.tag * gameBrain.currentObject.quantity
+            let skipCountNumber = image.tag
             image.highlightBackground()
             gameBrain.speechSynthesizer.stopSpeaking(at: .immediate)
             gameBrain.speechSynthesizer.speak(AVSpeechUtterance(string: String(skipCountNumber)))

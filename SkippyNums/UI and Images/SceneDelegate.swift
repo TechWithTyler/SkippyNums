@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 2/13/23.
-//  Copyright © 2023-2024 SheftApps. All rights reserved.
+//  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
 import UIKit
@@ -28,9 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		windowScene.titlebar?.titleVisibility = .hidden
         windowScene.sizeRestrictions?.minimumSize = CGSize(width: 1024, height: 768)
 		#endif
-        if gameBrain.gameLength != nil {
-            resumeGame()
-        }
+        resumeGame()
 	}
     
     // MARK: - Scene Lifecycle - Disconnect
@@ -71,16 +69,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func pauseGame() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        appDelegate.silentAudioPlayer?.stopSilenceTrack()
+        appDelegate.stopAudio()
         gameBrain.pauseGameTimer()
     }
 
     func resumeGame() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        appDelegate.silentAudioPlayer?.startSilenceTrack()
+        appDelegate.configureAudioSession()
         if let navigationController = window?.rootViewController as? UINavigationController, let gameViewController = navigationController.topViewController as? GameViewController {
-            gameViewController.setupGameTimer(toResume: true)
-
+            if gameBrain.gameLength != nil {
+                gameViewController.setupGameTimer(toResume: true)
+            }
         }
     }
 

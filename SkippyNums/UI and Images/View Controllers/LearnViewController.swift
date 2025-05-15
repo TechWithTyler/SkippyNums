@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 8/3/23.
-//  Copyright © 2023-2024 SheftApps. All rights reserved.
+//  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
 import UIKit
@@ -33,7 +33,7 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
         return traitCollection.userInterfaceStyle
     }
 
-	// MARK: - Setup
+	// MARK: - View Setup/Update
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -45,7 +45,7 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
         // 3. Set up the gradient layer.
         setupGradient()
         // 4. Show an example.
-		newQuestion()
+		newExample(self)
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -54,14 +54,6 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
-	}
-
-	@objc func imageTapped(_ sender: Any) {
-		if let player = gameBrain.soundPlayer, player.isPlaying {
-			player.stop()
-		} else {
-			gameBrain.playSoundForObject()
-		}
 	}
 
     func setupGradient() {
@@ -88,40 +80,40 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
         }
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Update frame of gradient layer when window size changes
         updateGradientFrame()
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update the gradient colors when the device's dark/light mode changes
+        updateBackgroundColors()
+    }
+
+    // MARK: - Reset Game
+
 	func resetGame() {
 		gameBrain.resetGame()
 		navigationController?.popToRootViewController(animated: true)
 	}
 
-	func newQuestion() {
-		gameBrain.newQuestion()
-		questionLabel?.text = gameBrain.getQuestionText()
-		objectCollectionView?.accessibilityLabel = gameBrain.backgroundAccessibilityText
-#if targetEnvironment(macCatalyst)
-		let soundGesture = "Activate"
-#else
-		let soundGesture = "Double-tap"
-#endif
-		objectCollectionView?.accessibilityHint = "\(soundGesture) to hear the \(gameBrain.getDisplayNameForObject())."
-		objectCollectionView?.reloadData()
-	}
+    // MARK: - @IBActions
 
 	@IBAction func newExample(_ sender: Any) {
-		newQuestion()
+        gameBrain.newQuestion()
+        questionLabel?.text = gameBrain.getQuestionText()
+        objectCollectionView?.accessibilityLabel = gameBrain.backgroundAccessibilityText
+#if targetEnvironment(macCatalyst)
+        let soundGesture = "Activate"
+#else
+        let soundGesture = "Double-tap"
+#endif
+        objectCollectionView?.accessibilityHint = "\(soundGesture) to hear the \(gameBrain.getDisplayNameForObject())."
+        objectCollectionView?.reloadData()
 	}
-	
+
 	@IBAction func newGame(_ sender: Any) {
 		resetGame()
 	}
@@ -179,5 +171,14 @@ extension LearnViewController {
 		return CGSize(width: widthPerItem, height: widthPerItem)
 	}
 
+    // MARK: - Object Collection View - Image Activation Handler
+
+    @objc func imageTapped(_ sender: Any) {
+        if let player = gameBrain.soundPlayer, player.isPlaying {
+            player.stop()
+        } else {
+            gameBrain.playSoundForObject()
+        }
+    }
 
 }

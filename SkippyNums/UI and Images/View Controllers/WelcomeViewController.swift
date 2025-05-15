@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 8/3/23.
-//  Copyright © 2023-2024 SheftApps. All rights reserved.
+//  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
 import SheftAppsStylishUI
@@ -68,17 +68,17 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
     }
 
-	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-		super.traitCollectionDidChange(previousTraitCollection)
-		// Update the gradient colors when the device's dark/light mode changes
-		updateBackgroundColors()
-	}
-
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
         // Update frame of gradient layer when window size changes
 		updateGradientFrame()
 	}
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update the gradient colors when the device's dark/light mode changes
+        updateBackgroundColors()
+    }
 
     // MARK: - @IBActions
 
@@ -130,7 +130,7 @@ extension WelcomeViewController {
 
     // Handles selection of picker rows on the given wheel.
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		settingsData.tenFrame = row == 1 ? true : false
+		settingsData.tenFrame = row == 1 
 	}
 
     // Returns the content to display for the given row on the given wheel.

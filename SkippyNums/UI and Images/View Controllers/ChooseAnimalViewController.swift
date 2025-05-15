@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 8/7/23.
-//  Copyright © 2023-2024 SheftApps. All rights reserved.
+//  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
 import UIKit
@@ -20,6 +20,8 @@ class ChooseAnimalViewController: UIViewController {
     var systemTheme: UIUserInterfaceStyle {
         return traitCollection.userInterfaceStyle
     }
+
+    // MARK: - View Setup/Update
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -54,31 +56,25 @@ class ChooseAnimalViewController: UIViewController {
         }
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Update frame of gradient layer when window size changes
         updateGradientFrame()
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Update the gradient colors when the device's dark/light mode changes
+        updateBackgroundColors()
+    }
+
+    // MARK: - @IBActions - Back
+
 	@IBAction func back(_ sender: SAIAccessibleButton) {
 		navigationController?.popViewController(animated: true)
 	}
 
-	@IBAction func birdsSelected(_ sender: Any) {
-        gameBrain.startLearnMode(withObject: Bird.self)
-		performSegue(withIdentifier: "StartLearn", sender: sender)
-	}
-
-	@IBAction func monkeysSelected(_ sender: Any) {
-		gameBrain.startLearnMode(withObject: Monkey.self)
-		performSegue(withIdentifier: "StartLearn", sender: sender)
-	}
+    // MARK: - @IBActions - Animal Selection
 
     @IBAction func dogsSelected(_ sender: Any) {
         gameBrain.startLearnMode(withObject: Dog.self)
@@ -87,6 +83,16 @@ class ChooseAnimalViewController: UIViewController {
 
     @IBAction func catsSelected(_ sender: Any) {
         gameBrain.startLearnMode(withObject: Cat.self)
+        performSegue(withIdentifier: "StartLearn", sender: sender)
+    }
+
+	@IBAction func monkeysSelected(_ sender: Any) {
+		gameBrain.startLearnMode(withObject: Monkey.self)
+		performSegue(withIdentifier: "StartLearn", sender: sender)
+	}
+
+    @IBAction func birdsSelected(_ sender: Any) {
+        gameBrain.startLearnMode(withObject: Bird.self)
         performSegue(withIdentifier: "StartLearn", sender: sender)
     }
 
