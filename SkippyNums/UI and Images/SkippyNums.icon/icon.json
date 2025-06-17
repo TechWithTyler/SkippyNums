@@ -1,0 +1,29 @@
+{
+  "fill" : {
+    "linear-gradient" : [
+      "srgb:0.00000,0.79792,1.00000,1.00000",
+      "srgb:0.84740,0.00000,0.00000,1.00000"
+    ]
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "image-name" : "AppIcon-Dark.png",
+          "name" : "AppIcon-Dark"
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "squares" : "shared"
+  }
+}
