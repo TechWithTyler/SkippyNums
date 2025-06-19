@@ -27,7 +27,7 @@
 		8D454C3E2A799A6300639479 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D454C3D2A799A6300639479 /* SettingsData.swift */; };
 		8D4FB98A2A0445BB00F66392 /* timeUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D4FB9892A0445BB00F66392 /* timeUp.caf */; };
 		8D61C77A2A8C0B0D008703D7 /* ObjectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */; };
-		8D64601A2E02068000597B34 /* SkippyNums.icon in Resources */ = {isa = PBXBuildFile; fileRef = 8D6460192E02068000597B34 /* SkippyNums.icon */; };
+		8D64601A2E02068000597B34 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 8D6460192E02068000597B34 /* AppIcon.icon */; };
 		8D7F2B212A00346600A7322B /* twoNote.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B1F2A00346600A7322B /* twoNote.caf */; };
 		8D7F2B222A00346600A7322B /* fiveChord.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B202A00346600A7322B /* fiveChord.caf */; };
 		8D7F2B242A0051D800A7322B /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F2B232A0051D800A7322B /* TimeViewController.swift */; };
@@ -103,7 +103,7 @@
 		8D454C3D2A799A6300639479 /* SettingsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		8D4FB9892A0445BB00F66392 /* timeUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = timeUp.caf; sourceTree = "<group>"; };
 		8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectImageView.swift; sourceTree = "<group>"; };
-		8D6460192E02068000597B34 /* SkippyNums.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = SkippyNums.icon; sourceTree = "<group>"; };
+		8D6460192E02068000597B34 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		8D7B7A1829A5656A00D3C727 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7F2B1F2A00346600A7322B /* twoNote.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = twoNote.caf; sourceTree = "<group>"; };
 		8D7F2B202A00346600A7322B /* fiveChord.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fiveChord.caf; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 		8D87C7CA2B02C40E009BBE56 /* UI and Images */ = {
 			isa = PBXGroup;
 			children = (
-				8D6460192E02068000597B34 /* SkippyNums.icon */,
+				8D6460192E02068000597B34 /* AppIcon.icon */,
 				8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */,
 				8DC26FB429DDEE3200703ECA /* View Controllers */,
 				8D61C7782A8C0AFA008703D7 /* Views */,
@@ -479,7 +479,7 @@
 				8DC7D98D2B9BCF9200DECADC /* bark.caf in Resources */,
 				8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */,
 				8DC7D98C2B9BCF9200DECADC /* meow.caf in Resources */,
-				8D64601A2E02068000597B34 /* SkippyNums.icon in Resources */,
+				8D64601A2E02068000597B34 /* AppIcon.icon in Resources */,
 				8DCC07B929BA8BE900A8C1FF /* carHorn.caf in Resources */,
 				8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */,
 				8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */,
@@ -698,7 +698,7 @@
 		8D8EC9C7299AD7B400043D39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = SkippyNums;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SkippyNums/Supporting Files/SkippyNums.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -734,7 +734,7 @@
 		8D8EC9C8299AD7B400043D39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = SkippyNums;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SkippyNums/Supporting Files/SkippyNums.entitlements";
 				CODE_SIGN_STYLE = Automatic;
