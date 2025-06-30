@@ -25,6 +25,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		return true
 	}
 
+    // MARK: - Menu Bar Configuration
+
+    override func buildMenu(with builder: any UIMenuBuilder) {
+        super.buildMenu(with: builder)
+        removeUnusedMenus(with: builder)
+    }
+
+    func removeUnusedMenus(with builder: any UIMenuBuilder) {
+        builder.remove(menu: .document)
+        builder.remove(menu: .edit)
+        builder.remove(menu: .format)
+        builder.remove(menu: .toolbar)
+        builder.remove(menu: .sidebar)
+        builder.remove(menu: .help)
+    }
+
 	// MARK: - UISceneSession Lifecycle - Configuration
 
 	func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
