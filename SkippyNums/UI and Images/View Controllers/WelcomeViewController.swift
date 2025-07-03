@@ -42,6 +42,10 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         setupGradient()
         // 2. Configure the "maximum number of groups" picker.
         configureMaxGroupsPicker()
+        // 3. Update the gradient colors when the device's dark/light mode changes.
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
+            updateBackgroundColors()
+        }
 	}
 
     func setupGradient() {
@@ -73,12 +77,6 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // Update frame of gradient layer when window size changes
 		updateGradientFrame()
 	}
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
-    }
 
     // MARK: - @IBActions
 

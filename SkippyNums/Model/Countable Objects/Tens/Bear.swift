@@ -10,13 +10,13 @@ import Foundation
 
 struct Bear: CountableObject {
 
-    var name: String = "bears"
+    let name: String = "bears"
 
-    var quantity: Int
+    let quantity: Int
 
-    var soundFilename: String = "bear.caf"
+    let soundFilename: String = "bear.caf"
 
-    var soundRate: Float = 2
+    let soundRate: Float = 2
 
     init(quantity: Int = 10) {
         self.quantity = quantity

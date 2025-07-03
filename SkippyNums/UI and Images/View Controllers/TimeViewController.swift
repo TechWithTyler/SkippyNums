@@ -34,6 +34,10 @@ class TimeViewController: UIViewController {
         navigationItem.hidesBackButton = true
         // 2. Set up the gradient layer.
         setupGradient()
+        // 3. Update the gradient colors when the device's dark/light mode changes.
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
+            updateBackgroundColors()
+        }
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -71,12 +75,6 @@ class TimeViewController: UIViewController {
         super.viewDidLayoutSubviews()
         // Update frame of gradient layer when window size changes
         updateGradientFrame()
-    }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
     }
 
     // MARK: - @IBActions - Game Time Selection

@@ -14,7 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: - Properties - Window
 
 	var window: UIWindow?
-    
+
+    // MARK: - Properties - Game Brain
+
     var gameBrain = GameBrain.shared
     
     // MARK: - Scene Lifecycle - Connect
@@ -23,7 +25,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
 		// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
 		// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        // 1. Make sure the scene is a UIWindowScene.
 		guard let windowScene = (scene as? UIWindowScene) else { return }
+        // 2. Configure the window scene's titlebar and minimum size on macOS.
 		#if targetEnvironment(macCatalyst)
 		windowScene.titlebar?.titleVisibility = .hidden
         windowScene.sizeRestrictions?.minimumSize = CGSize(width: 1024, height: 768)
@@ -74,8 +78,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func resumeGame() {
+        // 1. Reconfigure the audio session.
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         appDelegate.configureAudioSession()
+        // 2. If a timed game is in progress (the topmost view controller is the GameViewController and gameBrain.gameLength isn't nil), resume the game timer.
         if let navigationController = window?.rootViewController as? UINavigationController, let gameViewController = navigationController.topViewController as? GameViewController {
             if gameBrain.gameLength != nil {
                 gameViewController.setupGameTimer(toResume: true)

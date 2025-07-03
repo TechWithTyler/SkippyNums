@@ -38,11 +38,15 @@ class TimeUpViewController: UIViewController {
         // 1. Set the message text.
 		guard let messageText = messageText else { return }
         messageLabel?.text = messageText
-        // 2. Hide the system-provided back button--a more visually-accessible back button is used instead.
+        // 2. Hide the system-provided back button--a back button isn't needed here.
         navigationItem.hidesBackButton = true
         // 3. Set up the gradient layer.
         setupGradient()
-        // 4. Add an animation to the image.
+        // 4. Update the gradient colors when the device's dark/light mode changes.
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
+            updateBackgroundColors()
+        }
+        // 5. Add an animation to the image.
         if #available(iOS 18, *) {
             timeUpImageView?.addSymbolEffect(.wiggle, options: .repeat(.periodic(3, delay: 0)).speed(2))
         }
@@ -76,12 +80,6 @@ class TimeUpViewController: UIViewController {
         super.viewDidLayoutSubviews()
         // Update frame of gradient layer when window size changes
         updateGradientFrame()
-    }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
     }
 
     // MARK: - @IBActions

@@ -1,5 +1,5 @@
 //
-//  Car.swift
+//  Cow.swift
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 12/11/23.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct Car: CountableObject {
+struct Cow: CountableObject {
+    
+    let name: String = "cows"
 
-    var name: String = "cars"
+    let quantity: Int
 
-    var quantity: Int
+    let soundFilename: String = "moo.caf"
 
-    var soundFilename: String = "carHorn.caf"
-
-    var soundRate: Float = 2.5
+    let soundRate: Float = 2
 
     init(quantity: Int = 2) {
         self.quantity = quantity

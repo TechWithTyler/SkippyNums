@@ -44,7 +44,11 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
         navigationItem.hidesBackButton = true
         // 3. Set up the gradient layer.
         setupGradient()
-        // 4. Show an example.
+        // 4. Update the gradient colors when the device's dark/light mode changes.
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
+            updateBackgroundColors()
+        }
+        // 5. Show an example.
 		newExample(self)
 	}
 
@@ -84,12 +88,6 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
         super.viewDidLayoutSubviews()
         // Update frame of gradient layer when window size changes
         updateGradientFrame()
-    }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
     }
 
     // MARK: - Reset Game

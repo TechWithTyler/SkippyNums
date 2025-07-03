@@ -162,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				8D31D8572B27F834009F29EE /* Globals.swift */,
-				8D2BAF562CD41F0C0016C61E /* SilentAudioPlayer.swift */,
 				8DA632382A799C9D00A60458 /* PrivacyInfo.xcprivacy */,
 				8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */,
 				8D7B7A1829A5656A00D3C727 /* Info.plist */,
@@ -216,7 +215,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8D43C3D12BD30EBD003D1997 /* Objects */ = {
+		8D43C3D12BD30EBD003D1997 /* Countable Objects */ = {
 			isa = PBXGroup;
 			children = (
 				8D8EC9CA299ADD9400043D39 /* CountableObject.swift */,
@@ -225,7 +224,20 @@
 				8D31D85B2B27FAE4009F29EE /* Tens */,
 				8D31D85C2B27FAEE009F29EE /* Mix */,
 			);
-			path = Objects;
+			path = "Countable Objects";
+			sourceTree = "<group>";
+		};
+		8D61683F2E15B416003A5BDD /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8DC7D9912BA0F3CC00DECADC /* Objects - Twos */,
+				8DC7D9922BA0F3D800DECADC /* Objects - Fives */,
+				8DC7D9932BA0F3E000DECADC /* Objects - Tens */,
+				8DC7D9902BA0F3B200DECADC /* Objects - Mix */,
+				8DC7D9952BA0F40900DECADC /* Game Progress */,
+				8DC7D9942BA0F3FD00DECADC /* Earcons */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		8D61C7782A8C0AFA008703D7 /* Views */ = {
@@ -275,7 +287,8 @@
 				8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */,
 				8D87C7CA2B02C40E009BBE56 /* UI and Images */,
 				8DA6D96C299C2F6000ED533F /* Model */,
-				8DCC07B329B92CF000A8C1FF /* Sounds */,
+				8DCC07B329B92CF000A8C1FF /* Audio */,
+				8D2BAF562CD41F0C0016C61E /* SilentAudioPlayer.swift */,
 				8D31D8562B27F716009F29EE /* Supporting Files */,
 			);
 			path = SkippyNums;
@@ -286,7 +299,7 @@
 			children = (
 				8DA6D969299C2F4300ED533F /* GameBrain.swift */,
 				8D454C3D2A799A6300639479 /* SettingsData.swift */,
-				8D43C3D12BD30EBD003D1997 /* Objects */,
+				8D43C3D12BD30EBD003D1997 /* Countable Objects */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -372,17 +385,12 @@
 			path = "Game Progress";
 			sourceTree = "<group>";
 		};
-		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
+		8DCC07B329B92CF000A8C1FF /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				8DC7D9912BA0F3CC00DECADC /* Objects - Twos */,
-				8DC7D9922BA0F3D800DECADC /* Objects - Fives */,
-				8DC7D9932BA0F3E000DECADC /* Objects - Tens */,
-				8DC7D9902BA0F3B200DECADC /* Objects - Mix */,
-				8DC7D9952BA0F40900DECADC /* Game Progress */,
-				8DC7D9942BA0F3FD00DECADC /* Earcons */,
+				8D61683F2E15B416003A5BDD /* Sounds */,
 			);
-			path = Sounds;
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

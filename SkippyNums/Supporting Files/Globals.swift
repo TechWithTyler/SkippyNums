@@ -12,13 +12,13 @@ import UIKit
 
 // The edge insets of the sections of the object collection views in the GameViewController and LearnViewController.
 var objectInsets: UIEdgeInsets {
-    let verticalInsets: CGFloat = 50
-    let horizontalInsets: CGFloat = 20
+    let verticalInsetAmount: CGFloat = 50
+    let horizontalInsetAmount: CGFloat = 20
     let insets = UIEdgeInsets(
-        top: verticalInsets,
-        left: horizontalInsets,
-        bottom: verticalInsets,
-        right: horizontalInsets)
+        top: verticalInsetAmount,
+        left: horizontalInsetAmount,
+        bottom: verticalInsetAmount,
+        right: horizontalInsetAmount)
     return insets
 }
 
