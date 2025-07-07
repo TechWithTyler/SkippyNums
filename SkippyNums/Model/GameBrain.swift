@@ -255,28 +255,30 @@ class GameBrain {
 
     // This method creates 5 choices whose Int values are based on the number of images to show times the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed 5th choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place and so the number sequence isn't obvious.
     func getChoices() -> [Int] {
-        // 1. Create choices. In the examples below, numberOfImagesToShow is 3 and currentObject.quantity is 2.
+        // 1. Get the correct answer, which is used to calculate the values of each choice.
+        let correctAnswer = Int(getCorrectAnswer())!
+        // 2. Create choices. In the examples below, numberOfImagesToShow is 3 and currentObject.quantity is 2 (correctAnswer is numberOfImagesToShow times currentObject.quantity).
         // Below correct answer
         // Example: 3 times 2 minus (2 times 2) = 2
-        let incorrectChoice1A = numberOfImagesToShow * currentObject.quantity - (currentObject.quantity * 2)
+        let incorrectChoice1A = correctAnswer - (currentObject.quantity * 2)
         // Example: 3 times 2 plus (2 times 3) = 12 (not used in this example since incorrectChoice1A isn't 0)
-        let incorrectChoice1B = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 3)
+        let incorrectChoice1B = correctAnswer + (currentObject.quantity * 3)
         // Example: 3 times 2 minus 2 = 4
-        let incorrectChoice2 = numberOfImagesToShow * currentObject.quantity - currentObject.quantity
+        let incorrectChoice2 = correctAnswer - currentObject.quantity
         // Correct answer
         // Example: 3 times 2 = 6
-        let correctChoice = Int(getCorrectAnswer())!
+        let correctChoice = correctAnswer
         // Above correct answer
         // Example: 3 times 2 plus 2 = 8
-        let incorrectChoice3 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
+        let incorrectChoice3 = correctAnswer + currentObject.quantity
         // Example: 3 times 2 plus (2 times 2) = 10
-        let incorrectChoice4 = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 2)
-        // 2. Shuffle the 4 incorrect choices. If incorrect choice 1A is 0, use incorrect choice 1B instead, which is 1 multiple higher than incorrect choice 4.
+        let incorrectChoice4 = correctAnswer + (currentObject.quantity * 2)
+        // 3. Shuffle the 4 incorrect choices. If incorrect choice 1A is 0, use incorrect choice 1B instead, which is 1 multiple higher than incorrect choice 4.
         let shuffledIncorrectChoices = [incorrectChoice1A == 0 ? incorrectChoice1B : incorrectChoice1A, incorrectChoice2, incorrectChoice3, incorrectChoice4].shuffled()
-        // 3. Drop the last incorrect choice and append the correct one. These are the final 4 choices that are displayed to the player.
+        // 4. Drop the last incorrect choice and append the correct one. These are the final 4 choices that are displayed to the player.
         var finalChoices = Array(shuffledIncorrectChoices.dropLast())
         finalChoices.append(correctChoice)
-        // 4. Re-shuffle the final set of 4 choices (the choices offered to the player) and return them.
+        // 5. Re-shuffle the final set of 4 choices (the choices offered to the player) and return them.
         finalChoices.shuffle()
         return finalChoices
     }

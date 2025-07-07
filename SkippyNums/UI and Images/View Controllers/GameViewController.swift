@@ -186,7 +186,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - Game Timer - End
 
     func gameTimerEnded() {
-        // 1. Dismiss the "correct or incorrect" answer sheet if it's being shown when time runs out.
+        // 1. Dismiss the "correct or incorrect answer" sheet if it's being shown when time runs out.
         if let answerCheckViewController = presentedViewController as? AnswerCheckViewController {
             answerCheckViewController.dismiss(animated: true)
         }
@@ -222,7 +222,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     func setChoices() {
-        // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results). Converting from Int to String almost never produces nil values, so it's safe to use map instead of compactMap here.
+        // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results). Converting from Int to String almost never produces nil values, so it's safe to use map instead of compactMap here. This isn't true the other way--not all String values can be converted to Int. For example, "5" can be converted to Int, but "five" can't. In that case, you would use compactMap to throw out nil results.
         let choices = gameBrain.getChoices().map { String($0) }
         // 2. Set each choice button's title to the corresponding item in the choices array, and set the font properties.
         let useMonospacedFont: Bool = true
@@ -274,7 +274,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     // MARK: - Navigation - Storyboard Segue Preparation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 1. Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -286,7 +286,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 answerCheckViewController.messageText = "Incorrect! Try again!"
                 answerCheckViewController.baseImageName = "x"
             case "TooManyIncorrect":
-                answerCheckViewController.messageText = "Incorrect! The correct answer is \(gameBrain.getCorrectAnswer())."
+                answerCheckViewController.messageText = "Incorrect! The correct answer is:\n\(gameBrain.getCorrectAnswer())."
                 answerCheckViewController.baseImageName = "x"
             default:
                 answerCheckViewController.messageText = "Correct!"
@@ -326,6 +326,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
 
+    // This method posts a UIAccessibility announcement notification, which tells VoiceOver to speak message.
     func speakVoiceOverMessage(_ message: String) {
         UIAccessibility.post(notification: .announcement, argument: message)
     }
@@ -376,7 +377,7 @@ extension GameViewController {
         configureImageAccessibility(for: imageView)
         // 8. Disable keyboard focus for the cell.
         cell.focusEffect = nil
-        // 9. Remove the previous image view (if any) from the cell before adding this one, otherwise multiple image views would overlap each other each time a new question is presented.
+        // 9. Remove the previous image view (if any) from the cell before adding this one, otherwise multiple image views would overlap each other each time a new question is presented. If this is the first image in the cell, this will do nothing.
         cell.contentView.subviews.first?.removeFromSuperview()
         // 10. Add the image view to the cell's content view and return the cell.
         cell.contentView.addSubview(imageView)
@@ -395,7 +396,7 @@ extension GameViewController {
         let soundGesture = "Double-tap"
         let moveGesture = "flick"
 #endif
-        // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 5th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 6th image (the first one in the 2nd row).
+        // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 5th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 6th image (the first one in the 2nd row). If it's the last image the player hasn't yet focused on, skip to step 7.
         if voiceOverFocusedImages.count < gameBrain.numberOfImagesToShow {
             let lastImageViewInFirstRow = (5 * gameBrain.currentObject.quantity)
             if imageView.tag == lastImageViewInFirstRow && gameBrain.numberOfImagesToShow > 5 {
@@ -405,7 +406,7 @@ extension GameViewController {
                 imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(gameBrain.getDisplayNameForObject())."
             }
         } else {
-            // 7. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom.
+            // 7. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom. For example, if counting cows, the hint would be "That's all the cows, how many cows altogether? Select from the choices at the bottom of the screen."
             imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
         }
     }
@@ -418,10 +419,13 @@ extension GameViewController {
 
     // Specifies sizing of the images in the collection view.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // 1. Use the available width to determine the width of each image.
         let paddingSpace = objectInsets.left * 2
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / 6.2
-        return CGSize(width: widthPerItem, height: widthPerItem)
+        // 2. Return the size of each image as a square with the width and height equal to widthPerItem.
+        let size = CGSize(width: widthPerItem, height: widthPerItem)
+        return size
     }
 
     // MARK: - Object Collection View - Image Activation Handler
