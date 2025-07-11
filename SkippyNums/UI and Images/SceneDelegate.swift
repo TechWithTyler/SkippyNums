@@ -27,11 +27,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         // 1. Make sure the scene is a UIWindowScene.
 		guard let windowScene = (scene as? UIWindowScene) else { return }
-        // 2. Configure the window scene's titlebar and minimum size on macOS.
+        // 2. Configure the window scene's titlebar and minimum size.
 		#if targetEnvironment(macCatalyst)
 		windowScene.titlebar?.titleVisibility = .hidden
+#endif
         windowScene.sizeRestrictions?.minimumSize = CGSize(width: 1024, height: 768)
-		#endif
         resumeGame()
 	}
     
