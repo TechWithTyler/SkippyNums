@@ -410,7 +410,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUy-89-vqb" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="871" y="75" width="239" height="64"/>
+                                <rect key="frame" x="899" y="78" width="211" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -834,7 +834,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="pQa-gG-mWZ"/>
         <segue reference="MRR-36-b4x"/>
-        <segue reference="lyI-Xm-Oxd"/>
+        <segue reference="BIv-E0-hxl"/>
         <segue reference="HN7-Uw-0DH"/>
     </inferredMetricsTieBreakers>
     <resources>
