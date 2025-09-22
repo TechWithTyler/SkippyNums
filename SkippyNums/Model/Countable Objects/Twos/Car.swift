@@ -1,5 +1,5 @@
 //
-//  Elephant.swift
+//  Car.swift
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 12/11/23.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct Elephant: CountableObject {
+struct Car: CountableObject {
 
-    var name: String = "elephants"
+    let name: String = "cars"
 
-    var quantity: Int
+    let quantity: Int
 
-    var soundFilename: String = "elephantTrumpet.caf"
+    let soundFilename: String = "carHorn.caf"
 
-    var soundRate: Float = 2.5
+    let soundRate: Float = 2.5
 
     init(quantity: Int = 2) {
         self.quantity = quantity

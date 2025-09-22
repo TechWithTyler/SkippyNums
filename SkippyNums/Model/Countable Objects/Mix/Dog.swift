@@ -14,11 +14,11 @@ struct Dog: CountableObject {
         return "\(quantity)dogs"
     }
 
-    var quantity: Int
+    let quantity: Int
 
-    var soundFilename: String = "bark.caf"
+    let soundFilename: String = "bark.caf"
 
-    var soundRate: Float = 1
+    let soundRate: Float = 1
 
     init(quantity: Int) {
         self.quantity = quantity

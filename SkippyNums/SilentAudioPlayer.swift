@@ -29,16 +29,19 @@ class SilentAudioPlayer {
 
     // Configures the silence track by attaching the player node and scheduling silent audio.
     func setupSilenceTrack() {
-        audioEngine.attach(playerNode) // Attach the player node to the engine
-        audioEngine.connect(playerNode, to: audioEngine.mainMixerNode, format: audioFormat) // Connect player to mixer
+        // 1. Attach the player node to the engine.
+        audioEngine.attach(playerNode)
+        // 2. Connect the player to the mixer.
+        audioEngine.connect(playerNode, to: audioEngine.mainMixerNode, format: audioFormat)
         audioEngine.isAutoShutdownEnabled = false
-        scheduleSilentBuffer() // Schedule a silent audio buffer for looping playback
+        // 3. Schedule a silent audio buffer for looping playback.
+        scheduleSilentBuffer()
     }
 
     // Creates and schedules a silent audio buffer.
     func scheduleSilentBuffer() {
-        let bufferDuration: TimeInterval = 1 // 1-second buffer duration
         // 1. Calculate the total number of frames required for the buffer.
+        let bufferDuration: TimeInterval = 1 // 1-second buffer duration
         let frameCount = UInt32(bufferDuration * self.audioFormat.sampleRate)
         // 2. Create an audio buffer with the specified format and frame capacity.
         if let buffer = AVAudioPCMBuffer(pcmFormat: self.audioFormat, frameCapacity: frameCount) {

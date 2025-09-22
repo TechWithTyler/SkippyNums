@@ -42,6 +42,10 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         setupGradient()
         // 2. Configure the "maximum number of groups" picker.
         configureMaxGroupsPicker()
+        // 3. Update the gradient colors when the device's dark/light mode changes.
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
+            updateBackgroundColors()
+        }
 	}
 
     func setupGradient() {
@@ -74,12 +78,6 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 		updateGradientFrame()
 	}
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
-    }
-
     // MARK: - @IBActions
 
 	@IBAction func playSelected(_ sender: Any) {
@@ -107,11 +105,12 @@ extension WelcomeViewController {
         // 1. Configure accessibility of the max groups picker.
         maxGroupsPicker?.isAccessibilityElement = true
 		maxGroupsPicker?.accessibilityLabel = "Maximum number of groups"
-        // 2. Set the delegate and data source.
+        // 2. Set the delegate and data source. The delegate is notified when things happen with an object (in this case, a UIPickerView), and the data source tells it what data it should contain. An object's delegate and data source are always used together and are often set to the same object, in this case, WelcomeViewController.
 		maxGroupsPicker?.delegate = self
 		maxGroupsPicker?.dataSource = self
-        // Select the row corresponding to the current setting.
-		maxGroupsPicker?.selectRow(settingsData.tenFrame ? 1 : 0, inComponent: 0, animated: true)
+        // 3. Select the row corresponding to the current setting.
+        let currentTenFrameSetting = settingsData.tenFrame ? 1 : 0
+		maxGroupsPicker?.selectRow(currentTenFrameSetting, inComponent: 0, animated: true)
 	}
 
     // MARK: - Max Groups Picker - Delegate and Data Source
@@ -130,7 +129,8 @@ extension WelcomeViewController {
 
     // Handles selection of picker rows on the given wheel.
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		settingsData.tenFrame = row == 1 
+        let newTenFrameSetting = row == 1
+		settingsData.tenFrame = newTenFrameSetting
 	}
 
     // Returns the content to display for the given row on the given wheel.
@@ -144,7 +144,8 @@ extension WelcomeViewController {
             pickerLabel?.layer.cornerRadius = 12
         }
         // 2. Get the title for the label based on the row being configured.
-        let optionTitle = String(maxGroupsOptions[row])
+        let option = maxGroupsOptions[row]
+        let optionTitle = String(option)
         pickerLabel?.text = optionTitle
         // 3. Set the background color and text color of the row.
         pickerLabel?.textColor = .white

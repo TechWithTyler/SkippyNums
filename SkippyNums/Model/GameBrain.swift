@@ -98,7 +98,7 @@ class GameBrain {
     // The number of tries in the current game.
     var triesInGame: Int = 0
 
-    // The number of incorrect answers for the current question.
+    // The number of incorrect answers for the current question, which is used to reveal the correct answer and skip to a new question if the player gets 3 incorrect answers in a row.
     var numberOfIncorrectAnswersForQuestion = 0
 
     // The number the player is counting by, or nil if playing the Mix game. This determines which images to show.
@@ -129,10 +129,10 @@ class GameBrain {
 
     // MARK: - Properties - Booleans
 
-    // Whether the player is starting a new game (true) or a new round in the current game (false) when the timer goes off.
+    // Whether the player is starting a new game (true) or a new round in the current game (false) when the timer goes off. A new round in the current game keeps the game stats (number of tries/correct answers) the same, hides the Untimed option from the game length page, and brings the player back to the "choose your game" page, whereas a new game resets all properties for the current game and returns to the main menu.
     var isNewRoundInCurrentGame: Bool = false
 
-    // Whether the player got too many incorrect answers in a row.
+    // Whether the player got too many incorrect answers in a row. The game reveals the correct answer and skips to a new question in this case.
     var tooManyIncorrectAnswers: Bool {
         return numberOfIncorrectAnswersForQuestion == 3
     }
@@ -144,7 +144,7 @@ class GameBrain {
         return "\(triesInGame) " + (triesInGame == 1 ? "try" : "tries")
     }
 
-    // The text to display in the score label during gameplay or on the time up screen.
+    // The text to display in the score label during gameplay or on the time up screen (e.g. "3 of 5 tries correct".
     var scoreText: String {
         return "\(correctAnswersInGame) of \(triesSingularOrPlural) correct"
     }
@@ -197,18 +197,16 @@ class GameBrain {
 
     // This method presents a new question in play or practice mode, or a new learn mode example in learn mode.
     func newQuestion() {
-        // 1. Determine the maximum number of images to show.
+        // 1. Determine the maximum number of images to show (5 or 10) based on whether "maximum number of groups" is set to 5 or 10. The minimum number of images to display is 2.
         let maxNumber = settingsData.tenFrame ? 10 : 5
         numberOfImagesToShow = Int.random(in: 2...maxNumber)
-        // 2. Reset the incorrect answer count to 0.
-        numberOfIncorrectAnswersForQuestion = 0
-        // 3. If in learn mode, present a new example.
+        // 2. If in learn mode, present a new example.
         if gameType == .learn {
             // type(of:) allows you to get the dynamic type (e.g. Dog) from the given value's static type (e.g. currentObject which is anything that conforms to CountableObject).
             let object = type(of: currentObject)
             newLearnModeExample(withObject: object)
         } else {
-            // 4. If in play or practice mode, set the current object to a new object.
+            // 3. If in play or practice mode, set the current object to a new object.
             let previousObjectName = currentObject.name
             let previousNumberOfImages = numberOfImagesToShow
             if countingBy == nil {
@@ -216,6 +214,8 @@ class GameBrain {
             } else {
                 currentObject = GameBrain.objectsToCount.filter({$0.quantity == countingBy}).randomElement()!
             }
+            // 4. Reset the incorrect answer count to 0.
+            numberOfIncorrectAnswersForQuestion = 0
             // 5. If the next question is identical to the previous one (i.e., the new question's object and number of images to show are the same), try again until a different question (i.e., either the object or number of images to show are different) is shown.
             let isSameQuestionContent = currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages
             if isSameQuestionContent {
@@ -253,37 +253,39 @@ class GameBrain {
         }
     }
 
-    // This method creates 5 choices whose Int values are based on the number of images to show times the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place.
+    // This method creates 5 choices whose Int values are based on the number of images to show times the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed 5th choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place and so the number sequence isn't obvious.
     func getChoices() -> [Int] {
-        // 1. Create choices.
+        // 1. Get the correct answer, which is used to calculate the values of each choice.
+        let correctAnswer = Int(getCorrectAnswer())!
+        // 2. Create choices. In the examples below, numberOfImagesToShow is 3 and currentObject.quantity is 2 (correctAnswer is numberOfImagesToShow times currentObject.quantity).
         // Below correct answer
         // Example: 3 times 2 minus (2 times 2) = 2
-        let incorrectChoice1A = numberOfImagesToShow * currentObject.quantity - (currentObject.quantity * 2)
+        let incorrectChoice1A = correctAnswer - (currentObject.quantity * 2)
         // Example: 3 times 2 plus (2 times 3) = 12 (not used in this example since incorrectChoice1A isn't 0)
-        let incorrectChoice1B = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 3)
+        let incorrectChoice1B = correctAnswer + (currentObject.quantity * 3)
         // Example: 3 times 2 minus 2 = 4
-        let incorrectChoice2 = numberOfImagesToShow * currentObject.quantity - currentObject.quantity
+        let incorrectChoice2 = correctAnswer - currentObject.quantity
         // Correct answer
         // Example: 3 times 2 = 6
-        let correctChoice = Int(getCorrectAnswer())!
+        let correctChoice = correctAnswer
         // Above correct answer
         // Example: 3 times 2 plus 2 = 8
-        let incorrectChoice3 = numberOfImagesToShow * currentObject.quantity + currentObject.quantity
+        let incorrectChoice3 = correctAnswer + currentObject.quantity
         // Example: 3 times 2 plus (2 times 2) = 10
-        let incorrectChoice4 = numberOfImagesToShow * currentObject.quantity + (currentObject.quantity * 2)
-        // 2. Shuffle the 4 incorrect choices. If incorrect choice 1A is 0, use incorrect choice 1B instead, which is 1 multiple higher than incorrect choice 4.
+        let incorrectChoice4 = correctAnswer + (currentObject.quantity * 2)
+        // 3. Shuffle the 4 incorrect choices. If incorrect choice 1A is 0, use incorrect choice 1B instead, which is 1 multiple higher than incorrect choice 4.
         let shuffledIncorrectChoices = [incorrectChoice1A == 0 ? incorrectChoice1B : incorrectChoice1A, incorrectChoice2, incorrectChoice3, incorrectChoice4].shuffled()
-        // 3. Drop the last incorrect choice and append the correct choice. These are the final 4 choices that are displayed to the player.
+        // 4. Drop the last incorrect choice and append the correct one. These are the final 4 choices that are displayed to the player.
         var finalChoices = Array(shuffledIncorrectChoices.dropLast())
         finalChoices.append(correctChoice)
-        // 4. Re-shuffle the remaining 4 choices (the choices offered to the player) and return them.
+        // 5. Re-shuffle the final set of 4 choices (the choices offered to the player) and return them.
         finalChoices.shuffle()
         return finalChoices
     }
 
     // MARK: - Sound
 
-    // This method plays the current object's sound when it's tapped/clicked, or when selecting the object to count in learn mode. When tapping/clicking an image, the sound is played as many times as the object appears in the image. When selecting the object to count in learn mode, the sound is played only once.
+    // This method plays the current object's sound when it's tapped/clicked, or when selecting the object to count in learn mode. When tapping/clicking an image in play or practice mode, the sound is played as many times as the object appears in the image. When tapping/clicking an image in learn mode, the sound is played as many times as the object appears on the screen. When selecting the object to count in learn mode, the sound is played only once.
     func playSoundForObject(forLearnModeObjectSelection: Bool = false) {
         // 1. Make sure the current object's sound exists in the app bundle.
         guard let soundURL = Bundle.main.url(forResource: currentObject.soundFilename, withExtension: nil) else {
@@ -400,11 +402,12 @@ class GameBrain {
 
     // This method calculates the correct answer based on the number of images to show and the current object's quantity, and returns the result as a String.
     func getCorrectAnswer() -> String {
+        // Example: If numberOfImagesToShow is 3 and currentObject.quantity is 2, the correct answer is 6.
         let correctAnswer = numberOfImagesToShow * currentObject.quantity
         return String(correctAnswer)
     }
 
-    // This method compares answer with the correct answer, plays a sound, and increments the tries in the current game by 1. If it's correct, the number of correct answers in the current game increases by 1. If it's incorrect, the number of incorrect answers for the current question increases by 1. The resulting Bool is used to determine how the answer screen should display.
+    // This method compares answer with the correct answer, plays a sound, and increments the tries in the current game by 1. If it's correct, the number of correct answers in the current game increases by 1. If it's incorrect, the number of incorrect answers for the current question increases by 1 (a value of 3 means reveal the correct answer and skip to a new question). The resulting Bool is used to determine how the answer screen should display.
     func checkAnswer(_ answer: String) -> Bool {
         let correctAnswer = getCorrectAnswer()
         let correct = answer == correctAnswer
@@ -421,7 +424,7 @@ class GameBrain {
 
     // MARK: - Game Timer
 
-    // This method winds up the game timer, calling the timer fire handler every second (or only once if playing an untimed or practice game), and calling the timer end handler when the timer ends.
+    // This method winds up the game timer, calling the timer fire handler every second (or only once if playing an untimed or practice game to trigger a stat update), and calling the timer end handler when the timer ends.
     func setupGameTimer(toResume: Bool = false, timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
         // 1. If gameLength is nil, call the timer fire handler with a nil value and don't start the timer.
         guard gameLength != nil else {
@@ -433,7 +436,7 @@ class GameBrain {
             gameTimeLeft = gameLength
             timerFireHandler(gameTimeLeft)
         }
-        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] timer in
+        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
             // 3. Decrease gameTimeLeft by 1 every second.
             gameTimeLeft! -= 1
             // 4. If gameTimeLeft is (or falls below) 0 seconds, reset the gameTimer and call the timer end handler.
@@ -445,10 +448,10 @@ class GameBrain {
                 // 5. Otherwise, call the timer fire handler with the new value.
                 timerFireHandler(gameTimeLeft)
             }
-        })
+        }
     }
 
-    // This method pauses the game timer.
+    // This method pauses the game timer when the game becomes inactive (e.g. by moving to the background).
     func pauseGameTimer() {
         gameTimer?.invalidate()
         gameTimer = nil

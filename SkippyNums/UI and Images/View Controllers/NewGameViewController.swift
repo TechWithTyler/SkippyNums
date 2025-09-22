@@ -30,6 +30,10 @@ class NewGameViewController: UIViewController {
         navigationItem.hidesBackButton = true
         // 2. Set up the gradient layer.
         setupGradient()
+        // 3. Update the gradient colors when the device's dark/light mode changes.
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
+            updateBackgroundColors()
+        }
     }
 
     func setupGradient() {
@@ -62,12 +66,6 @@ class NewGameViewController: UIViewController {
         updateGradientFrame()
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
-    }
-
     // MARK: - Quantity Selection - @IBActions
 
     // For these @IBActions, the segue to use depends on the game type (play/practice/learn) selected on the main menu.
@@ -91,6 +89,7 @@ class NewGameViewController: UIViewController {
     // MARK: - Quantity Selection - Selection Handler
 
     func handleGameSelection(number: Int?, sender: Any) {
+        // 1. Create the quantity part of the segue identifier based on number.
         var quantity: String {
             if let number = number {
                 return String(number)
@@ -98,6 +97,7 @@ class NewGameViewController: UIViewController {
                 return "Mix"
             }
         }
+        // 2. Choose the segue to use based on the game type and the value of quantity.
         switch gameBrain.gameType {
         case .practice:
             performSegue(withIdentifier: "Practice\(quantity)", sender: sender)
@@ -119,7 +119,7 @@ class NewGameViewController: UIViewController {
 
     // MARK: - Navigation - Storyboard Segue Preparation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.

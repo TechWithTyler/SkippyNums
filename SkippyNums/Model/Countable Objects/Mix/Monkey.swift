@@ -1,5 +1,5 @@
 //
-//  Bird.swift
+//  Monkey.swift
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 12/11/23.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct Bird: CountableObject {
+struct Monkey: CountableObject {
 
     var name: String {
-        return "\(quantity)birds"
+        return "\(quantity)monkeys"
     }
 
-    var quantity: Int
+    let quantity: Int
 
-    var soundFilename: String = "bird.caf"
+    let soundFilename: String = "monkey.caf"
 
-    var soundRate: Float = 1
+    let soundRate: Float = 1.5
 
     init(quantity: Int) {
         self.quantity = quantity

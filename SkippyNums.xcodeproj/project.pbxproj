@@ -27,6 +27,7 @@
 		8D454C3E2A799A6300639479 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D454C3D2A799A6300639479 /* SettingsData.swift */; };
 		8D4FB98A2A0445BB00F66392 /* timeUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D4FB9892A0445BB00F66392 /* timeUp.caf */; };
 		8D61C77A2A8C0B0D008703D7 /* ObjectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */; };
+		8D64601A2E02068000597B34 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 8D6460192E02068000597B34 /* AppIcon.icon */; };
 		8D7F2B212A00346600A7322B /* twoNote.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B1F2A00346600A7322B /* twoNote.caf */; };
 		8D7F2B222A00346600A7322B /* fiveChord.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B202A00346600A7322B /* fiveChord.caf */; };
 		8D7F2B242A0051D800A7322B /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F2B232A0051D800A7322B /* TimeViewController.swift */; };
@@ -102,6 +103,7 @@
 		8D454C3D2A799A6300639479 /* SettingsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		8D4FB9892A0445BB00F66392 /* timeUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = timeUp.caf; sourceTree = "<group>"; };
 		8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectImageView.swift; sourceTree = "<group>"; };
+		8D6460192E02068000597B34 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		8D7B7A1829A5656A00D3C727 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7F2B1F2A00346600A7322B /* twoNote.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = twoNote.caf; sourceTree = "<group>"; };
 		8D7F2B202A00346600A7322B /* fiveChord.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fiveChord.caf; sourceTree = "<group>"; };
@@ -160,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				8D31D8572B27F834009F29EE /* Globals.swift */,
-				8D2BAF562CD41F0C0016C61E /* SilentAudioPlayer.swift */,
 				8DA632382A799C9D00A60458 /* PrivacyInfo.xcprivacy */,
 				8D8EC9C9299AD7BC00043D39 /* SkippyNums.entitlements */,
 				8D7B7A1829A5656A00D3C727 /* Info.plist */,
@@ -214,7 +215,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8D43C3D12BD30EBD003D1997 /* Objects */ = {
+		8D43C3D12BD30EBD003D1997 /* Countable Objects */ = {
 			isa = PBXGroup;
 			children = (
 				8D8EC9CA299ADD9400043D39 /* CountableObject.swift */,
@@ -223,7 +224,20 @@
 				8D31D85B2B27FAE4009F29EE /* Tens */,
 				8D31D85C2B27FAEE009F29EE /* Mix */,
 			);
-			path = Objects;
+			path = "Countable Objects";
+			sourceTree = "<group>";
+		};
+		8D61683F2E15B416003A5BDD /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8DC7D9912BA0F3CC00DECADC /* Objects - Twos */,
+				8DC7D9922BA0F3D800DECADC /* Objects - Fives */,
+				8DC7D9932BA0F3E000DECADC /* Objects - Tens */,
+				8DC7D9902BA0F3B200DECADC /* Objects - Mix */,
+				8DC7D9952BA0F40900DECADC /* Game Progress */,
+				8DC7D9942BA0F3FD00DECADC /* Earcons */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		8D61C7782A8C0AFA008703D7 /* Views */ = {
@@ -237,6 +251,7 @@
 		8D87C7CA2B02C40E009BBE56 /* UI and Images */ = {
 			isa = PBXGroup;
 			children = (
+				8D6460192E02068000597B34 /* AppIcon.icon */,
 				8D8EC9B7299AD7B300043D39 /* SceneDelegate.swift */,
 				8DC26FB429DDEE3200703ECA /* View Controllers */,
 				8D61C7782A8C0AFA008703D7 /* Views */,
@@ -272,7 +287,8 @@
 				8D8EC9B5299AD7B300043D39 /* AppDelegate.swift */,
 				8D87C7CA2B02C40E009BBE56 /* UI and Images */,
 				8DA6D96C299C2F6000ED533F /* Model */,
-				8DCC07B329B92CF000A8C1FF /* Sounds */,
+				8DCC07B329B92CF000A8C1FF /* Audio */,
+				8D2BAF562CD41F0C0016C61E /* SilentAudioPlayer.swift */,
 				8D31D8562B27F716009F29EE /* Supporting Files */,
 			);
 			path = SkippyNums;
@@ -283,7 +299,7 @@
 			children = (
 				8DA6D969299C2F4300ED533F /* GameBrain.swift */,
 				8D454C3D2A799A6300639479 /* SettingsData.swift */,
-				8D43C3D12BD30EBD003D1997 /* Objects */,
+				8D43C3D12BD30EBD003D1997 /* Countable Objects */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -369,17 +385,12 @@
 			path = "Game Progress";
 			sourceTree = "<group>";
 		};
-		8DCC07B329B92CF000A8C1FF /* Sounds */ = {
+		8DCC07B329B92CF000A8C1FF /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				8DC7D9912BA0F3CC00DECADC /* Objects - Twos */,
-				8DC7D9922BA0F3D800DECADC /* Objects - Fives */,
-				8DC7D9932BA0F3E000DECADC /* Objects - Tens */,
-				8DC7D9902BA0F3B200DECADC /* Objects - Mix */,
-				8DC7D9952BA0F40900DECADC /* Game Progress */,
-				8DC7D9942BA0F3FD00DECADC /* Earcons */,
+				8D61683F2E15B416003A5BDD /* Sounds */,
 			);
-			path = Sounds;
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,7 +440,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1640;
 				ORGANIZATIONNAME = SheftApps;
 				TargetAttributes = {
 					8D8EC9B1299AD7B300043D39 = {
@@ -476,6 +487,7 @@
 				8DC7D98D2B9BCF9200DECADC /* bark.caf in Resources */,
 				8D8EC9BF299AD7B400043D39 /* Assets.xcassets in Resources */,
 				8DC7D98C2B9BCF9200DECADC /* meow.caf in Resources */,
+				8D64601A2E02068000597B34 /* AppIcon.icon in Resources */,
 				8DCC07B929BA8BE900A8C1FF /* carHorn.caf in Resources */,
 				8DCC07B529B92CF000A8C1FF /* moo.caf in Resources */,
 				8D0BBD1B29BFB81B00AE7A62 /* incorrect.caf in Resources */,
@@ -604,6 +616,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -667,6 +680,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -696,24 +710,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SkippyNums/Supporting Files/SkippyNums.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 500;
-				DEVELOPMENT_TEAM = 3B6G4T54X3;
+				CURRENT_PROJECT_VERSION = 700;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SkippyNums/Supporting Files/Info.plist";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023-2025 SheftApps. All rights reserved.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2025.5;
+				MARKETING_VERSION = 2025.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tylersheft.SkippyNums;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -733,24 +747,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SkippyNums/Supporting Files/SkippyNums.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 500;
-				DEVELOPMENT_TEAM = 3B6G4T54X3;
+				CURRENT_PROJECT_VERSION = 700;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SkippyNums/Supporting Files/Info.plist";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023-2025 SheftApps. All rights reserved.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2025.5;
+				MARKETING_VERSION = 2025.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tylersheft.SkippyNums;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -769,7 +783,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -791,7 +804,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3B6G4T54X3;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;

@@ -34,6 +34,10 @@ class TimeViewController: UIViewController {
         navigationItem.hidesBackButton = true
         // 2. Set up the gradient layer.
         setupGradient()
+        // 3. Update the gradient colors when the device's dark/light mode changes.
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
+            updateBackgroundColors()
+        }
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -73,12 +77,6 @@ class TimeViewController: UIViewController {
         updateGradientFrame()
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        // Update the gradient colors when the device's dark/light mode changes
-        updateBackgroundColors()
-    }
-
     // MARK: - @IBActions - Game Time Selection
 
 	@IBAction func oneMinuteGame(_ sender: Any) {
@@ -101,12 +99,12 @@ class TimeViewController: UIViewController {
 
 	// MARK: - Navigation - Storyboard Segue Preparation
 
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	// In a storyboard-based application, you will often want to do a little preparation before navigation.
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		// Get the new view controller using segue.destination.
 		// Pass the selected object to the new view controller.
         if let segueIdentifier = segue.identifier {
-            // Set gameBrain.gameLength to the segue identifier's trailing number times 60, or nil if selecting "Untimed". For example, the segue identifier for the 2 minutes option is "TimedGame2"--multiply 2 by 60 to get 120 seconds.
+            // Set gameBrain.gameLength to the segue identifier's trailing number times 60, or nil if selecting "Untimed". For example, the segue identifier for the 2 minutes option is "TimedGame2"--multiply 2 by 60 to get 120 seconds or 2 minutes.
             if segueIdentifier.hasPrefix("Untimed") {
                 gameBrain.gameLength = nil
             } else {

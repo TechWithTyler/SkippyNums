@@ -1,5 +1,5 @@
 //
-//  Cow.swift
+//  Elephant.swift
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 12/11/23.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct Cow: CountableObject {
-    
-    var name: String = "cows"
+struct Elephant: CountableObject {
 
-    var quantity: Int
+    let name: String = "elephants"
 
-    var soundFilename: String = "moo.caf"
+    let quantity: Int
 
-    var soundRate: Float = 2
+    let soundFilename: String = "elephantTrumpet.caf"
+
+    let soundRate: Float = 2.5
 
     init(quantity: Int = 2) {
         self.quantity = quantity
