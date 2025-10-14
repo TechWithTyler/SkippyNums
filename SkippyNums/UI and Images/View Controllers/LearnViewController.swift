@@ -48,7 +48,13 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
         registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
             updateBackgroundColors()
         }
-        // 5. Show an example.
+        // 5. Allow the question label to be tapped/clicked to speak the question.
+        questionLabel?.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(questionTapped(_:)))
+        tapGesture.numberOfTouchesRequired = 1
+        tapGesture.numberOfTapsRequired = 1
+        questionLabel?.addGestureRecognizer(tapGesture)
+        // 6. Show an example.
 		newExample(self)
 	}
 
@@ -115,6 +121,16 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 	@IBAction func newGame(_ sender: Any) {
 		resetGame()
 	}
+
+    // MARK: - Speak Question
+
+    // This method speaks the question text when it's tapped/clicked.
+    @objc func questionTapped(_ sender: UIGestureRecognizer) {
+        guard !UIAccessibility.isVoiceOverRunning else { return }
+        let questionText = (questionLabel?.text)!
+        let utterance = AVSpeechUtterance(string: questionText)
+        gameBrain.speechSynthesizer.speak(utterance)
+    }
 
 }
 
