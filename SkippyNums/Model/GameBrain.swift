@@ -222,6 +222,8 @@ class GameBrain {
                 newQuestion()
             }
         }
+        // 6. Stop speech.
+        speechSynthesizer.stopSpeaking(at: .immediate)
     }
 
     // MARK: - Get Data to Display
@@ -253,7 +255,7 @@ class GameBrain {
         }
     }
 
-    // This method creates 5 choices whose Int values are based on the number of images to show times the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed 5th choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place and so the number sequence isn't obvious.
+    // This method creates 5 choices whose Int values are based on the number of images to show times the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed 5th choice is used only to assist with randomizing and shuffling the available choices so the correct one isn't always in an obvious place and so the number sequence isn't obvious.
     func getChoices() -> [Int] {
         // 1. Get the correct answer, which is used to calculate the values of each choice.
         let correctAnswer = Int(getCorrectAnswer())!

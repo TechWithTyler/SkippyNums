@@ -345,6 +345,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         guard !UIAccessibility.isVoiceOverRunning else { return }
         let questionText = (questionLabel?.text)!
         let utterance = AVSpeechUtterance(string: questionText)
+        gameBrain.speechSynthesizer.stopSpeaking(at: .immediate)
         gameBrain.speechSynthesizer.speak(utterance)
     }
 
