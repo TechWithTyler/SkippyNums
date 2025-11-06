@@ -6,6 +6,8 @@
 //  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
+// MARK: - Imports
+
 import UIKit
 
 // Displays an image of a group of objects to count.
