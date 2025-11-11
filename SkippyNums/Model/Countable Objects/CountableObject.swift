@@ -31,6 +31,8 @@ protocol CountableObject {
     // The rate of the sound that plays when the image is tapped/clicked.
 	var soundRate: Float { get }
 
+    // MARK: - Initialization
+
     init(quantity: Int)
 
 

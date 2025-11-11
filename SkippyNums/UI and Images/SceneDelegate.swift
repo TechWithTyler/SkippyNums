@@ -69,9 +69,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+        // Use this method to save data, release shared resources, and store enough scene-specific state information to restore the scene back to its current state.
 	}
+
+    // MARK: - Pause/Unpause
 
     func pauseGame() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }

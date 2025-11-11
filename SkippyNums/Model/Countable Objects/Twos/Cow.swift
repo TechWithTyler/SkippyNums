@@ -11,14 +11,20 @@
 import Foundation
 
 struct Cow: CountableObject {
-    
+
+    // MARK: - Properties - Image/Accessibility
+
     let name: String = "cows"
 
     let quantity: Int
 
+    // MARK: - Properties - Sound
+
     let soundFilename: String = "moo.caf"
 
     let soundRate: Float = 2
+
+    // MARK: - Initialization
 
     init(quantity: Int = 2) {
         self.quantity = quantity

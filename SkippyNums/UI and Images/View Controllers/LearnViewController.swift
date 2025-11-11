@@ -25,10 +25,6 @@ class LearnViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 	var gameBrain = GameBrain.shared
 
-    // MARK: - Properties - Inactivity VoiceOver Announcement Timer
-
-	var announcementTimer: Timer? = nil
-
     // MARK: - Properties - System Theme
 
     var systemTheme: UIUserInterfaceStyle {

@@ -404,6 +404,26 @@ extension GameViewController {
         return cell
     }
 
+    // Specifies spacing between the images in the collection view.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        let sectionSpacing: CGFloat = 30
+        return sectionSpacing
+    }
+
+    // Specifies sizing of the images in the collection view.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // 1. Use the available width to determine the width of each image.
+        let paddingSpace = objectInsets.left * 2
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / 6.2
+        // 2. Return the size of each image as a square with the width and height equal to widthPerItem.
+        let size = CGSize(width: widthPerItem, height: widthPerItem)
+        return size
+    }
+
+    // MARK: - Object Collection View - Image Accessibility Configuration
+
+    // Configures accessibility for an image.
     func configureImageAccessibility(for imageView: ObjectImageView) {
         imageView.isAccessibilityElement = true
         imageView.accessibilityTraits = [.startsMediaSession, .image]
@@ -429,23 +449,6 @@ extension GameViewController {
             // 7. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom. For example, if counting cows, the hint would be "That's all the cows, how many cows altogether? Select from the choices at the bottom of the screen."
             imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
         }
-    }
-
-    // Specifies spacing between the images in the collection view.
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        let sectionSpacing: CGFloat = 30
-        return sectionSpacing
-    }
-
-    // Specifies sizing of the images in the collection view.
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // 1. Use the available width to determine the width of each image.
-        let paddingSpace = objectInsets.left * 2
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / 6.2
-        // 2. Return the size of each image as a square with the width and height equal to widthPerItem.
-        let size = CGSize(width: widthPerItem, height: widthPerItem)
-        return size
     }
 
     // MARK: - Object Collection View - Image Activation Handler

@@ -27,7 +27,15 @@ var objectInsets: UIEdgeInsets {
 // MARK: - Properties - Colors
 
 // The colors to use for the gradient background in light theme.
-let gradientColorsLight: [CGColor] = [(UIColor(named: "LightGradientBottom")?.cgColor)!, (UIColor(named: "LightGradientTop")?.cgColor)!, UIColor.white.cgColor]
+let gradientColorsLight: [CGColor] = [
+    UIColor.lightGradientBottom.cgColor,
+    UIColor.lightGradientTop.cgColor,
+    UIColor.white.cgColor
+]
 
 // The colors to use for the gradient background in dark theme.
-let gradientColorsDark: [CGColor] = [(UIColor(named: "DarkGradientBottom")?.cgColor)!, (UIColor(named: "DarkGradientTop")?.cgColor)!, UIColor.black.cgColor]
+let gradientColorsDark: [CGColor] = [
+    UIColor.darkGradientBottom.cgColor,
+    UIColor.darkGradientTop.cgColor,
+    UIColor.black.cgColor
+]

@@ -35,6 +35,8 @@ class AnswerCheckViewController: UIViewController {
         return traitCollection.userInterfaceStyle
     }
 
+    // MARK: - View Setup/Update
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
@@ -92,6 +94,8 @@ class AnswerCheckViewController: UIViewController {
         // Update frame of gradient layer when window size changes
         updateGradientFrame()
     }
+
+    // MARK: - @IBActions
 
 	@IBAction func dismiss(_ sender: Any) {
 		dismiss(animated: true)

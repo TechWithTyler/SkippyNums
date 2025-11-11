@@ -13,6 +13,8 @@ import AVFoundation
 // Plays a constant track of silence to prevent Bluetooth devices from switching away from the device playing SkippyNums audio.
 class SilentAudioPlayer {
 
+    // MARK: - Properties - Audio
+
     // The audio engine, which manages the audio processing graph.
     var audioEngine: AVAudioEngine
 
@@ -21,6 +23,8 @@ class SilentAudioPlayer {
 
     // The audio format, specifying the sample rate and channel count.
     var audioFormat: AVAudioFormat
+
+    // MARK: - Initialization
 
     init() {
         // Initialize the audio engine components.
@@ -39,6 +43,8 @@ class SilentAudioPlayer {
         // 3. Schedule a silent audio buffer for looping playback.
         scheduleSilentBuffer()
     }
+
+    // MARK: - Audio Buffer
 
     // Creates and schedules a silent audio buffer.
     func scheduleSilentBuffer() {
@@ -60,6 +66,8 @@ class SilentAudioPlayer {
             playerNode.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: nil)
         }
     }
+
+    // MARK: - Silence Track
 
     // Starts the silence track by starting the audio engine and playing the player node.
     func startSilenceTrack() {

@@ -288,7 +288,6 @@
 				8D87C7CA2B02C40E009BBE56 /* UI and Images */,
 				8DA6D96C299C2F6000ED533F /* Model */,
 				8DCC07B329B92CF000A8C1FF /* Audio */,
-				8D2BAF562CD41F0C0016C61E /* SilentAudioPlayer.swift */,
 				8D31D8562B27F716009F29EE /* Supporting Files */,
 			);
 			path = SkippyNums;
@@ -388,6 +387,7 @@
 		8DCC07B329B92CF000A8C1FF /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				8D2BAF562CD41F0C0016C61E /* SilentAudioPlayer.swift */,
 				8D61683F2E15B416003A5BDD /* Sounds */,
 			);
 			path = Audio;

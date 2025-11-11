@@ -101,7 +101,7 @@ class GameBrain {
     var triesInGame: Int = 0
 
     // The number of incorrect answers for the current question, which is used to reveal the correct answer and skip to a new question if the player gets 3 incorrect answers in a row.
-    var numberOfIncorrectAnswersForQuestion = 0
+    var numberOfIncorrectAnswersForQuestion: Int = 0
 
     // The number the player is counting by, or nil if playing the Mix game. This determines which images to show.
     var countingBy: Int?
@@ -109,6 +109,7 @@ class GameBrain {
     // MARK: - Properties - Time Intervals
 
     // The number of seconds left in the current game, or nil if playing an untimed or practice game or in learn mode.
+    // TimeInterval is a type alias for Double, and is often used when a value is a number of seconds.
     var gameTimeLeft: TimeInterval? = nil
 
     // The number of seconds to start the gameTimer with, or nil if playing an untimed or practice game or in learn mode.
@@ -121,7 +122,7 @@ class GameBrain {
 
     // MARK: - Properties - Learn Mode Numbers
 
-    // An array of numbers which learn mode randomly picks from when showing examples.
+    // An array of numbers which mixed learn mode randomly picks from when showing examples.
     let learnModeNumbers: [Int] = [2, 5, 10]
 
     // MARK: - Properties - Sound Player
