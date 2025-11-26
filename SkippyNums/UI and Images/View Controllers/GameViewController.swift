@@ -6,6 +6,8 @@
 //  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
+// MARK: - Imports
+
 import UIKit
 import AVFoundation
 import SheftAppsStylishUI
@@ -101,8 +103,15 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     func setupLabels() {
+        // 1. Configure the seconds left label and score label.
         secondsLeftLabel?.text = "Loading…"
         scoreLabel?.isAccessibilityElement = true
+        // 2. Allow the question label to be tapped/clicked to speak the question.
+        questionLabel?.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(questionTapped(_:)))
+        tapGesture.numberOfTouchesRequired = 1
+        tapGesture.numberOfTapsRequired = 1
+        questionLabel?.addGestureRecognizer(tapGesture)
     }
 
     func setupGradient() {
@@ -331,6 +340,17 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         UIAccessibility.post(notification: .announcement, argument: message)
     }
 
+    // MARK: - Speak Question
+
+    // This method speaks the question text when it's tapped/clicked.
+    @objc func questionTapped(_ sender: UIGestureRecognizer) {
+        guard !UIAccessibility.isVoiceOverRunning else { return }
+        let questionText = (questionLabel?.text)!
+        let utterance = AVSpeechUtterance(string: questionText)
+        gameBrain.speechSynthesizer.stopSpeaking(at: .immediate)
+        gameBrain.speechSynthesizer.speak(utterance)
+    }
+
 }
 
 extension GameViewController {
@@ -384,6 +404,26 @@ extension GameViewController {
         return cell
     }
 
+    // Specifies spacing between the images in the collection view.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        let sectionSpacing: CGFloat = 30
+        return sectionSpacing
+    }
+
+    // Specifies sizing of the images in the collection view.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // 1. Use the available width to determine the width of each image.
+        let paddingSpace = objectInsets.left * 2
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / 6.2
+        // 2. Return the size of each image as a square with the width and height equal to widthPerItem.
+        let size = CGSize(width: widthPerItem, height: widthPerItem)
+        return size
+    }
+
+    // MARK: - Object Collection View - Image Accessibility Configuration
+
+    // Configures accessibility for an image.
     func configureImageAccessibility(for imageView: ObjectImageView) {
         imageView.isAccessibilityElement = true
         imageView.accessibilityTraits = [.startsMediaSession, .image]
@@ -411,25 +451,9 @@ extension GameViewController {
         }
     }
 
-    // Specifies spacing between the images in the collection view.
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        let sectionSpacing: CGFloat = 30
-        return sectionSpacing
-    }
-
-    // Specifies sizing of the images in the collection view.
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // 1. Use the available width to determine the width of each image.
-        let paddingSpace = objectInsets.left * 2
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / 6.2
-        // 2. Return the size of each image as a square with the width and height equal to widthPerItem.
-        let size = CGSize(width: widthPerItem, height: widthPerItem)
-        return size
-    }
-
     // MARK: - Object Collection View - Image Activation Handler
 
+    // This method speaks the skip count number of the tapped/clicked image in practice mode.
     @objc func imageTapped(_ sender: UIGestureRecognizer) {
         // 1. If in practice mode and VoiceOver is off, get the tapped image view and its tag (representing the skip count number) and use a dedicated speech synthesizer/highlight effect. VoiceOver is configured to handle this as part of creating the image view.
         if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {

@@ -6,6 +6,8 @@
 //  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
+// MARK: - Imports
+
 import UIKit
 import AVFoundation
 
@@ -99,7 +101,7 @@ class GameBrain {
     var triesInGame: Int = 0
 
     // The number of incorrect answers for the current question, which is used to reveal the correct answer and skip to a new question if the player gets 3 incorrect answers in a row.
-    var numberOfIncorrectAnswersForQuestion = 0
+    var numberOfIncorrectAnswersForQuestion: Int = 0
 
     // The number the player is counting by, or nil if playing the Mix game. This determines which images to show.
     var countingBy: Int?
@@ -107,6 +109,7 @@ class GameBrain {
     // MARK: - Properties - Time Intervals
 
     // The number of seconds left in the current game, or nil if playing an untimed or practice game or in learn mode.
+    // TimeInterval is a type alias for Double, and is often used when a value is a number of seconds.
     var gameTimeLeft: TimeInterval? = nil
 
     // The number of seconds to start the gameTimer with, or nil if playing an untimed or practice game or in learn mode.
@@ -119,7 +122,7 @@ class GameBrain {
 
     // MARK: - Properties - Learn Mode Numbers
 
-    // An array of numbers which learn mode randomly picks from when showing examples.
+    // An array of numbers which mixed learn mode randomly picks from when showing examples.
     let learnModeNumbers: [Int] = [2, 5, 10]
 
     // MARK: - Properties - Sound Player
@@ -222,6 +225,8 @@ class GameBrain {
                 newQuestion()
             }
         }
+        // 6. Stop speech.
+        speechSynthesizer.stopSpeaking(at: .immediate)
     }
 
     // MARK: - Get Data to Display
@@ -253,7 +258,7 @@ class GameBrain {
         }
     }
 
-    // This method creates 5 choices whose Int values are based on the number of images to show times the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed 5th choice is used only to assist with randomizing the available choices so the correct one isn't always in an obvious place and so the number sequence isn't obvious.
+    // This method creates 5 choices whose Int values are based on the number of images to show times the current object's quantity. 4 of these choices are displayed to the player, one of which is correct. The non-displayed 5th choice is used only to assist with randomizing and shuffling the available choices so the correct one isn't always in an obvious place and so the number sequence isn't obvious.
     func getChoices() -> [Int] {
         // 1. Get the correct answer, which is used to calculate the values of each choice.
         let correctAnswer = Int(getCorrectAnswer())!

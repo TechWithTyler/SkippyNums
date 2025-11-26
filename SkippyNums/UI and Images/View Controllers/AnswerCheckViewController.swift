@@ -6,6 +6,8 @@
 //  Copyright © 2023-2025 SheftApps. All rights reserved.
 //
 
+// MARK: - Imports
+
 import UIKit
 import SheftAppsStylishUI
 
@@ -32,6 +34,8 @@ class AnswerCheckViewController: UIViewController {
     var systemTheme: UIUserInterfaceStyle {
         return traitCollection.userInterfaceStyle
     }
+
+    // MARK: - View Setup/Update
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -90,6 +94,8 @@ class AnswerCheckViewController: UIViewController {
         // Update frame of gradient layer when window size changes
         updateGradientFrame()
     }
+
+    // MARK: - @IBActions
 
 	@IBAction func dismiss(_ sender: Any) {
 		dismiss(animated: true)
