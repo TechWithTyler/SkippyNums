@@ -49,7 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        let configurationName = "Default Configuration"
+        let configuration = UISceneConfiguration(name: configurationName, sessionRole: connectingSceneSession.role)
+        return configuration
     }
 
     // MARK: - UISceneSession Lifecycle - Discard
@@ -88,7 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .began:
                 stopAudio()
                 case .ended:
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) { [self] in
+                DispatchQueue.main
+                    .asyncAfter(deadline: .now() + .milliseconds(audioSessionResetTime)) { [self] in
                     configureAudioSession()
                 }
                 @unknown default:
@@ -110,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try audioSession.setCategory(.ambient, mode: .default, options: [])
             try audioSession.setActive(false)
         } catch {
-            print("Failed to stop audio session: \(error)")
+            fatalError("Failed to stop audio session: \(error)")
         }
     }
 
@@ -121,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try audioSession.setActive(true)
             silentAudioPlayer?.startSilenceTrack()
         } catch {
-            print("Failed to set up audio session: \(error)")
+            fatalError("Failed to set up audio session: \(error)")
         }
     }
 

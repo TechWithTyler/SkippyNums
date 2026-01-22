@@ -75,8 +75,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: - Pause/Unpause
 
     func pauseGame() {
+        // 1. Stop the game audio.
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         appDelegate.stopAudio()
+        // 2. Pause the game timer.
         gameBrain.pauseGameTimer()
     }
 
@@ -85,10 +87,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         appDelegate.configureAudioSession()
         // 2. If a timed game is in progress (the topmost view controller is the GameViewController and gameBrain.gameLength isn't nil), resume the game timer.
-        if let navigationController = window?.rootViewController as? UINavigationController, let gameViewController = navigationController.topViewController as? GameViewController {
-            if gameBrain.gameLength != nil {
+        if let navigationController = window?.rootViewController as? UINavigationController, let gameViewController = navigationController.topViewController as? GameViewController, gameBrain.gameLength != nil {
                 gameViewController.setupGameTimer(toResume: true)
-            }
         }
     }
 
