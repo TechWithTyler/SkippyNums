@@ -137,7 +137,7 @@ class GameBrain {
 
     // Whether the player got too many incorrect answers in a row. The game reveals the correct answer and skips to a new question in this case.
     var tooManyIncorrectAnswers: Bool {
-        return numberOfIncorrectAnswersForQuestion == 3
+        return numberOfIncorrectAnswersForQuestion == settingsData.maxTriesPerQuestion
     }
 
     // MARK: - Properties - Strings

@@ -10,24 +10,12 @@
 
 import SheftAppsStylishUI
 
-class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
-    // MARK: - @IBOutlets
-
-	@IBOutlet weak var maxGroupsPicker: UIPickerView?
+class WelcomeViewController: UIViewController {
 
     // MARK: - Properties - Objects
 
     // Handles gameplay.
 	var gameBrain = GameBrain.shared
-
-    // Stores settings for the game.
-    var settingsData = SettingsData()
-
-    // MARK: - Properties - Arrays
-
-    // The options in the "maximum number of groups" picker.
-    var maxGroupsOptions = [5, 10]
 
     // MARK: - Properties - System Theme
 
@@ -42,9 +30,7 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 		// Do any additional setup after loading the view.
 		// 1. Set up the gradient layer.
         setupGradient()
-        // 2. Configure the "maximum number of groups" picker.
-        configureMaxGroupsPicker()
-        // 3. Update the gradient colors when the device's dark/light mode changes.
+        // 2. Update the gradient colors when the device's dark/light mode changes.
         registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
             updateBackgroundColors()
         }
@@ -96,69 +82,5 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 		gameBrain.gameType = .learn
 		performSegue(withIdentifier: "ChooseGame", sender: sender)
 	}
-
-}
-
-extension WelcomeViewController {
-
-	// MARK: - Max Groups Picker - Configuration
-
-	func configureMaxGroupsPicker() {
-        // 1. Configure accessibility of the max groups picker.
-        maxGroupsPicker?.isAccessibilityElement = true
-		maxGroupsPicker?.accessibilityLabel = "Maximum number of groups"
-        // 2. Set the delegate and data source. The delegate is notified when things happen with an object (in this case, a UIPickerView), and the data source tells it what data it should contain. An object's delegate and data source are always used together and are often set to the same object, in this case, WelcomeViewController.
-		maxGroupsPicker?.delegate = self
-		maxGroupsPicker?.dataSource = self
-        // 3. Select the row corresponding to the current setting.
-        let currentTenFrameSetting = settingsData.tenFrame ? 1 : 0
-		maxGroupsPicker?.selectRow(currentTenFrameSetting, inComponent: 0, animated: true)
-	}
-
-    // MARK: - Max Groups Picker - Delegate and Data Source
-
-    // Returns the number of components (wheels) for the picker.
-	func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        let numberOfWheels = 1
-        return numberOfWheels
-	}
-
-    // Returns the number of rows for a given component (wheel) in the picker.
-	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        let numberOfOptions = 2
-        return numberOfOptions
-	}
-
-    // Handles selection of picker rows on the given wheel.
-	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let newTenFrameSetting = row == 1
-		settingsData.tenFrame = newTenFrameSetting
-	}
-
-    // Returns the content to display for the given row on the given wheel.
-	func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        // 1. Create the label for the row.
-		var pickerLabel: UILabel? = (view as? UILabel)
-		if pickerLabel == nil {
-			pickerLabel = UILabel()
-			pickerLabel?.font = UIFont(name: "Helvetica", size: 40)
-			pickerLabel?.textAlignment = .center
-            pickerLabel?.layer.cornerRadius = 12
-        }
-        // 2. Get the title for the label based on the row being configured.
-        let option = maxGroupsOptions[row]
-        let optionTitle = String(option)
-        pickerLabel?.text = optionTitle
-        // 3. Set the background color and text color of the row.
-        pickerLabel?.textColor = .white
-        pickerLabel?.layer.backgroundColor = UIColor.tintColor.cgColor
-        // 4. Return the label as the picker item's view.
-		return pickerLabel!
-	}
-
-    // Returns the row height for the picker.
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 40
-    }
 
 }

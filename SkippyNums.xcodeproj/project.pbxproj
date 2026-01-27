@@ -30,6 +30,7 @@
 		8D4FB98A2A0445BB00F66392 /* timeUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D4FB9892A0445BB00F66392 /* timeUp.caf */; };
 		8D61C77A2A8C0B0D008703D7 /* ObjectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */; };
 		8D64601A2E02068000597B34 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 8D6460192E02068000597B34 /* AppIcon.icon */; };
+		8D68614D2F296A3300DDBC2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D68614C2F296A3300DDBC2C /* SettingsViewController.swift */; };
 		8D7F2B212A00346600A7322B /* twoNote.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B1F2A00346600A7322B /* twoNote.caf */; };
 		8D7F2B222A00346600A7322B /* fiveChord.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B202A00346600A7322B /* fiveChord.caf */; };
 		8D7F2B242A0051D800A7322B /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F2B232A0051D800A7322B /* TimeViewController.swift */; };
@@ -108,6 +109,7 @@
 		8D4FB9892A0445BB00F66392 /* timeUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = timeUp.caf; sourceTree = "<group>"; };
 		8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectImageView.swift; sourceTree = "<group>"; };
 		8D6460192E02068000597B34 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		8D68614C2F296A3300DDBC2C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8D7B7A1829A5656A00D3C727 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7F2B1F2A00346600A7322B /* twoNote.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = twoNote.caf; sourceTree = "<group>"; };
 		8D7F2B202A00346600A7322B /* fiveChord.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fiveChord.caf; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				8D0E1EEC2A03282000B3FA70 /* TimeUpViewController.swift */,
 				8DA7D5572A818098005AC588 /* ChooseAnimalViewController.swift */,
 				8DA7D5552A7C45D2005AC588 /* LearnViewController.swift */,
+				8D68614C2F296A3300DDBC2C /* SettingsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				8DA7D5582A818098005AC588 /* ChooseAnimalViewController.swift in Sources */,
 				8D04D70C29DCB71A009670F2 /* NewGameViewController.swift in Sources */,
 				8D31D8682B27FBA4009F29EE /* Monkey.swift in Sources */,
+				8D68614D2F296A3300DDBC2C /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
