@@ -200,9 +200,10 @@ class GameBrain {
 
     // This method presents a new question in play or practice mode, or a new learn mode example in learn mode.
     func newQuestion() {
-        // 1. Determine the maximum number of images to show (5 or 10) based on whether "maximum number of groups" is set to 5 or 10. The minimum number of images to display is 2.
+        // 1. Determine the maximum number of images to show (5 or 10) based on whether "maximum number of groups" is set to 5 or 10. The minimum number of images to display is 2, since the lowest skip count number is twos.
         let maxNumber = settingsData.tenFrame ? 10 : 5
-        numberOfImagesToShow = Int.random(in: 2...maxNumber)
+        let numberRange = 2...maxNumber
+        numberOfImagesToShow = Int.random(in: numberRange)
         // 2. If in learn mode, present a new example.
         if gameType == .learn {
             // type(of:) allows you to get the dynamic type (e.g. Dog) from the given value's static type (e.g. currentObject which is anything that conforms to CountableObject).
@@ -215,7 +216,7 @@ class GameBrain {
             if countingBy == nil {
                 currentObject = GameBrain.objectsToCount.randomElement()!
             } else {
-                currentObject = GameBrain.objectsToCount.filter({$0.quantity == countingBy}).randomElement()!
+                currentObject = getNewObjectForQuantity()
             }
             // 4. Reset the incorrect answer count to 0.
             numberOfIncorrectAnswersForQuestion = 0
@@ -229,12 +230,25 @@ class GameBrain {
         speechSynthesizer.stopSpeaking(at: .immediate)
     }
 
+    // MARK: - Get New Object For Quantity
+
+    // This method returns a new CountableObject based on countingBy.
+    func getNewObjectForQuantity() -> any CountableObject {
+        // 1. Filter the objectsToCount array to only include objects with a quantity of countingBy. For example, if countingBy is 5, this will only include objects with a quantity of 5.
+        let filteredObjects = GameBrain.objectsToCount.filter({$0.quantity == countingBy})
+        // 2. Return a random object from the filtered array.
+        return filteredObjects.randomElement()!
+    }
+
     // MARK: - Get Data to Display
 
     // This method gets the display name for the current object, removing the leading number if any. For example, if the current object's name is "2monkeys", use that full name to look up the image to use, but drop the leading 2 so the displayed/announced name is "monkeys". For objects that only have one quantity (e.g. cows only come in twos), the name has no leading number so nothing will be dropped from it (e.g. "cows").
     func getDisplayNameForObject() -> String {
+        // 1. Get the image name of the current object.
         let imageName = currentObject.name
+        // 2. Get the display name of the current object, which is the image name without the leading number if any.
         let displayName = imageName.filter { $0.isLetter }
+        // 3. Return the display name.
         return displayName
     }
 
@@ -286,6 +300,80 @@ class GameBrain {
         // 5. Re-shuffle the final set of 4 choices (the choices offered to the player) and return them.
         finalChoices.shuffle()
         return finalChoices
+    }
+
+    // MARK: - Answer Checking
+
+    // This method calculates the correct answer based on the number of images to show and the current object's quantity, and returns the result as a String.
+    func getCorrectAnswer() -> String {
+        // 1. Get the correct answer, which is numberOfImagesToShow times currentObject.quantity. For example, if numberOfImagesToShow is 3 and currentObject.quantity is 2, the correct answer is 6.
+        let correctAnswer = numberOfImagesToShow * currentObject.quantity
+        // 2. Return the correct answer as a String.
+        return String(correctAnswer)
+    }
+
+    // This method compares answer with the correct answer, plays a sound, and increments the tries in the current game by 1. If it's correct, the number of correct answers in the current game increases by 1. If it's incorrect, the number of incorrect answers for the current question increases by 1 (a value of 3 means reveal the correct answer and skip to a new question). The resulting Bool is used to determine how the answer screen should display.
+    func checkAnswer(_ answer: String) -> Bool {
+        // 1. Get the correct answer.
+        let correctAnswer = getCorrectAnswer()
+        // 2. Get whether answer is correct (i.e. equal to correctAnswer).
+        let correct = answer == correctAnswer
+        // 3. Play the answer sound.
+        playAnswerSound(correct: correct)
+        // 4. Increment the tries in the current game by 1.
+        triesInGame += 1
+        // 5. If answer is correct, increment the number of correct answers in the current game by 1. Otherwise, increment the number of incorrect answers for the current question by 1.
+        if correct {
+            correctAnswersInGame += 1
+        } else {
+            numberOfIncorrectAnswersForQuestion += 1
+        }
+        // 6. Return whether answer is correct.
+        return correct
+    }
+
+    // MARK: - Game Timer
+
+    // This method winds up the game timer, calling the timer fire handler every second (or only once if playing an untimed or practice game to trigger a stat update), and calling the timer end handler when the timer ends.
+    func setupGameTimer(toResume: Bool = false, timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
+        // 1. If gameLength is nil, call the timer fire handler with a nil value and don't start the timer.
+        guard gameLength != nil else {
+            timerFireHandler(nil)
+            return
+        }
+        // 2. If gameLength is specified, call the timer fire handler with the initial value and start the gameTimer.
+        if !toResume {
+            gameTimeLeft = gameLength
+            timerFireHandler(gameTimeLeft)
+        }
+        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
+            // 3. Decrease gameTimeLeft by 1 every second.
+            gameTimeLeft! -= 1
+            // 4. If gameTimeLeft is (or falls below) 0 seconds, reset the gameTimer, play a buzzer sound, and call the timer end handler.
+            if gameTimeLeft! <= 0 {
+                resetGameTimer()
+                playTimeUpSound()
+                timerEndHandler()
+            } else {
+                // 5. Otherwise, call the timer fire handler with the new value.
+                timerFireHandler(gameTimeLeft)
+            }
+        }
+    }
+
+    // This method pauses the game timer when the game becomes inactive (e.g. by moving to the background).
+    func pauseGameTimer() {
+        gameTimer?.invalidate()
+        gameTimer = nil
+    }
+
+    // This method stops the game timer and resets the properties back to default.
+    func resetGameTimer() {
+        // 1. Stop the gameTimer.
+        pauseGameTimer()
+        // 2. Reset gameTimeLeft and gameLength to nil.
+        gameTimeLeft = nil
+        gameLength = nil
     }
 
     // MARK: - Sound
@@ -354,7 +442,7 @@ class GameBrain {
     }
 
     // This method plays a "correct answer" or "incorrect answer" sound when choosing an answer.
-    func playAnswerSound(_ correct: Bool) {
+    func playAnswerSound(correct: Bool) {
         // 1. Choose the appropriate sound based on whether the player's answer is correct.
         let filename = correct ? "correct" : "incorrect"
         // 2. Make sure the sound exists in the app bundle.
@@ -401,75 +489,6 @@ class GameBrain {
             // 5. If an error occurs, throw a fatal error.
             fatalError("Failed to play \(filename).caf: \(error)")
         }
-    }
-
-    // MARK: - Answer Checking
-
-    // This method calculates the correct answer based on the number of images to show and the current object's quantity, and returns the result as a String.
-    func getCorrectAnswer() -> String {
-        // Example: If numberOfImagesToShow is 3 and currentObject.quantity is 2, the correct answer is 6.
-        let correctAnswer = numberOfImagesToShow * currentObject.quantity
-        return String(correctAnswer)
-    }
-
-    // This method compares answer with the correct answer, plays a sound, and increments the tries in the current game by 1. If it's correct, the number of correct answers in the current game increases by 1. If it's incorrect, the number of incorrect answers for the current question increases by 1 (a value of 3 means reveal the correct answer and skip to a new question). The resulting Bool is used to determine how the answer screen should display.
-    func checkAnswer(_ answer: String) -> Bool {
-        let correctAnswer = getCorrectAnswer()
-        let correct = answer == correctAnswer
-        playAnswerSound(correct)
-        if correct {
-            triesInGame += 1
-            correctAnswersInGame += 1
-        } else {
-            triesInGame += 1
-            numberOfIncorrectAnswersForQuestion += 1
-        }
-        return correct
-    }
-
-    // MARK: - Game Timer
-
-    // This method winds up the game timer, calling the timer fire handler every second (or only once if playing an untimed or practice game to trigger a stat update), and calling the timer end handler when the timer ends.
-    func setupGameTimer(toResume: Bool = false, timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
-        // 1. If gameLength is nil, call the timer fire handler with a nil value and don't start the timer.
-        guard gameLength != nil else {
-            timerFireHandler(nil)
-            return
-        }
-        // 2. If gameLength is specified, call the timer fire handler with the initial value and start the gameTimer.
-        if !toResume {
-            gameTimeLeft = gameLength
-            timerFireHandler(gameTimeLeft)
-        }
-        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
-            // 3. Decrease gameTimeLeft by 1 every second.
-            gameTimeLeft! -= 1
-            // 4. If gameTimeLeft is (or falls below) 0 seconds, reset the gameTimer and call the timer end handler.
-            if gameTimeLeft! <= 0 {
-                resetGameTimer()
-                playTimeUpSound()
-                timerEndHandler()
-            } else {
-                // 5. Otherwise, call the timer fire handler with the new value.
-                timerFireHandler(gameTimeLeft)
-            }
-        }
-    }
-
-    // This method pauses the game timer when the game becomes inactive (e.g. by moving to the background).
-    func pauseGameTimer() {
-        gameTimer?.invalidate()
-        gameTimer = nil
-    }
-
-    // This method stops the game timer and resets the properties back to default.
-    func resetGameTimer() {
-        // 1. Stop the gameTimer.
-        gameTimer?.invalidate()
-        gameTimer = nil
-        // 2. Reset gameTimeLeft to nil.
-        gameTimeLeft = nil
-        gameLength = nil
     }
 
     // MARK: - Reset Game

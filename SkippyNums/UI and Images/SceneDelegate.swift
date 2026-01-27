@@ -34,6 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		windowScene.titlebar?.titleVisibility = .hidden
 #endif
         windowScene.sizeRestrictions?.minimumSize = CGSize(width: 1024, height: 768)
+        // 3. Resume an in-progress game.
         resumeGame()
 	}
     
@@ -44,6 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// This occurs shortly after the scene enters the background, or when its session is discarded.
 		// Release any resources associated with this scene that can be re-created the next time the scene connects.
 		// The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+        pauseGame()
 	}
     
     // MARK: - Scene Lifecycle - Activation
@@ -65,15 +67,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        resumeGame()
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information to restore the scene back to its current state.
+        pauseGame()
 	}
 
     // MARK: - Pause/Unpause
 
+    // This method pauses an in-progress game.
     func pauseGame() {
         // 1. Stop the game audio.
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -82,6 +87,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         gameBrain.pauseGameTimer()
     }
 
+    // This method resumes an in-progress game.
     func resumeGame() {
         // 1. Reconfigure the audio session.
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
