@@ -256,13 +256,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - @IBActions
 
     @IBAction func answerSelected(_ sender: SAIAccessibleButton) {
-        // 1. Check whether the selected answer is correct, incorrect, or the 3rd/5th/10th incorrect one in a row.
+        // 1. Check whether the selected answer is correct, incorrect, or incorrect too many times in a row.
         guard let answer = sender.currentTitle else { return }
         let correct = gameBrain.checkAnswer(answer)
         let incorrectTooManyTimes = !correct && gameBrain.tooManyIncorrectAnswers
         // 2. Update the score display.
         updateScoreDisplay()
-        // 3. Choose how to show the "correct/incorrect answer" sheet and decide whether to advance to a new question based on whether the answer is correct, incorrect, or the 3rd/5th/10th incorrect one in a row.
+        // 3. Choose how to show the "correct/incorrect answer" sheet and decide whether to advance to a new question based on whether the answer is correct, incorrect, or incorrect too many times in a row.
         if correct {
             // Correct answer, advance to new question
             performSegue(withIdentifier: "Correct", sender: sender)
@@ -289,7 +289,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         // Pass the selected object to the new view controller.
         if let answerCheckViewController = segue.destination as? AnswerCheckViewController {
             switch segue.identifier {
-                // 2. If segue is used to present the AnswerCheckViewController (sheet), set the messageText and imageName of the AnswerCheckViewController based on which segue is used to present it. The segue to use to present it depends on whether the chosen answer is correct, incorrect, or the 3rd/5th/10th incorrect one in a row.
+                // 2. If segue is used to present the AnswerCheckViewController (sheet), set the messageText and imageName of the AnswerCheckViewController based on which segue is used to present it. The segue to use to present it depends on whether the chosen answer is correct, incorrect, or incorrect too many times in a row.
                 // The "correct or incorrect" image's name is always "something.circle", so we only pass that something to AnswerCheckViewController which constructs the full image name.
             case "Incorrect":
                 answerCheckViewController.messageText = "Incorrect! Try again!"

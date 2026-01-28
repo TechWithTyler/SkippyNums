@@ -57,7 +57,7 @@ class AnswerCheckViewController: UIViewController {
         checkXImageView?.image = UIImage(systemName: "\(baseImageName).circle.fill")
         // 2. Use green for the checkmark and red for the X.
         checkXImageView?.tintColor = baseImageName == "x" ? .systemRed : .systemGreen
-        // 3. Set the button title based on whether the chosen answer is correct, incorrect, or the 3rd/5th/10th incorrect one in a row.
+        // 3. Set the button title based on whether the chosen answer is correct, incorrect, or incorrect too many times in a row.
         if messageText.lowercased().components(separatedBy: [" ", "!"]).contains("correct") {
             dismissButton?.setTitle("Next Question", for: .normal)
         } else {
