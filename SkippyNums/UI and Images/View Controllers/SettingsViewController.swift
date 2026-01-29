@@ -11,7 +11,7 @@
 import UIKit
 import SheftAppsStylishUI
 
-class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class SettingsViewController: SkippyNumsViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // MARK: - @IBOutlets
 
@@ -34,12 +34,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     // The options in the "maximum number of tries per question" picker.
     var maxTriesOptions = [1, 2, 3, 5, 10]
 
-    // MARK: - Properties - System Theme
-
-    var systemTheme: UIUserInterfaceStyle {
-        return traitCollection.userInterfaceStyle
-    }
-
     // MARK: - View Setup/Update
 
     override func viewDidLoad() {
@@ -47,46 +41,10 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         // Do any additional setup after loading the view.
         // 1. Hide the system-provided back button--a more visually-accessible back button is used instead.
         navigationItem.hidesBackButton = true
-        // 2. Set up the gradient layer.
-        setupGradient()
-        // 3. Update the gradient colors when the device's dark/light mode changes.
-        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
-            updateBackgroundColors()
-        }
-        // 4. Configure the "maximum number of groups" picker.
+        // 2. Configure the "maximum number of groups" picker.
         configureMaxGroupsPicker()
-        // 5. Configure the "maximum number of tries per question" picker.
+        // 3. Configure the "maximum number of tries per question" picker.
         configureMaxTriesPicker()
-    }
-
-    func setupGradient() {
-        // 1. Create the gradient layer.
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-        // 2. Add the gradient layer to the view.
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-
-    func updateBackgroundColors() {
-        // Update gradient colors based on device's dark/light mode
-        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
-        }
-    }
-
-    func updateGradientFrame() {
-        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.frame = view.bounds
-        }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // Update frame of gradient layer when window size changes
-        updateGradientFrame()
     }
 
     // MARK: - @IBActions - Back
@@ -137,7 +95,7 @@ extension SettingsViewController {
         // 2. Set the delegate and data source.
         maxTriesPicker?.delegate = self
         maxTriesPicker?.dataSource = self
-        // 3. Select the row corresponding to the current setting. The row is the index of the item corresponding to the current setting, so we get the index of the current setting, not the current setting itself. If the setting isn't stored, select 3 tries.
+        // 3. Select the row corresponding to the current setting. The row is the index of the item corresponding to the current setting, so we get the index of the current setting, not the current setting itself. If the setting isn't stored, select 3 tries (index 2).
         let currentSetting = settingsData.maxTriesPerQuestion
         let currentSettingRow = maxTriesOptions.firstIndex(of: currentSetting) ?? 2
         maxTriesPicker?.selectRow(currentSettingRow, inComponent: 0, animated: true)

@@ -12,7 +12,7 @@ import UIKit
 import AVFoundation
 import SheftAppsStylishUI
 
-class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+class GameViewController: SkippyNumsViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
 
     // MARK: - @IBOutlets - Buttons
 
@@ -57,38 +57,26 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // A set containing the corresponding skip count numbers for the images that VoiceOver has already focused on.
     var voiceOverFocusedImages: Set<Int> = []
 
-    // MARK: - Properties - System Theme
-
-    var systemTheme: UIUserInterfaceStyle {
-        return traitCollection.userInterfaceStyle
-    }
-
     // MARK: - View Setup/Update
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // 1. Hide the system-provided back button--a more visually-accessible "end game" button is used instead, located in the top-right corner.
+        // Hide the system-provided back button--a more visually-accessible "end game" button is used instead, located in the top-right corner.
         navigationItem.hidesBackButton = true
         // 2. Set up the objectCollectionView's delegate and data source.
         setupObjectCollectionView()
         // 3. Set up the labels and seconds left bar.
         setupLabels()
         setupSecondsLeftBarTrackColor()
-        // 4. Set up the gradient layer.
-        setupGradient()
-        // 5. Update the gradient colors when the device's dark/light mode changes.
-        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
-            updateBackgroundColors()
-        }
-        // 6. Show or hide the seconds left bar's track color when the Increase Contrast accessibility setting changes.
+        // 4. Show or hide the seconds left bar's track color when the Increase Contrast accessibility setting changes.
         registerForTraitChanges([UITraitAccessibilityContrast.self]) { [self] (
             self: Self,
             previousTraitCollection: UITraitCollection
         ) in
             setupSecondsLeftBarTrackColor()
         }
-        // 7. Present a question to the player.
+        // 5. Present a question to the player.
         newQuestion()
     }
 
@@ -114,39 +102,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         questionLabel?.addGestureRecognizer(tapGesture)
     }
 
-    func setupGradient() {
-        // 1. Create the gradient layer.
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-        // 2. Add the gradient layer to the view.
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-
     func setupSecondsLeftBarTrackColor() {
         let shouldFillTrack = UIAccessibility.isDarkerSystemColorsEnabled
         secondsLeftBar?.trackTintColor = shouldFillTrack ? .lightGray.withAlphaComponent(0.8) : .clear
-    }
-
-    func updateBackgroundColors() {
-        // Update gradient colors based on device's dark/light mode
-        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
-        }
-    }
-
-    func updateGradientFrame() {
-        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.frame = view.bounds
-        }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // Update frame of gradient layer when window size changes
-        updateGradientFrame()
     }
 
     // MARK: - Game Timer - Setup

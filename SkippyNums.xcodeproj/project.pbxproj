@@ -31,6 +31,7 @@
 		8D61C77A2A8C0B0D008703D7 /* ObjectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */; };
 		8D64601A2E02068000597B34 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 8D6460192E02068000597B34 /* AppIcon.icon */; };
 		8D68614D2F296A3300DDBC2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D68614C2F296A3300DDBC2C /* SettingsViewController.swift */; };
+		8D68614F2F2C0C3F00DDBC2C /* SkippyNumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D68614E2F2C0C3F00DDBC2C /* SkippyNumsViewController.swift */; };
 		8D7F2B212A00346600A7322B /* twoNote.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B1F2A00346600A7322B /* twoNote.caf */; };
 		8D7F2B222A00346600A7322B /* fiveChord.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F2B202A00346600A7322B /* fiveChord.caf */; };
 		8D7F2B242A0051D800A7322B /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F2B232A0051D800A7322B /* TimeViewController.swift */; };
@@ -110,6 +111,7 @@
 		8D61C7792A8C0B0D008703D7 /* ObjectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectImageView.swift; sourceTree = "<group>"; };
 		8D6460192E02068000597B34 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		8D68614C2F296A3300DDBC2C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8D68614E2F2C0C3F00DDBC2C /* SkippyNumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkippyNumsViewController.swift; sourceTree = "<group>"; };
 		8D7B7A1829A5656A00D3C727 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7F2B1F2A00346600A7322B /* twoNote.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = twoNote.caf; sourceTree = "<group>"; };
 		8D7F2B202A00346600A7322B /* fiveChord.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fiveChord.caf; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				8DA7D5572A818098005AC588 /* ChooseAnimalViewController.swift */,
 				8DA7D5552A7C45D2005AC588 /* LearnViewController.swift */,
 				8D68614C2F296A3300DDBC2C /* SettingsViewController.swift */,
+				8D68614E2F2C0C3F00DDBC2C /* SkippyNumsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				8D8EC9BA299AD7B300043D39 /* GameViewController.swift in Sources */,
 				8D61C77A2A8C0B0D008703D7 /* ObjectImageView.swift in Sources */,
 				8D7F2B242A0051D800A7322B /* TimeViewController.swift in Sources */,
+				8D68614F2F2C0C3F00DDBC2C /* SkippyNumsViewController.swift in Sources */,
 				8D31D8662B27FB8A009F29EE /* Bear.swift in Sources */,
 				8D863D262A7C3E7700AD621E /* WelcomeViewController.swift in Sources */,
 				8D454C3E2A799A6300639479 /* SettingsData.swift in Sources */,
