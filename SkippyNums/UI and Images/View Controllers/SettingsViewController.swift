@@ -24,13 +24,15 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     // Stores settings for the game.
     var settingsData = SettingsData()
 
+    var gameBrain = GameBrain.shared
+
     // MARK: - Properties - Arrays
 
     // The options in the "maximum number of groups" picker.
     var maxGroupsOptions = [5, 10]
 
     // The options in the "maximum number of tries per question" picker.
-    var maxTriesOptions = [3, 5, 10]
+    var maxTriesOptions = [1, 2, 3, 5, 10]
 
     // MARK: - Properties - System Theme
 
@@ -93,6 +95,19 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         navigationController?.popViewController(animated: true)
     }
 
+    // MARK: - @IBActions - Reset
+
+    @IBAction func reset(_ sender: SAIAccessibleButton) {
+        // 1. Reset all settings to default
+        settingsData.tenFrame = false
+        settingsData.maxTriesPerQuestion = 3
+        // 2. Reconfigure the pickers.
+        configureMaxGroupsPicker()
+        configureMaxTriesPicker()
+        // 3. Play a "correct answer" sound as confirmation.
+        gameBrain.playAnswerSound(correct: true)
+    }
+
 }
 
 extension SettingsViewController {
@@ -122,9 +137,9 @@ extension SettingsViewController {
         // 2. Set the delegate and data source.
         maxTriesPicker?.delegate = self
         maxTriesPicker?.dataSource = self
-        // 3. Select the row corresponding to the current setting. The row is the index of the item corresponding to the current setting, so we get the index of the current setting, not the current setting itself. If the setting isn't stored, select the first row.
+        // 3. Select the row corresponding to the current setting. The row is the index of the item corresponding to the current setting, so we get the index of the current setting, not the current setting itself. If the setting isn't stored, select 3 tries.
         let currentSetting = settingsData.maxTriesPerQuestion
-        let currentSettingRow = maxTriesOptions.firstIndex(of: currentSetting) ?? 0
+        let currentSettingRow = maxTriesOptions.firstIndex(of: currentSetting) ?? 2
         maxTriesPicker?.selectRow(currentSettingRow, inComponent: 0, animated: true)
     }
 
