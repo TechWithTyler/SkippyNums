@@ -295,7 +295,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 answerCheckViewController.messageText = "Incorrect! Try again!"
                 answerCheckViewController.baseImageName = "x"
             case "TooManyIncorrect":
-                answerCheckViewController.messageText = "Incorrect! The correct answer is:\n\(gameBrain.getCorrectAnswer())."
+                let correctAnswer = gameBrain.getCorrectAnswer()
+                answerCheckViewController.messageText = "Incorrect! The correct answer is:\n\(correctAnswer)"
                 answerCheckViewController.baseImageName = "x"
             default:
                 answerCheckViewController.messageText = "Correct!"
@@ -355,12 +356,22 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 extension GameViewController {
 
+    // MARK: - Object Collection View - Info
+
+    /*
+     The structure of a collection view is very simple!
+     1. Have numberOfSections(in:) return the number of sections for the collection view.
+     2. Have collectionView(_:numberOfItemsInSection:) return the number of items for the section.
+     4. In collectionView(_:cellForItemAt:), fill the cell with content.
+     5. Implement the UICollectionViewDelegateFlowLayout methods to specify the size for each item and the inter-item spacing for each section.
+     */
+
     // MARK: - Object Collection View - Setup
 
     func setupObjectCollectionView() {
         // 1. Set the object collection view's delegate and data source.
-        objectCollectionView?.dataSource = self
         objectCollectionView?.delegate = self
+        objectCollectionView?.dataSource = self
         // 2. Allow the user to interact with it.
         objectCollectionView?.isUserInteractionEnabled = true
         // 3. Don't show a background color as there's already a background gradient for the entire view.
@@ -368,6 +379,12 @@ extension GameViewController {
     }
 
     // MARK: - Object Collection View - Delegate and Data Source
+
+    // Specifies the number of sections for the collection view.
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        let numberOfSections = 1
+        return numberOfSections
+    }
 
     // Specifies the number of images to show.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -378,7 +395,8 @@ extension GameViewController {
     // Shows an image in the collection view cell.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // 1. Create a cell with identifier "ObjectCell".
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCell", for: indexPath)
+        let cellIdentifier = "ObjectCell"
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         // 2. Create and configure the image view.
         let imageView = ObjectImageView(frame: cell.contentView.bounds)
         imageView.isUserInteractionEnabled = true
@@ -395,11 +413,11 @@ extension GameViewController {
         // 4. Configure accessibility.
         imageView.tag = (indexPath.item + 1) * gameBrain.currentObject.quantity
         configureImageAccessibility(for: imageView)
-        // 8. Disable keyboard focus for the cell.
+        // 5. Disable keyboard focus for the cell.
         cell.focusEffect = nil
-        // 9. Remove the previous image view (if any) from the cell before adding this one, otherwise multiple image views would overlap each other each time a new question is presented. If this is the first image in the cell, this will do nothing.
+        // 6. Remove the previous image view (if any) from the cell before adding this one, otherwise multiple image views would overlap each other each time a new question is presented. If this is the first image in the cell, this will do nothing.
         cell.contentView.subviews.first?.removeFromSuperview()
-        // 10. Add the image view to the cell's content view and return the cell.
+        // 7. Add the image view to the cell's content view and return the cell.
         cell.contentView.addSubview(imageView)
         return cell
     }
@@ -415,9 +433,9 @@ extension GameViewController {
         // 1. Use the available width to determine the width of each image.
         let paddingSpace = objectInsets.left * 2
         let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / 6.2
-        // 2. Return the size of each image as a square with the width and height equal to widthPerItem.
-        let size = CGSize(width: widthPerItem, height: widthPerItem)
+        let sizePerItem = availableWidth / 6.2
+        // 2. Return the size of each image as a square with the width and height equal to sizePerItem.
+        let size = CGSize(width: sizePerItem, height: sizePerItem)
         return size
     }
 
@@ -425,10 +443,14 @@ extension GameViewController {
 
     // Configures accessibility for an image.
     func configureImageAccessibility(for imageView: ObjectImageView) {
+        // 1. Configure accessibility traits.
         imageView.isAccessibilityElement = true
         imageView.accessibilityTraits = [.startsMediaSession, .image]
+        // 2. Set the accessibility label.
         // The image view's tag is set to the respective skip count number, which will be announced in practice mode.
         imageView.accessibilityLabel = gameBrain.gameType == .play ? "\(gameBrain.imageAccessibilityText)" : "\(imageView.tag)"
+        // 3. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 5th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 6th image (the first one in the 2nd row). If it's the last image the player hasn't yet focused on, skip to step 7.
+        let displayName = gameBrain.getDisplayNameForObject()
 #if targetEnvironment(macCatalyst)
         let soundGesture = "Activate"
         let moveGesture = "move"
@@ -436,26 +458,25 @@ extension GameViewController {
         let soundGesture = "Double-tap"
         let moveGesture = "flick"
 #endif
-        // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 5th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 6th image (the first one in the 2nd row). If it's the last image the player hasn't yet focused on, skip to step 7.
         if voiceOverFocusedImages.count < gameBrain.numberOfImagesToShow {
             let lastImageViewInFirstRow = (5 * gameBrain.currentObject.quantity)
             if imageView.tag == lastImageViewInFirstRow && gameBrain.numberOfImagesToShow > 5 {
                 imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
             } else {
-                // 6. If it's any other image, tell the player that they can activate the image to play the sound.
-                imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(gameBrain.getDisplayNameForObject())."
+                // 4. If it's any other image, tell the player that they can activate the image to play the sound.
+                imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(displayName)."
             }
         } else {
-            // 7. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom. For example, if counting cows, the hint would be "That's all the cows, how many cows altogether? Select from the choices at the bottom of the screen."
-            imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
+            // 5. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom. For example, if counting cows, the hint would be "That's all the cows, how many cows altogether? Select from the choices at the bottom of the screen."
+            imageView.accessibilityHint = "That's all the \(displayName), how many \(displayName) altogether? Select from the choices at the bottom of the screen."
         }
     }
 
     // MARK: - Object Collection View - Image Activation Handler
 
-    // This method speaks the skip count number of the tapped/clicked image in practice mode.
+    // This method speaks the skip count number of the tapped/clicked image in practice mode and plays the object's sound in play and practice mode.
     @objc func imageTapped(_ sender: UIGestureRecognizer) {
-        // 1. If in practice mode and VoiceOver is off, get the tapped image view and its tag (representing the skip count number) and use a dedicated speech synthesizer/highlight effect. VoiceOver is configured to handle this as part of creating the image view.
+        // 1. If in practice mode and VoiceOver is off, get the tapped image view and its tag (representing the skip count number) and use a dedicated speech synthesizer/highlight effect. VoiceOver is configured to handle this as part of creating the image view, so nothing happens here if VoiceOver is on.
         if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {
             guard let image = sender.view as? ObjectImageView else { return }
             let skipCountNumber = image.tag
