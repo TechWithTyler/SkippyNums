@@ -12,7 +12,7 @@ import UIKit
 import AVFoundation
 import SheftAppsStylishUI
 
-class GameViewController: SkippyNumsViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     // MARK: - @IBOutlets - Buttons
 
