@@ -282,7 +282,7 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
 #else
         let message = "Starting from the top-left of the screen, drag your finger across each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
 #endif
-        // 2. Setup the announcement timer to play the announcement after 15 seconds of inactivity as long as the "correct/incorrect answer" sheet isn't being displayed.
+        // 2. Set up the announcement timer to play the announcement after 15 seconds of inactivity as long as the "correct/incorrect answer" sheet isn't being displayed.
         let secondsToWait: TimeInterval = 15
         voiceOverAnnouncementTimer?.invalidate()
         voiceOverAnnouncementTimer = nil

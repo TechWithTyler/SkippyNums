@@ -25,7 +25,7 @@ class GameBrain {
         // Player is asked to choose the correct answer, untimed, announces number in the sequence/highlights image when tapped/clicked/VoiceOver focused.
         case practice
 
-        // Player is given all information to learn how to skip-count, tapping any image plays the sound as many times as there are the given object.
+        // Player is given all information to learn how to skip-count, tapping/clicking any image plays the sound as many times as there are the given object.
         case learn
 
     }
@@ -160,16 +160,20 @@ class GameBrain {
     // The accessibility text for the background.
     var backgroundAccessibilityText: String {
         if gameType == .learn {
+            // 1. If in learn mode, use "There are X groups of Y <object>s…" as the background accessibility text.
             var learnString = "There are \(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject()): "
-            for n in 1...numberOfImagesToShow {
+            // 2. Add each skip count number to this text. Add a comma after all but the last one.
+            for n in ClosedRange.oneToMax(numberOfImagesToShow) {
                 learnString.append("\(n*currentObject.quantity)")
                 if n != numberOfImagesToShow {
                     learnString.append(", ")
                 }
             }
+            // 3. Append the total and return the text.
             learnString.append(". There are \(numberOfImagesToShow*currentObject.quantity) \(getDisplayNameForObject()) altogether.")
             return learnString
         } else {
+            // 4. If in play or practice mode, use "X groups of Y <object>s".
             let normalString = "\(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject())"
             return normalString
         }

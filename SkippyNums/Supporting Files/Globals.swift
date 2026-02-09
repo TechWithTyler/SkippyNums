@@ -14,13 +14,20 @@ import UIKit
 
 // The edge insets of the sections of the object collection views in the GameViewController and LearnViewController.
 var objectInsets: UIEdgeInsets {
+    // 1. Define the edge inset amounts.
     let verticalInsetAmount: CGFloat = 50
     let horizontalInsetAmount: CGFloat = 20
+    // 2. Create a UIEdgeInsets object, using the vertical inset amount for the top and bottom edges and the horizontal inset amount for the left and right edges. This adds 50px of padding to the top and bottom of the view and 20px of padding to the left and right of the view.
     let insets = UIEdgeInsets(
+        // 50px
         top: verticalInsetAmount,
+        // 20px
         left: horizontalInsetAmount,
+        // 50px
         bottom: verticalInsetAmount,
+        // 20px
         right: horizontalInsetAmount)
+    // 3. Return the inset object.
     return insets
 }
 
