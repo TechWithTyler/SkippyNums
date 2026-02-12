@@ -163,7 +163,7 @@ class GameBrain {
             // 1. If in learn mode, use "There are X groups of Y <object>s…" as the background accessibility text.
             var learnString = "There are \(numberOfImagesToShow) groups of \(currentObject.quantity) \(getDisplayNameForObject()): "
             // 2. Add each skip count number to this text. Add a comma after all but the last one.
-            for n in ClosedRange.oneToMax(numberOfImagesToShow) {
+            for n in 1...numberOfImagesToShow {
                 learnString.append("\(n*currentObject.quantity)")
                 if n != numberOfImagesToShow {
                     learnString.append(", ")

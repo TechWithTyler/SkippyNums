@@ -58,9 +58,10 @@ class SilentAudioPlayer {
             let leftChannel = buffer.floatChannelData?[0]
             let rightChannel = buffer.floatChannelData?[1]
             // 3. Fill the buffer with silent audio samples for both channels.
-            for frame in Range.zeroToButNotIncluding(Int(frameCount)) {
-                leftChannel?[frame] = (Float.random(in: -1.0...1.0)) * volume // Left channel
-                rightChannel?[frame] = (Float.random(in: -1.0...1.0)) * volume // Right channel
+            for frame in 0..<Int(frameCount) {
+                let range: ClosedRange<Float> = -1.0...1.0
+                leftChannel?[frame] = (Float.random(in: range)) * volume // Left channel
+                rightChannel?[frame] = (Float.random(in: range)) * volume // Right channel
             }
             // 4. Schedule the buffer to play in a loop.
             playerNode.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: nil)
