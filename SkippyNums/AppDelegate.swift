@@ -111,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 .asyncAfter(deadline: .now() + .milliseconds(audioSessionResetTimeInMilliseconds)) { [self] in
                 configureAudioSession()
             }
-            @unknown default:
+            default:
                 break
         }
     }
