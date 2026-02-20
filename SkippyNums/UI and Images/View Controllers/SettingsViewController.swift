@@ -111,7 +111,7 @@ extension SettingsViewController {
      1. Create an array that will contain the picker data.
      2. Have numberOfComponents(in:) return the number of wheels for the picker.
      3. Have numberOfRowsInComponent(_:) return the array's item count.
-     4. In pickerView(_:viewForRow:forComponent:reusing:), check the tag of the picker and fill that picker with data from the array. Tag checks are unnecessary when there's only one picker, as was the case until version 2026.2. For a picker with multiple wheels (components), check the component.
+     4. In pickerView(_:viewForRow:forComponent:reusing:), check the tag of the picker and fill that picker with data from the array. Tag checks are unnecessary when there's only one picker, as was the case until version 2026.3. For a picker with multiple wheels (components), check the component.
      5. In the same method, before selecting the picker, create a row view.
      6. Still in the same method, use the picker row to access the corresponding element in the array, and set the row view's data to that element or to data containing that element.
      7. pickerView(_:didSelectRow:inComponent:) is where you handle the selection of picker rows.
