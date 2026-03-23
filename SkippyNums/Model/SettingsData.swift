@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 8/1/23.
-//  Copyright © 2023-2025 SheftApps. All rights reserved.
+//  Copyright © 2023-2026 SheftApps. All rights reserved.
 //
 
 // MARK: - Imports
@@ -24,5 +24,18 @@ struct SettingsData {
 			UserDefaults.standard.set(newValue, forKey: "tenFrame")
 		}
 	}
+
+    // MARK: - Max Tries Per Question Settings Data
+
+    // The maximum number of tries per question.
+    var maxTriesPerQuestion: Int {
+        get {
+            // Get the stored value from the application's UserDefaults
+            return UserDefaults.standard.integer(forKey: "maxTriesPerQuestion")
+        } set {
+            // Save the new value to the application's UserDefaults
+            UserDefaults.standard.set(newValue, forKey: "maxTriesPerQuestion")
+        }
+    }
 
 }

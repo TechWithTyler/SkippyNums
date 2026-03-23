@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 4/4/23.
-//  Copyright © 2023-2025 SheftApps. All rights reserved.
+//  Copyright © 2023-2026 SheftApps. All rights reserved.
 //
 
 // MARK: - Imports
@@ -11,7 +11,7 @@
 import UIKit
 import SheftAppsStylishUI
 
-class AnswerCheckViewController: UIViewController {
+class AnswerCheckViewController: SkippyNumsViewController {
 
     // MARK: - @IBOutlets
 
@@ -29,12 +29,6 @@ class AnswerCheckViewController: UIViewController {
     // The base image name passed in from the GameViewController. The base image name doesn't include the ".circle.fill" suffix as it's common to both images, so it's applied when setting the image here.
 	var baseImageName: String?
 
-    // MARK: - Properties - System Theme
-
-    var systemTheme: UIUserInterfaceStyle {
-        return traitCollection.userInterfaceStyle
-    }
-
     // MARK: - View Setup/Update
 
 	override func viewDidLoad() {
@@ -42,12 +36,6 @@ class AnswerCheckViewController: UIViewController {
 		// Do any additional setup after loading the view.
 		// 1. Set up the "correct or incorrect" display.
         setupAnswerCheckDisplay()
-		// 2. Set up the gradient layer.
-        setupGradient()
-        // 3. Update the gradient colors when the device's dark/light mode changes.
-        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
-            updateBackgroundColors()
-        }
 	}
 
     func setupAnswerCheckDisplay() {
@@ -57,42 +45,12 @@ class AnswerCheckViewController: UIViewController {
         checkXImageView?.image = UIImage(systemName: "\(baseImageName).circle.fill")
         // 2. Use green for the checkmark and red for the X.
         checkXImageView?.tintColor = baseImageName == "x" ? .systemRed : .systemGreen
-        // 3. Set the button title based on whether the chosen answer is correct, incorrect, or the 3rd incorrect one in a row.
+        // 3. Set the button title based on whether the chosen answer is correct, incorrect, or incorrect too many times in a row.
         if messageText.lowercased().components(separatedBy: [" ", "!"]).contains("correct") {
             dismissButton?.setTitle("Next Question", for: .normal)
         } else {
             dismissButton?.setTitle("Try Again", for: .normal)
         }
-    }
-
-    func setupGradient() {
-        // 1. Create the gradient layer.
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-        // 2. Add the gradient layer to the view.
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-
-    func updateBackgroundColors() {
-        // Update gradient colors based on device's dark/light mode
-        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
-        }
-    }
-
-    func updateGradientFrame() {
-        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.frame = view.bounds
-        }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // Update frame of gradient layer when window size changes
-        updateGradientFrame()
     }
 
     // MARK: - @IBActions

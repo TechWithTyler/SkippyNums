@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 10/31/24.
-//  Copyright © 2023-2025 SheftApps. All rights reserved.
+//  Copyright © 2023-2026 SheftApps. All rights reserved.
 //
 
 // MARK: - Imports
@@ -57,12 +57,13 @@ class SilentAudioPlayer {
             let volume: Float = 0 // Set volume to 0 to create silence
             let leftChannel = buffer.floatChannelData?[0]
             let rightChannel = buffer.floatChannelData?[1]
-            // 3. Fill the buffer with silent audio samples for both channels
+            // 3. Fill the buffer with silent audio samples for both channels.
             for frame in 0..<Int(frameCount) {
-                leftChannel?[frame] = (Float.random(in: -1.0...1.0)) * volume // Left channel
-                rightChannel?[frame] = (Float.random(in: -1.0...1.0)) * volume // Right channel
+                let range: ClosedRange<Float> = -1.0...1.0
+                leftChannel?[frame] = (Float.random(in: range)) * volume // Left channel
+                rightChannel?[frame] = (Float.random(in: range)) * volume // Right channel
             }
-            // 4. Schedule the buffer to play in a loop
+            // 4. Schedule the buffer to play in a loop.
             playerNode.scheduleBuffer(buffer, at: nil, options: .loops, completionHandler: nil)
         }
     }
@@ -71,7 +72,7 @@ class SilentAudioPlayer {
 
     // Starts the silence track by starting the audio engine and playing the player node.
     func startSilenceTrack() {
-        // 1. Setup the silence track by attaching and connecting nodes.
+        // 1. Set up the silence track by attaching and connecting nodes.
         setupSilenceTrack()
         // 2. Try to play the silent audio track.
         do {

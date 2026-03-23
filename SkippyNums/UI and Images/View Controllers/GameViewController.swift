@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 2/13/23.
-//  Copyright © 2023-2025 SheftApps. All rights reserved.
+//  Copyright © 2023-2026 SheftApps. All rights reserved.
 //
 
 // MARK: - Imports
@@ -12,7 +12,7 @@ import UIKit
 import AVFoundation
 import SheftAppsStylishUI
 
-class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     // MARK: - @IBOutlets - Buttons
 
@@ -57,38 +57,26 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // A set containing the corresponding skip count numbers for the images that VoiceOver has already focused on.
     var voiceOverFocusedImages: Set<Int> = []
 
-    // MARK: - Properties - System Theme
-
-    var systemTheme: UIUserInterfaceStyle {
-        return traitCollection.userInterfaceStyle
-    }
-
     // MARK: - View Setup/Update
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // 1. Hide the system-provided back button--a more visually-accessible "end game" button is used instead, located in the top-right corner.
+        // Hide the system-provided back button--a more visually-accessible "end game" button is used instead, located in the top-right corner.
         navigationItem.hidesBackButton = true
         // 2. Set up the objectCollectionView's delegate and data source.
         setupObjectCollectionView()
         // 3. Set up the labels and seconds left bar.
         setupLabels()
         setupSecondsLeftBarTrackColor()
-        // 4. Set up the gradient layer.
-        setupGradient()
-        // 5. Update the gradient colors when the device's dark/light mode changes.
-        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { [self] (self: Self, previousTraitCollection: UITraitCollection) in
-            updateBackgroundColors()
-        }
-        // 6. Show or hide the seconds left bar's track color when the Increase Contrast accessibility setting changes.
+        // 4. Show or hide the seconds left bar's track color when the Increase Contrast accessibility setting changes.
         registerForTraitChanges([UITraitAccessibilityContrast.self]) { [self] (
             self: Self,
             previousTraitCollection: UITraitCollection
         ) in
             setupSecondsLeftBarTrackColor()
         }
-        // 7. Present a question to the player.
+        // 5. Present a question to the player.
         newQuestion()
     }
 
@@ -114,39 +102,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         questionLabel?.addGestureRecognizer(tapGesture)
     }
 
-    func setupGradient() {
-        // 1. Create the gradient layer.
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-        // 2. Add the gradient layer to the view.
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-
     func setupSecondsLeftBarTrackColor() {
         let shouldFillTrack = UIAccessibility.isDarkerSystemColorsEnabled
         secondsLeftBar?.trackTintColor = shouldFillTrack ? .lightGray.withAlphaComponent(0.8) : .clear
-    }
-
-    func updateBackgroundColors() {
-        // Update gradient colors based on device's dark/light mode
-        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.colors = systemTheme == .dark ? gradientColorsDark : gradientColorsLight
-        }
-    }
-
-    func updateGradientFrame() {
-        if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
-            gradientLayer.frame = view.bounds
-        }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // Update frame of gradient layer when window size changes
-        updateGradientFrame()
     }
 
     // MARK: - Game Timer - Setup
@@ -256,13 +214,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - @IBActions
 
     @IBAction func answerSelected(_ sender: SAIAccessibleButton) {
-        // 1. Check whether the selected answer is correct, incorrect, or the 3rd incorrect one in a row.
+        // 1. Check whether the selected answer is correct, incorrect, or incorrect too many times in a row.
         guard let answer = sender.currentTitle else { return }
         let correct = gameBrain.checkAnswer(answer)
         let incorrectTooManyTimes = !correct && gameBrain.tooManyIncorrectAnswers
         // 2. Update the score display.
         updateScoreDisplay()
-        // 3. Choose how to show the "correct/incorrect answer" sheet and decide whether to advance to a new question based on whether the answer is correct, incorrect, or the 3rd incorrect one in a row.
+        // 3. Choose how to show the "correct/incorrect answer" sheet and decide whether to advance to a new question based on whether the answer is correct, incorrect, or incorrect too many times in a row.
         if correct {
             // Correct answer, advance to new question
             performSegue(withIdentifier: "Correct", sender: sender)
@@ -289,13 +247,14 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         // Pass the selected object to the new view controller.
         if let answerCheckViewController = segue.destination as? AnswerCheckViewController {
             switch segue.identifier {
-                // 2. If segue is used to present the AnswerCheckViewController (sheet), set the messageText and imageName of the AnswerCheckViewController based on which segue is used to present it. The segue to use to present it depends on whether the chosen answer is correct, incorrect, or the 3rd incorrect one in a row.
+                // 2. If segue is used to present the AnswerCheckViewController (sheet), set the messageText and imageName of the AnswerCheckViewController based on which segue is used to present it. The segue to use to present it depends on whether the chosen answer is correct, incorrect, or incorrect too many times in a row.
                 // The "correct or incorrect" image's name is always "something.circle", so we only pass that something to AnswerCheckViewController which constructs the full image name.
             case "Incorrect":
                 answerCheckViewController.messageText = "Incorrect! Try again!"
                 answerCheckViewController.baseImageName = "x"
             case "TooManyIncorrect":
-                answerCheckViewController.messageText = "Incorrect! The correct answer is:\n\(gameBrain.getCorrectAnswer())."
+                let correctAnswer = gameBrain.getCorrectAnswer()
+                answerCheckViewController.messageText = "Incorrect! The correct answer is:\n\(correctAnswer)"
                 answerCheckViewController.baseImageName = "x"
             default:
                 answerCheckViewController.messageText = "Correct!"
@@ -323,7 +282,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 #else
         let message = "Starting from the top-left of the screen, drag your finger across each group of \(gameBrain.getDisplayNameForObject()) to count them, then if you'd like, split-tap (keep your finger on the screen and tap with a second) to play the sound."
 #endif
-        // 2. Setup the announcement timer to play the announcement after 15 seconds of inactivity as long as the "correct/incorrect answer" sheet isn't being displayed.
+        // 2. Set up the announcement timer to play the announcement after 15 seconds of inactivity as long as the "correct/incorrect answer" sheet isn't being displayed.
         let secondsToWait: TimeInterval = 15
         voiceOverAnnouncementTimer?.invalidate()
         voiceOverAnnouncementTimer = nil
@@ -355,12 +314,22 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 extension GameViewController {
 
+    // MARK: - Object Collection View - Info
+
+    /*
+     The structure of a collection view is very simple!
+     1. Have numberOfSections(in:) return the number of sections for the collection view.
+     2. Have collectionView(_:numberOfItemsInSection:) return the number of items for the section.
+     4. In collectionView(_:cellForItemAt:), fill the cell with content.
+     5. Implement the UICollectionViewDelegateFlowLayout methods to specify the size for each item and the inter-item spacing for each section.
+     */
+
     // MARK: - Object Collection View - Setup
 
     func setupObjectCollectionView() {
         // 1. Set the object collection view's delegate and data source.
-        objectCollectionView?.dataSource = self
         objectCollectionView?.delegate = self
+        objectCollectionView?.dataSource = self
         // 2. Allow the user to interact with it.
         objectCollectionView?.isUserInteractionEnabled = true
         // 3. Don't show a background color as there's already a background gradient for the entire view.
@@ -368,6 +337,12 @@ extension GameViewController {
     }
 
     // MARK: - Object Collection View - Delegate and Data Source
+
+    // Specifies the number of sections for the collection view.
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        let numberOfSections = 1
+        return numberOfSections
+    }
 
     // Specifies the number of images to show.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -378,7 +353,8 @@ extension GameViewController {
     // Shows an image in the collection view cell.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // 1. Create a cell with identifier "ObjectCell".
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCell", for: indexPath)
+        let cellIdentifier = "ObjectCell"
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         // 2. Create and configure the image view.
         let imageView = ObjectImageView(frame: cell.contentView.bounds)
         imageView.isUserInteractionEnabled = true
@@ -395,11 +371,11 @@ extension GameViewController {
         // 4. Configure accessibility.
         imageView.tag = (indexPath.item + 1) * gameBrain.currentObject.quantity
         configureImageAccessibility(for: imageView)
-        // 8. Disable keyboard focus for the cell.
+        // 5. Disable keyboard focus for the cell.
         cell.focusEffect = nil
-        // 9. Remove the previous image view (if any) from the cell before adding this one, otherwise multiple image views would overlap each other each time a new question is presented. If this is the first image in the cell, this will do nothing.
+        // 6. Remove the previous image view (if any) from the cell before adding this one, otherwise multiple image views would overlap each other each time a new question is presented. If this is the first image in the cell, this will do nothing.
         cell.contentView.subviews.first?.removeFromSuperview()
-        // 10. Add the image view to the cell's content view and return the cell.
+        // 7. Add the image view to the cell's content view and return the cell.
         cell.contentView.addSubview(imageView)
         return cell
     }
@@ -415,9 +391,9 @@ extension GameViewController {
         // 1. Use the available width to determine the width of each image.
         let paddingSpace = objectInsets.left * 2
         let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / 6.2
-        // 2. Return the size of each image as a square with the width and height equal to widthPerItem.
-        let size = CGSize(width: widthPerItem, height: widthPerItem)
+        let sizePerItem = availableWidth / 6.2
+        // 2. Return the size of each image as a square with the width and height equal to sizePerItem.
+        let size = CGSize(width: sizePerItem, height: sizePerItem)
         return size
     }
 
@@ -425,10 +401,14 @@ extension GameViewController {
 
     // Configures accessibility for an image.
     func configureImageAccessibility(for imageView: ObjectImageView) {
+        // 1. Configure accessibility traits.
         imageView.isAccessibilityElement = true
         imageView.accessibilityTraits = [.startsMediaSession, .image]
+        // 2. Set the accessibility label.
         // The image view's tag is set to the respective skip count number, which will be announced in practice mode.
         imageView.accessibilityLabel = gameBrain.gameType == .play ? "\(gameBrain.imageAccessibilityText)" : "\(imageView.tag)"
+        // 3. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 5th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 6th image (the first one in the 2nd row). If it's the last image the player hasn't yet focused on, skip to step 7.
+        let displayName = gameBrain.getDisplayNameForObject()
 #if targetEnvironment(macCatalyst)
         let soundGesture = "Activate"
         let moveGesture = "move"
@@ -436,26 +416,25 @@ extension GameViewController {
         let soundGesture = "Double-tap"
         let moveGesture = "flick"
 #endif
-        // 5. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 5th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 6th image (the first one in the 2nd row). If it's the last image the player hasn't yet focused on, skip to step 7.
         if voiceOverFocusedImages.count < gameBrain.numberOfImagesToShow {
             let lastImageViewInFirstRow = (5 * gameBrain.currentObject.quantity)
             if imageView.tag == lastImageViewInFirstRow && gameBrain.numberOfImagesToShow > 5 {
                 imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
             } else {
-                // 6. If it's any other image, tell the player that they can activate the image to play the sound.
-                imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(gameBrain.getDisplayNameForObject())."
+                // 4. If it's any other image, tell the player that they can activate the image to play the sound.
+                imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(displayName)."
             }
         } else {
-            // 7. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom. For example, if counting cows, the hint would be "That's all the cows, how many cows altogether? Select from the choices at the bottom of the screen."
-            imageView.accessibilityHint = "That's all the \(gameBrain.getDisplayNameForObject()), how many \(gameBrain.getDisplayNameForObject()) altogether? Select from the choices at the bottom of the screen."
+            // 5. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom. For example, if counting cows, the hint would be "That's all the cows, how many cows altogether? Select from the choices at the bottom of the screen."
+            imageView.accessibilityHint = "That's all the \(displayName), how many \(displayName) altogether? Select from the choices at the bottom of the screen."
         }
     }
 
     // MARK: - Object Collection View - Image Activation Handler
 
-    // This method speaks the skip count number of the tapped/clicked image in practice mode.
+    // This method speaks the skip count number of the tapped/clicked image in practice mode and plays the object's sound in play and practice mode.
     @objc func imageTapped(_ sender: UIGestureRecognizer) {
-        // 1. If in practice mode and VoiceOver is off, get the tapped image view and its tag (representing the skip count number) and use a dedicated speech synthesizer/highlight effect. VoiceOver is configured to handle this as part of creating the image view.
+        // 1. If in practice mode and VoiceOver is off, get the tapped image view and its tag (representing the skip count number) and use a dedicated speech synthesizer/highlight effect. VoiceOver is configured to handle this as part of creating the image view, so nothing happens here if VoiceOver is on.
         if !UIAccessibility.isVoiceOverRunning && gameBrain.gameType == .practice {
             guard let image = sender.view as? ObjectImageView else { return }
             let skipCountNumber = image.tag

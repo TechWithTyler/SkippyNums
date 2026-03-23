@@ -3,7 +3,7 @@
 //  SkippyNums
 //
 //  Created by Tyler Sheft on 12/11/23.
-//  Copyright © 2023-2025 SheftApps. All rights reserved.
+//  Copyright © 2023-2026 SheftApps. All rights reserved.
 //
 
 // MARK: - Imports
