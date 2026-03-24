@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xxx-lu-B61" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="294" width="497" height="110"/>
+                                <rect key="frame" x="132" y="227" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -54,7 +54,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Wk-H7-Yha" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="412" width="497" height="110"/>
+                                <rect key="frame" x="132" y="325" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -72,8 +72,34 @@
                                     <action selector="practiceSelected:" destination="QT8-yR-MG0" eventType="touchUpInside" id="hlY-M2-DsW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to SkippyNums! Choose a mode." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Alz-va-KDR">
+                                <rect key="frame" x="20" y="62" width="1093" height="126"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAA-NP-vNr" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
+                                <rect key="frame" x="132" y="607" width="870" height="70"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="gear" catalog="system">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Settings">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="35" name="Helvetica"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="LPz-V7-Xrg" kind="show" id="1bS-Nv-G7r"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgI-kO-Vei" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="530" width="497" height="110"/>
+                                <rect key="frame" x="131" y="423" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -91,32 +117,6 @@
                                     <action selector="learnSelected:" destination="QT8-yR-MG0" eventType="touchUpInside" id="c7E-8a-8dX"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to SkippyNums! Choose a mode." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Alz-va-KDR">
-                                <rect key="frame" x="318" y="62" width="497" height="176"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAA-NP-vNr" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="862" y="62" width="223" height="87"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="gear" catalog="system">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Settings">
-                                            <attributes>
-                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <font key="NSFont" size="35" name="Helvetica"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </buttonConfiguration>
-                                <connections>
-                                    <segue destination="LPz-V7-Xrg" kind="show" id="1bS-Nv-G7r"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="z0h-Bi-0Yc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -129,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBy-6c-Pgt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-513.41571050308914" y="-986.29032258064512"/>
+            <point key="canvasLocation" x="-513.94527802294795" y="-987.09677419354841"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="ozY-zz-Usu">
@@ -155,48 +155,41 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maxinum Number of Groups:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfR-0O-knU">
-                                <rect key="frame" x="59" y="179" width="477" height="78"/>
+                                <rect key="frame" x="51" y="262" width="475" height="73"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is the maximum number of groups of objects that will be presented for a question or learn mode example." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wY-wQ-xz3">
-                                <rect key="frame" x="59" y="411" width="477" height="160"/>
+                                <rect key="frame" x="51" y="405" width="475" height="227"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="After this number of tries, the correct answer is revealed and a new question is presented." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eud-Kb-5JB">
-                                <rect key="frame" x="597" y="411" width="477" height="160"/>
+                                <rect key="frame" x="587" y="405" width="479" height="227"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maxinum Number of Tries Per Question:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAS-0e-Sk5">
-                                <rect key="frame" x="582" y="179" width="509" height="78"/>
+                                <rect key="frame" x="571" y="262" width="512" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIj-NU-d7k">
-                                <rect key="frame" x="59" y="265" width="477" height="138"/>
+                                <rect key="frame" x="51" y="348" width="475" height="126"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <pickerView tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0iB-3u-CPr">
-                                <rect key="frame" x="597" y="265" width="477" height="138"/>
+                                <rect key="frame" x="587" y="348" width="479" height="126"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wu1-r7-r2U">
-                                <rect key="frame" x="318" y="65" width="497" height="87"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xu6-Wn-Eao" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
                                 <rect key="frame" x="20" y="646" width="1093" height="48"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -211,6 +204,13 @@
                                     <action selector="reset:" destination="LPz-V7-Xrg" eventType="touchUpInside" id="7vi-nL-Jtv"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wu1-r7-r2U">
+                                <rect key="frame" x="20" y="158" width="1093" height="87"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UQc-RP-AeJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -223,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ojj-lS-s0E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="410.67961165048541" y="-1915.3225806451612"/>
+            <point key="canvasLocation" x="410.48387096774195" y="-1915.7105030891437"/>
         </scene>
         <!--Choose Animal View Controller-->
         <scene sceneID="Imm-FS-NQ2">
@@ -249,7 +249,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQ0-Bc-rtA" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="455" width="497" height="110"/>
+                                <rect key="frame" x="131" y="511" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -268,7 +268,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wj5-44-k7z" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="219" width="497" height="110"/>
+                                <rect key="frame" x="131" y="315" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -287,7 +287,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tM4-le-nHa" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="337" width="497" height="110"/>
+                                <rect key="frame" x="131" y="413" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -306,7 +306,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e7-Lw-Y6p" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="573" width="497" height="110"/>
+                                <rect key="frame" x="131" y="609" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -325,7 +325,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose what you'd like to count!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMZ-It-fbb">
-                                <rect key="frame" x="318" y="65" width="497" height="110"/>
+                                <rect key="frame" x="20" y="165" width="1093" height="62"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
@@ -343,7 +343,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wUm-B9-a92" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="120.4766107678729" y="-986.29032258064512"/>
+            <point key="canvasLocation" x="119.94704324801411" y="-987.09677419354841"/>
         </scene>
         <!--New Game View Controller-->
         <scene sceneID="bSc-hD-EW4">
@@ -353,8 +353,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vu-S5-Frl" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
+                                <rect key="frame" x="59" y="65" width="170" height="87"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="New Game"/>
+                                <buttonConfiguration key="configuration" style="filled" imagePlacement="leading" title="Back" imagePadding="20" titleAlignment="center">
+                                    <imageReference key="image" image="chevron.left" catalog="system" variableValue="0.0"/>
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="32"/>
+                                    <attributedString key="attributedSubtitle"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="back:" destination="MBZ-me-mQQ" eventType="touchUpInside" id="p4K-hP-3bN"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYC-ol-jQW" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="227" width="497" height="110"/>
+                                <rect key="frame" x="132" y="315" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -374,7 +389,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCZ-Bq-zCb" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="345" width="497" height="110"/>
+                                <rect key="frame" x="132" y="413" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -394,7 +409,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yG4-xe-JIe" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="463" width="497" height="110"/>
+                                <rect key="frame" x="131" y="511" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -413,7 +428,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhA-Ww-wSH" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="581" width="497" height="110"/>
+                                <rect key="frame" x="131" y="609" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -432,23 +447,8 @@
                                     <action selector="mixSelected:" destination="MBZ-me-mQQ" eventType="touchUpInside" id="m7q-Tj-qX3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vu-S5-Frl" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="59" y="65" width="170" height="87"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="New Game"/>
-                                <buttonConfiguration key="configuration" style="filled" imagePlacement="leading" title="Back" imagePadding="20" titleAlignment="center">
-                                    <imageReference key="image" image="chevron.left" catalog="system" variableValue="0.0"/>
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="32"/>
-                                    <attributedString key="attributedSubtitle"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="back:" destination="MBZ-me-mQQ" eventType="touchUpInside" id="p4K-hP-3bN"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose your game." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qT2-9p-fQW">
-                                <rect key="frame" x="318" y="65" width="497" height="87"/>
+                                <rect key="frame" x="20" y="165" width="1093" height="77"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
@@ -477,7 +477,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uvs-Ik-aA1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-595.4986760812003" y="-166.12903225806451"/>
+            <point key="canvasLocation" x="-595.9677419354839" y="-166.54898499558692"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -488,8 +488,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUy-89-vqb" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="862" y="62" width="211" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="62" y="60" width="211" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="New Game"/>
@@ -501,72 +501,15 @@
                                     <action selector="newGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z5m-qF-peQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="--- seconds left" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfg-64-DBg">
-                                <rect key="frame" x="631" y="148" width="481" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYv-2K-VFw" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="262" y="606" width="136" height="101"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="2">
-                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="answerSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h5o-Ao-RdM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYF-fH-uo5" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="420" y="606" width="135" height="101"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="8">
-                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="answerSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1zR-r1-4bX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHk-uY-fWd" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="578" y="606" width="135" height="101"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="4">
-                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="answerSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zA1-1S-oWd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JED-63-76J" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="737" y="606" width="134" height="101"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="10">
-                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="answerSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Usi-i3-ojg"/>
-                                </connections>
-                            </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="24e-k1-d0o">
-                                <rect key="frame" x="632" y="200" width="478" height="5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="progressTintColor" systemColor="systemGreenColor"/>
-                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </progressView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- of - tries correct" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zb-rR-Obm">
-                                <rect key="frame" x="19" y="148" width="484" height="45"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- of - tries correct" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zb-rR-Obm">
+                                <rect key="frame" x="803" y="37" width="302" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1KS-f4-rKK">
-                                <rect key="frame" x="20" y="211" width="1093" height="387"/>
+                                <rect key="frame" x="20" y="270" width="1093" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oHi-QB-fWo">
                                     <size key="itemSize" width="128" height="128"/>
@@ -586,12 +529,69 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Count the &lt;blank&gt;s by &lt;number&gt;s." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-dK-aEE">
-                                <rect key="frame" x="309" y="37" width="514" height="110"/>
+                                <rect key="frame" x="20" y="169" width="1093" height="85"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="--- seconds left" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfg-64-DBg">
+                                <rect key="frame" x="803" y="94" width="302" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="24e-k1-d0o">
+                                <rect key="frame" x="20" y="147" width="1093" height="5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="progressTintColor" systemColor="systemGreenColor"/>
+                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYv-2K-VFw" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
+                                <rect key="frame" x="232" y="645" width="105" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="2">
+                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="answerSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h5o-Ao-RdM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JED-63-76J" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
+                                <rect key="frame" x="796" y="645" width="105" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="10">
+                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="answerSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Usi-i3-ojg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYF-fH-uo5" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
+                                <rect key="frame" x="420" y="645" width="105" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="8">
+                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="answerSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1zR-r1-4bX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHk-uY-fWd" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
+                                <rect key="frame" x="608" y="645" width="105" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="4">
+                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="44"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="answerSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zA1-1S-oWd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -617,7 +617,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="198.85260370697262" y="-166.12903225806451"/>
+            <point key="canvasLocation" x="195.67519858781995" y="-168.54838709677421"/>
         </scene>
         <!--Answer Check View Controller-->
         <scene sceneID="M3u-Yu-v1l">
@@ -627,13 +627,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="580" height="650"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;condition&gt;" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAv-Pf-w6s">
-                                <rect key="frame" x="20" y="32" width="540" height="199"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pO0-VD-o9j" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
                                 <rect key="frame" x="20" y="539" width="540" height="74"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -654,9 +647,16 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N2i-qh-rog">
-                                <rect key="frame" x="229" y="315" width="121" height="159"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="221" y="20" width="137" height="106"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;condition&gt;" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAv-Pf-w6s">
+                                <rect key="frame" x="20" y="134" width="540" height="176"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Cs4-24-o9e"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -669,7 +669,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ny2-px-V9S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="852.86849073256838" y="-166.12903225806451"/>
+            <point key="canvasLocation" x="852.33892321270957" y="-166.93548387096774"/>
         </scene>
         <!--Time View Controller-->
         <scene sceneID="gcD-6x-lDx">
@@ -679,8 +679,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eA7-CA-rv0" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
+                                <rect key="frame" x="57" y="65" width="170" height="87"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="New Game"/>
+                                <buttonConfiguration key="configuration" style="filled" imagePlacement="leading" title="Back" imagePadding="20" titleAlignment="center">
+                                    <imageReference key="image" image="chevron.left" catalog="system" variableValue="0.0"/>
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="32"/>
+                                    <attributedString key="attributedSubtitle"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="back:" destination="QNS-Dc-ZD6" eventType="touchUpInside" id="0Y7-de-j22"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ae-8j-Brd" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="209" width="497" height="110"/>
+                                <rect key="frame" x="131" y="393" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -699,7 +714,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIb-D1-g1Q" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="327" width="497" height="110"/>
+                                <rect key="frame" x="131" y="491" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -718,7 +733,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vzk-C8-t90" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="318" y="445" width="497" height="110"/>
+                                <rect key="frame" x="131" y="589" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -736,23 +751,8 @@
                                     <action selector="untimedGame:" destination="QNS-Dc-ZD6" eventType="touchUpInside" id="h1L-hd-Sco"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eA7-CA-rv0" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="57" y="65" width="170" height="87"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="New Game"/>
-                                <buttonConfiguration key="configuration" style="filled" imagePlacement="leading" title="Back" imagePadding="20" titleAlignment="center">
-                                    <imageReference key="image" image="chevron.left" catalog="system" variableValue="0.0"/>
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="32"/>
-                                    <attributedString key="attributedSubtitle"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="back:" destination="QNS-Dc-ZD6" eventType="touchUpInside" id="0Y7-de-j22"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose game length." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyd-6X-zFa">
-                                <rect key="frame" x="318" y="65" width="497" height="87"/>
+                                <rect key="frame" x="20" y="165" width="1093" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
@@ -773,7 +773,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Df-Cr-XNM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-242.27714033539274" y="526.61290322580646"/>
+            <point key="canvasLocation" x="-242.74193548387098" y="526.12533097969992"/>
         </scene>
         <!--Time Up View Controller-->
         <scene sceneID="0QQ-GY-H8H">
@@ -784,8 +784,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time's up! You answered &lt;correct&gt; out of &lt;tries&gt; tries correct!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10X-cG-LjX">
-                                <rect key="frame" x="20" y="62" width="1093" height="136"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="20" y="62" width="1093" height="247"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -809,11 +809,6 @@
                                     <action selector="resetScore:" destination="RGu-7n-5D2" eventType="touchUpInside" id="aYy-Ya-TIB"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="alarm.waves.left.and.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-Jh-MIe">
-                                <rect key="frame" x="389" y="239" width="354" height="264"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemRedColor"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQW-ZD-hZR" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
                                 <rect key="frame" x="686" y="595" width="407" height="99"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
@@ -833,6 +828,11 @@
                                     <action selector="nextRound:" destination="RGu-7n-5D2" eventType="touchUpInside" id="J1W-2n-WoV"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="alarm.waves.left.and.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-Jh-MIe">
+                                <rect key="frame" x="40" y="351" width="1053" height="211"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQc-0M-iRY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -846,7 +846,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UV2-IC-976" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="799.91173874669016" y="497.58064516129031"/>
+            <point key="canvasLocation" x="798.85260370697256" y="496.77419354838707"/>
         </scene>
         <!--Learn View Controller-->
         <scene sceneID="9m6-4e-Ysm">
@@ -857,7 +857,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zo7-Za-gb8">
-                                <rect key="frame" x="21" y="294" width="1091" height="387"/>
+                                <rect key="frame" x="21" y="294" width="1091" height="399"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="A8A-Eq-W0g">
                                     <size key="itemSize" width="128" height="128"/>
@@ -877,8 +877,8 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTp-aB-4cF" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="862" y="62" width="239" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="41" y="53" width="270" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="New Game"/>
@@ -890,15 +890,8 @@
                                     <action selector="newGame:" destination="I4Y-cs-4AQ" eventType="touchUpInside" id="WCf-6f-9Hi"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="There are &lt;blank&gt; groups of &lt;blank&gt; &lt;blank&gt;s: &lt;blank&gt;. There are &lt;blank&gt; &lt;blank&gt;s altogether." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnH-wT-vgV">
-                                <rect key="frame" x="278" y="24" width="577" height="209"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o21-cR-Qts" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="863" y="140" width="239" height="93"/>
+                                <rect key="frame" x="823" y="53" width="270" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -911,6 +904,13 @@
                                     <action selector="newExample:" destination="I4Y-cs-4AQ" eventType="touchUpInside" id="g5g-Qm-w03"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="There are &lt;blank&gt; groups of &lt;blank&gt; &lt;blank&gt;s: &lt;blank&gt;. There are &lt;blank&gt; &lt;blank&gt;s altogether." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnH-wT-vgV">
+                                <rect key="frame" x="20" y="142" width="1093" height="136"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LLa-ZD-xAI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -925,13 +925,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tft-JP-F9U" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="883.58340688437772" y="-852.41935483870964"/>
+            <point key="canvasLocation" x="881.99470432480132" y="-854.0322580645161"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="pQa-gG-mWZ"/>
         <segue reference="MRR-36-b4x"/>
-        <segue reference="FNO-UI-0Zm"/>
+        <segue reference="ydF-Ma-L2T"/>
         <segue reference="HN7-Uw-0DH"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -46,3 +46,19 @@ let gradientColorsDark: [CGColor] = [
     UIColor.darkGradientTop.cgColor,
     UIColor.black.cgColor
 ]
+
+// MARK: - Object Collection View Image Size
+
+// Returns the size for each image in the object collection view in the given view.
+func sizeForImageInObjectCollectionView(superview view: UIView) -> CGSize {
+    // 1. Use the available width and height to determine the size of each image.
+    let paddingSpaceWidth = objectInsets.left * 2
+    let paddingSpaceHeight = objectInsets.top * 2
+    let availableWidth = view.frame.width - paddingSpaceWidth
+    let availableHeight = view.frame.height - paddingSpaceHeight
+    let widthPerItem = availableWidth / 6.25
+    let heightPerItem = availableHeight / 6.25
+    // 2. Return the size of each image.
+    let size = CGSize(width: widthPerItem, height: heightPerItem)
+    return size
+}

@@ -52,6 +52,12 @@ class LearnViewController: SkippyNumsViewController, UICollectionViewDataSource,
 		super.viewDidDisappear(animated)
 	}
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Invalidate the current object collection view layout to force a redraw when the window size changes.
+        objectCollectionView?.collectionViewLayout.invalidateLayout()
+    }
+
     // MARK: - Reset Game
 
 	func resetGame() {
@@ -136,10 +142,7 @@ extension LearnViewController {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let paddingSpace = objectInsets.left * 2
-		let availableWidth = view.frame.width - paddingSpace
-		let widthPerItem = availableWidth / 6.2
-		return CGSize(width: widthPerItem, height: widthPerItem)
+        return sizeForImageInObjectCollectionView(superview: view)
 	}
 
     // MARK: - Object Collection View - Image Activation Handler

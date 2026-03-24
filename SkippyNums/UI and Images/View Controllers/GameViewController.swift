@@ -42,7 +42,7 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
 
     // MARK: - Properties - Floats
 
-    private let choiceButtonTextSize: CGFloat = 50
+    private let choiceButtonTextSize: CGFloat = 35
 
     // MARK: - Properties - Objects
 
@@ -62,7 +62,7 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // Hide the system-provided back button--a more visually-accessible "end game" button is used instead, located in the top-right corner.
+        // Hide the system-provided back button--a more visually-accessible "end game" button is used instead.
         navigationItem.hidesBackButton = true
         // 2. Set up the objectCollectionView's delegate and data source.
         setupObjectCollectionView()
@@ -88,6 +88,12 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         gameBrain.resetGameTimer()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Invalidate the current object collection view layout to force a redraw when the window size changes.
+        objectCollectionView?.collectionViewLayout.invalidateLayout()
     }
 
     func setupLabels() {
@@ -388,13 +394,7 @@ extension GameViewController {
 
     // Specifies sizing of the images in the collection view.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // 1. Use the available width to determine the width of each image.
-        let paddingSpace = objectInsets.left * 2
-        let availableWidth = view.frame.width - paddingSpace
-        let sizePerItem = availableWidth / 6.2
-        // 2. Return the size of each image as a square with the width and height equal to sizePerItem.
-        let size = CGSize(width: sizePerItem, height: sizePerItem)
-        return size
+        return sizeForImageInObjectCollectionView(superview: view)
     }
 
     // MARK: - Object Collection View - Image Accessibility Configuration
