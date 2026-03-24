@@ -42,7 +42,7 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
 
     // MARK: - Properties - Floats
 
-    private let choiceButtonTextSize: CGFloat = 50
+    private let choiceButtonTextSize: CGFloat = 35
 
     // MARK: - Properties - Objects
 
@@ -88,6 +88,12 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         gameBrain.resetGameTimer()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Invalidate the current object collection view layout to force a redraw when the window size changes.
+        objectCollectionView?.collectionViewLayout.invalidateLayout()
     }
 
     func setupLabels() {
@@ -388,13 +394,7 @@ extension GameViewController {
 
     // Specifies sizing of the images in the collection view.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // 1. Use the available width to determine the width of each image.
-        let paddingSpace = objectInsets.left * 2
-        let availableWidth = view.frame.width - paddingSpace
-        let sizePerItem = availableWidth / 6.2
-        // 2. Return the size of each image as a square with the width and height equal to sizePerItem.
-        let size = CGSize(width: sizePerItem, height: sizePerItem)
-        return size
+        return sizeForImageInObjectCollectionView(superview: view)
     }
 
     // MARK: - Object Collection View - Image Accessibility Configuration
@@ -407,7 +407,7 @@ extension GameViewController {
         // 2. Set the accessibility label.
         // The image view's tag is set to the respective skip count number, which will be announced in practice mode.
         imageView.accessibilityLabel = gameBrain.gameType == .play ? "\(gameBrain.imageAccessibilityText)" : "\(imageView.tag)"
-        // 3. Choose the accessibility hint based on which image has VoiceOver focus. If it's the 5th image (the last one in the 1st row), tell the player to move VoiceOver focus right so it focuses on the 6th image (the first one in the 2nd row). If it's the last image the player hasn't yet focused on, skip to step 7.
+        // 3. Choose the accessibility hint based on which image has VoiceOver focus. If it's the last image the player hasn't yet focused on, skip to step 5.
         let displayName = gameBrain.getDisplayNameForObject()
 #if targetEnvironment(macCatalyst)
         let soundGesture = "Activate"
@@ -417,13 +417,8 @@ extension GameViewController {
         let moveGesture = "flick"
 #endif
         if voiceOverFocusedImages.count < gameBrain.numberOfImagesToShow {
-            let lastImageViewInFirstRow = (5 * gameBrain.currentObject.quantity)
-            if imageView.tag == lastImageViewInFirstRow && gameBrain.numberOfImagesToShow > 5 {
-                imageView.accessibilityHint = "Now \(moveGesture) right to move to the second row."
-            } else {
-                // 4. If it's any other image, tell the player that they can activate the image to play the sound.
+                // 4. Tell the player that they can activate the image to play the sound.
                 imageView.accessibilityHint = "\(soundGesture) if you want to play the sound for this group of \(displayName)."
-            }
         } else {
             // 5. If it's the last image that VoiceOver hasn't yet focused on, tell the player that they've counted all the objects and to guide them to select an answer at the bottom. For example, if counting cows, the hint would be "That's all the cows, how many cows altogether? Select from the choices at the bottom of the screen."
             imageView.accessibilityHint = "That's all the \(displayName), how many \(displayName) altogether? Select from the choices at the bottom of the screen."
