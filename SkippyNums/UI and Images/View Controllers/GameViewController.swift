@@ -62,7 +62,7 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // Hide the system-provided back button--a more visually-accessible "end game" button is used instead, located in the top-right corner.
+        // Hide the system-provided back button--a more visually-accessible "end game" button is used instead.
         navigationItem.hidesBackButton = true
         // 2. Set up the objectCollectionView's delegate and data source.
         setupObjectCollectionView()
