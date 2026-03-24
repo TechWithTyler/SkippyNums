@@ -204,7 +204,9 @@ class GameBrain {
 
     // This method presents a new question in play or practice mode, or a new learn mode example in learn mode.
     func newQuestion() {
-        // 1. Determine the maximum number of images to show (5 or 10) based on whether "maximum number of groups" is set to 5 or 10. The minimum number of images to display is 2, since the lowest skip count number is twos.
+        // 1. Determine the maximum number of images to show (5 or 10) based on whether "maximum number of groups" is set to 5 or 10. The minimum number of images to display is 2, since it would be too easy if only 1 image is shown.
+        let previousObjectName = currentObject.name
+        let previousNumberOfImages = numberOfImagesToShow
         let maxNumber = settingsData.tenFrame ? 10 : 5
         let numberRange = 2...maxNumber
         numberOfImagesToShow = Int.random(in: numberRange)
@@ -215,8 +217,6 @@ class GameBrain {
             newLearnModeExample(withObject: object)
         } else {
             // 3. If in play or practice mode, set the current object to a new object.
-            let previousObjectName = currentObject.name
-            let previousNumberOfImages = numberOfImagesToShow
             if countingBy == nil {
                 currentObject = GameBrain.objectsToCount.randomElement()!
             } else {
@@ -224,11 +224,11 @@ class GameBrain {
             }
             // 4. Reset the incorrect answer count to 0.
             numberOfIncorrectAnswersForQuestion = 0
-            // 5. If the next question is identical to the previous one (i.e., the new question's object and number of images to show are the same), try again until a different question (i.e., either the object or number of images to show are different) is shown.
-            let isSameQuestionContent = currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages
-            if isSameQuestionContent {
-                newQuestion()
-            }
+        }
+        // 5. If the next question/learn mode example is identical to the previous one (i.e., the new question's object and number of images to show are the same), try again until a different question or learn mode example (i.e., either the object or number of images to show are different) is shown.
+        let isSameQuestionContent = currentObject.name == previousObjectName && numberOfImagesToShow == previousNumberOfImages
+        if isSameQuestionContent {
+            newQuestion()
         }
         // 6. Stop speech.
         speechSynthesizer.stopSpeaking(at: .immediate)
