@@ -37,9 +37,7 @@ class TimeUpViewController: SkippyNumsViewController {
         // 2. Hide the system-provided back button--a back button isn't needed here.
         navigationItem.hidesBackButton = true
         // 3. Add an animation to the image.
-        if #available(iOS 18, *) {
-            timeUpImageView?.addSymbolEffect(.wiggle, options: .repeat(.periodic(3, delay: 0)).speed(2))
-        }
+        timeUpImageView?.addSymbolEffect(.wiggle, options: .repeat(.periodic(3, delay: 0)).speed(2))
     }
 
     // MARK: - @IBActions
