@@ -57,7 +57,7 @@ class SilentAudioPlayer {
             let volume: Float = 0 // Set volume to 0 to create silence
             let leftChannel = buffer.floatChannelData?[0]
             let rightChannel = buffer.floatChannelData?[1]
-            // 3. Fill the buffer with silent audio samples for both channels.
+            // 3. Fill the buffer with silent audio samples for both channels. Randomize the samples to create static in case volume needs to be increased for testing.
             for frame in 0..<Int(frameCount) {
                 let range: ClosedRange<Float> = -1.0...1.0
                 leftChannel?[frame] = (Float.random(in: range)) * volume // Left channel
@@ -80,7 +80,7 @@ class SilentAudioPlayer {
             try audioEngine.start() // Start the audio engine
             self.playerNode.play() // Begin playback of the player node
         } catch {
-            print("Failed to start audio engine: \(error)") // Handle error if engine fails to start
+            fatalError("Failed to start audio engine: \(error)") // Handle error if engine fails to start
         }
     }
 
