@@ -68,13 +68,13 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
         setupObjectCollectionView()
         // 3. Set up the labels and seconds left bar.
         setupLabels()
-        setupSecondsLeftBarTrackColor()
+        configureSecondsLeftBarTrackVisibility()
         // 4. Show or hide the seconds left bar's track color when the Increase Contrast accessibility setting changes.
         registerForTraitChanges([UITraitAccessibilityContrast.self]) { [self] (
             self: Self,
             previousTraitCollection: UITraitCollection
         ) in
-            setupSecondsLeftBarTrackColor()
+            configureSecondsLeftBarTrackVisibility()
         }
         // 5. Present a question to the player.
         newQuestion()
@@ -96,6 +96,7 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
         objectCollectionView?.collectionViewLayout.invalidateLayout()
     }
 
+    // This method configures the game's labels.
     func setupLabels() {
         // 1. Configure the seconds left label and score label.
         secondsLeftLabel?.text = "Loading…"
@@ -108,13 +109,15 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
         questionLabel?.addGestureRecognizer(tapGesture)
     }
 
-    func setupSecondsLeftBarTrackColor() {
+    // This method configures the secondsLeftBar's track visibility based on whether Increase Contrast is enabled in device accessibility settings. The bar is track-less if disabled. This is done by setting the track's tint color to a transparent gray if enabled or clear if disabled.
+    func configureSecondsLeftBarTrackVisibility() {
         let shouldFillTrack = UIAccessibility.isDarkerSystemColorsEnabled
         secondsLeftBar?.trackTintColor = shouldFillTrack ? .lightGray.withAlphaComponent(0.8) : .clear
     }
 
     // MARK: - Game Timer - Setup
 
+    // This method sets up the gameTimer.
     func setupGameTimer(toResume: Bool = false) {
         // 1. Set up the gameTimer.
         gameBrain.setupGameTimer(toResume: toResume) { [self] gameTimeLeft in
