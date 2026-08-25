@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="25095" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="duO-p5-9Oj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="25098" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="duO-p5-9Oj">
     <device id="ipad7_9" orientation="landscape" layout="fullscreen" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="25070"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="25072"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -15,7 +15,7 @@
             <objects>
                 <navigationController id="duO-p5-9Oj" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sH4-KK-0Jy">
-                        <rect key="frame" x="0.0" y="24" width="744" height="54"/>
+                        <rect key="frame" x="0.0" y="24" width="1133" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -31,11 +31,11 @@
             <objects>
                 <viewController id="QT8-yR-MG0" customClass="WelcomeViewController" customModule="SkippyNums" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TyH-nc-VbS">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xxx-lu-B61" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="132" y="358" width="481" height="70"/>
+                                <rect key="frame" x="132" y="226" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -54,7 +54,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Wk-H7-Yha" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="132" y="513" width="481" height="70"/>
+                                <rect key="frame" x="132" y="325" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -73,14 +73,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to SkippyNums! Choose a mode." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Alz-va-KDR">
-                                <rect key="frame" x="20" y="62" width="704" height="126"/>
+                                <rect key="frame" x="20" y="62" width="1093" height="126"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAA-NP-vNr" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="132" y="996" width="481" height="70"/>
+                                <rect key="frame" x="132" y="607" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="gear" catalog="system">
@@ -99,7 +99,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgI-kO-Vei" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="667" width="481" height="70"/>
+                                <rect key="frame" x="131" y="422" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -136,7 +136,7 @@
             <objects>
                 <viewController id="LPz-V7-Xrg" customClass="SettingsViewController" customModule="SkippyNums" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3vD-Ou-u5T">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POM-2S-Ey4" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
@@ -155,43 +155,43 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maxinum Number of Groups:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfR-0O-knU">
-                                <rect key="frame" x="51" y="262" width="304" height="132"/>
+                                <rect key="frame" x="51" y="262" width="475" height="73"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is the maximum number of groups of objects that will be presented for a question or learn mode example." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wY-wQ-xz3">
-                                <rect key="frame" x="51" y="617" width="304" height="345"/>
+                                <rect key="frame" x="51" y="405" width="475" height="227"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="After this number of tries, the correct answer is revealed and a new question is presented." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eud-Kb-5JB">
-                                <rect key="frame" x="373" y="617" width="304" height="345"/>
+                                <rect key="frame" x="587" y="405" width="479" height="227"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maxinum Number of Tries Per Question:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAS-0e-Sk5">
-                                <rect key="frame" x="366" y="262" width="328" height="132"/>
+                                <rect key="frame" x="571" y="262" width="512" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIj-NU-d7k">
-                                <rect key="frame" x="51" y="348" width="304" height="250"/>
+                                <rect key="frame" x="51" y="348" width="475" height="126"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <pickerView tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0iB-3u-CPr">
-                                <rect key="frame" x="373" y="348" width="304" height="250"/>
+                                <rect key="frame" x="587" y="348" width="479" height="126"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xu6-Wn-Eao" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="20" y="1035" width="704" height="48"/>
+                                <rect key="frame" x="20" y="646" width="1093" height="48"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -205,7 +205,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wu1-r7-r2U">
-                                <rect key="frame" x="20" y="158" width="704" height="87"/>
+                                <rect key="frame" x="20" y="158" width="1093" height="87"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
@@ -230,7 +230,7 @@
             <objects>
                 <viewController id="RWJ-ul-MGy" customClass="ChooseAnimalViewController" customModule="SkippyNums" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t4k-wi-3M1">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ycq-bf-hwD" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
@@ -249,7 +249,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQ0-Bc-rtA" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="806" width="481" height="70"/>
+                                <rect key="frame" x="131" y="511" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -268,7 +268,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wj5-44-k7z" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="497" width="481" height="70"/>
+                                <rect key="frame" x="131" y="315" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -287,7 +287,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tM4-le-nHa" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="651" width="481" height="70"/>
+                                <rect key="frame" x="131" y="413" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -306,7 +306,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e7-Lw-Y6p" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="960" width="481" height="70"/>
+                                <rect key="frame" x="131" y="608" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -325,7 +325,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose what you'd like to count!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMZ-It-fbb">
-                                <rect key="frame" x="20" y="165" width="704" height="62"/>
+                                <rect key="frame" x="20" y="165" width="1093" height="62"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
@@ -350,7 +350,7 @@
             <objects>
                 <viewController id="MBZ-me-mQQ" customClass="NewGameViewController" customModule="SkippyNums" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2S6-WS-zdp">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vu-S5-Frl" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
@@ -369,7 +369,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYC-ol-jQW" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="132" y="497" width="481" height="70"/>
+                                <rect key="frame" x="132" y="315" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -389,7 +389,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCZ-Bq-zCb" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="132" y="651" width="481" height="70"/>
+                                <rect key="frame" x="132" y="413" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -409,7 +409,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yG4-xe-JIe" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="806" width="481" height="70"/>
+                                <rect key="frame" x="131" y="511" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -428,7 +428,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhA-Ww-wSH" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="960" width="481" height="70"/>
+                                <rect key="frame" x="131" y="608" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -448,7 +448,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose your game." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qT2-9p-fQW">
-                                <rect key="frame" x="20" y="165" width="704" height="77"/>
+                                <rect key="frame" x="20" y="165" width="1093" height="77"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
@@ -484,7 +484,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="GameViewController" customModule="SkippyNums" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUy-89-vqb" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
@@ -502,14 +502,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- of - tries correct" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zb-rR-Obm">
-                                <rect key="frame" x="414" y="37" width="302" height="45"/>
+                                <rect key="frame" x="803" y="37" width="302" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1KS-f4-rKK">
-                                <rect key="frame" x="20" y="270" width="704" height="756"/>
+                                <rect key="frame" x="20" y="270" width="1093" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oHi-QB-fWo">
                                     <size key="itemSize" width="128" height="128"/>
@@ -529,27 +529,27 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Count the &lt;blank&gt;s by &lt;number&gt;s." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-dK-aEE">
-                                <rect key="frame" x="20" y="169" width="704" height="85"/>
+                                <rect key="frame" x="20" y="169" width="1093" height="85"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="--- seconds left" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfg-64-DBg">
-                                <rect key="frame" x="414" y="94" width="302" height="45"/>
+                                <rect key="frame" x="803" y="94" width="302" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="24e-k1-d0o">
-                                <rect key="frame" x="13" y="147" width="711" height="5"/>
+                                <rect key="frame" x="19" y="147" width="1094" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="progressTintColor" systemColor="systemGreenColor"/>
                                 <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </progressView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYv-2K-VFw" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="144" y="1034" width="105" height="70"/>
+                                <rect key="frame" x="232" y="645" width="105" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="2">
@@ -560,7 +560,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JED-63-76J" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="495" y="1034" width="105" height="70"/>
+                                <rect key="frame" x="796" y="645" width="105" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="10">
@@ -571,7 +571,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYF-fH-uo5" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="261" y="1034" width="105" height="70"/>
+                                <rect key="frame" x="420" y="645" width="105" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="8">
@@ -582,7 +582,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHk-uY-fWd" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="378" y="1034" width="105" height="70"/>
+                                <rect key="frame" x="608" y="645" width="105" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="4">
@@ -676,7 +676,7 @@
             <objects>
                 <viewController id="QNS-Dc-ZD6" customClass="TimeViewController" customModule="SkippyNums" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YMc-M1-OO8">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eA7-CA-rv0" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
@@ -695,7 +695,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ae-8j-Brd" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="620" width="481" height="70"/>
+                                <rect key="frame" x="131" y="393" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -714,7 +714,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIb-D1-g1Q" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="774" width="481" height="70"/>
+                                <rect key="frame" x="131" y="491" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -733,7 +733,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vzk-C8-t90" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="131" y="929" width="481" height="70"/>
+                                <rect key="frame" x="131" y="589" width="870" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled">
@@ -752,7 +752,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose game length." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyd-6X-zFa">
-                                <rect key="frame" x="20" y="165" width="704" height="70"/>
+                                <rect key="frame" x="20" y="165" width="1093" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
@@ -780,18 +780,18 @@
             <objects>
                 <viewController id="RGu-7n-5D2" customClass="TimeUpViewController" customModule="SkippyNums" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hf2-U1-NGX">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time's up! You answered &lt;correct&gt; out of &lt;tries&gt; tries correct!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10X-cG-LjX">
-                                <rect key="frame" x="20" y="62" width="704" height="388"/>
+                                <rect key="frame" x="20" y="62" width="1093" height="247"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KE1-vX-0Hp" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="40" y="984" width="262" height="99"/>
+                                <rect key="frame" x="40" y="595" width="407" height="99"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="chevron.left" catalog="system" titleAlignment="center">
@@ -810,7 +810,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQW-ZD-hZR" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="442" y="984" width="262" height="99"/>
+                                <rect key="frame" x="686" y="595" width="407" height="99"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="chevron.right" catalog="system" imagePlacement="trailing" titleAlignment="center">
@@ -828,10 +828,16 @@
                                     <action selector="nextRound:" destination="RGu-7n-5D2" eventType="touchUpInside" id="J1W-2n-WoV"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="alarm.waves.left.and.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-Jh-MIe">
-                                <rect key="frame" x="40" y="535" width="664" height="321"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-Jh-MIe">
+                                <rect key="frame" x="40" y="351" width="1053" height="211"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <imageReference key="image" image="alarm.waves.left.and.right" catalog="system" renderingMode="hierarchical">
+                                    <hierarchicalColors>
+                                        <color systemColor="systemRedColor"/>
+                                        <color systemColor="secondaryLabelColor"/>
+                                        <color systemColor="tertiaryLabelColor"/>
+                                    </hierarchicalColors>
+                                </imageReference>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQc-0M-iRY"/>
@@ -853,11 +859,11 @@
             <objects>
                 <viewController id="I4Y-cs-4AQ" customClass="LearnViewController" customModule="SkippyNums" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FNM-Dt-unv">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zo7-Za-gb8">
-                                <rect key="frame" x="21" y="294" width="702" height="788"/>
+                                <rect key="frame" x="21" y="294" width="1091" height="399"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="A8A-Eq-W0g">
                                     <size key="itemSize" width="128" height="128"/>
@@ -891,7 +897,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o21-cR-Qts" customClass="SAIAccessibleButton" customModule="SheftAppsStylishUI">
-                                <rect key="frame" x="434" y="53" width="270" height="64"/>
+                                <rect key="frame" x="823" y="53" width="270" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -905,7 +911,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="There are &lt;blank&gt; groups of &lt;blank&gt; &lt;blank&gt;s: &lt;blank&gt;. There are &lt;blank&gt; &lt;blank&gt;s altogether." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnH-wT-vgV">
-                                <rect key="frame" x="20" y="142" width="704" height="136"/>
+                                <rect key="frame" x="20" y="142" width="1093" height="136"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
@@ -931,7 +937,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="pQa-gG-mWZ"/>
         <segue reference="MRR-36-b4x"/>
-        <segue reference="ydF-Ma-L2T"/>
+        <segue reference="FNO-UI-0Zm"/>
         <segue reference="HN7-Uw-0DH"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -939,6 +945,9 @@
         <image name="chevron.left" catalog="system" width="93" height="128"/>
         <image name="chevron.right" catalog="system" width="93" height="128"/>
         <image name="gear" catalog="system" width="128" height="128"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -947,6 +956,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.21960784310000001" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

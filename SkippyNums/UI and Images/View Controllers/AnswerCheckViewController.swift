@@ -39,13 +39,20 @@ class AnswerCheckViewController: SkippyNumsViewController {
 	}
 
     func setupAnswerCheckDisplay() {
-        // 1. Set the message text and image.
+        // 1. Make sure we can get the message text and base image name.
         guard let messageText = messageText, let baseImageName = baseImageName else { return }
+        // 2. Construct the full image name by adding ".circle.fill" to the base image name "x" (for incorrect answers) or "checkmark" (for correct answers).
+        let fullImageName = "\(baseImageName).circle.fill"
+        let image = UIImage(systemName: fullImageName)
+        // 3. Define the color for the image: green for the checkmark and red for the X.
+        let color: UIColor = (baseImageName == "x" ? .systemRed : .systemGreen)
+        let imageColors: [UIColor] = [color, color.withAlphaComponent(0.5)]
+        // 4. Apply the color to the image.
+        let symbolImage = image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: imageColors))
+        // 5. Set the message text and image.
         messageLabel?.text = messageText
-        checkXImageView?.image = UIImage(systemName: "\(baseImageName).circle.fill")
-        // 2. Use green for the checkmark and red for the X.
-        checkXImageView?.tintColor = baseImageName == "x" ? .systemRed : .systemGreen
-        // 3. Set the button title based on whether the chosen answer is correct, incorrect, or incorrect too many times in a row.
+        checkXImageView?.image = symbolImage
+        // 6. Set the button title based on whether the chosen answer is correct, incorrect, or incorrect too many times in a row.
         if messageText.lowercased().components(separatedBy: [" ", "!"]).contains("correct") {
             dismissButton?.setTitle("Next Question", for: .normal)
         } else {
