@@ -84,16 +84,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // This method configures the game's audio session and starts the silence track.
     func configureAudioSession() {
         // 1. Get the audio session.
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            // 2. Try to set the audio session category, mode, and options, and start it.
-            try audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers])
-            try audioSession.setActive(true)
-            // 3. If successful, start the silence track.
-            silentAudioPlayer?.startSilenceTrack()
-        } catch {
-            // 4. Otherwise, throw a fatal error.
-            fatalError("Failed to set up audio session: \(error)")
+        Task.detached(priority: .userInitiated) {
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                // 2. Try to set the audio session category, mode, and options, and start it.
+                try audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+                try audioSession.setActive(true)
+                // 3. If successful, start the silence track.
+                await self.silentAudioPlayer?.startSilenceTrack()
+            } catch {
+                // 4. Otherwise, throw a fatal error.
+                fatalError("Failed to set up audio session: \(error)")
+            }
         }
     }
 
@@ -146,16 +148,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // This method stops the game's silent audio player and deactivates the audio session.
     func stopAudio() {
         // 1. Get the audio session.
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            // 2. Stop the silence track.
-            silentAudioPlayer?.stopSilenceTrack()
-            // 3. Try to set the audio session category, mode, and options back to default and stop it.
-            try audioSession.setCategory(.ambient, mode: .default, options: [])
-            try audioSession.setActive(false)
-        } catch {
-            // 4. If that fails, throw a fatal error.
-            fatalError("Failed to stop audio session: \(error)")
+        Task.detached(priority: .userInitiated) {
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                // 2. Stop the silence track.
+                await self.silentAudioPlayer?.stopSilenceTrack()
+                // 3. Try to set the audio session category, mode, and options back to default and stop it.
+                try audioSession.setCategory(.ambient, mode: .default, options: [])
+                try audioSession.setActive(false)
+            } catch {
+                // 4. If that fails, throw a fatal error.
+                fatalError("Failed to stop audio session: \(error)")
+            }
         }
     }
 
