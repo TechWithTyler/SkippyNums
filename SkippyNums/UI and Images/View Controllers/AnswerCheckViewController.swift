@@ -46,7 +46,8 @@ class AnswerCheckViewController: SkippyNumsViewController {
         let image = UIImage(systemName: fullImageName)
         // 3. Define the color for the image: green for the checkmark and red for the X.
         let color: UIColor = (baseImageName == "x" ? .systemRed : .systemGreen)
-        let imageColors: [UIColor] = [color, color.withAlphaComponent(0.5)]
+        let semiTransparentColor = color.withAlphaComponent(0.5)
+        let imageColors: [UIColor] = [color, semiTransparentColor]
         // 4. Apply the color to the image.
         let symbolImage = image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: imageColors))
         // 5. Set the message text and image.

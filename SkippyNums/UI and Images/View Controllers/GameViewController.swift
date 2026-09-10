@@ -112,7 +112,8 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
     // This method configures the secondsLeftBar's track visibility based on whether Increase Contrast is enabled in device accessibility settings. The bar is track-less if disabled. This is done by setting the track's tint color to a transparent gray if enabled or clear if disabled.
     func configureSecondsLeftBarTrackVisibility() {
         let shouldFillTrack = UIAccessibility.isDarkerSystemColorsEnabled
-        secondsLeftBar?.trackTintColor = shouldFillTrack ? .lightGray.withAlphaComponent(0.8) : .clear
+        let trackFillColor = UIColor.lightGray.withAlphaComponent(0.8)
+        secondsLeftBar?.trackTintColor = shouldFillTrack ? trackFillColor : .clear
     }
 
     // MARK: - Game Timer - Setup
