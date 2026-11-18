@@ -199,26 +199,18 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
     }
 
     func setChoices() {
-        // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results). Converting from Int to String almost never produces nil values, so it's safe to use map instead of compactMap here. This isn't true the other way--not all String values can be converted to Int. For example, "5" can be converted to Int, but "five" can't. In that case, you would use compactMap to throw out nil results.
-        let choices = gameBrain.getChoices().map { String($0) }
+        // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results). Converting from Int to String never produces nil values, so it's safe to use map instead of compactMap here. This isn't true the other way--not all String values can be converted to Int. For example, "5" can be converted to Int, but "five" can't. In that case, you would use compactMap to throw out nil results.
+        let choices = gameBrain.getChoices()
+        let choicesAsStrings = choices.map { String($0) }
         // 2. Set each choice button's title to the corresponding item in the choices array, and set the font properties.
+        let buttons = [choice1Button, choice2Button, choice3Button, choice4Button]
         let useMonospacedFont: Bool = true
-        // Choice 1
-        choice1Button?.setTitle(choices[0], for: .normal)
-        choice1Button?.usesMonospacedFont = useMonospacedFont
-        choice1Button?.textSize = choiceButtonTextSize
-        // Choice 2
-        choice2Button?.setTitle(choices[1], for: .normal)
-        choice2Button?.usesMonospacedFont = useMonospacedFont
-        choice2Button?.textSize = choiceButtonTextSize
-        // Choice 3
-        choice3Button?.setTitle(choices[2], for: .normal)
-        choice3Button?.usesMonospacedFont = useMonospacedFont
-        choice3Button?.textSize = choiceButtonTextSize
-        // Choice 4
-        choice4Button?.setTitle(choices[3], for: .normal)
-        choice4Button?.usesMonospacedFont = useMonospacedFont
-        choice4Button?.textSize = choiceButtonTextSize
+        for (index, button) in buttons.enumerated() {
+            button?.setTitle(choicesAsStrings[index], for: .normal)
+            button?.usesMonospacedFont = useMonospacedFont
+            button?.textSize = choiceButtonTextSize
+        }
+
     }
 
     // MARK: - @IBActions
