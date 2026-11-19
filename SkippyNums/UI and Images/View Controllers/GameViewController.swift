@@ -202,10 +202,11 @@ class GameViewController: SkippyNumsViewController, UICollectionViewDelegateFlow
         // 1. Convert the Int array of choices to String using map. Converting an array's elements from one type to another is a common use of map (when you don't want to throw out nil results) or compactMap (when you want to throw out nil results). Converting from Int to String never produces nil values, so it's safe to use map instead of compactMap here. This isn't true the other way--not all String values can be converted to Int. For example, "5" can be converted to Int, but "five" can't. In that case, you would use compactMap to throw out nil results.
         let choices = gameBrain.getChoices()
         let choicesAsStrings = choices.map { String($0) }
-        // 2. Set each choice button's title to the corresponding item in the choices array, and set the font properties.
+        // 2. Set each choice button's title to the corresponding item in the choicesAsStrings array, and set the font properties. This is done by enumerating through an array containing the 4 choice buttons to get the index of the button along with the button itself. The button's index is used to get the corresponding choice from the choicesAsStrings array.
         let buttons = [choice1Button, choice2Button, choice3Button, choice4Button]
+        let choiceIndexButtonPairs = buttons.enumerated()
         let useMonospacedFont: Bool = true
-        for (index, button) in buttons.enumerated() {
+        for (index, button) in choiceIndexButtonPairs {
             button?.setTitle(choicesAsStrings[index], for: .normal)
             button?.usesMonospacedFont = useMonospacedFont
             button?.textSize = choiceButtonTextSize
