@@ -340,12 +340,12 @@ class GameBrain {
 
     // This method winds up the game timer, calling the timer fire handler every second (or only once if playing an untimed or practice game to trigger a stat update), and calling the timer end handler when the timer ends.
     func setupGameTimer(toResume: Bool = false, timerFireHandler: @escaping ((TimeInterval?) -> Void), timerEndHandler: @escaping (() -> Void)) {
-        // 1. If gameLength is nil, call the timer fire handler with a nil value and don't start the timer.
+        // 1. If gameLength is nil, call the timer fire handler once with a nil value and don't start the timer.
         guard gameLength != nil else {
             timerFireHandler(nil)
             return
         }
-        // 2. If gameLength is specified, call the timer fire handler with the initial value and start the gameTimer.
+        // 2. If gameLength is specified, call the timer fire handler with the initial value and start the gameTimer. If starting a new game, set gameTimeLeft to gameLength.
         if !toResume {
             gameTimeLeft = gameLength
             timerFireHandler(gameTimeLeft)

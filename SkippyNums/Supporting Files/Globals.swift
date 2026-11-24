@@ -53,7 +53,7 @@ let gradientColorsDark: [CGColor] = [
 func sizeForImageInObjectCollectionView(superview view: UIView) -> CGSize {
     // 1. Use the available width and height to determine the size of each image.
     let paddingSpaceWidth = objectInsets.left * 2
-    let paddingSpaceHeight = objectInsets.top * 2
+    let paddingSpaceHeight = objectInsets.top * 2.5
     let availableWidth = view.frame.width - paddingSpaceWidth
     let availableHeight = view.frame.height - paddingSpaceHeight
     let widthPerItem = availableWidth / 6.25

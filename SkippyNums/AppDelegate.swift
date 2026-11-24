@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         stopAudio()
     }
 
-    // MARK: - Game Audio - Initial Configuration
+    // MARK: - Game Audio - Configuration
 
     // This method initializes the game's audio.
     func initializeGameAudio() {
@@ -81,7 +81,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         silentAudioPlayer = SilentAudioPlayer()
     }
 
-    // MARK: - Game Audio - Route Change Handler
+    // This method configures the game's audio session and starts the silence track.
+    func configureAudioSession() {
+        // 1. Get the audio session.
+        Task.detached(priority: .userInitiated) {
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                // 2. Try to set the audio session category, mode, and options, and start it.
+                try audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+                try audioSession.setActive(true)
+                // 3. If successful, start the silence track.
+                await self.silentAudioPlayer?.startSilenceTrack()
+            } catch {
+                // 4. Otherwise, throw a fatal error.
+                fatalError("Failed to set up audio session: \(error)")
+            }
+        }
+    }
+
+    // MARK: - Game Audio - Route Change/Interruption Handlers
 
     // This method sets up the game to listen for notifications when the device's audio source (route) changes and when audio is interrupted.
     func configureAudioRouteChangeHandlers() {
@@ -107,8 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .began:
             stopAudio()
             case .ended:
-            DispatchQueue.main
-                .asyncAfter(deadline: .now() + .milliseconds(audioSessionResetTimeInMilliseconds)) { [self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(audioSessionResetTimeInMilliseconds)) { [self] in
                 configureAudioSession()
             }
             default:
@@ -126,35 +143,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    // MARK: - Game Audio - Stop
+
     // This method stops the game's silent audio player and deactivates the audio session.
     func stopAudio() {
         // 1. Get the audio session.
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            // 2. Stop the silence track.
-            silentAudioPlayer?.stopSilenceTrack()
-            // 3. Try to set the audio session category, mode, and options back to default and stop it.
-            try audioSession.setCategory(.ambient, mode: .default, options: [])
-            try audioSession.setActive(false)
-        } catch {
-            // 4. If that fails, throw a fatal error.
-            fatalError("Failed to stop audio session: \(error)")
-        }
-    }
-
-    // This method configures the game's audio session and starts the silence track.
-    func configureAudioSession() {
-        // 1. Get the audio session.
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            // 2. Try to set the audio session category, mode, and options, and start it.
-            try audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers])
-            try audioSession.setActive(true)
-            // 3. If successful, start the silence track.
-            silentAudioPlayer?.startSilenceTrack()
-        } catch {
-            // 4. Otherwise, throw a fatal error.
-            fatalError("Failed to set up audio session: \(error)")
+        Task.detached(priority: .userInitiated) {
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                // 2. Stop the silence track.
+                await self.silentAudioPlayer?.stopSilenceTrack()
+                // 3. Try to set the audio session category, mode, and options back to default and stop it.
+                try audioSession.setCategory(.ambient, mode: .default, options: [])
+                try audioSession.setActive(false)
+            } catch {
+                // 4. If that fails, throw a fatal error.
+                fatalError("Failed to stop audio session: \(error)")
+            }
         }
     }
 
