@@ -88,6 +88,7 @@ class SilentAudioPlayer {
         playerNode.stop()
         audioEngine.stop()
         audioEngine.reset()
+        audioEngine.detach(playerNode)
     }
 
 }

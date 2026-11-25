@@ -130,6 +130,10 @@ class GameBrain {
     // The game's sound player.
     var soundPlayer: AVAudioPlayer? = nil
 
+    // MARK: - Properties - Dispatch Queues
+
+    let audioQueue: DispatchQueue = DispatchQueue(label: "SkippyNumsSilentAudio", qos: .userInitiated)
+
     // MARK: - Properties - Booleans
 
     // Whether the player is starting a new game (true) or a new round in the current game (false) when the timer goes off. A new round in the current game keeps the game stats (number of tries/correct answers) the same, hides the Untimed option from the game length page, and brings the player back to the "choose your game" page, whereas a new game resets all properties for the current game and returns to the main menu.
